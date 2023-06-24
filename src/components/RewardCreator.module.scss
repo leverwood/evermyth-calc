@@ -1,0 +1,27 @@
+.root {
+  margin-bottom: 25vh;
+}
+.columns {
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  > div {
+    width: 50%;
+  }
+
+  .codeBlock {
+    overflow-wrap: break-word;
+    max-width: 100%;
+    background-color: #eee;
+    font-size: 11px;
+    padding: 10px;
+    font-family: monospace;
+  }
+}
+.rewardName {
+  font-weight: bold;
+}

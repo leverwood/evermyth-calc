@@ -1,0 +1,19 @@
+.grid {
+  background-color: white;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 1fr;
+}
+.cell {
+  text-align: left;
+  padding: 5px 10px;
+}
+.evenRow {
+  background-color: #eee;
+}
+.headerCell {
+  font-weight: bold;
+  border-bottom: 2px solid black;
+  text-align: left;
+  padding: 5px 10px;
+}
