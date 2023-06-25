@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styles from "./PCLevels.module.scss";
 import {
-  getMaxAbilty,
-  getMaxPool,
-  getMinPool,
-  getPowerLevel,
+  getDCEasy,
+  getDCHard,
+  getDCMedium,
   getTier,
-  totalWellspring,
+  totalPCWellspring,
 } from "../util/calcs";
 import { ABILITY_MIN_LVL } from "../util/constants";
 import {
@@ -16,8 +15,29 @@ import {
   getEncounterTiers,
   getEnemies,
   maxEnemyPools,
-  maxRoundsToLose,
-} from "../util/enemyCalcs";
+  roundsToLose,
+  maxRoundsToWin,
+  minRoundsToWin,
+  getDefenseDC,
+  totalEnemyWellspring,
+} from "../util/enemy-calcs";
+import {
+  getMaxAbilty,
+  getPowerLevel,
+  getMaxPool,
+  getMinPool,
+} from "../util/pc-calcs";
+import {
+  getEnemyRewardMaxDealt,
+  getPCRewardMaxDealt,
+  getRewardMinDealt,
+} from "../util/reward-calcs";
+import {
+  flatToRolled,
+  flatToRolledPrint,
+  printAllFormulaData,
+  printDiceFormula,
+} from "../util/dice-calcs";
 
 interface PCLevelProps {
   lvl: number;
@@ -34,16 +54,41 @@ enum Column {
   PowerLevel = "PowerLevel",
   MaxPool = "MaxPool",
   MinPool = "MinPool",
+  DCEasy = "DCEasy",
+  DCMedium = "DCMedium",
+  DCHard = "DCHard",
+  RewardMinDealt = "RewardMinDealt",
+  RewardMaxDealt = "RewardMaxDealt",
+  RewardEnemyMaxDealt = "RewardEnemyMaxDealt",
   MaxEnemyPools = "MaxEnemyPools",
+  EnemyPoolsToPlayerPools = "EnemyPoolsToPlayerPools",
   Enemies = "Enemies",
   EncounterTiers = "EncounterTiers",
   EnemyAgainstDC = "EnemyAgainstDC",
+  EnemyDefenseDC = "EnemyDefenseDC",
   ChanceToMissEnemy = "ChanceToMissEnemy",
   ChanceToHitEnemy = "ChanceToHitEnemy",
   ChanceToGetHit = "ChanceToGetHit",
-  MaxRoundsToTPK = "MaxRoundsToTPK",
+  RoundsToTPK = "RoundsToTPK",
+  MaxRoundsToWin = "MaxRoundsToWin",
+  MinRoundsToWin = "MinRoundsToWin",
   Wellspring = "Wellspring",
+  EnemyWellspring = "EnemyWellspring",
 }
+
+const DEFAULT_COLUMNS: Column[] = [
+  Column.Level,
+  Column.Tier,
+  Column.MaxPool,
+  Column.MaxEnemyPools,
+  Column.RewardMinDealt,
+  Column.RewardMaxDealt,
+  Column.RewardEnemyMaxDealt,
+  Column.RoundsToTPK,
+  Column.MaxRoundsToWin,
+  Column.MinRoundsToWin,
+  Column.EnemyPoolsToPlayerPools,
+];
 
 const labels: { [K in keyof typeof Column]: string } = {
   Level: "Level",
@@ -53,43 +98,71 @@ const labels: { [K in keyof typeof Column]: string } = {
   PowerLevel: "Power Level",
   MaxPool: "Max Pool",
   MinPool: "Min Pool",
+  DCEasy: "DC Easy",
+  DCMedium: "DC Medium",
+  DCHard: "DC Hard",
+  RewardMinDealt: "Reward Min Dealt",
+  RewardMaxDealt: "Reward PC Max Dealt",
   MaxEnemyPools: "Max Enemy Pools",
+  EnemyPoolsToPlayerPools: "Enemy Pools To Player Pools",
+  RewardEnemyMaxDealt: "Reward Enemy Max Dealt",
   EncounterTiers: "Encounter Tiers",
   Enemies: "Enemies",
   EnemyAgainstDC: "Enemy Against DC",
-  ChanceToMissEnemy: "Chance To Miss Enemy, Best Modifier",
-  ChanceToHitEnemy: "Chance To Hit Enemy, Best Modifier",
-  ChanceToGetHit: "Chance To Get Hit, Best Modifier",
-  MaxRoundsToTPK: "Max Rounds To TPK",
+  EnemyDefenseDC: "Enemy Defense DC",
+  ChanceToMissEnemy: "Chance To Miss Enemy, Best Modifier, Advantage",
+  ChanceToHitEnemy: "Chance To Hit Enemy, Best Mod, Advantage",
+  ChanceToGetHit: "Chance To Get Hit, Best Mod",
+  RoundsToTPK: "Rounds To TPK",
+  MaxRoundsToWin: "Max Rounds To Win",
+  MinRoundsToWin: "Min Rounds To Win",
   Wellspring: "Wellspring",
+  EnemyWellspring: "Enemy Wellspring",
 };
 
 function PCLevel({ lvl, columns, i, players }: PCLevelProps) {
+  const tier = getTier(lvl);
   const vals: {
     readonly [K in keyof typeof Column]: number | string;
   } = {
     Level: "lvl " + lvl,
-    Tier: "T" + getTier(lvl),
+    Tier: "T" + tier,
     MinAbility: ABILITY_MIN_LVL,
     MaxAbility: "+" + getMaxAbilty(lvl),
     PowerLevel: "+" + getPowerLevel(lvl),
     MaxPool: getMaxPool(lvl),
     MinPool: getMinPool(lvl),
+    DCEasy: `DC ${getDCEasy(tier)}`,
+    DCMedium: `DC ${getDCMedium(tier)}`,
+    DCHard: `DC ${getDCHard(tier)}`,
+    RewardMinDealt: printAllFormulaData(flatToRolled(getRewardMinDealt(tier))),
+    RewardMaxDealt: printAllFormulaData(flatToRolled(getPCRewardMaxDealt(lvl))),
+    RewardEnemyMaxDealt: flatToRolledPrint(getEnemyRewardMaxDealt(tier)),
     EncounterTiers: getEncounterTiers(lvl, players),
     MaxEnemyPools: maxEnemyPools(lvl, players),
+    EnemyPoolsToPlayerPools: `${maxEnemyPools(lvl, players)} / ${
+      players * getMaxPool(lvl)
+    } (${(
+      (maxEnemyPools(lvl, players) / (players * getMaxPool(lvl))) *
+      100
+    ).toFixed(0)}%)`,
     Enemies: getEnemies(lvl, players).join(", "),
-    EnemyAgainstDC: `DC ${getAgainstDC(getTier(lvl))}`,
+    EnemyAgainstDC: `DC ${getAgainstDC(tier)}`,
+    EnemyDefenseDC: `DC ${getDefenseDC(tier)}`,
     ChanceToMissEnemy: `${Math.round(
-      (1 - chanceToHitEnemy(getTier(lvl), getPowerLevel(lvl))) * 100
+      (1 - chanceToHitEnemy(tier, getPowerLevel(lvl))) * 100
     )}%`,
     ChanceToHitEnemy: `${Math.round(
-      chanceToHitEnemy(getTier(lvl), getPowerLevel(lvl)) * 100
+      chanceToHitEnemy(tier, getPowerLevel(lvl)) * 100
     )}%`,
     ChanceToGetHit: `${Math.round(
-      chanceToGetHit(getTier(lvl), getPowerLevel(lvl)) * 100
+      chanceToGetHit(tier, getPowerLevel(lvl)) * 100
     )}%`,
-    MaxRoundsToTPK: maxRoundsToLose(lvl, players),
-    Wellspring: totalWellspring(lvl),
+    RoundsToTPK: roundsToLose(lvl, players),
+    MaxRoundsToWin: maxRoundsToWin(lvl, players),
+    MinRoundsToWin: minRoundsToWin(lvl, players),
+    Wellspring: totalPCWellspring(lvl),
+    EnemyWellspring: totalEnemyWellspring(tier),
   };
   return (
     <>
@@ -143,7 +216,7 @@ function ColumnSelect({
 }
 
 export default function PCLevels() {
-  const [columns, setColumns] = useState<Column[]>([Column.Level, Column.Tier]);
+  const [columns, setColumns] = useState<Column[]>(DEFAULT_COLUMNS);
   const [players, setPlayers] = useState(4);
   const gridTemplateColumns = `repeat(${columns.length}, 1fr)`;
 

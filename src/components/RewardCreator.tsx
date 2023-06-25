@@ -1,28 +1,33 @@
 import React, { useState } from "react";
 import styles from "./RewardCreator.module.scss";
 import { ATTRIBUTES, RewardAttribute } from "../util/constants";
-import { doesRewardScale, printReward, rewardTier } from "../util/rewardCalcs";
+import { doesRewardScale, printReward, rewardTier } from "../util/reward-calcs";
+import { parseDiceFormula, printAllFormulaData } from "../util/dice-calcs";
+
+const toDice = (str: string) => printAllFormulaData(parseDiceFormula(str));
 
 const SAVED_REWARDS = [
   {
     name: "Recovery",
     tier: 1,
-    description: "safe action, restores 2d4 (4), 10 minutes, wellspring",
+    description: `safe action, restores ${toDice(
+      `2d4`
+    )}, 10 minutes, wellspring`,
   },
   {
     name: "Potion of Healing",
     tier: 0,
-    description: "no action, restores 1d4",
+    description: `no action, restores ${toDice(`1d4`)}`,
   },
   {
     name: "Potion of Healing",
     tier: 1,
-    description: "no action, restores 2d4 (4)",
+    description: `no action, restores ${toDice(`2d4`)}`,
   },
   {
     name: "Healing word",
     tier: 1,
-    description: "safe action, restores 1d4 (2), wellspring",
+    description: `safe action, restores ${toDice(`1d4`)}, wellspring`,
   },
   {
     name: "Tavern Brawler",
@@ -33,8 +38,9 @@ const SAVED_REWARDS = [
   {
     name: "Meteor Swarm",
     tier: 18,
-    description:
-      "+26, deals 4d6 + 2 (14) AOE, on fail deals 2d10 (10) to your [POOL]",
+    description: `+26, deals ${toDice(
+      `4d6+2`
+    )} AOE, on fail deals 2d10 (10) to your [POOL]`,
   },
   {
     name: "Flask of Oil",
@@ -52,6 +58,28 @@ const SAVED_REWARDS = [
     tier: 0,
     description:
       "It takes a risky action to set and disguse the trap. On a failure, it deals 1 to your TOU. If a creature steps on it, it takes 1d4 (2) TOU and cannot move until it uses an action free itself, taking an additional 1 TOU when it does.",
+  },
+  {
+    name: "Weapon",
+    tier: 5,
+    description: "+5, deals 1d10 (5)",
+  },
+  {
+    name: "Spell",
+    tier: 5,
+    description: "+6, deals 3d4 (6), wellspring",
+  },
+  {
+    name: "Backfiring Spell",
+    tier: 5,
+    description:
+      "+11, deals 2d10 + 1 (11), on fail deals 1d10 (5) to your [POOL], wellspring",
+  },
+  {
+    name: "Backfiring Consumable",
+    tier: 5,
+    description:
+      "+14, deals 4d6 + 2 (14), on fail deals 1d10 (5) to your [POOL], consumable",
   },
 ];
 

@@ -1,49 +1,5 @@
-import { ABILITY_MIN_LVL } from "./constants";
-
 export const getTier = (lvl: number): number => {
   return Math.ceil(lvl / 4);
-};
-
-export const getTotalAbilityPoints = (lvl: number) => {
-  return lvl + 3 + getTier(lvl);
-};
-
-export const getPowerLevel = (lvl: number) => {
-  return getTier(lvl) * 3 + 2;
-};
-
-export const getMaxAbilty = (lvl: number) => {
-  return getTier(lvl) + 2;
-};
-
-export const getPool = (ablity: number, lvl: number) => {
-  return 6 + ablity + lvl;
-};
-
-export const getMaxPool = (lvl: number) => {
-  return getPool(getMaxAbilty(lvl), lvl);
-};
-
-export const getMinPool = (lvl: number) => {
-  return getPool(ABILITY_MIN_LVL, lvl);
-};
-
-export const getRewardMinDealt = (tier: number) => {
-  return tier + 2;
-};
-
-/**
- * (-2) backfire
- * (-tier) wellspring cost
- * (+2) +2 dmg
- * (+tier) +tier dmg
- * (+tier) +tier dmg
- * Total = tier
- * ---
- * 2 base damage + 2 + tier +tier
- */
-export const getRewardMaxDealt = (tier: number) => {
-  return 2 + 2 + tier + tier;
 };
 
 export const getDCMedium = (tier: number) => {
@@ -70,46 +26,52 @@ export const beatDCOn = (mod: number, dc: number) => {
   return Math.max(beatIt, 2);
 };
 
-export const chanceToFail = (mod: number, dc: number) => {
-  return (beatDCOn(mod, dc) - 1) / 20;
+export const chanceToFail = (
+  mod: number,
+  dc: number,
+  rollType?: "advantage" | "disadvantage"
+) => {
+  return 1 - chanceToSucceed(mod, dc, rollType);
 };
 
-export const chanceToSucceed = (mod: number, dc: number) => {
-  return 1 - chanceToFail(mod, dc);
-};
+export function chanceToSucceed(
+  modifier: number,
+  dc: number,
+  rollType?: "advantage" | "disadvantage"
+) {
+  const successRoll = beatDCOn(modifier, dc);
 
-export const totalWellspring = (lvl: number) => {
+  // no advantage or disadvantage
+  if (!rollType) {
+    // Count the successful outcomes
+    let successCount = 20 - successRoll + 1;
+    return successCount / 20;
+  }
+
+  // Count the successful outcomes
+  let successCount = 0;
+  let totalOutcomes = 0;
+
+  for (let roll1 = 1; roll1 <= 20; roll1++) {
+    for (let roll2 = 1; roll2 <= 20; roll2++) {
+      totalOutcomes++;
+      let result =
+        rollType === "advantage"
+          ? Math.max(roll1, roll2)
+          : Math.min(roll1, roll2);
+      if (result >= successRoll) {
+        successCount++;
+      }
+    }
+  }
+
+  return successCount / totalOutcomes;
+}
+
+export const totalPCWellspring = (lvl: number) => {
   return 3 + getTier(lvl) + lvl;
 };
 
 export const maxWellspringCast = (lvl: number) => {
   return getTier(lvl);
-};
-
-export const findDieSize = (dealt: number): number | undefined => {
-  const die = [4, 6, 8, 10, 12];
-  const dieSize = die.find((d) => (dealt * 2) % d === 0 && (dealt * 2) / d < d);
-  return dieSize;
-};
-
-export const dealtToDice = (dealt: number): string | number => {
-  if (dealt < 2) {
-    return dealt;
-  }
-  const dieSize = findDieSize(dealt);
-  if (dieSize) {
-    return `${(dealt * 2) / dieSize}d${dieSize} (${dealt})`;
-  }
-
-  // subtract 2 and try again
-  let currentDealt = dealt;
-  let flatExtra = 0;
-  while (currentDealt > 0 && !findDieSize(currentDealt)) {
-    flatExtra++;
-    currentDealt--;
-  }
-  const newDieSize = findDieSize(currentDealt) as number;
-  return `${
-    (currentDealt * 2) / newDieSize
-  }d${newDieSize} + ${flatExtra}  (${dealt})`;
 };

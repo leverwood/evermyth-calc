@@ -250,3 +250,7 @@ addAttribute({
   tier: -1,
   description: "More rare, additional constraints.",
 });
+addAttribute({
+  tier: 0,
+  description: "Each additional wellspring you spend adds +1 dealt",
+});

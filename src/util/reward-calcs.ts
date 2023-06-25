@@ -1,5 +1,11 @@
-import { dealtToDice } from "./calcs";
+import { getTier, totalPCWellspring } from "./calcs";
 import { RewardAttribute } from "./constants";
+import {
+  flatToRolled,
+  flatToRolledPrint,
+  printAllFormulaData,
+} from "./dice-calcs";
+import { totalEnemyWellspring } from "./enemy-calcs";
 
 export const rewardTier = (attributes: RewardAttribute[]): number => {
   return attributes.reduce((sum, attribute) => sum + attribute.tier, 0);
@@ -12,6 +18,7 @@ const printAoE = (attributes: RewardAttribute[]) => {
 export const rewardDealt = (attributes: RewardAttribute[]): string => {
   return printValueTiered("deals", attributes, true) + printAoE(attributes);
 };
+
 const printDealt = (attributes: RewardAttribute[]) => {
   const dealt = rewardDealt(attributes);
   return dealt ? `deals ${dealt}` : "";
@@ -23,7 +30,9 @@ export const rewardBackfire = (attributes: RewardAttribute[]): number => {
 export const printBackfire = (attributes: RewardAttribute[]) => {
   const backfire = rewardBackfire(attributes);
   return backfire > 0
-    ? `on fail deals ${dealtToDice(backfire)} to your [POOL]`
+    ? `on fail deals ${printAllFormulaData(
+        flatToRolled(backfire)
+      )} to your [POOL]`
     : "";
 };
 
@@ -101,7 +110,7 @@ const printValueTiered = (
   if (total === 0 && totalTier === 0) return "";
 
   const printMod = isDealt
-    ? dealtToDice(total)
+    ? flatToRolledPrint(total)
     : `${total >= 0 ? "+" : ""}${total}`;
   const printTierMultiple = totalTier > 1 ? ` x ${totalTier}` : "";
 
@@ -137,4 +146,44 @@ export const printReward = (attributes: RewardAttribute[]) => {
   ];
 
   return `${parts.filter((p) => p).join(", ")}`;
+};
+
+export const getRewardMinDealt = (tier: number) => {
+  return tier + 2;
+};
+
+/**
+ * Blow literally all your wellspring on the most powerful thing
+ * (+0) deal 2
+ * (+0) upcast deal
+ * (-1) wellspring
+ * (-tier) backfire tier
+ * (+tier) deal tier
+ * (+tier) deal tier
+ * (+1) deal 1
+ * --- total = tier
+ */
+export const getPCRewardMaxDealt = (lvl: number) => {
+  const tier = getTier(lvl);
+  // spend all remaining wellspring increasing the dealt
+  const extraWellspringSpent = totalPCWellspring(lvl) - tier;
+
+  return 2 + extraWellspringSpent + tier + tier + 1;
+};
+
+/**
+ * Blow literally all your wellspring on the most powerful thing
+ * (+0) deal 2
+ * (+0) upcast deal
+ * (-1) wellspring
+ * (+tier) deal tier
+ * (+tier) deal tier
+ * (+1) deal 1
+ * --- total = tier
+ */
+export const getEnemyRewardMaxDealt = (tier: number) => {
+  // spend all remaining wellspring increasing the dealt
+  const extraWellspringSpent = totalEnemyWellspring(tier) - tier;
+
+  return 2 + extraWellspringSpent + tier + tier + 1;
 };
