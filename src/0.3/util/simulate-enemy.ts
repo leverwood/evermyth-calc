@@ -7,7 +7,7 @@ import {
   EnemyTurnData,
   EnemyAttackData,
   PCRollOptions,
-} from "../types/types-new-system";
+} from "../types/system-types";
 import { getMaxMod, getTargetablePCs, hasAdv } from "./pc-calcs";
 import {
   decrementConditionDurations,

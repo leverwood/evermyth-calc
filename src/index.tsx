@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import OldApp from './0.2/components/App-0.2';
-import NewSystem from './0.3/components/NewSystem';
-import RewardCreatorNew from "./0.3/components/rewards/RewardCreatorNew";
+import NewSystem from "./0.3/components/SystemOverview";
+import RewardCreator from "./0.3/components/rewards/RewardCreator";
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/rewards",
-    element: <RewardCreatorNew />,
-  }
+    element: <RewardCreator />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(

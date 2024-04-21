@@ -1,4 +1,4 @@
-import { Condition, PC_STATUS } from "./types-new-system";
+import { Condition, PC_STATUS } from "./system-types";
 
 export enum REWARD_TYPE {
   EQUIPMENT = "equipment",

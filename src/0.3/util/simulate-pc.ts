@@ -8,7 +8,7 @@ import {
   PCRollOptions,
   PCTurnData,
   isEnemyStatus,
-} from "../types/types-new-system";
+} from "../types/system-types";
 import {
   getPCWellspring,
   getPCRandomPool,

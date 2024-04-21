@@ -1,8 +1,5 @@
 import { getRandomNum } from "../../util/math";
-import {
-  Enemy,
-  PC
-} from "../types/types-new-system";
+import { Enemy, PC } from "../types/system-types";
 import { conditionNotYetApplied, initReward } from "./reward-calcs";
 import { Reward } from "../types/reward-types";
 

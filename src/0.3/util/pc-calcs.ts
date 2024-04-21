@@ -4,7 +4,7 @@ import {
   PC,
   PC_STATUS,
   SavedPCData,
-} from "../types/types-new-system";
+} from "../types/system-types";
 import { getTier } from "../../util/calcs";
 import { FLED_AFTER_ROUNDS } from "../../util/constants";
 import { getRandomNum } from "../../util/math";

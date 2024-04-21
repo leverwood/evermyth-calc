@@ -1,7 +1,7 @@
-import styles from "./RewardCreatorNew.module.scss";
+import styles from "./RewardCreator.module.scss";
 import AttributeDescription from "./AttributeDescription";
 import { RewardOptions } from "../../types/reward-types";
-import { CombinedReward } from "./RewardCreatorNew";
+import { CombinedReward } from "./RewardCreator";
 import { ChangeValueFunc } from "../../types/reward-types";
 
 export function RemoveAttributes({

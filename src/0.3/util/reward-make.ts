@@ -1,7 +1,7 @@
 import { initReward } from "./reward-calcs";
 
 import { Reward } from "../types/reward-types";
-import { Condition, PC_STATUS, ENEMY_STATUS } from "../types/types-new-system";
+import { Condition, PC_STATUS, ENEMY_STATUS } from "../types/system-types";
 import { LOG_LEVEL, Logger } from "../../util/log";
 
 const logger = Logger(LOG_LEVEL.INFO);

@@ -13,7 +13,7 @@ import {
   PCAction,
   Condition,
   PC,
-} from "../types/types-new-system";
+} from "../types/system-types";
 import { getTier } from "../../util/calcs";
 import { getEnemyPool, getEnemyWellspring } from "../util/enemy-calc";
 import { makeEnemyInitiative, makeRandomEnemy } from "../util/simulate-enemy";

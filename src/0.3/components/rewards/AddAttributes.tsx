@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./RewardCreatorNew.module.scss";
+import styles from "./RewardCreator.module.scss";
 import AttributeDescription from "./AttributeDescription";
 import { RewardOptions } from "../../types/reward-types";
 import { ChangeValueFunc } from "../../types/reward-types";

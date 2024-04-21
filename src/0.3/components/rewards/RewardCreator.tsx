@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import styles from "./RewardCreatorNew.module.scss";
+import styles from "./RewardCreator.module.scss";
 import { initReward, validateRewardOptions } from "../../util/reward-calcs";
 import { LOG_LEVEL, Logger } from "../../../util/log";
 import { PlayerRewards } from "./PlayerRewards";
@@ -35,7 +35,7 @@ const getRewardsFromStorage = () => {
 };
 
 // TODO:  Conditions, upcast, upcastMax, lingering damage
-export default function RewardCreatorNew() {
+export default function RewardCreator() {
   const [savedRewards, setSavedRewards] = useState<RewardOptions[]>(
     getRewardsFromStorage()
   );
@@ -411,5 +411,3 @@ export function CombinedReward({
     </>
   );
 }
-
-

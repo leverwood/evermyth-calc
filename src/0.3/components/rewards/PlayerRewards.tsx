@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import { SavedPCData } from "../../types/types-new-system";
+import { SavedPCData } from "../../types/system-types";
 import styles from "./PlayerRewards.module.scss";
-import rewardStyles from "./RewardCreatorNew.module.scss";
+import rewardStyles from "./RewardCreator.module.scss";
 import { getRewardOptionsFromIds, initReward } from "../../util/reward-calcs";
 import { getPCLearnedFeatures, getPCWellspring } from "../../util/pc-calcs";
 import { LOG_LEVEL, Logger } from "../../../util/log";

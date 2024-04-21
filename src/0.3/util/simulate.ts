@@ -9,7 +9,7 @@ import {
   InitiativeCount,
   RoundData,
   SimulationData,
-} from "../types/types-new-system";
+} from "../types/system-types";
 import { getTargetablePCs, getTotalPCTiers } from "./pc-calcs";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { randomPCs } from "./simulate-pc";

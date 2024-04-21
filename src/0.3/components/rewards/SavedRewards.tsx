@@ -1,4 +1,4 @@
-import styles from "./RewardCreatorNew.module.scss";
+import styles from "./RewardCreator.module.scss";
 import { initReward } from "../../util/reward-calcs";
 import { RewardOptions } from "../../types/reward-types";
 import TierRangeSlider from "./TierRangeSlider";

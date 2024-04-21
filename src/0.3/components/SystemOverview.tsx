@@ -8,7 +8,7 @@ import {
   sumResults,
 } from "../util/dice-calcs";
 import { printPercent } from "../../util/print";
-import styles from "./NewSystem.module.scss";
+import styles from "./SystemOverview.module.scss";
 import {
   getDCEasyOld,
   getDCHardOld,

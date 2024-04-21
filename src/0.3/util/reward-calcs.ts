@@ -14,7 +14,7 @@ import {
   PC,
   isBeneficialStatus,
   isEnemyStatus,
-} from "../types/types-new-system";
+} from "../types/system-types";
 import { getDCHard } from "./enemy-calc";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { hasAdv } from "./pc-calcs";

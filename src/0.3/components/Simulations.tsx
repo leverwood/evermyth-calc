@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { SimulationData } from "../types/types-new-system";
+import { SimulationData } from "../types/system-types";
 import { analyzeSimulations, runSimulations } from "../util/simulate";
 import { printPercent } from "../../util/print";
 import { getTotalEnemyTiers } from "../util/enemy-calc";

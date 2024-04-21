@@ -1,4 +1,4 @@
-import styles from "./RewardCreatorNew.module.scss";
+import styles from "./RewardCreator.module.scss";
 import { initReward } from "../../util/reward-calcs";
 import Markdown from "markdown-to-jsx";
 import { RewardOptions, REWARD_TYPE } from "../../types/reward-types";
