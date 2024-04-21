@@ -1,0 +1,11 @@
+@use "../../variables.scss" as *;
+
+.root {
+  display: flex;
+  gap: $gap * 2;
+  margin-bottom: $gap * 2;
+}
+
+.sliderLabel {
+  font-weight: bold;
+}

@@ -1,5 +1,5 @@
 import { PCRoll } from "../util/dice-calcs";
-import { RewardOptions, Reward, RewardOptionsID } from "./reward-types-new";
+import { RewardOptions, Reward, RewardOptionsID } from "./reward-types";
 
 export const INITIAL_SIMULATION_DATA: SimulationData = {
   rounds: [],

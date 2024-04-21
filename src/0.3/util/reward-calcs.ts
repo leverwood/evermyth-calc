@@ -5,7 +5,7 @@ import {
   OPTION_COST,
   isReward,
   RewardOptionsID,
-} from "../types/reward-types-new";
+} from "../types/reward-types";
 import {
   Condition,
   ENEMY_STATUS,
@@ -19,7 +19,7 @@ import { getDCHard } from "./enemy-calc";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { hasAdv } from "./pc-calcs";
 
-export const logger = Logger(LOG_LEVEL.ERROR);
+const logger = Logger(LOG_LEVEL.ERROR);
 
 export function initReward({
   name = "",
@@ -237,7 +237,7 @@ export function initReward({
     reward.tier += wellspringRecover * OPTION_COST.wellspringRecover;
     reward.wellspringRecover = wellspringRecover;
   }
-  if(whileDefending){
+  if (whileDefending) {
     reward.whileDefending = true;
     reward.tier += OPTION_COST.whileDefending;
   }
@@ -424,4 +424,11 @@ export function getRewardOptionsFromIds(
 ): RewardOptions[] {
   const results = ids.map((id) => rewards.find((r) => r.id === id));
   return results.filter((r) => r) as RewardOptions[];
-}
+} // ignore name
+export const isSameReward = (a: RewardOptions, b: RewardOptions) => {
+  const isSame =
+    JSON.stringify({ ...a, name: "" }) === JSON.stringify({ ...b, name: "" });
+  logger.debug(`isSameReward: ${isSame}`, a, b);
+  return isSame;
+};
+

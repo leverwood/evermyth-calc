@@ -7,7 +7,6 @@ export enum REWARD_TYPE {
   TRINKET = "trinket",
 }
 
-
 // generate with crypto.randomUUID()
 export type RewardOptionsID = string;
 
@@ -128,3 +127,14 @@ export const OPTION_COST = {
 export function isReward(reward: any): reward is Reward {
   return reward.__typename === "Reward";
 }
+export type ChangeValueFunc = (
+  key:
+    | keyof RewardOptions
+    | "addMultiReward"
+    | "deleteMultiReward"
+    | "addAbility"
+    | "deleteAbility"
+    | "changeAbility",
+  value: number | boolean | string | RewardOptions,
+  index?: number
+) => void;

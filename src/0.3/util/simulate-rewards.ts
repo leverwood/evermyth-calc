@@ -4,7 +4,7 @@ import {
   PC
 } from "../types/types-new-system";
 import { conditionNotYetApplied, initReward } from "./reward-calcs";
-import { Reward } from "../types/reward-types-new";
+import { Reward } from "../types/reward-types";
 
 export function chooseBestReward(
   actingCreature: PC | Enemy,

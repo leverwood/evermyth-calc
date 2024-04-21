@@ -1,6 +1,8 @@
-import { Reward } from "../types/reward-types-new";
+import { Reward } from "../types/reward-types";
 import { printModifier } from "../../0.2/util/dice-calcs-0.2";
-import { logger } from "./reward-calcs";
+import { LOG_LEVEL, Logger } from "../../util/log";
+
+const logger = Logger(LOG_LEVEL.INFO);
 
 // for a single reward, doesn't account for multi-rewards
 // TODO: conditions
@@ -29,7 +31,7 @@ export const printRewardMessage = (
   if (reward.specificMsg) messages.push(reward.specificMsg);
 
   // Decide to cast it
-  if(reward.whileDefending) messages.push("while defending");
+  if (reward.whileDefending) messages.push("while defending");
   if (reward.castTimeMsg) messages.push(reward.castTimeMsg);
   if (reward.consumable) messages.push("single use");
   if (reward.noAction) messages.push("no action");
@@ -74,7 +76,7 @@ export const printRewardMessage = (
   // DEAL OR HEAL
   if (reward.deals)
     messages.push(
-      `deal ${isUpcast ? printModifier(reward.deals): reward.deals} point${
+      `deal ${isUpcast ? printModifier(reward.deals) : reward.deals} point${
         reward.aoe
           ? " to " +
             (reward.avoidAllies

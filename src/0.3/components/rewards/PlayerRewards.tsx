@@ -5,8 +5,8 @@ import rewardStyles from "./RewardCreatorNew.module.scss";
 import { getRewardOptionsFromIds, initReward } from "../../util/reward-calcs";
 import { getPCLearnedFeatures, getPCWellspring } from "../../util/pc-calcs";
 import { LOG_LEVEL, Logger } from "../../../util/log";
-import { SingleRewardText } from "./RewardCreatorNew";
-import { RewardOptions, RewardOptionsID } from "../../types/reward-types-new";
+import { SingleRewardText } from "./SingleRewardText";
+import { RewardOptions, RewardOptionsID } from "../../types/reward-types";
 
 const logger = Logger(LOG_LEVEL.INFO);
 

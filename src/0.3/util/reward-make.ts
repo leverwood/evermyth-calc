@@ -1,8 +1,10 @@
-import { initReward, logger } from "./reward-calcs";
+import { initReward } from "./reward-calcs";
 
-import { Reward } from "../types/reward-types-new";
+import { Reward } from "../types/reward-types";
 import { Condition, PC_STATUS, ENEMY_STATUS } from "../types/types-new-system";
+import { LOG_LEVEL, Logger } from "../../util/log";
 
+const logger = Logger(LOG_LEVEL.INFO);
 
 export const makeStandardWeapon = (tier: number): Reward => {
   const reward = initReward({

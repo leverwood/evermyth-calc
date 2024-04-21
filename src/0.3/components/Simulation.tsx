@@ -26,7 +26,7 @@ import styles from "./Simulation.module.scss";
 import { PCRoll } from "../util/dice-calcs";
 import { initReward } from "../util/reward-calcs";
 import { printRewardMessage } from "../util/printRewardMessage";
-import { Reward } from "../types/reward-types-new";
+import { Reward } from "../types/reward-types";
 
 export default function Simulation({
   level,

@@ -36,7 +36,11 @@ import { FLED_AFTER_ROUNDS } from "../../util/constants";
 import { getDCToHitEnemy } from "./enemy-calc";
 import { chooseBestReward } from "./simulate-rewards";
 import { LOG_LEVEL, Logger } from "../../util/log";
-import { TEMPORARY_ADV_ACTION, TEMPORARY_ADV_DEFENSE, Reward } from "../types/reward-types-new";
+import {
+  TEMPORARY_ADV_ACTION,
+  TEMPORARY_ADV_DEFENSE,
+  Reward,
+} from "../types/reward-types";
 
 const logger = Logger(LOG_LEVEL.WARN);
 
