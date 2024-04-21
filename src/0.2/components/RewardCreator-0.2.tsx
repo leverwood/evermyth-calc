@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import styles from "./RewardCreator.module.scss";
-import { ATTRIBUTES, RewardAttribute } from "../util/constants";
-import { doesRewardScale, printReward, rewardTier } from "../util/reward-calcs";
-import { parseDiceFormula, printAllFormulaData } from "../util/dice-calcs";
+import styles from "./RewardCreator-0.2.module.scss";
+import { ATTRIBUTES, RewardAttribute } from "../../util/constants";
+import {
+  doesRewardScale,
+  printReward,
+  rewardTier,
+} from "../util/reward-calcs-0.2";
+import { parseDiceFormula, printAllFormulaData } from "../util/dice-calcs-0.2";
 
 const toDice = (str: string) => printAllFormulaData(parseDiceFormula(str));
 
@@ -25,7 +29,7 @@ const SAVED_REWARDS = [
     description: `no action, restores ${toDice(`2d4`)}`,
   },
   {
-    name: "Healing word",
+    name: "WANT: Healing word",
     tier: 1,
     description: `safe action, restores ${toDice(`1d4`)}, wellspring`,
   },
@@ -100,7 +104,6 @@ const RewardCreator = () => {
   ) => {
     const selectedId = parseInt(event.target.value, 10);
     const value = availableOptions.find((option) => option.id === selectedId);
-    console.log("value", value);
     if (value) setAttributeOption(value);
   };
 

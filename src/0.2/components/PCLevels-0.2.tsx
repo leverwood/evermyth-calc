@@ -1,49 +1,48 @@
-import React, { useState } from "react";
-import styles from "./PCLevels.module.scss";
+import { useState } from "react";
+import styles from "./PCLevels-0.2.module.scss";
 import {
-  getDCEasy,
-  getDCHard,
-  getDCMedium,
+  getDCEasyOld,
+  getDCHardOld,
+  getDCMediumOld,
   getTier,
   totalPCWellspring,
-} from "../util/calcs";
-import { ABILITY_MIN_LVL } from "../util/constants";
+} from "../../util/calcs";
+import { ABILITY_MIN_LVL } from "../../util/constants";
 import {
   chanceToGetHit,
-  chanceToHitEnemy,
+  chanceToHitEnemyOld,
   getAgainstDC,
-  getEncounterTiers,
+  getEncounterTiersOld,
   getEnemies,
-  maxEnemyPools,
+  totalEnemyPools,
   roundsToLose,
   maxRoundsToWin,
   minRoundsToWin,
   getDefenseDC,
   totalEnemyWellspring,
-} from "../util/enemy-calcs";
+} from "../util/enemy-calcs-0.2";
 import {
-  getMaxAbilty,
+  getMaxAbility,
   getPowerLevel,
   getMaxPool,
   getMinPool,
-} from "../util/pc-calcs";
+} from "../util/pc-calcs-0.2";
 import {
   getEnemyRewardMaxDealt,
   getPCRewardMaxDealt,
   getRewardMinDealt,
-} from "../util/reward-calcs";
+} from "../util/reward-calcs-0.2";
 import {
   flatToRolled,
   flatToRolledPrint,
   printAllFormulaData,
-  printDiceFormula,
-} from "../util/dice-calcs";
+} from "../util/dice-calcs-0.2";
 
 interface PCLevelProps {
   lvl: number;
   columns: Column[];
   i: number;
-  players: number;
+  pcs: number;
 }
 
 enum Column {
@@ -61,7 +60,7 @@ enum Column {
   RewardMaxDealt = "RewardMaxDealt",
   RewardEnemyMaxDealt = "RewardEnemyMaxDealt",
   MaxEnemyPools = "MaxEnemyPools",
-  EnemyPoolsToPlayerPools = "EnemyPoolsToPlayerPools",
+  EnemyPoolsToPCPools = "EnemyPoolsToPCPools",
   Enemies = "Enemies",
   EncounterTiers = "EncounterTiers",
   EnemyAgainstDC = "EnemyAgainstDC",
@@ -87,7 +86,7 @@ const DEFAULT_COLUMNS: Column[] = [
   Column.RoundsToTPK,
   Column.MaxRoundsToWin,
   Column.MinRoundsToWin,
-  Column.EnemyPoolsToPlayerPools,
+  Column.EnemyPoolsToPCPools,
 ];
 
 const labels: { [K in keyof typeof Column]: string } = {
@@ -104,7 +103,7 @@ const labels: { [K in keyof typeof Column]: string } = {
   RewardMinDealt: "Reward Min Dealt",
   RewardMaxDealt: "Reward PC Max Dealt",
   MaxEnemyPools: "Max Enemy Pools",
-  EnemyPoolsToPlayerPools: "Enemy Pools To Player Pools",
+  EnemyPoolsToPCPools: "Enemy Pools To PC Pools",
   RewardEnemyMaxDealt: "Reward Enemy Max Dealt",
   EncounterTiers: "Encounter Tiers",
   Enemies: "Enemies",
@@ -120,7 +119,7 @@ const labels: { [K in keyof typeof Column]: string } = {
   EnemyWellspring: "Enemy Wellspring",
 };
 
-function PCLevel({ lvl, columns, i, players }: PCLevelProps) {
+function PCLevel({ lvl, columns, i, pcs }: PCLevelProps) {
   const tier = getTier(lvl);
   const vals: {
     readonly [K in keyof typeof Column]: number | string;
@@ -128,39 +127,38 @@ function PCLevel({ lvl, columns, i, players }: PCLevelProps) {
     Level: "lvl " + lvl,
     Tier: "T" + tier,
     MinAbility: ABILITY_MIN_LVL,
-    MaxAbility: "+" + getMaxAbilty(lvl),
+    MaxAbility: "+" + getMaxAbility(lvl),
     PowerLevel: "+" + getPowerLevel(lvl),
     MaxPool: getMaxPool(lvl),
     MinPool: getMinPool(lvl),
-    DCEasy: `DC ${getDCEasy(tier)}`,
-    DCMedium: `DC ${getDCMedium(tier)}`,
-    DCHard: `DC ${getDCHard(tier)}`,
+    DCEasy: `DC ${getDCEasyOld(tier)}`,
+    DCMedium: `DC ${getDCMediumOld(tier)}`,
+    DCHard: `DC ${getDCHardOld(tier)}`,
     RewardMinDealt: printAllFormulaData(flatToRolled(getRewardMinDealt(tier))),
     RewardMaxDealt: printAllFormulaData(flatToRolled(getPCRewardMaxDealt(lvl))),
     RewardEnemyMaxDealt: flatToRolledPrint(getEnemyRewardMaxDealt(tier)),
-    EncounterTiers: getEncounterTiers(lvl, players),
-    MaxEnemyPools: maxEnemyPools(lvl, players),
-    EnemyPoolsToPlayerPools: `${maxEnemyPools(lvl, players)} / ${
-      players * getMaxPool(lvl)
-    } (${(
-      (maxEnemyPools(lvl, players) / (players * getMaxPool(lvl))) *
-      100
-    ).toFixed(0)}%)`,
-    Enemies: getEnemies(lvl, players).join(", "),
+    EncounterTiers: getEncounterTiersOld(lvl, pcs),
+    MaxEnemyPools: totalEnemyPools(lvl, pcs),
+    EnemyPoolsToPCPools: `${totalEnemyPools(lvl, pcs)} / ${
+      pcs * getMaxPool(lvl)
+    } (${((totalEnemyPools(lvl, pcs) / (pcs * getMaxPool(lvl))) * 100).toFixed(
+      0
+    )}%)`,
+    Enemies: getEnemies(lvl, pcs).join(", "),
     EnemyAgainstDC: `DC ${getAgainstDC(tier)}`,
     EnemyDefenseDC: `DC ${getDefenseDC(tier)}`,
     ChanceToMissEnemy: `${Math.round(
-      (1 - chanceToHitEnemy(tier, getPowerLevel(lvl))) * 100
+      (1 - chanceToHitEnemyOld(tier, getPowerLevel(lvl))) * 100
     )}%`,
     ChanceToHitEnemy: `${Math.round(
-      chanceToHitEnemy(tier, getPowerLevel(lvl)) * 100
+      chanceToHitEnemyOld(tier, getPowerLevel(lvl)) * 100
     )}%`,
     ChanceToGetHit: `${Math.round(
       chanceToGetHit(tier, getPowerLevel(lvl)) * 100
     )}%`,
-    RoundsToTPK: roundsToLose(lvl, players),
-    MaxRoundsToWin: maxRoundsToWin(lvl, players),
-    MinRoundsToWin: minRoundsToWin(lvl, players),
+    RoundsToTPK: roundsToLose(lvl, pcs),
+    MaxRoundsToWin: maxRoundsToWin(lvl, pcs),
+    MinRoundsToWin: minRoundsToWin(lvl, pcs),
     Wellspring: totalPCWellspring(lvl),
     EnemyWellspring: totalEnemyWellspring(tier),
   };
@@ -217,15 +215,15 @@ function ColumnSelect({
 
 export default function PCLevels() {
   const [columns, setColumns] = useState<Column[]>(DEFAULT_COLUMNS);
-  const [players, setPlayers] = useState(4);
+  const [pcs, setPCs] = useState(4);
   const gridTemplateColumns = `repeat(${columns.length}, 1fr)`;
 
   return (
     <>
       <input
         type="number"
-        value={players}
-        onChange={(e) => setPlayers(+e.target.value)}
+        value={pcs}
+        onChange={(e) => setPCs(+e.target.value)}
       />
       <ColumnSelect columns={columns} setColumns={setColumns} />
       <ul className={styles.grid} style={{ gridTemplateColumns }}>
@@ -238,13 +236,7 @@ export default function PCLevels() {
             )
         )}
         {Array.from({ length: 20 }, (_, i) => i + 1).map((lvl, i) => (
-          <PCLevel
-            key={lvl}
-            lvl={lvl}
-            columns={columns}
-            i={i}
-            players={players}
-          />
+          <PCLevel key={lvl} lvl={lvl} columns={columns} i={i} pcs={pcs} />
         ))}
       </ul>
     </>

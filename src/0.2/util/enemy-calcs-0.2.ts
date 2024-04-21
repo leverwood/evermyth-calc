@@ -1,19 +1,19 @@
-import { chanceToFail, chanceToSucceed, getDCHard, getTier } from "./calcs";
-import { TIER_0_ENEMY_POOL } from "./constants";
-import { getPowerLevel, getMaxPool } from "./pc-calcs";
+import { chanceToFail, chanceToSucceed, getDCHardOld, getTier } from "../../util/calcs";
+import { TIER_0_ENEMY_POOL } from "../../util/constants";
+import { getPowerLevel, getMaxPool } from "./pc-calcs-0.2";
 import {
   getEnemyRewardMaxDealt,
   getPCRewardMaxDealt,
   getRewardMinDealt,
-} from "./reward-calcs";
+} from "./reward-calcs-0.2";
 
-export const getEncounterTiers = (lvl: number, players: number) => {
-  const totalPlayerLevels = lvl * players;
-  return 1 + Math.floor(totalPlayerLevels / 4);
+export const getEncounterTiersOld = (lvl: number, pcs: number) => {
+  const totalPCLevels = lvl * pcs;
+  return 1 + Math.floor(totalPCLevels / 5);
 };
 
-export const getEnemies = (lvl: number, players: number) => {
-  let totalTiers = getEncounterTiers(lvl, players);
+export const getEnemies = (lvl: number, pcs: number) => {
+  let totalTiers = getEncounterTiersOld(lvl, pcs);
   const maxTier = getTier(lvl);
   let current = maxTier;
   const enemies = [];
@@ -23,28 +23,31 @@ export const getEnemies = (lvl: number, players: number) => {
       totalTiers -= current;
     } else current--;
   }
-  return [...enemies, ...new Array(players).fill(0)];
+  return [...enemies, ...new Array(pcs).fill(0)];
 };
 
-export const maxEnemyPools = (lvl: number, players: number) => {
-  const enemies = getEnemies(lvl, players);
-  return enemies.reduce((acc, cur) => acc + getEnemyPool(cur), 0);
+// sum of all enemy pools
+export const totalEnemyPools = (lvl: number, pcs: number) => {
+  const enemies = getEnemies(lvl, pcs);
+  return enemies.reduce((acc, cur) => acc + getEnemyPoolOld(cur), 0);
 };
 
 export const getAgainstDC = (tier: number) => {
-  return getDCHard(tier);
+  if (tier === 0) return 7;
+  return getDCHardOld(tier);
 };
 
 export const getDefenseDC = (tier: number) => {
+  if (tier === 0) return 11;
   return getAgainstDC(tier) + 3;
 };
 
-export const getEnemyPool = (tier: number) => {
+export const getEnemyPoolOld = (tier: number) => {
   if (tier === 0) return TIER_0_ENEMY_POOL;
-  return 10 + tier * 5;
+  return 10 + tier * 10;
 };
 
-export const chanceToHitEnemy = (enemyTier: number, mod: number) => {
+export const chanceToHitEnemyOld = (enemyTier: number, mod: number) => {
   const againstDC = getAgainstDC(enemyTier);
   return chanceToSucceed(mod, againstDC, "advantage");
 };
@@ -66,35 +69,31 @@ export const averageMaxEnemyDealt = (enemyTier: number, pcLvl: number) => {
 };
 
 /** always using the lowest attack for their tier. Use chance to hit enemy */
-export const maxRoundsToWin = (lvl: number, players: number) => {
-  const totalPool = maxEnemyPools(lvl, players);
+export const maxRoundsToWin = (lvl: number, pcs: number) => {
+  const totalPool = totalEnemyPools(lvl, pcs);
   const eachRoundDeal =
     getRewardMinDealt(getTier(lvl)) *
-    chanceToHitEnemy(getTier(lvl), getPowerLevel(lvl)) *
-    players;
+    chanceToHitEnemyOld(getTier(lvl), getPowerLevel(lvl)) *
+    pcs;
   return Math.ceil(totalPool / eachRoundDeal);
 };
 
-// export const minRoundsToWin2 = (lvl: number, players: number) => {
-//   const totalPool = maxEnemyPools(lvl, players);
-//   const eachRoundDeal =
-//     getEnemyRewardMaxDealt(getTier(lvl)) *
-//     chanceToHitEnemy(getTier(lvl), getPowerLevel(lvl)) *
-//     players;
-//   return Math.ceil(totalPool / eachRoundDeal);
-// };
-
-export const minRoundsToWin = (lvl: number, players: number) => {
+/**
+ * Assumptions:
+ * - PCs dump all wellspring round 1
+ * - PCs always have advantage
+ */
+export const minRoundsToWin = (lvl: number, pcs: number) => {
   const tier = getTier(lvl);
-  let remainingPool = maxEnemyPools(lvl, players);
+  let remainingPool = totalEnemyPools(lvl, pcs);
 
   // how many times can you cast your most powerful thing
   // assume uses all wellspring on first round
   const maxCastTimes = 1;
   const roundMaxDeal =
     getPCRewardMaxDealt(lvl) *
-    chanceToHitEnemy(tier, getPowerLevel(lvl)) *
-    players;
+    chanceToHitEnemyOld(tier, getPowerLevel(lvl)) *
+    pcs;
   let round;
   for (round = 1; round <= maxCastTimes; round++) {
     remainingPool -= roundMaxDeal;
@@ -102,23 +101,26 @@ export const minRoundsToWin = (lvl: number, players: number) => {
   }
   const followingRoundsDeal =
     getRewardMinDealt(getTier(lvl)) *
-    chanceToHitEnemy(getTier(lvl), getPowerLevel(lvl)) *
-    players;
+    chanceToHitEnemyOld(getTier(lvl), getPowerLevel(lvl)) *
+    pcs;
 
   return round + Math.ceil(remainingPool / followingRoundsDeal);
 };
 
-// TODO: Use middling player pool
-// TODO: Accomodate wellspring for enemies
-export const roundsToLose = (lvl: number, players: number) => {
-  const totalPCPool = getMaxPool(lvl) * players;
+/**
+ * Assumptions
+ * - Against pc's max pool
+ * - Enemies have wellspring and dump all of it round 1
+ */
+export const roundsToLose = (lvl: number, pcs: number) => {
+  const totalPCPool = getMaxPool(lvl) * pcs;
   let remainingPool = totalPCPool;
-  const enemies = getEnemies(lvl, players);
-  console.log(
-    `------- FIGHT ------------ ${players} Lvl ${lvl} vs ${enemies.join(
-      ", "
-    )}. Total PC Pool: ${totalPCPool}`
-  );
+  const enemies = getEnemies(lvl, pcs);
+  // console.log(
+  //   `------- FIGHT ------------ ${pcs} Lvl ${lvl} vs ${enemies.join(
+  //     ", "
+  //   )}. Total PC Pool: ${totalPCPool}`
+  // );
   let round = 1;
   while (remainingPool > 0) {
     for (let i = 0; i < enemies.length; i++) {
@@ -129,9 +131,9 @@ export const roundsToLose = (lvl: number, players: number) => {
           ? averageMaxEnemyDealt(enemy, lvl)
           : averageMinEnemyDealt(enemy, lvl);
       remainingPool -= deals;
-      console.log(
-        `Round ${round} T${enemy} deals ${deals} damage. ${remainingPool} remaining`
-      );
+      // console.log(
+      //   `Round ${round} T${enemy} deals ${deals} damage. ${remainingPool} remaining`
+      // );
       if (remainingPool <= 0) return round;
     }
     round++;

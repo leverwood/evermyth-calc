@@ -1,0 +1,272 @@
+@use "sass:math";
+
+$gap: 16px;
+$half-gap: math.div($gap, 2);
+$featureColor: rgb(199, 235, 232);
+$equipmentColor: #eee;
+$trainingColor: rgb(230, 219, 235);
+$trinketColor: rgb(255, 245, 188);
+
+body {
+  margin: 0;
+  padding: 0 $gap;
+}
+
+.root {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: $gap;
+  box-sizing: border-box;
+}
+
+.twoColWrapper {
+  border-top: 1px solid #d4d4d4;
+  display: flex;
+  gap: $gap;
+  padding: $gap 0;
+  position: relative;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  
+}
+
+.selectColumn {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.resultsColumn {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-left: $half-gap;
+}
+
+.errorList {
+  color: red;
+  margin-top: 0;
+}
+
+.errorTitle {
+  color: red;
+  margin-top: $gap;
+  display: block;
+}
+
+.jsonDump {
+  background-color: #eee;
+  padding: $gap;
+  box-shadow: inset 0px 0px 5px #d4d4d4;
+}
+
+.card {
+  $multiplier: 110px;
+  box-shadow: 0px 0px 5px #a8a8a8;
+  padding: $gap;
+  line-height: 1.5em;
+  margin-top: $gap;
+  width: 2.5 * $multiplier;
+  min-height: 3.5 * $multiplier;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardMultiReward {
+  padding: 0;
+}
+
+.cardHeader {
+  padding: $half-gap $gap;
+  border-bottom: 1px solid #d4d4d4;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.cardBody {
+  margin: 0;
+  padding: $half-gap $gap $gap;
+  flex-grow: 1;
+
+  p {
+    margin-top: 0;
+    margin-bottom: $half-gap;
+  }
+}
+
+.cardRewardList {
+  list-style: none;
+
+  li {
+    margin-top: $half-gap;
+  }
+}
+
+.cardFooter {
+  padding: 0.3em 1em;
+  background-color: $equipmentColor;
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.3em;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.cardFooter.equipment {
+  background-color: $equipmentColor;
+}
+
+.cardFooter.training {
+  background-color: $trainingColor;
+}
+
+.cardFooter.feature {
+  background-color: $featureColor;
+}
+
+.cardFooter.trinket {
+  background-color: $trinketColor;
+}
+
+.input, .select {
+  width: 100%;
+  padding: $half-gap;
+  margin-top: $half-gap;
+  box-sizing: border-box;
+}
+
+.textarea {
+  margin-top: $half-gap;
+  width: 100%;
+  height: 100px;
+  padding: $half-gap;
+  box-sizing: border-box;
+}
+
+.inputLabel {
+  font-weight: bold;
+}
+
+.removeListTitle,
+.addListTitle {
+  margin-top: $gap;
+  margin-bottom: 0;
+  display: block;
+}
+
+.removeList,
+.addList {
+  li {
+    margin-bottom: $half-gap;
+  }
+
+  button, .button {
+    margin-right: $half-gap;
+  }
+}
+
+// TODO: make class more specific
+button, .button {
+  appearance: none;
+  border: 0;
+  margin-right: $half-gap;
+  padding: 0.5em 1em;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid #bbbbbb;
+  background-color: #eee;
+}
+
+.deleteButton {
+  background-color: rgb(128, 0, 0);
+  border: 1px solid rgb(128, 0, 0);
+  color: white;
+}
+
+.rewardList {
+  padding: 0;
+  list-style-type: none;
+
+  li {
+    margin-top: $half-gap;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .singleRewardText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.singleRewardText {
+    strong {
+      font-style: italic;
+    }
+}
+
+.combinedRewardsList {
+  padding: 0;
+  li {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: $half-gap;
+  }
+}
+
+.combinedRewardText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rewardListText {
+  padding-right: $half-gap;
+}
+
+.typeHeading {
+  margin-top: $gap;
+  display: block;
+}
+
+.typeChoiceLabel {
+  vertical-align: middle;
+  margin-right: $half-gap;
+}
+
+.typeChoice {
+  vertical-align: middle;
+}
+
+.typeTag {
+  background-color: $equipmentColor;
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  border-radius: 1em;
+}
+
+.typeTag.equipment {
+  background-color: $equipmentColor;
+}
+
+.typeTag.training {
+  background-color: $trainingColor;
+}
+
+.typeTag.feature {
+  background-color: $featureColor;
+}
+
+.typeTag.trinket {
+  background-color: $trinketColor;
+}

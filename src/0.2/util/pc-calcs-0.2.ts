@@ -1,5 +1,5 @@
-import { getTier } from "./calcs";
-import { ABILITY_MIN_LVL } from "./constants";
+import { getTier } from "../../util/calcs";
+import { ABILITY_MIN_LVL } from "../../util/constants";
 
 export const getTotalAbilityPoints = (lvl: number) => {
   return lvl + 3 + getTier(lvl);
@@ -8,16 +8,16 @@ export const getPowerLevel = (lvl: number) => {
   return getTier(lvl) * 3 + 2;
 };
 
-export const getMaxAbilty = (lvl: number) => {
+export const getMaxAbility = (lvl: number) => {
   return getTier(lvl) + 2;
 };
 
-export const getPool = (ablity: number, lvl: number) => {
-  return 6 + ablity + lvl;
+export const getPool = (ability: number, lvl: number) => {
+  return 6 + ability + lvl;
 };
 
 export const getMaxPool = (lvl: number) => {
-  return getPool(getMaxAbilty(lvl), lvl);
+  return getPool(getMaxAbility(lvl), lvl);
 };
 
 export const getMinPool = (lvl: number) => {

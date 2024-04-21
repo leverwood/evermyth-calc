@@ -1,8 +1,7 @@
-import React from "react";
-import "./App.css";
-import PCLevel from "./components/PCLevels";
-import RewardCreator from "./components/RewardCreator";
-import DiceFormulas from "./components/DiceFormulas";
+import "./App-0.2.css";
+import PCLevel from "./PCLevels-0.2";
+import RewardCreator from "./RewardCreator-0.2";
+import DiceFormulas from "./DiceFormulas-0.2";
 
 function App() {
   return (

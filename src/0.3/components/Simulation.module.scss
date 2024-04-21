@@ -1,0 +1,97 @@
+.root {
+
+}
+
+.roundTitle {
+  text-align: center;
+  font-size: 1.5em;
+  color: purple;
+  border-top: 1px solid purple;
+  padding-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.roundIntro {
+  text-align: center;
+  color: purple;
+}
+
+.turns {
+  list-style: none;
+  padding: 0;
+}
+
+.turn {
+
+}
+
+.pcTurnTitle {
+  color: purple;
+}
+
+.enemyTurnTitle {
+  color: red;
+}
+
+li {
+  line-height: 1.5em;
+}
+
+.initiativeTitle {
+  background-color: #eee;
+  padding: 0.5em;
+}
+
+.actionLabel {
+  font-size: 0.8rem;
+  background-color: aqua;
+  padding: 0.25em 0.5em;
+  margin-right: 0.5rem;
+}
+
+.hitLabel {
+  background-color: rgb(0, 89, 255);
+  color: white;
+  &::before {
+    content: '⚔️';
+  }
+}
+
+.attackLabel {
+  background-color: rgb(124, 2, 2);
+  color: white;
+  &::before {
+    content: '🩸';
+  }
+}
+
+.partialAttackLabel {
+  background-color: rgb(218, 128, 128);
+  color: white;
+  &::before {
+    content: '🩸';
+  }
+}
+
+.killLabel {
+  background-color: rgb(49, 173, 0);
+  color: white;
+  &::before {
+    content: '💀';
+  }
+}
+
+.missLabel {
+  background-color: rgb(182, 180, 180);
+  color: white;
+  &::before {
+    content: '';
+  }
+}
+
+.diceResult {
+  font-size: 0.75rem;
+  font-family: monospace;
+  background-color: #eee;
+  padding: 0.25em 0.5em;
+}

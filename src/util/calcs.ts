@@ -2,16 +2,16 @@ export const getTier = (lvl: number): number => {
   return Math.ceil(lvl / 4);
 };
 
-export const getDCMedium = (tier: number) => {
+export const getDCMediumOld = (tier: number) => {
   return tier * 3 + 7;
 };
 
-export const getDCEasy = (tier: number) => {
-  return getDCMedium(tier) - 3;
+export const getDCEasyOld = (tier: number) => {
+  return getDCMediumOld(tier) - 3;
 };
 
-export const getDCHard = (tier: number) => {
-  return getDCMedium(tier) + 3;
+export const getDCHardOld = (tier: number) => {
+  return getDCMediumOld(tier) + 3;
 };
 
 /**
@@ -72,6 +72,6 @@ export const totalPCWellspring = (lvl: number) => {
   return 3 + getTier(lvl) + lvl;
 };
 
-export const maxWellspringCast = (lvl: number) => {
+export const wellspringMaxCast = (lvl: number) => {
   return getTier(lvl);
 };

@@ -1,11 +1,11 @@
-import { getTier, totalPCWellspring } from "./calcs";
-import { RewardAttribute } from "./constants";
+import { getTier, totalPCWellspring } from "../../util/calcs";
+import { RewardAttribute } from "../../util/constants";
 import {
   flatToRolled,
   flatToRolledPrint,
   printAllFormulaData,
-} from "./dice-calcs";
-import { totalEnemyWellspring } from "./enemy-calcs";
+} from "./dice-calcs-0.2";
+import { totalEnemyWellspring } from "./enemy-calcs-0.2";
 
 export const rewardTier = (attributes: RewardAttribute[]): number => {
   return attributes.reduce((sum, attribute) => sum + attribute.tier, 0);
@@ -173,17 +173,17 @@ export const getPCRewardMaxDealt = (lvl: number) => {
 
 /**
  * Blow literally all your wellspring on the most powerful thing
+ * Enemies do not take backfire effects
  * (+0) deal 2
  * (+0) upcast deal
  * (-1) wellspring
- * (+tier) deal tier
- * (+tier) deal tier
  * (+1) deal 1
+ * (+tier) deal tier
  * --- total = tier
  */
 export const getEnemyRewardMaxDealt = (tier: number) => {
   // spend all remaining wellspring increasing the dealt
   const extraWellspringSpent = totalEnemyWellspring(tier) - tier;
 
-  return 2 + extraWellspringSpent + tier + tier + 1;
+  return 2 + extraWellspringSpent + tier + 1;
 };

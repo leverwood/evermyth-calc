@@ -1,14 +1,32 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
-import App from './App';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import OldApp from './0.2/components/App-0.2';
+import NewSystem from './0.3/components/NewSystem';
+import RewardCreatorNew from './0.3/components/RewardCreatorNew';
 import reportWebVitals from './reportWebVitals';
+
+const router = createBrowserRouter([
+  {
+    path: "/0.2",
+    element: <OldApp />,
+  },
+  {
+    path: "/",
+    element: <NewSystem />,
+  },
+  {
+    path: "/rewards",
+    element: <RewardCreatorNew />,
+  }
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

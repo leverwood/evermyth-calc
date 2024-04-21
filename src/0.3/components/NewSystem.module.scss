@@ -1,0 +1,17 @@
+
+.table {
+  border-spacing: 0;
+
+  td { 
+    padding: 0.2em 0.5em;
+    border: 0px;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f9f9f9;
+  }
+}
+
+.borderBottom td {
+  border-bottom: 1px solid #999;
+}

@@ -2,6 +2,8 @@ export const ABILITY_MIN_LVL = -3;
 
 export const TIER_0_ENEMY_POOL = 1;
 
+export const FLED_AFTER_ROUNDS = 1;
+
 // dnd level 18 fighter with +3 weapon
 
 export interface RewardAttribute {
@@ -90,12 +92,14 @@ function addAttribute({
   });
 }
 
+// in doc
 addAttribute({
   tier: 0,
-  description: "Deal 1d4 (2) points",
+  description: "Deal 1d4 (2) points, must take an action",
   once: true,
   deals: 2,
 });
+// in doc
 addAttribute({
   tier: 1,
   description: "Add +1 to checks and points dealt",
@@ -108,6 +112,7 @@ addAttribute({
   deals: 5,
   mod: 5,
 });
+// in doc
 addAttribute({
   tier: 1,
   description: "Add your tier to checks and points dealt",
@@ -116,12 +121,16 @@ addAttribute({
   scales: true,
   once: true,
 });
+// in doc
 addAttribute({
   tier: -1,
   description: "Subtract 1 from checks and points dealt",
   deals: -1,
   mod: -1,
 });
+
+// We already have a crazy dump of super sayan power with the upcasting, so it's fine
+// in doc
 addAttribute({
   tier: -1,
   description:
@@ -133,17 +142,34 @@ addAttribute({
   description: "Backfire: on fail, deal 5 to your pool",
   backfire: 5,
 });
+// in doc
 addAttribute({
   tier: -1,
   description: "Costs wellspring equal to the reward's tier",
   wellspring: true,
 });
 addAttribute({
-  tier: -4,
-  description: "Is consumable",
+  tier: -3,
+  description: "Is consumable and a risky action",
   consumable: true,
+  checkRequired: false,
+});
+// in doc
+addAttribute({
+  tier: -2,
+  description: "Is consumable and a safe action",
+  consumable: true,
+  checkRequired: false,
+});
+// in doc
+addAttribute({
+  tier: -1,
+  description: "Is consumable and does not take an action",
+  consumable: true,
+  checkRequired: false,
 });
 
+// in doc
 // Tier 0 Potion of Healing:
 // Restores 2 points +1
 // Consumable -4
@@ -151,36 +177,38 @@ addAttribute({
 addAttribute({
   // must have some tier cost or it will be added arbitrarily to random shit.
   tier: 1,
-  description: "Restores 2 points, must also be consumable",
-  restores: 2,
-  once: true,
-  consumable: true,
-});
-// Tier 1 Healing word:
-addAttribute({
-  // must have some tier or wellspring cost, or it will be added arbitrarily to random shit.
-  tier: 0,
-  description: "Restores 2, must cost wellspring",
+  description: "Restores 2 points, must also be consumable or cost wellspring",
   restores: 2,
   once: true,
 });
+// in doc
 addAttribute({
   tier: 1,
   description: "Restores 2 more",
   restores: 2,
 });
+
+// in doc
+addAttribute({
+  tier: 1,
+  description: "Spend 1 wellspring to restore 2 points",
+  restores: 2,
+});
+// in doc
 addAttribute({
   tier: 2,
   description: "Is a safe action (no check required)",
   checkRequired: false,
 });
 
+// in doc
 addAttribute({
   tier: 1,
   description: "Advantage on check",
   rollType: "advantage",
   once: true,
 });
+// in doc
 addAttribute({
   tier: -1,
   description: "Disadvantage on check",
@@ -219,7 +247,7 @@ addAttribute({
 // need this one first, only once
 addAttribute({
   tier: 1,
-  description: "Make AoE: Divide dealt by 2",
+  description: "Make AoE: Divide dealt or points restored by 2",
   aoe: true,
   once: true,
   dealsMultiplier: 1 / 2,

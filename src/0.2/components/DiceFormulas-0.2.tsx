@@ -1,10 +1,9 @@
-import React from "react";
-import styles from "./DiceFormulas.module.scss";
+import styles from "./DiceFormulas-0.2.module.scss";
 import {
   findHighestLikely,
   getAllDiceFormulas,
   printDiceFormula,
-} from "../util/dice-calcs";
+} from "../util/dice-calcs-0.2";
 
 interface DiceFormulasProps {
   min: number;

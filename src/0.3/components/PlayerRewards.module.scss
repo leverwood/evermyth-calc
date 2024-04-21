@@ -1,0 +1,66 @@
+@use "sass:math";
+
+$gap: 16px;
+$half-gap: math.div($gap, 2);
+
+.root {
+  border-bottom: 1px solid #d4d4d4;
+  padding-bottom: $gap;
+  margin-bottom: $gap;
+}
+
+.addPlayerForm, .playerHeader {
+  display: flex;
+  align-items: center;
+
+  input {
+    width: auto;
+    flex-shrink: 1;
+    margin-right: $gap;
+    margin-top: 0;
+  }
+
+  label {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: $half-gap;
+    line-height: 1em;
+  }
+}
+
+.playerList {
+  padding: 0;
+}
+
+.player {
+  border-bottom: 1px solid #d4d4d4;
+  margin-bottom: $gap;
+  padding-bottom: $gap;
+}
+
+.playerHeader{
+  padding-bottom: $half-gap;
+}
+
+.playerBody {
+  p {
+    padding: 0;
+    margin: 0 0 $half-gap; 
+  }
+}
+
+
+.addReward {
+  display: flex;
+
+  select {
+    width: auto;
+    flex-shrink: 1;
+    margin-top: 0;
+    margin-right: $gap;
+  }
+}
+
+.rewardName {
+  margin-right: $half-gap;
+}
