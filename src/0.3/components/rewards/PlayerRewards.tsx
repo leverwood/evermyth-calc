@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
-import { PC } from "../types/types-new-system";
+import { SavedPCData } from "../../types/types-new-system";
 import styles from "./PlayerRewards.module.scss";
 import rewardStyles from "./RewardCreatorNew.module.scss";
-import { initReward } from "../util/reward-calcs";
-import { getPCLearnedFeatures, getPCWellspring, initPC } from "../util/pc-calcs";
-import { LOG_LEVEL, Logger } from "../../util/log";
+import { getRewardOptionsFromIds, initReward } from "../../util/reward-calcs";
+import { getPCLearnedFeatures, getPCWellspring } from "../../util/pc-calcs";
+import { LOG_LEVEL, Logger } from "../../../util/log";
 import { SingleRewardText } from "./RewardCreatorNew";
-import { RewardOptions } from "../types/reward-types-new";
+import { RewardOptions, RewardOptionsID } from "../../types/reward-types-new";
 
 const logger = Logger(LOG_LEVEL.INFO);
 
@@ -19,35 +19,74 @@ const getPlayersFromStorage = () => {
   return [];
 };
 
+type HandleModifyPlayerFunc = (
+  index: number,
+  player: SavedPCData,
+  action: "add" | "update" | "delete"
+) => void;
+
 export function PlayerRewards({ rewards }: { rewards: RewardOptions[] }) {
-  const [players, setPlayers] = useState<PC[]>(getPlayersFromStorage());
+  const [players, setPlayers] = useState<SavedPCData[]>(
+    getPlayersFromStorage()
+  );
+
+  const handleModifyPlayer: HandleModifyPlayerFunc = useCallback(
+    (
+      index: number,
+      player: SavedPCData,
+      action: "add" | "update" | "delete"
+    ) => {
+      setPlayers((prevPlayers) => {
+        const newPlayers = [...prevPlayers];
+        switch (action) {
+          case "add":
+            newPlayers.push(player);
+            break;
+          case "delete":
+            newPlayers.splice(index, 1);
+            break;
+          case "update":
+            newPlayers[index] = player;
+            break;
+        }
+        localStorage.setItem("player", JSON.stringify(newPlayers));
+        return newPlayers;
+      });
+    },
+    []
+  );
 
   return (
     <section className={styles.root}>
       <h1>Player Rewards</h1>
-      <AddPlayer setPlayers={setPlayers} />
-      <Players players={players} setPlayers={setPlayers} rewards={rewards} />
+      <AddPlayer handleModifyPlayer={handleModifyPlayer} />
+      <Players
+        players={players}
+        handleModifyPlayer={handleModifyPlayer}
+        rewards={rewards}
+      />
     </section>
   );
 }
 
 function AddPlayer({
-  setPlayers,
+  handleModifyPlayer,
 }: {
-  setPlayers: React.Dispatch<React.SetStateAction<PC[]>>;
+  handleModifyPlayer: HandleModifyPlayerFunc;
 }) {
   const [name, setName] = useState("");
   const [level, setLevel] = useState(1);
 
   const addPlayer = useCallback(() => {
-    setPlayers((prevPlayers: PC[]) => {
-      const newPlayers: PC[] = [...prevPlayers, initPC(level, name)];
-      localStorage.setItem("players", JSON.stringify(newPlayers));
-      return newPlayers;
-    });
+    const newPC: SavedPCData = {
+      name: name,
+      level: level,
+      rewards: [],
+    };
+    handleModifyPlayer(-1, newPC, "add");
     setName("");
     setLevel(1);
-  }, [level, name, setPlayers]);
+  }, [level, name, handleModifyPlayer]);
 
   return (
     <div className={styles.addPlayer}>
@@ -91,11 +130,11 @@ function AddPlayer({
 
 function Players({
   players,
-  setPlayers,
+  handleModifyPlayer,
   rewards,
 }: {
-  players: PC[];
-  setPlayers: React.Dispatch<React.SetStateAction<PC[]>>;
+  players: SavedPCData[];
+  handleModifyPlayer: HandleModifyPlayerFunc;
   rewards: RewardOptions[];
 }) {
   return (
@@ -107,7 +146,7 @@ function Players({
             player={player}
             key={player.name}
             index={i}
-            setPlayers={setPlayers}
+            handleModifyPlayer={handleModifyPlayer}
             rewards={rewards}
           />
         ))}
@@ -119,12 +158,12 @@ function Players({
 function Player({
   player,
   index,
-  setPlayers,
+  handleModifyPlayer,
   rewards,
 }: {
-  player: PC;
+  player: SavedPCData;
   index: number;
-  setPlayers: React.Dispatch<React.SetStateAction<PC[]>>;
+  handleModifyPlayer: HandleModifyPlayerFunc;
   rewards: RewardOptions[];
 }) {
   const [name, setName] = useState(player.name);
@@ -132,19 +171,15 @@ function Player({
   const [eduMod, setEduMod] = useState(
     player.eduMod ? player.eduMod.toString() : ""
   );
-  const [playerRewards, setPlayerRewards] = useState(player.rewards);
+  const playerRewards = getRewardOptionsFromIds(player.rewards, rewards);
 
-  const sortedRewards: {
-    originalIndex: number;
-    reward: RewardOptions;
-  }[] = rewards
-    .map((reward, i) => ({ originalIndex: i, reward }))
-    .sort((r1, r2) =>
-      (r1.reward.name || "").localeCompare(r2.reward.name || "")
-    );
+  // sort alphabetically
+  const sortedRewards: RewardOptions[] = rewards.sort((r1, r2) =>
+    (r1.name || "").localeCompare(r2.name || "")
+  );
 
   // stores the originalIndex of the selected reward
-  const [selectedReward, setSelectedReward] = useState<number>(-1);
+  const [selectedReward, setSelectedReward] = useState<string>("-1");
 
   const handleChange = useCallback(
     (key: "name" | "level" | "eduMod", value: string) => {
@@ -162,65 +197,39 @@ function Player({
         storedValue = 1;
       }
 
-      setPlayers((prevPlayers) => {
-        const newPlayers: PC[] = [...prevPlayers];
-        newPlayers[index] = {
-          ...player,
-          [key]: storedValue,
-        };
-        localStorage.setItem("players", JSON.stringify(newPlayers));
-        return newPlayers;
-      });
+      const newPlayerData: SavedPCData = {
+        ...player,
+        [key]: storedValue,
+      };
+
+      handleModifyPlayer(index, newPlayerData, "update");
     },
-    [index, player, setPlayers]
+    [index, player, handleModifyPlayer]
   );
 
-  const handleDelete = useCallback(() => {
-    setPlayers((prevPlayers) => {
-      const newPlayers = prevPlayers.filter((_, i) => i !== index);
-      localStorage.setItem("players", JSON.stringify(newPlayers));
-      return newPlayers;
-    });
-  }, [index, setPlayers]);
-
   const handleAddReward = useCallback(
-    (rewardOptions: RewardOptions) => {
-      const reward = initReward(rewardOptions);
-      setPlayerRewards((prevRewards) => {
-        const newRewards = [...prevRewards, reward];
-        setPlayers((prevPlayers) => {
-          const newPlayers = [...prevPlayers];
-          newPlayers[index] = {
-            ...player,
-            rewards: newRewards,
-          };
-          localStorage.setItem("players", JSON.stringify(newPlayers));
-          return newPlayers;
-        });
-        return newRewards;
-      });
-      setSelectedReward(-1);
+    (rewardId: RewardOptionsID) => {
+      const newPlayer = {
+        ...player,
+        rewards: [...player.rewards, rewardId],
+      };
+      handleModifyPlayer(index, newPlayer, "update");
+      setSelectedReward("-1");
     },
-    [index, player, setPlayers]
+    [index, player, handleModifyPlayer]
   );
 
   const handleDeleteReward = useCallback(
     (rewardIndex: number) => {
-      setPlayerRewards((prevRewards) => {
-        const newRewards = prevRewards.filter((_, i) => i !== rewardIndex);
-        setPlayers((prevPlayers) => {
-          const newPlayers = [...prevPlayers];
-          newPlayers[index] = {
-            ...player,
-            rewards: newRewards,
-          };
-          localStorage.setItem("players", JSON.stringify(newPlayers));
-          return newPlayers;
-        });
-        return newRewards;
-      });
+      const newRewards = player.rewards.filter((_, i) => i !== rewardIndex);
+      const newPlayer = {
+        ...player,
+        rewards: newRewards,
+      };
+      handleModifyPlayer(index, newPlayer, "update");
+      return newRewards;
     },
-    [index, player, setPlayers]
+    [index, player, handleModifyPlayer]
   );
 
   return (
@@ -256,28 +265,31 @@ function Player({
           min={0}
         />
 
-        <button onClick={handleDelete} className={rewardStyles.deleteButton}>
+        <button
+          onClick={() => handleModifyPlayer(index, player, "delete")}
+          className={rewardStyles.deleteButton}
+        >
           x
         </button>
       </div>
       <div className={styles.playerBody}>
-        <p>Can learn {getPCLearnedFeatures(player)} features | Wellspring {getPCWellspring(player.level)}</p>
+        <p>
+          Can learn {getPCLearnedFeatures(player)} features | Wellspring{" "}
+          {getPCWellspring(player.level)}
+        </p>
         <div className={styles.addReward}>
           <select
             id={`${index}-rewards`}
             className={rewardStyles.select}
-            onChange={(e) => {
-              logger.log(`selected reward: ${e.target.value}`);
-              setSelectedReward(parseInt(e.target.value));
-            }}
+            onChange={(e) => setSelectedReward(e.target.value)}
           >
             <option value={-1}>Select Reward</option>
-            {sortedRewards.map(({ originalIndex, reward }) => {
+            {sortedRewards.map((reward, i) => {
               if (playerRewards.find((r) => r.name === reward.name))
                 return null;
               if (!reward.name) return null;
               return (
-                <option key={originalIndex} value={originalIndex}>
+                <option key={i} value={reward.id}>
                   {reward.name}
                 </option>
               );
@@ -285,9 +297,7 @@ function Player({
           </select>
           <button
             onClick={() =>
-              selectedReward !== -1
-                ? handleAddReward(rewards[selectedReward])
-                : null
+              selectedReward !== "-1" ? handleAddReward(selectedReward) : null
             }
             className={rewardStyles.button}
           >

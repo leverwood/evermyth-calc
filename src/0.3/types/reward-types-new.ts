@@ -7,6 +7,10 @@ export enum REWARD_TYPE {
   TRINKET = "trinket",
 }
 
+
+// generate with crypto.randomUUID()
+export type RewardOptionsID = string;
+
 interface RewardBase {
   type?: REWARD_TYPE;
   // optional
@@ -56,6 +60,7 @@ interface RewardBase {
 }
 
 export interface RewardOptions extends RewardBase {
+  id?: RewardOptionsID; // the options and the reward should share an ID
   name?: string;
   modifyTier?: number;
 }
@@ -68,6 +73,7 @@ export interface Reward extends RewardBase {
   cost: number;
   deals: number;
   heals: number;
+  optionsId?: RewardOptionsID;
 }
 
 export const TEMPORARY_ADV_ACTION: Condition = {

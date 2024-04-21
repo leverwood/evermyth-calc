@@ -1,5 +1,5 @@
-import { OPTION_COST } from "../types/reward-types-new";
-import { printModifier } from "../../0.2/util/dice-calcs-0.2";
+import { OPTION_COST } from "../../types/reward-types-new";
+import { printModifier } from "../../../0.2/util/dice-calcs-0.2";
 
 const DESCRIPTIONS = {
   advantage: (
@@ -52,7 +52,8 @@ const DESCRIPTIONS = {
   ),
   grantsAbilities: (
     <>
-      <strong>Grants Ability.</strong> Grants the ability to do something. Ability: 
+      <strong>Grants Ability.</strong> Grants the ability to do something.
+      Ability:
     </>
   ),
   heals: (
@@ -62,7 +63,8 @@ const DESCRIPTIONS = {
   ),
   isMove: (
     <>
-      <strong>Is movement.</strong> Use this reward during your move on your turn. It doesn't require a roll. Cannot deal points or heal.
+      <strong>Is movement.</strong> Use this reward during your move on your
+      turn. It doesn't require a roll. Cannot deal points or heal.
     </>
   ),
   noAction: (
@@ -132,7 +134,8 @@ const DESCRIPTIONS = {
   ),
   summonTierIncrease: (
     <>
-      <strong>Summon Tier Increase.</strong> Increase the tier of the summon by 1
+      <strong>Summon Tier Increase.</strong> Increase the tier of the summon by
+      1
     </>
   ),
   teleport: (
@@ -142,12 +145,13 @@ const DESCRIPTIONS = {
   ),
   trained: (
     <>
-      <strong>Trained.</strong> Gain a training under a specific condition: 
+      <strong>Trained.</strong> Gain a training under a specific condition:
     </>
   ),
   upcast: (
     <>
-      <strong>Upcast.</strong> Spend more wellspring to apply a stronger effect. Select a reward with a tier of -1: 
+      <strong>Upcast.</strong> Spend more wellspring to apply a stronger effect.
+      Select a reward with a tier of -1:
     </>
   ),
   wellspringMax: (
@@ -165,9 +169,8 @@ const DESCRIPTIONS = {
     <>
       <strong>Defending.</strong> Can be used while making a defense roll.
     </>
-  )
+  ),
 } as const;
-
 
 export default function AttributeDescription({
   keyName,
@@ -178,8 +181,7 @@ export default function AttributeDescription({
   const content = DESCRIPTIONS[keyName];
   return (
     <span>
-      ({printModifier(cost)} tier){" "}
-      {content || "Key not found"}
+      ({printModifier(cost)} tier) {content || "Key not found"}
     </span>
   );
 }

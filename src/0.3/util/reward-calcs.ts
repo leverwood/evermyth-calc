@@ -4,6 +4,7 @@ import {
   Reward,
   OPTION_COST,
   isReward,
+  RewardOptionsID,
 } from "../types/reward-types-new";
 import {
   Condition,
@@ -415,4 +416,12 @@ export function validateRewardOptions(options: RewardOptions): {
   }
   const valid = errors.length === 0;
   return { errors, valid };
+}
+
+export function getRewardOptionsFromIds(
+  ids: RewardOptionsID[],
+  rewards: RewardOptions[]
+): RewardOptions[] {
+  const results = ids.map((id) => rewards.find((r) => r.id === id));
+  return results.filter((r) => r) as RewardOptions[];
 }

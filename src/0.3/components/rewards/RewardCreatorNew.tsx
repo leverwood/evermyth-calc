@@ -1,12 +1,16 @@
 import { useCallback, useState } from "react";
 import styles from "./RewardCreatorNew.module.scss";
-import { initReward, validateRewardOptions } from "../util/reward-calcs";
-import { printRewardMessage } from "../util/printRewardMessage";
-import { LOG_LEVEL, Logger } from "../../util/log";
+import { initReward, validateRewardOptions } from "../../util/reward-calcs";
+import { printRewardMessage } from "../../util/printRewardMessage";
+import { LOG_LEVEL, Logger } from "../../../util/log";
 import Markdown from "markdown-to-jsx";
 import { PlayerRewards } from "./PlayerRewards";
 import AttributeDescription from "./AttributeDescription";
-import { RewardOptions, REWARD_TYPE, Reward } from "../types/reward-types-new";
+import {
+  RewardOptions,
+  REWARD_TYPE,
+  Reward,
+} from "../../types/reward-types-new";
 
 // TODO : markdown to HTML for description
 
@@ -21,6 +25,12 @@ const getRewardsFromStorage = () => {
     return [];
   }
   logger.debug("getRewardsFromStorage", rewards);
+
+  // ensure they all have IDs if they don't already
+  rewards.forEach((r) => {
+    if (!r.id) r.id = crypto.randomUUID();
+  });
+
   return rewards;
 };
 
@@ -48,67 +58,66 @@ export default function RewardCreatorNew() {
   const errors = validateRewardOptions(selectedOptions).errors;
   logger.debug("errors", errors);
 
-  const changeValue = useCallback<ChangeValueFunc>(
-    (key, value, index = -1) => {
-      // set the new value
-      setSelectedOptions((prevState) => {
-        let newKey = key;
-        let newValue: RewardOptions[keyof RewardOptions] = value;
+  const changeValue = useCallback<ChangeValueFunc>((key, value, index = -1) => {
+    // set the new value
+    setSelectedOptions((prevState) => {
+      let newKey = key;
+      let newValue: RewardOptions[keyof RewardOptions] = value;
 
-        if (key === "addMultiReward" && typeof value === "object") {
-          newKey = "multiRewards";
-          newValue = [
-            ...(prevState.multiRewards || []),
-            newValue as RewardOptions,
-          ];
-        } else if (key === "deleteMultiReward" && typeof value === "object") {
-          newKey = "multiRewards";
-          newValue = (prevState.multiRewards || []).filter(
-            (opt) => !isSameReward(opt, newValue as RewardOptions)
-          );
-        } else if (key === "addAbility") {
-          newKey = "grantsAbilities";
-          newValue = [...(prevState.grantsAbilities || []), value as string];
-        } else if (key === "deleteAbility") {
-          newKey = "grantsAbilities";
-          newValue = (prevState.grantsAbilities || []).splice(index, 1);
-        } else if (key === "changeAbility") {
-          newKey = "grantsAbilities";
-          newValue = (prevState.grantsAbilities || []).map((ability, i) =>
-            i === index ? (value as string) : ability
-          );
-        } else if(key === "upcast" && value === false){
-          newKey = "upcast";
-          newValue = undefined;
-        }
-        else if (key !== "addMultiReward" && key !== "deleteMultiReward") {
-          newValue =
-            typeof newValue === "number"
-              ? ((prevState[key as keyof RewardOptions] as number) || 0) +
-                newValue
-              : newValue;
-        }
+      if (key === "addMultiReward" && typeof value === "object") {
+        newKey = "multiRewards";
+        newValue = [
+          ...(prevState.multiRewards || []),
+          newValue as RewardOptions,
+        ];
+      } else if (key === "deleteMultiReward" && typeof value === "object") {
+        newKey = "multiRewards";
+        newValue = (prevState.multiRewards || []).filter(
+          (opt) => !isSameReward(opt, newValue as RewardOptions)
+        );
+      } else if (key === "addAbility") {
+        newKey = "grantsAbilities";
+        newValue = [...(prevState.grantsAbilities || []), value as string];
+      } else if (key === "deleteAbility") {
+        newKey = "grantsAbilities";
+        newValue = (prevState.grantsAbilities || []).splice(index, 1);
+      } else if (key === "changeAbility") {
+        newKey = "grantsAbilities";
+        newValue = (prevState.grantsAbilities || []).map((ability, i) =>
+          i === index ? (value as string) : ability
+        );
+      } else if (key === "upcast" && value === false) {
+        newKey = "upcast";
+        newValue = undefined;
+      } else if (key !== "addMultiReward" && key !== "deleteMultiReward") {
+        newValue =
+          typeof newValue === "number"
+            ? ((prevState[key as keyof RewardOptions] as number) || 0) +
+              newValue
+            : newValue;
+      }
 
-        const newState: RewardOptions = {
-          ...prevState,
-          [newKey]: newValue,
-        };
+      const newState: RewardOptions = {
+        ...prevState,
+        [newKey]: newValue,
+      };
 
-        // save this into the rewards list
-        const newRewardsList = [...savedRewards];
+      // save this into the rewards list
+      setSavedRewards((prevSavedRewards) => {
+        const newRewardsList = [...prevSavedRewards];
         if (newRewardsList.length === 0)
           newRewardsList.push({} as RewardOptions);
         else newRewardsList[newRewardsList.length - 1] = newState;
         setSavedRewards(newRewardsList);
         localStorage.setItem("rewards", JSON.stringify(newRewardsList));
         logger.debug("Saving to localStorage", newRewardsList);
-
-        // return the new reward options
-        return newState;
+        return newRewardsList;
       });
-    },
-    [savedRewards]
-  );
+
+      // return the new reward options
+      return newState;
+    });
+  }, []);
 
   const handleClickLoad = useCallback(
     (index: number) => {
@@ -157,7 +166,7 @@ export default function RewardCreatorNew() {
       // This runs twice in strict mode
       setSavedRewards((prevRewards) => {
         const newRewards = [...prevRewards];
-        const copy = { ...prevRewards[index] };
+        const copy = { ...prevRewards[index], id: crypto.randomUUID() };
 
         if (Object.keys(newRewards[newRewards.length - 1]).length) {
           // save the currently loaded reward
@@ -178,7 +187,9 @@ export default function RewardCreatorNew() {
 
   const handleCreateNew = useCallback(() => {
     setSavedRewards((prevRewards) => {
-      const newReward = {} as RewardOptions;
+      const newReward = {
+        id: crypto.randomUUID(),
+      } as RewardOptions;
       const newRewards = [...prevRewards, newReward];
       localStorage.setItem("rewards", JSON.stringify(newRewards));
       logger.debug("Saving to localStorage", newRewards);
@@ -584,7 +595,9 @@ function RemoveAttributes({
         )}
         {selectedOptions.teleport && (
           <li>
-            <button onClick={() => changeValue("teleport", false)}>delete</button>
+            <button onClick={() => changeValue("teleport", false)}>
+              delete
+            </button>
             <AttributeDescription keyName="teleport" />
           </li>
         )}
@@ -1068,7 +1081,7 @@ export function SingleRewardText({
   noType = false,
   oneLine = false,
   noTier = false,
-  upcast = false
+  upcast = false,
 }: {
   reward: Reward;
   className?: string;
@@ -1086,11 +1099,6 @@ export function SingleRewardText({
           {!noTier && ` (T${reward.tier < 0 ? 0 : reward.tier})`}.{" "}
         </strong>
       ) : null}
-      {reward.instructions && !oneLine ? (
-        <Markdown>{reward.instructions}</Markdown>
-      ) : (
-        printRewardMessage(reward, upcast)
-      )}{" "}
       {!noType ? (
         <span
           className={`${styles.typeTag} ${
@@ -1100,6 +1108,11 @@ export function SingleRewardText({
           {reward.type}
         </span>
       ) : null}
+      {reward.instructions && !oneLine ? (
+        <Markdown>{reward.instructions}</Markdown>
+      ) : (
+        printRewardMessage(reward, upcast)
+      )}{" "}
     </span>
   );
 }

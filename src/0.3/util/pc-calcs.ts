@@ -3,15 +3,13 @@ import {
   ENEMY_STATUS,
   PC,
   PC_STATUS,
+  SavedPCData,
 } from "../types/types-new-system";
 import { getTier } from "../../util/calcs";
 import { FLED_AFTER_ROUNDS } from "../../util/constants";
 import { getRandomNum } from "../../util/math";
 
-export const initPC = (
-  level: number,
-  name: string
-): PC => {
+export const initPC = (level: number, name: string): PC => {
   const wellspring = getPCWellspring(level);
   const startingPool = 0;
   return {
@@ -33,10 +31,9 @@ export const initPC = (
   };
 };
 
-
 export const getMaxMod = (level: number) => {
   return getTier(level);
-}
+};
 
 // random pool number
 export const getPCRandomPool = (level: number) => {
@@ -44,16 +41,18 @@ export const getPCRandomPool = (level: number) => {
   return getPCPool(level, mod);
 };
 
-export const getPCMaxPool = (level: number) => getPCPool(level, getMaxMod(level));
+export const getPCMaxPool = (level: number) =>
+  getPCPool(level, getMaxMod(level));
 
-export const getPCPool = (level: number, mod: number) => mod + mod + getTier(level) + 3;
+export const getPCPool = (level: number, mod: number) =>
+  mod + mod + getTier(level) + 3;
 
 // adding tier significantly decreases downed chance
 export const getPCWellspring = (level: number) => {
   return 3 + level;
 };
 
-export const getPCLearnedFeatures = (pc: PC) => {
+export const getPCLearnedFeatures = (pc: SavedPCData) => {
   return 6 + (pc.eduMod || 0) * 4;
 };
 

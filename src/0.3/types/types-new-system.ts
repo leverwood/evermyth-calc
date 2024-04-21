@@ -1,6 +1,5 @@
 import { PCRoll } from "../util/dice-calcs";
-import { RewardOptions, Reward } from "./reward-types-new";
-
+import { RewardOptions, Reward, RewardOptionsID } from "./reward-types-new";
 
 export const INITIAL_SIMULATION_DATA: SimulationData = {
   rounds: [],
@@ -9,14 +8,14 @@ export const INITIAL_SIMULATION_DATA: SimulationData = {
       enemies: [],
       initiative: [],
     },
-    pcs: []
+    pcs: [],
   },
   snapshot: {
     GM: {
       enemies: [],
       initiative: [],
     },
-    pcs: []
+    pcs: [],
   },
   averagePlayerLevel: 0,
   pcsFled: [],
@@ -91,11 +90,15 @@ export const ENEMY_STATUS = {
 
 export const isEnemyStatus = (status: string): status is keyof typeof ENEMY_STATUS => {
   return status in ENEMY_STATUS;
-}
+};
 
 export const isBeneficialStatus = (status: string): boolean => {
-  return status.startsWith("ADV_") || status.startsWith("TRAINED_") || status === ENEMY_STATUS.ENEMY_LING_DMG;
-}
+  return (
+    status.startsWith("ADV_") ||
+    status.startsWith("TRAINED_") ||
+    status === ENEMY_STATUS.ENEMY_LING_DMG
+  );
+};
 
 export interface Condition {
   name: string;
@@ -124,6 +127,16 @@ export interface GM {
   initiative: Enemy[][];
 }
 
+export interface SavedPCData {
+  name: string;
+  playerName?: string;
+  level: number;
+  rewards: RewardOptionsID[];
+  // for calculating number of features
+  eduMod?: number;
+}
+
+// while simulating a game
 export interface PC {
   type: "pc";
   name: string;
@@ -141,8 +154,6 @@ export interface PC {
   rewards: RewardOptions[];
   deathFails: number;
   dead: boolean;
-  // for calculating number of features
-  eduMod?: number;
 }
 export interface Creatures {
   GM: GM;
