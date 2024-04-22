@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import styles from "./RewardCreator.module.scss";
 import { initReward, validateRewardOptions } from "../../util/reward-calcs";
 import { LOG_LEVEL, Logger } from "../../../util/log";
-import { PlayerRewards } from "./PlayerRewards";
 import { RewardOptions, REWARD_TYPE } from "../../types/reward-types";
 import { RemoveAttributes } from "./RemoveAttributes";
 import { AddAttributes } from "./AddAttributes";
@@ -11,30 +10,11 @@ import { SingleRewardText } from "./SingleRewardText";
 import { SavedRewards } from "./SavedRewards";
 import { isSameReward } from "../../util/reward-calcs";
 import { ChangeValueFunc } from "../../types/reward-types";
-
-// TODO : markdown to HTML for description
+import { getRewardsFromStorage } from "../../util/reward-make";
 
 const logger = Logger(LOG_LEVEL.INFO);
 
-const getRewardsFromStorage = () => {
-  const rewards = localStorage.getItem("rewards")
-    ? JSON.parse(localStorage.getItem("rewards") as string)
-    : ([] as RewardOptions[]);
-  if (!Array.isArray(rewards)) {
-    logger.error("Rewards is not an array", rewards);
-    return [];
-  }
-  logger.debug("getRewardsFromStorage", rewards);
-
-  // ensure they all have IDs if they don't already
-  rewards.forEach((r) => {
-    if (!r.id) r.id = crypto.randomUUID();
-  });
-
-  return rewards;
-};
-
-// TODO:  Conditions, upcast, upcastMax, lingering damage
+// TODO:  Conditions, lingering damage
 export default function RewardCreator() {
   const [savedRewards, setSavedRewards] = useState<RewardOptions[]>(
     getRewardsFromStorage()
@@ -198,7 +178,6 @@ export default function RewardCreator() {
   return (
     <div className={styles.root}>
       <h1>Reward Creator</h1>
-      <PlayerRewards rewards={savedRewards} />
       <SavedRewards
         handleClickLoad={handleClickLoad}
         savedRewards={savedRewards}
@@ -276,7 +255,6 @@ function EditReward({
         Name
       </label>
       <input
-        className={styles.input}
         id="rewardName"
         type="text"
         value={selectedOptions.name || ""}

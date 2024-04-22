@@ -49,7 +49,6 @@ export function AddAttributes({
             <button onClick={() => changeValue("relentless", true)}>add</button>
             <AttributeDescription keyName="relentless" />
             <input
-              className={styles.input}
               value={selectedOptions.relentlessMsg || ""}
               type="text"
               onChange={(e) => changeValue("relentlessMsg", e.target.value)}
@@ -105,7 +104,6 @@ export function AddAttributes({
           </button>
           <AttributeDescription keyName="grantsAbilities" />
           <input
-            className={styles.input}
             value={newAbility}
             type="text"
             onChange={(e) => setNewAbility(e.target.value)}
@@ -141,7 +139,6 @@ export function AddAttributes({
           <button onClick={() => changeValue("duration", 1)}>add</button>
           <AttributeDescription keyName="duration" />
           <input
-            className={styles.input}
             value={selectedOptions.durationMsg || ""}
             type="text"
             onChange={(e) => changeValue("durationMsg", e.target.value)}
@@ -152,7 +149,6 @@ export function AddAttributes({
             <button onClick={() => changeValue("advantage", true)}>add</button>
             <AttributeDescription keyName="advantage" />
             <input
-              className={styles.input}
               value={selectedOptions.advantageMsg || ""}
               type="text"
               onChange={(e) => changeValue("advantageMsg", e.target.value)}
@@ -190,7 +186,6 @@ export function AddAttributes({
             <button onClick={() => changeValue("trained", true)}>add</button>
             <AttributeDescription keyName="trained" />
             <input
-              className={styles.input}
               value={selectedOptions.trainedMsg || ""}
               type="text"
               onChange={(e) => changeValue("trainedMsg", e.target.value)}
@@ -226,7 +221,6 @@ export function AddAttributes({
             </button>
             <AttributeDescription keyName="disadvantage" />
             <input
-              className={styles.input}
               value={selectedOptions.disadvantageMsg || ""}
               type="text"
               onChange={(e) => changeValue("disadvantageMsg", e.target.value)}
@@ -241,7 +235,6 @@ export function AddAttributes({
           <button onClick={() => changeValue("castTime", 1)}>add</button>
           <AttributeDescription keyName="castTime" />
           <input
-            className={styles.input}
             value={selectedOptions.castTimeMsg || ""}
             type="text"
             onChange={(e) => changeValue("castTimeMsg", e.target.value)}
@@ -252,7 +245,6 @@ export function AddAttributes({
             <button onClick={() => changeValue("specific", true)}>add</button>
             <AttributeDescription keyName="specific" />
             <input
-              className={styles.input}
               value={selectedOptions.specificMsg || ""}
               onChange={(e) => changeValue("specificMsg", e.target.value)}
             />

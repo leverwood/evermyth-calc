@@ -1,19 +1,8 @@
 @use "sass:math";
+@import "../../../variables";
 
-$gap: 16px;
-$half-gap: math.div($gap, 2);
-$featureColor: rgb(199, 235, 232);
-$equipmentColor: #eee;
-$trainingColor: rgb(230, 219, 235);
-$trinketColor: rgb(255, 245, 188);
-
-body {
-  margin: 0;
-  padding: 0 $gap;
-}
 
 .root {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   overflow-x: hidden;
   margin: 0;
   padding: $gap;
@@ -135,12 +124,6 @@ body {
   background-color: $trinketColor;
 }
 
-.input, .select {
-  width: 100%;
-  padding: $half-gap;
-  margin-top: $half-gap;
-  box-sizing: border-box;
-}
 
 .textarea {
   margin-top: $half-gap;
@@ -167,52 +150,9 @@ body {
     margin-bottom: $half-gap;
   }
 
-  button, .button {
+  .button {
     margin-right: $half-gap;
   }
-}
-
-// TODO: make class more specific
-button, .button {
-  appearance: none;
-  border: 0;
-  margin-right: $half-gap;
-  padding: 0.5em 1em;
-  font-size: 10px;
-  text-transform: uppercase;
-  font-weight: bold;
-  border: 1px solid #bbbbbb;
-  background-color: #eee;
-}
-
-.deleteButton {
-  background-color: rgb(128, 0, 0);
-  border: 1px solid rgb(128, 0, 0);
-  color: white;
-}
-
-.rewardList {
-  padding: 0;
-  list-style-type: none;
-
-  li {
-    margin-top: $half-gap;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-  }
-
-  .singleRewardText {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-.singleRewardText {
-    strong {
-      font-style: italic;
-    }
 }
 
 .combinedRewardsList {
@@ -246,28 +186,4 @@ button, .button {
 
 .typeChoice {
   vertical-align: middle;
-}
-
-.typeTag {
-  background-color: $equipmentColor;
-  font-size: 0.8em;
-  padding: 0.2em 0.5em;
-  border-radius: 1em;
-  margin-right: 0.4em;
-}
-
-.typeTag.equipment {
-  background-color: $equipmentColor;
-}
-
-.typeTag.training {
-  background-color: $trainingColor;
-}
-
-.typeTag.feature {
-  background-color: $featureColor;
-}
-
-.typeTag.trinket {
-  background-color: $trinketColor;
 }

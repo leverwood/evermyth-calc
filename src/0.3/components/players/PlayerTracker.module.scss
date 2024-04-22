@@ -9,25 +9,6 @@ $half-gap: math.div($gap, 2);
   margin-bottom: $gap;
 }
 
-.addPlayerForm, .playerHeader {
-  display: flex;
-  align-items: center;
-
-  input {
-    width: auto;
-    flex-shrink: 1;
-    margin-right: $gap;
-    margin-top: 0;
-  }
-
-  label {
-    font-weight: bold;
-    display: inline-block;
-    margin-right: $half-gap;
-    line-height: 1em;
-  }
-}
-
 .playerList {
   padding: 0;
 }
@@ -63,4 +44,19 @@ $half-gap: math.div($gap, 2);
 
 .rewardName {
   margin-right: $half-gap;
+}
+
+.addPlayerForm {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+}
+
+.addPlayerInput {
+  max-width: 200px;
+}
+
+.levelInput {
+  max-width: 60px;
 }

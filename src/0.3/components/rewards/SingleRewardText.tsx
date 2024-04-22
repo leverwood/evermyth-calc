@@ -1,7 +1,8 @@
-import styles from "./RewardCreator.module.scss";
+import styles from "./SingleRewardText.module.scss";
 import { printRewardMessage } from "../../util/printRewardMessage";
 import Markdown from "markdown-to-jsx";
 import { Reward } from "../../types/reward-types";
+import { Badge } from "react-bootstrap";
 
 export function SingleRewardText({
   reward,
@@ -23,19 +24,15 @@ export function SingleRewardText({
   return (
     <span className={`${styles.singleRewardText} ${className}`}>
       {!noTitle ? (
-        <strong>
+        <strong className={"me-2"}>
           {reward.name}
-          {!noTier && ` (T${reward.tier < 0 ? 0 : reward.tier})`}.{" "}
+          {!noTier && ` (T${reward.tier < 0 ? 0 : reward.tier})`}.
         </strong>
       ) : null}
       {!noType ? (
-        <span
-          className={`${styles.typeTag} ${
-            styles[reward.type.toLocaleLowerCase()]
-          }`}
-        >
+        <Badge className={`${styles[reward.type.toLocaleLowerCase()]} me-2`}>
           {reward.type}
-        </span>
+        </Badge>
       ) : null}
       {reward.instructions && !oneLine ? (
         <Markdown>{reward.instructions}</Markdown>

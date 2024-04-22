@@ -1,6 +1,6 @@
 import { initReward } from "./reward-calcs";
 
-import { Reward } from "../types/reward-types";
+import { Reward, RewardOptions } from "../types/reward-types";
 import { Condition, PC_STATUS, ENEMY_STATUS } from "../types/system-types";
 import { LOG_LEVEL, Logger } from "../../util/log";
 
@@ -170,3 +170,21 @@ export const makeHealingSpell = (tier: number): Reward => {
     );
   return reward;
 };
+export const getRewardsFromStorage = () => {
+  const rewards = localStorage.getItem("rewards")
+    ? JSON.parse(localStorage.getItem("rewards") as string)
+    : ([] as RewardOptions[]);
+  if (!Array.isArray(rewards)) {
+    logger.error("Rewards is not an array", rewards);
+    return [];
+  }
+  logger.debug("getRewardsFromStorage", rewards);
+
+  // ensure they all have IDs if they don't already
+  rewards.forEach((r) => {
+    if (!r.id) r.id = crypto.randomUUID();
+  });
+
+  return rewards;
+};
+

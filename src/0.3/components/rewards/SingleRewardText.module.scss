@@ -1,0 +1,32 @@
+@import "../../../variables";
+
+:global(.badge).equipment {
+  background-color: $equipmentColor !important;
+  color: $body-color;
+}
+
+:global(.badge).training {
+  background-color: $trainingColor !important;
+  color: $body-color;
+}
+
+:global(.badge).feature {
+  background-color: $featureColor !important;
+  color: $body-color;
+}
+
+:global(.badge).trinket {
+  background-color: $trinketColor !important;
+  color: $body-color;
+}
+
+.singleRewardText {
+  &.oneLine {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  strong {
+    font-style: italic;
+  }
+}

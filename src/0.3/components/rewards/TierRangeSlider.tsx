@@ -4,16 +4,18 @@ import "rc-slider/assets/index.css";
 import styles from "./TierRangeSlider.module.scss";
 
 export default function TierRangeSlider({
-  min = 0,
+  value = [0, 5],
   max = 5,
+  setShownTierRange,
 }: {
-  min: number;
+  value: [number, number];
   max: number;
+  setShownTierRange: (value: [number, number]) => void;
 }) {
   const marks: {
     [key: number]: string;
   } = {};
-  for (let i = min; i <= max; i++) {
+  for (let i = 0; i <= max; i++) {
     marks[i] = `T${i}`;
   }
 
@@ -22,12 +24,16 @@ export default function TierRangeSlider({
       <span className={styles.sliderLabel}>Tier</span>
       <Slider
         range
-        min={min}
+        min={0}
         max={max}
         marks={marks}
         step={null}
-        defaultValue={[0, 5]}
-        onChangeComplete={(value) => console.log(value)}
+        defaultValue={[0, max]}
+        onChangeComplete={(value) =>
+          setShownTierRange(
+            typeof value === "number" ? [value, value] : [value[0], value[1]]
+          )
+        }
       />
     </div>
   );

@@ -48,7 +48,6 @@ export function RemoveAttributes({
             <button onClick={() => changeValue("relentless", false)}>x</button>
             <AttributeDescription keyName="relentless" />
             <input
-              className={styles.input}
               value={selectedOptions.relentlessMsg || ""}
               onChange={(e) => changeValue("relentlessMsg", e.target.value)}
             />
@@ -120,7 +119,6 @@ export function RemoveAttributes({
                   </button>
                   <AttributeDescription keyName="grantsAbilities" />
                   <input
-                    className={styles.input}
                     value={ability}
                     onChange={(e) =>
                       changeValue("changeAbility", e.target.value, i)
@@ -173,7 +171,6 @@ export function RemoveAttributes({
             </button>
             <AttributeDescription keyName="duration" />
             <input
-              className={styles.input}
               value={selectedOptions.durationMsg || ""}
               onChange={(e) => changeValue("durationMsg", e.target.value)}
             />
@@ -184,7 +181,6 @@ export function RemoveAttributes({
             <button onClick={() => changeValue("advantage", false)}>x</button>
             <AttributeDescription keyName="advantage" />
             <input
-              className={styles.input}
               value={selectedOptions.advantageMsg || ""}
               onChange={(e) => changeValue("advantageMsg", e.target.value)}
             />
@@ -229,7 +225,6 @@ export function RemoveAttributes({
             <button onClick={() => changeValue("trained", false)}>x</button>
             <AttributeDescription keyName="trained" />
             <input
-              className={styles.input}
               value={selectedOptions.trainedMsg || ""}
               onChange={(e) => changeValue("trainedMsg", e.target.value)}
             />
@@ -242,7 +237,6 @@ export function RemoveAttributes({
             </button>
             <AttributeDescription keyName="disadvantage" />
             <input
-              className={styles.input}
               value={selectedOptions.disadvantageMsg || ""}
               onChange={(e) => changeValue("disadvantageMsg", e.target.value)}
             />
@@ -263,7 +257,6 @@ export function RemoveAttributes({
             </button>
             <AttributeDescription keyName="castTime" />
             <input
-              className={styles.input}
               value={selectedOptions.castTimeMsg || ""}
               onChange={(e) => changeValue("castTimeMsg", e.target.value)}
             />
@@ -274,7 +267,6 @@ export function RemoveAttributes({
             <button onClick={() => changeValue("specific", false)}>x</button>
             <AttributeDescription keyName="specific" />
             <input
-              className={styles.input}
               value={selectedOptions.specificMsg || ""}
               onChange={(e) => changeValue("specificMsg", e.target.value)}
             />
