@@ -137,15 +137,13 @@
   font-weight: bold;
 }
 
-.removeListTitle,
-.addListTitle {
+.removeListTitle {
   margin-top: $gap;
   margin-bottom: 0;
   display: block;
 }
 
-.removeList,
-.addList {
+.removeList {
   li {
     margin-bottom: $half-gap;
   }

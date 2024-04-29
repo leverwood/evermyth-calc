@@ -69,44 +69,46 @@ export function SavedRewards({
         ></Form.Control>
         <InputGroup.Text>🔎</InputGroup.Text>
       </InputGroup>
-      <ListGroup className={styles.rewardList}>
-        {showRewards.map((options) => {
-          const reward = initReward(options);
-          const index = savedRewards.findIndex((opt) => opt === options);
-          return (
-            <ListGroup.Item className={`d-flex`} key={index}>
-              <p className={`flex-grow-1`}>
-                <SingleRewardText reward={reward} oneLine={true} />
-              </p>
+      <div className={styles.rewardList}>
+        <ListGroup>
+          {showRewards.map((options) => {
+            const reward = initReward(options);
+            const index = savedRewards.findIndex((opt) => opt === options);
+            return (
+              <ListGroup.Item className={`d-flex`} key={index}>
+                <p className={`flex-grow-1`}>
+                  <SingleRewardText reward={reward} oneLine={true} />
+                </p>
 
-              <div className={`flex-shrink-1 d-flex align-items-center`}>
-                <Button
-                  size="sm"
-                  className="me-2"
-                  onClick={() => handleClickLoad(index)}
-                >
-                  Load
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="me-2"
-                  onClick={() => handleClickCopy(index)}
-                >
-                  Copy
-                </Button>
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => handleClickDelete(index)}
-                >
-                  Delete
-                </Button>
-              </div>
-            </ListGroup.Item>
-          );
-        })}
-      </ListGroup>
+                <div className={`flex-shrink-1 d-flex align-items-center`}>
+                  <Button
+                    size="sm"
+                    className="me-2"
+                    onClick={() => handleClickLoad(index)}
+                  >
+                    Load
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => handleClickCopy(index)}
+                  >
+                    Copy
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="danger"
+                    onClick={() => handleClickDelete(index)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </ListGroup.Item>
+            );
+          })}
+        </ListGroup>
+      </div>
     </div>
   );
 }

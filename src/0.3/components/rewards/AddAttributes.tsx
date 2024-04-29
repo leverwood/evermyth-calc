@@ -1,8 +1,10 @@
 import { useState } from "react";
-import styles from "./RewardCreator.module.scss";
+import styles from "./AddAttributes.module.scss";
 import AttributeDescription from "./AttributeDescription";
 import { RewardOptions } from "../../types/reward-types";
 import { ChangeValueFunc } from "../../types/reward-types";
+import AddRemoveButton from "./AddRemoveButton";
+import { Form } from "react-bootstrap";
 
 export function AddAttributes({
   selectedOptions,
@@ -18,37 +20,40 @@ export function AddAttributes({
 
   return (
     <>
-      <strong className={styles.addListTitle}>Add attributes</strong>
+      <h3 className="mb-3 mt-3">Add attributes</h3>
       <ul className={styles.addList}>
         {!selectedOptions.stunned && (
           <li>
-            <button onClick={() => changeValue("stunned", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("stunned", true)} />
             <AttributeDescription keyName="stunned" />
           </li>
         )}
         {!selectedOptions.noAction && (
           <li>
-            <button onClick={() => changeValue("noAction", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("noAction", true)} />
             <AttributeDescription keyName="noAction" />
           </li>
         )}
         {!selectedOptions.summon ? (
           <li>
-            <button onClick={() => changeValue("summon", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("summon", true)} />
+
             <AttributeDescription keyName="summon" />
           </li>
         ) : null}
         {!selectedOptions.noCheck && !selectedOptions.noAction && (
           <li>
-            <button onClick={() => changeValue("noCheck", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("noCheck", true)} />
+
             <AttributeDescription keyName="noCheck" />
           </li>
         )}
         {!selectedOptions.relentless && (
           <li>
-            <button onClick={() => changeValue("relentless", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("relentless", true)} />
+
             <AttributeDescription keyName="relentless" />
-            <input
+            <Form.Control
               value={selectedOptions.relentlessMsg || ""}
               type="text"
               onChange={(e) => changeValue("relentlessMsg", e.target.value)}
@@ -57,88 +62,97 @@ export function AddAttributes({
         )}
         {!selectedOptions.aoe && (
           <li>
-            <button onClick={() => changeValue("aoe", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("aoe", true)} />
+
             <AttributeDescription keyName="aoe" />
           </li>
         )}
         {!selectedOptions.teleport && (
           <li>
-            <button onClick={() => changeValue("teleport", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("teleport", true)} />
+
             <AttributeDescription keyName="teleport" />
           </li>
         )}
         {selectedOptions.aoe && (
           <li>
-            <button onClick={() => changeValue("avoidAllies", true)}>
-              add
-            </button>
+            <AddRemoveButton onClick={() => changeValue("avoidAllies", true)} />
+
             <AttributeDescription keyName="avoidAllies" />
           </li>
         )}
         <li>
-          <button onClick={() => changeValue("summonTierIncrease", 1)}>
-            add
-          </button>
+          <AddRemoveButton
+            onClick={() => changeValue("summonTierIncrease", 1)}
+          />
+
           <AttributeDescription keyName="summonTierIncrease" />
         </li>
         <li>
-          <button onClick={() => changeValue("deals", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("deals", 1)} />
+
           <AttributeDescription keyName="deals" />
         </li>
         <li>
-          <button onClick={() => changeValue("heals", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("heals", 1)} />
+
           <AttributeDescription keyName="heals" />
         </li>
         <li>
-          <button onClick={() => changeValue("reduceDamage", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("reduceDamage", 1)} />
+
           <AttributeDescription keyName="reduceDamage" />
         </li>
         <li>
-          <button
+          <AddRemoveButton
             onClick={() => {
               changeValue("addAbility", newAbility);
               setNewAbility("");
             }}
-          >
-            add
-          </button>
+          />
           <AttributeDescription keyName="grantsAbilities" />
-          <input
+          <Form.Control
             value={newAbility}
             type="text"
             onChange={(e) => setNewAbility(e.target.value)}
           />
         </li>
         <li>
-          <button onClick={() => changeValue("wellspringMax", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("wellspringMax", 1)} />
+
           <AttributeDescription keyName="wellspringMax" />
         </li>
         <li>
-          <button onClick={() => changeValue("wellspringRecover", 1)}>
-            add
-          </button>
+          <AddRemoveButton
+            onClick={() => changeValue("wellspringRecover", 1)}
+          />
+
           <AttributeDescription keyName="wellspringRecover" />
         </li>
         {!selectedOptions.restrained && (
           <li>
-            <button onClick={() => changeValue("restrained", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("restrained", true)} />
+
             <AttributeDescription keyName="restrained" />
           </li>
         )}
         <li>
-          <button onClick={() => changeValue("speed", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("speed", 1)} />
+
           <AttributeDescription keyName="speed" />
         </li>
         {!selectedOptions.noChase && !selectedOptions.teleport ? (
           <li>
-            <button onClick={() => changeValue("noChase", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("noChase", true)} />
+
             <AttributeDescription keyName="noChase" />
           </li>
         ) : null}
         <li>
-          <button onClick={() => changeValue("duration", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("duration", 1)} />
+
           <AttributeDescription keyName="duration" />
-          <input
+          <Form.Control
             value={selectedOptions.durationMsg || ""}
             type="text"
             onChange={(e) => changeValue("durationMsg", e.target.value)}
@@ -146,9 +160,10 @@ export function AddAttributes({
         </li>
         {!selectedOptions.advantage && (
           <li>
-            <button onClick={() => changeValue("advantage", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("advantage", true)} />
+
             <AttributeDescription keyName="advantage" />
-            <input
+            <Form.Control
               value={selectedOptions.advantageMsg || ""}
               type="text"
               onChange={(e) => changeValue("advantageMsg", e.target.value)}
@@ -157,35 +172,41 @@ export function AddAttributes({
         )}
         {!selectedOptions.whileDefending && (
           <li>
-            <button onClick={() => changeValue("whileDefending", true)}>
-              add
-            </button>
+            <AddRemoveButton
+              size="sm"
+              onClick={() => changeValue("whileDefending", true)}
+            />
+
             <AttributeDescription keyName="whileDefending" />
           </li>
         )}
         {selectedOptions.ranged && (
           <li>
-            <button onClick={() => changeValue("rangeIncrease", 1)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("rangeIncrease", 1)} />
+
             <AttributeDescription keyName="rangeIncrease" />
           </li>
         )}
         {!selectedOptions.isMove && (
           <li>
-            <button onClick={() => changeValue("isMove", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("isMove", true)} />
+
             <AttributeDescription keyName="isMove" />
           </li>
         )}
         {!selectedOptions.ranged && (
           <li>
-            <button onClick={() => changeValue("ranged", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("ranged", true)} />
+
             <AttributeDescription keyName="ranged" />
           </li>
         )}
         {!selectedOptions.trained && (
           <li>
-            <button onClick={() => changeValue("trained", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("trained", true)} />
+
             <AttributeDescription keyName="trained" />
-            <input
+            <Form.Control
               value={selectedOptions.trainedMsg || ""}
               type="text"
               onChange={(e) => changeValue("trainedMsg", e.target.value)}
@@ -194,11 +215,10 @@ export function AddAttributes({
         )}
         {!selectedOptions.upcast ? (
           <li>
-            <button
+            <AddRemoveButton
               onClick={() => changeValue("upcast", rewards[upcastRewardIndex])}
-            >
-              add
-            </button>
+            />
+
             <AttributeDescription keyName="upcast" />
             <select
               className={styles.select}
@@ -216,11 +236,12 @@ export function AddAttributes({
         ) : null}
         {!selectedOptions.disadvantage && (
           <li>
-            <button onClick={() => changeValue("disadvantage", true)}>
-              add
-            </button>
+            <AddRemoveButton
+              onClick={() => changeValue("disadvantage", true)}
+            />
+
             <AttributeDescription keyName="disadvantage" />
-            <input
+            <Form.Control
               value={selectedOptions.disadvantageMsg || ""}
               type="text"
               onChange={(e) => changeValue("disadvantageMsg", e.target.value)}
@@ -228,13 +249,15 @@ export function AddAttributes({
           </li>
         )}
         <li>
-          <button onClick={() => changeValue("cost", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("cost", 1)} />
+
           <AttributeDescription keyName="cost" />
         </li>
         <li>
-          <button onClick={() => changeValue("castTime", 1)}>add</button>
+          <AddRemoveButton onClick={() => changeValue("castTime", 1)} />
+
           <AttributeDescription keyName="castTime" />
-          <input
+          <Form.Control
             value={selectedOptions.castTimeMsg || ""}
             type="text"
             onChange={(e) => changeValue("castTimeMsg", e.target.value)}
@@ -242,9 +265,10 @@ export function AddAttributes({
         </li>
         {!selectedOptions.specific && (
           <li>
-            <button onClick={() => changeValue("specific", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("specific", true)} />
+
             <AttributeDescription keyName="specific" />
-            <input
+            <Form.Control
               value={selectedOptions.specificMsg || ""}
               onChange={(e) => changeValue("specificMsg", e.target.value)}
             />
@@ -252,7 +276,8 @@ export function AddAttributes({
         )}
         {!selectedOptions.consumable && (
           <li>
-            <button onClick={() => changeValue("consumable", true)}>add</button>
+            <AddRemoveButton onClick={() => changeValue("consumable", true)} />
+
             <AttributeDescription keyName="consumable" />
           </li>
         )}

@@ -6,20 +6,8 @@ const logger = Logger(LOG_LEVEL.INFO);
 
 // for a single reward, doesn't account for multi-rewards
 // TODO: conditions
-export const printRewardMessage = (
-  reward: Reward,
-  isUpcast = false
-): string => {
-  logger.debug(reward.name);
-  if (reward.name === "Golem Familiar") {
-    logger.debug(
-      `Golem Familiar! getRewardMessage: returning description for reward ${reward.name}`
-    );
-  }
+export const printRewardMessage = (reward: Reward, isUpcast = false): string => {
   if (reward.instructions && reward.instructions.length) {
-    logger.debug(
-      `getRewardMessage: returning description for reward ${reward.name}`
-    );
     return reward.instructions;
   }
 
@@ -33,9 +21,6 @@ export const printRewardMessage = (
   // Decide to cast it
   if (reward.whileDefending) messages.push("while defending");
   if (reward.castTimeMsg) messages.push(reward.castTimeMsg);
-  if (reward.consumable) messages.push("single use");
-  if (reward.noAction) messages.push("no action");
-  else if (reward.noCheck) messages.push("no check");
   if (reward.ranged && !reward.rangeIncrease) messages.push("ranged");
   else if (reward.rangeIncrease)
     messages.push(`range of ${reward.rangeIncrease + 1} zones`);
@@ -67,11 +52,6 @@ export const printRewardMessage = (
   if (!reward.summon && reward.summonTierIncrease) {
     messages.push(`+${reward.summonTierIncrease} summon tier`);
   }
-
-  // ROLL
-  if (reward.trained) messages.push(reward.trainedMsg);
-  if (reward.advantage) messages.push(reward.advantageMsg);
-  if (reward.disadvantage) messages.push(reward.disadvantageMsg);
 
   // DEAL OR HEAL
   if (reward.deals)
@@ -107,13 +87,24 @@ export const printRewardMessage = (
   if (reward.wellspringMax)
     messages.push(`increase max wellspring by ${reward.wellspringMax}`);
 
-  if (reward.grantsAbilities && reward.grantsAbilities.length)
-    messages.push(...reward.grantsAbilities);
+  if (reward.grantsAbilities && reward.grantsAbilities.length) {
+    reward.grantsAbilities.forEach((ability) => {
+      if (ability) messages.push(ability);
+    });
+  }
+
+  // ROLL
+  if (reward.trained) messages.push(reward.trainedMsg);
+  if (reward.advantage) messages.push(reward.advantageMsg);
+  if (reward.disadvantage) messages.push(reward.disadvantageMsg);
+  if (reward.noAction) messages.push("no action");
+  else if (reward.noCheck) messages.push("no check");
 
   // duration should be near last
   if (reward.durationMsg) messages.push(reward.durationMsg);
 
   // cost should be last
+  if (reward.consumable) messages.push("single use");
   if (reward.cost) messages.push(`costs ${reward.cost} wellspring`);
 
   return messages.join(", ");

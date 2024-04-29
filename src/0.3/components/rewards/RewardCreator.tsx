@@ -11,6 +11,7 @@ import { SavedRewards } from "./SavedRewards";
 import { isSameReward } from "../../util/reward-calcs";
 import { ChangeValueFunc } from "../../types/reward-types";
 import { getRewardsFromStorage } from "../../util/reward-make";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 
 const logger = Logger(LOG_LEVEL.INFO);
 
@@ -48,7 +49,8 @@ export default function RewardCreator() {
         newValue = [...(prevState.grantsAbilities || []), value as string];
       } else if (key === "deleteAbility") {
         newKey = "grantsAbilities";
-        newValue = (prevState.grantsAbilities || []).splice(index, 1);
+        newValue = [...(prevState.grantsAbilities || [])];
+        newValue.splice(index, 1);
       } else if (key === "changeAbility") {
         newKey = "grantsAbilities";
         newValue = (prevState.grantsAbilities || []).map((ability, i) =>
@@ -184,15 +186,15 @@ export default function RewardCreator() {
         handleClickDelete={handleClickDelete}
         handleClickCopy={handleClickCopy}
       />
-      <section className={styles.twoColWrapper}>
+      <Row className="mt-4">
         <EditReward
           selectedOptions={selectedOptions}
           changeValue={changeValue}
           savedRewards={savedRewards}
         />
-        <div className={styles.resultsColumn}>
+        <Col className={styles.resultsColumn}>
           {Object.keys(selectedOptions).length ? (
-            <button onClick={handleCreateNew}>Create New</button>
+            <Button onClick={handleCreateNew}>Create New</Button>
           ) : null}
           {errors.length && Object.keys(selectedOptions).length ? (
             <div>
@@ -233,8 +235,8 @@ export default function RewardCreator() {
           <pre className={styles.jsonDump}>
             {JSON.stringify(selectedOptions, null, 2)}
           </pre>
-        </div>
-      </section>
+        </Col>
+      </Row>
     </div>
   );
 }
@@ -250,65 +252,56 @@ function EditReward({
 }) {
   logger.debug("EditReward - selectedOptions", selectedOptions);
   return (
-    <div className={styles.selectColumn}>
-      <label className={styles.inputLabel} htmlFor="rewardName">
-        Name
-      </label>
-      <input
-        id="rewardName"
-        type="text"
-        value={selectedOptions.name || ""}
-        onChange={(e) => changeValue("name", e.target.value)}
-      />
-      <strong className={styles.typeHeading}>Type</strong>
-      <input
-        className={styles.typeChoice}
-        type="radio"
-        name="type"
-        id="equipmentType"
-        value={REWARD_TYPE.EQUIPMENT}
-        checked={selectedOptions.type === REWARD_TYPE.EQUIPMENT}
-        onChange={() => changeValue("type", REWARD_TYPE.EQUIPMENT)}
-      />
-      <label className={styles.typeChoiceLabel} htmlFor="equipmentType">
-        Equipment
-      </label>
-      <input
-        className={styles.typeChoice}
-        type="radio"
-        name="type"
-        id="featureType"
-        value={REWARD_TYPE.FEATURE}
-        checked={selectedOptions.type === REWARD_TYPE.FEATURE}
-        onChange={() => changeValue("type", REWARD_TYPE.FEATURE)}
-      />
-      <label className={styles.typeChoiceLabel} htmlFor="featureType">
-        Feature
-      </label>
-      <input
-        className={styles.typeChoice}
-        type="radio"
-        name="type"
-        id="trainingType"
-        value={REWARD_TYPE.TRAINING}
-        checked={selectedOptions.type === REWARD_TYPE.TRAINING}
-        onChange={() => changeValue("type", REWARD_TYPE.TRAINING)}
-      />
-      <label className={styles.typeChoiceLabel} htmlFor="trainingType">
-        Training
-      </label>
-      <input
-        className={styles.typeChoice}
-        type="radio"
-        name="type"
-        id="trinketType"
-        value={REWARD_TYPE.TRINKET}
-        checked={selectedOptions.type === REWARD_TYPE.TRINKET}
-        onChange={() => changeValue("type", REWARD_TYPE.TRINKET)}
-      />
-      <label className={styles.typeChoiceLabel} htmlFor="trinketType">
-        Trinket
-      </label>
+    <Form as={Col} className={styles.selectColumn}>
+      <InputGroup size="lg">
+        <InputGroup.Text>Name</InputGroup.Text>
+        <Form.Control
+          id="rewardName"
+          type="text"
+          value={selectedOptions.name || ""}
+          onChange={(e) => changeValue("name", e.target.value)}
+        />
+      </InputGroup>
+      <Form.Group className="mt-3">
+        <Form.Check
+          inline
+          id="type-equipment"
+          type="radio"
+          label="Equipment"
+          value={REWARD_TYPE.EQUIPMENT}
+          checked={selectedOptions.type === REWARD_TYPE.EQUIPMENT}
+          onChange={() => changeValue("type", REWARD_TYPE.EQUIPMENT)}
+        />
+        <Form.Check
+          inline
+          id="type-feature"
+          type="radio"
+          label="Feature"
+          value={REWARD_TYPE.FEATURE}
+          checked={selectedOptions.type === REWARD_TYPE.FEATURE}
+          onChange={() => changeValue("type", REWARD_TYPE.FEATURE)}
+        />
+        <Form.Check
+          inline
+          id="trainingType"
+          type="radio"
+          label="Training"
+          value={REWARD_TYPE.TRAINING}
+          checked={selectedOptions.type === REWARD_TYPE.TRAINING}
+          onChange={() => changeValue("type", REWARD_TYPE.TRAINING)}
+        />
+        <Form.Check
+          inline
+          id="trinketType"
+          type="radio"
+          name="type"
+          label="Trinket"
+          value={REWARD_TYPE.TRINKET}
+          checked={selectedOptions.type === REWARD_TYPE.TRINKET}
+          onChange={() => changeValue("type", REWARD_TYPE.TRINKET)}
+        />
+      </Form.Group>
+
       {(!selectedOptions.multiRewards ||
         selectedOptions.multiRewards.length === 0) &&
       selectedOptions.type !== REWARD_TYPE.TRAINING ? (
@@ -326,7 +319,7 @@ function EditReward({
           adding={true}
         />
       )}
-    </div>
+    </Form>
   );
 }
 
@@ -346,9 +339,7 @@ export function CombinedReward({
 
   return (
     <>
-      <strong className={styles.addListTitle}>
-        Combine{!adding ? "d" : ""} rewards
-      </strong>
+      <h3 className={"mt-5"}>Combine{!adding ? "d" : ""} rewards</h3>
       <ul className={styles.combinedRewardsList}>
         {list.map((rewardOptions, index) => {
           // Adding: if it is already included, don't show it
@@ -366,8 +357,14 @@ export function CombinedReward({
 
           // TODO: set display names for rewards
           return (
-            <li className={styles.combinedRewardItem} key={index}>
-              <button
+            <li
+              className={`${styles.combinedRewardItem} d-flex align-items-center`}
+              key={index}
+            >
+              <Button
+                size="sm"
+                className={`me-2`}
+                variant={`${adding ? "secondary" : "outline-danger"}`}
                 onClick={() =>
                   changeValue(
                     adding ? "addMultiReward" : "deleteMultiReward",
@@ -375,8 +372,8 @@ export function CombinedReward({
                   )
                 }
               >
-                {adding ? "Add" : "Remove"}
-              </button>
+                {adding ? "+" : "x"}
+              </Button>
               <SingleRewardText
                 className={styles.combinedRewardText}
                 reward={initReward(rewardOptions)}

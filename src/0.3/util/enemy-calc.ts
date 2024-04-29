@@ -1,7 +1,7 @@
 import { Enemy } from "../types/system-types";
 
 export function getDCMedium(tier: number) {
-  return 8 + tier;
+  return 9 + tier;
 }
 
 export function getDCHard(tier: number) {

@@ -3,6 +3,7 @@ import AttributeDescription from "./AttributeDescription";
 import { RewardOptions } from "../../types/reward-types";
 import { CombinedReward } from "./RewardCreator";
 import { ChangeValueFunc } from "../../types/reward-types";
+import AddRemoveButton from "./AddRemoveButton";
 
 export function RemoveAttributes({
   selectedOptions,
@@ -112,11 +113,10 @@ export function RemoveAttributes({
           ? selectedOptions.grantsAbilities.map((ability, i) => {
               return (
                 <li key={i}>
-                  <button
+                  <AddRemoveButton
+                    adding={false}
                     onClick={() => changeValue("deleteAbility", ability, i)}
-                  >
-                    x
-                  </button>
+                  />
                   <AttributeDescription keyName="grantsAbilities" />
                   <input
                     value={ability}
