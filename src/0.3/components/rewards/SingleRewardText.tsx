@@ -29,15 +29,19 @@ export function SingleRewardText({
           {!noTier && ` (T${reward.tier < 0 ? 0 : reward.tier})`}.
         </strong>
       ) : null}
+      &nbsp;
       {!noType ? (
         <Badge className={`${styles[reward.type.toLocaleLowerCase()]} me-2`}>
-          {reward.type}
+          &nbsp;{reward.type}&nbsp;
         </Badge>
       ) : null}
+      &nbsp;
       {reward.instructions && !oneLine ? (
         <Markdown>{reward.instructions}</Markdown>
       ) : (
-        printRewardMessage(reward, upcast)
+        <Markdown>
+          {printRewardMessage(reward, upcast).replaceAll("\n", " ")}
+        </Markdown>
       )}{" "}
     </span>
   );

@@ -1,0 +1,563 @@
+[
+  {
+    "type": "pc",
+    "name": "Doloria",
+    "level": 4,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 7,
+    "wellspring": 7,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [
+      "b6c28290-8b94-4f24-8271-0d028b45d2cb",
+      "3cb414c8-3962-48b4-a698-88eaaf2b7cb1",
+      "a2fee5d0-2e3c-481d-b106-d5681d482c42",
+      "555009c6-064b-4ef0-969c-c951976b9f64",
+      "411ee852-d025-432d-8ef2-9bb907690403",
+      "4b0fddf2-444c-461d-a18c-0d92408a4177"
+    ],
+    "deathFails": 0,
+    "dead": false
+  },
+  {
+    "type": "pc",
+    "name": "Dantes",
+    "level": 4,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 7,
+    "wellspring": 7,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [
+      {
+        "__typename": "Reward",
+        "name": "Cult Leader",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "instructions": "Convince a person to make a pact with your patron and increase your max wellspring by 1",
+        "maxWellspring": 2
+      },
+      {
+        "__typename": "Reward",
+        "name": "Warlock of Glomtili",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "training",
+        "instructions": "You draw magic from Glomtili, the god of earth. They dream of your experiences, and power flows through you. You use your Social score for Glomtili powers.\n\n***Pushing the limit.*** If you are out of wellspring, you can attempt to cast again. Make a check with a target of 10 + the feature's level. On a failure, instantly drop to 0 Social pool.\n\n***Waking the kaiju.*** Displeasing Glomtili disturbs their slumber, and blocks your ability to cast spells until they are calmed."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Speaking Stone Carver",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "instructions": "You can take an hour to carve a pair of speaking stones. All speaking stones are trinkets for you, but equipment for others.",
+        "multiRewards": [
+          {
+            "__typename": "Reward",
+            "name": "Speaking Stones",
+            "deals": 0,
+            "heals": 0,
+            "cost": 0,
+            "tier": 1,
+            "type": "equipment",
+            "instructions": "Stones come in matching pairs, and are carved so they are easily distinguished. While you touch a stone, you can speak into it. The sound of your voice emits from the paired stone.",
+            "noCheck": true
+          }
+        ]
+      },
+      {
+        "__typename": "Reward",
+        "name": "Orb of Depths Direction",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "equipment",
+        "instructions": "This item can orient you while traveling underground."
+      },
+      {
+        "__typename": "Reward",
+        "name": "No-Stones",
+        "deals": 0,
+        "heals": 0,
+        "cost": 1,
+        "tier": 1,
+        "type": "equipment",
+        "aoe": true,
+        "grantsAbilities": ["can see through walls"],
+        "instructions": "see through walls, costs 1 wellspring\n\nYou can use an action to speak the command word, \"unturned\" and turn it over so the flat side is pressed against a natural surface. When you do, the geode is fixed in place and projects a map above it, showing the layout of the area around it with a range of 3. It shows all walls, floors, and surfaces made of stone, natural metal, or earth.\n\nTo remove the geode, speak the command word again."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Mystic Pebbles",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "instructions": "You imbue 5 pebbles with magic. After a full reset, they become ordinary pebbles again.",
+        "multiRewards": [
+          {
+            "__typename": "Reward",
+            "name": "Mystic Pebble",
+            "deals": 2,
+            "heals": 0,
+            "cost": 0,
+            "tier": 1,
+            "type": "equipment",
+            "instructions": "deals 2 points, ranged when used with a sling",
+            "ranged": true,
+            "rangeIncrease": 0
+          }
+        ]
+      },
+      {
+        "__typename": "Reward",
+        "name": "Golem Familiar",
+        "deals": 0,
+        "heals": 0,
+        "cost": 1,
+        "tier": 1,
+        "type": "feature",
+        "notes": "summon a tier 0 tiny golem\n\nYour patron lends one of their tiny minions to follow your commands and keep an eye on you. When their pool hits zero, they disappear back to your patron. It takes an hour to summon them again with an elaborate ritual. Work the DM to make them.",
+        "summon": true,
+        "upcastMax": 0,
+        "upcast": {
+          "name": "Increase summon tier",
+          "summonTierIncrease": 1,
+          "cost": 1,
+          "summon": false,
+          "noAction": false,
+          "noCheck": false
+        }
+      },
+      {
+        "__typename": "Reward",
+        "name": "Stone Step",
+        "deals": 0,
+        "heals": 0,
+        "cost": 1,
+        "tier": 1,
+        "type": "feature",
+        "speed": 1,
+        "teleport": true
+      }
+    ],
+    "deathFails": 0,
+    "dead": false
+  },
+  {
+    "type": "pc",
+    "name": "Olfuc",
+    "level": 5,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 8,
+    "wellspring": 8,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [
+      {
+        "name": "Alchemist's Supplies",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "equipment",
+        "instructions": "It's up to you to harvest materials you think have alchemical properties. The materials are consumed on success or failure.\n\n***Learning Formulas (T0).*** You can either choose to create a formula you already know, or experiment with learning a new one. Make a medium difficulty check. On a success, you learn and brew a new formula.\n\n***Craft potion or poison (T0).*** Takes 1 hour. If trained, no check is required."
+      },
+      {
+        "name": "Formula: Basic Poison",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "multiRewards": [
+          {
+            "name": "Poison Coating",
+            "deals": 2,
+            "heals": 0,
+            "cost": 0,
+            "tier": 1,
+            "type": "equipment",
+            "noCheck": true,
+            "consumable": true
+          },
+          {
+            "name": "Ingested Poison",
+            "deals": 4,
+            "heals": 0,
+            "cost": 0,
+            "tier": 1,
+            "type": "equipment",
+            "consumable": true
+          }
+        ]
+      },
+      {
+        "name": "Formula: Antitoxin",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 0,
+        "type": "feature",
+        "advantage": true,
+        "advantageMsg": "advantage to resist poison, 8 hours",
+        "noCheck": true,
+        "consumable": true
+      },
+      {
+        "name": "Grafted Cleaver",
+        "deals": 2,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "equipment"
+      },
+      {
+        "name": "Blood Hunter",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "training",
+        "instructions": "You practice the forbidden art of hemocraft to cast blood curses. Your ability for this is AGI.\n\n***Pushing the limit.*** If you are out of wellspring, you can attempt to cast again. Make a check, DC + the feature's tier. On a failure, instantly drop to 0 AGI pool."
+      },
+      {
+        "name": "Jug of oil",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 0,
+        "type": "equipment",
+        "instructions": "lasts 48 hours in lamp or lantern",
+        "multiRewards": [
+          {
+            "name": "Minor Grenade",
+            "deals": 1,
+            "heals": 0,
+            "cost": 0,
+            "tier": 0,
+            "type": "equipment",
+            "aoe": true,
+            "consumable": true
+          }
+        ]
+      },
+      {
+        "__typename": "Reward",
+        "name": "Leather Armor",
+        "deals": 0,
+        "heals": 0,
+        "cost": 1,
+        "tier": 1,
+        "type": "equipment",
+        "noCheck": true,
+        "reduceDamage": 1
+      },
+      {
+        "__typename": "Reward",
+        "name": "Dagger",
+        "deals": 1,
+        "heals": 0,
+        "cost": 0,
+        "tier": 0,
+        "type": "equipment"
+      },
+      {
+        "__typename": "Reward",
+        "name": "Hooded Lantern",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "equipment",
+        "instructions": "Runs on flasks of lamp oil. Gives off light around it with a range of 1."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Torch",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "equipment",
+        "instructions": "Lasts 1 hour. Each torch takes 1 gear slot."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Bloodied Resurgence",
+        "deals": 0,
+        "heals": 0,
+        "cost": 2,
+        "tier": 1,
+        "type": "feature",
+        "relentless": true,
+        "relentlessMsg": "a physical pool",
+        "noCheck": true
+      },
+      {
+        "__typename": "Reward",
+        "name": "Crimson Chains",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "advantage": true,
+        "advantageMsg": "all creatures have advantage to act against it while it is restrained",
+        "restrained": true
+      },
+      {
+        "__typename": "Reward",
+        "name": "Speaking Stones",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "equipment",
+        "instructions": "Stones come in matching pairs, and are carved so they are easily distinguished. While you touch a stone, you can speak into it. The sound of your voice emits from the paired stone.",
+        "noCheck": true
+      }
+    ],
+    "deathFails": 0,
+    "dead": false,
+    "eduMod": 0
+  },
+  {
+    "type": "pc",
+    "name": "Sally",
+    "level": 5,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 8,
+    "wellspring": 8,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [
+      {
+        "__typename": "Reward",
+        "name": "Aetherplume",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 0,
+        "type": "equipment",
+        "aoe": true,
+        "consumable": true,
+        "grantsAbilities": ["slow fall"],
+        "instructions": "Throw this in the air and up to 4 creatures of your choice fall slowly for 1 minute. Single use."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Twin Shortswords",
+        "deals": 2,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "equipment",
+        "instructions": "With their swift and nimble design, you can execute dual attacks simultaneously, dealing 2 points"
+      },
+      {
+        "__typename": "Reward",
+        "name": "Needle of Mending",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 0,
+        "type": "equipment",
+        "grantsAbilities": ["repair things"],
+        "instructions": "With this needle, you can repair a single break or tear in an object, as long as the break or tear is no larger than 1 foot in any dimension. It leaves no trace of the former damage."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Shadowstep mark",
+        "deals": 1,
+        "heals": 0,
+        "cost": 1,
+        "tier": 1,
+        "type": "feature",
+        "instructions": "as your move, teleport to a nearby zone, deal +1 on your next successful attack, costs 1 wellspring",
+        "isMove": true,
+        "teleport": true
+      },
+      {
+        "__typename": "Reward",
+        "name": "Tide Caller's Veil",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "equipment",
+        "grantsAbilities": ["breathe underwater"],
+        "instructions": "breathe underwater, swim speed of 1",
+        "speed": 1
+      },
+      {
+        "__typename": "Reward",
+        "name": "Blind Fire Mark",
+        "deals": 3,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "disadvantage": true,
+        "disadvantageMsg": "close your eyes and fire with disadvantage",
+        "ranged": true,
+        "rangeIncrease": 0
+      },
+      {
+        "__typename": "Reward",
+        "name": "Hare Trigger",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "feature",
+        "grantsAbilities": ["", ""],
+        "instructions": "If the enemy side goes before you bullet time, you can roll an Agile check to take your turn before them. The target number based on the highest tier enemy."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Marks of the Thief",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": -1,
+        "type": "training",
+        "instructions": "If you rob a building that has been marked by the local thieves guild, and then gift a valuable stolen item to that guild, you earn the thieves' marks of that city.\n\nEach guild will tattoo you with two marks, each of which provides a feature."
+      },
+      {
+        "__typename": "Reward",
+        "name": "Spidersilk Gloves",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 1,
+        "type": "equipment",
+        "advantage": true,
+        "advantageMsg": "picking locks and picking pockets",
+        "instructions": "These gloves are invisible when worn. While wearing them, you roll with training and advantage when picking locks, picking pockets, or performing other acts of manipulating small objects for the purpose of stealing.",
+        "trained": true,
+        "trainedMsg": "picking locks and picking pockets"
+      },
+      {
+        "__typename": "Reward",
+        "name": "Sneak Attack",
+        "deals": 4,
+        "heals": 0,
+        "cost": 1,
+        "tier": 1,
+        "type": "equipment",
+        "specific": true,
+        "specificMsg": "when attacking from hiding"
+      },
+      {
+        "__typename": "Reward",
+        "name": "Rabbit Hop",
+        "deals": 0,
+        "heals": 0,
+        "cost": 0,
+        "tier": 0,
+        "type": "feature",
+        "noChase": true
+      }
+    ],
+    "deathFails": 0,
+    "dead": false,
+    "eduMod": 0
+  },
+  {
+    "type": "pc",
+    "name": "Suri",
+    "level": 5,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 8,
+    "wellspring": 8,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [],
+    "deathFails": 0,
+    "dead": false
+  },
+  {
+    "type": "pc",
+    "name": "Tz'zarok",
+    "level": 5,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 8,
+    "wellspring": 8,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [],
+    "deathFails": 0,
+    "dead": false
+  },
+  {
+    "type": "pc",
+    "name": "Tuft",
+    "level": 4,
+    "initiative": 0,
+    "pool": 0,
+    "startingPool": 0,
+    "number": 0,
+    "startingWellspring": 7,
+    "wellspring": 7,
+    "fortune": 0,
+    "fledRounds": 0,
+    "conditions": [],
+    "rewards": [],
+    "deathFails": 0,
+    "dead": false
+  },
+  {
+    "name": "Faerie Fire",
+    "level": 1,
+    "rewards": [
+      "c45fa22b-8b22-4af9-a11d-2c8c58ad8792",
+      "cd16e1c8-55e7-401e-ba43-b094e1f93ca2",
+      "c919abe2-4f51-4ab0-9821-9c1fc239a025",
+      "fabd81e7-99b7-48cd-afd7-bfc8adf7d588",
+      "f97ae5c4-dc5a-4ec9-8950-4b4c023c1f4d",
+      "70e76666-503c-419e-ab71-8c9727aa4b00",
+      "c1cdf5e5-8421-4b81-b8dd-89ba46724633",
+      "9aa75bc1-f25c-4e9f-9a55-8e0914f4765a",
+      "7b38f7ad-a049-45b1-b563-fda24fba3362",
+      "08dd2c31-783a-4a16-aef9-7053fd27d8b6",
+      "c7204946-5a78-48ec-a5f8-87c6abd44bc3",
+      "ebda8c4a-87b9-42c1-9d21-97e9239a1da4",
+      "8b7ec689-e971-4061-bf78-33affa9fbc34"
+    ]
+  }
+]

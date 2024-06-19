@@ -25,8 +25,8 @@ import { randomPC } from "../util/simulate-pc";
 import styles from "./Simulation.module.scss";
 import { PCRoll } from "../util/dice-calcs";
 import { initReward } from "../util/reward-calcs";
-import { printRewardMessage } from "../util/printRewardMessage";
 import { Reward } from "../types/reward-types";
+import { SingleRewardText } from "./rewards/SingleRewardText";
 
 export default function Simulation({
   level,
@@ -434,7 +434,11 @@ export function CreaturesDisplay({ creatures }: { creatures: Creatures }) {
 }
 
 export function RewardDisplay({ reward }: { reward: Reward }) {
-    return <p>{printRewardMessage(reward)}</p>;
+  return (
+    <p>
+      <SingleRewardText reward={reward} oneLine={true} />
+    </p>
+  );
 }
 
 function PCTurn({ turn }: { turn: PCTurnData }) {

@@ -40,10 +40,11 @@ export function SavedRewards({
     .filter((options) =>
       options.name?.toLowerCase().includes(searchText.toLowerCase())
     )
-    .filter((options) => {
-      const r = initReward(options);
-      return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
-    })
+    // filter out the rewards that are not 0 or above
+    // .filter((options) => {
+    //   const r = initReward(options);
+    //   return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
+    // })
     .sort((opt1, opt2) => {
       const r1 = initReward(opt1);
       const r2 = initReward(opt2);

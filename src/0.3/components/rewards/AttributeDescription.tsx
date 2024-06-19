@@ -145,7 +145,7 @@ const DESCRIPTIONS = {
   ),
   trained: (
     <>
-      <strong>Trained.</strong> Gain a training under a specific condition:
+      <strong>Trained.</strong> Gain training for something specific:
     </>
   ),
   upcast: (

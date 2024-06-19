@@ -418,6 +418,13 @@ export function validateRewardOptions(options: RewardOptions): {
   return { errors, valid };
 }
 
+export function getRewardOptionsFromId(
+  id: RewardOptionsID,
+  rewards: RewardOptions[]
+): RewardOptions | undefined {
+  return rewards.find((r) => r.id === id);
+}
+
 export function getRewardOptionsFromIds(
   ids: RewardOptionsID[],
   rewards: RewardOptions[]
@@ -425,6 +432,7 @@ export function getRewardOptionsFromIds(
   const results = ids.map((id) => rewards.find((r) => r.id === id));
   return results.filter((r) => r) as RewardOptions[];
 } // ignore name
+
 export const isSameReward = (a: RewardOptions, b: RewardOptions) => {
   const isSame =
     JSON.stringify({ ...a, name: "" }) === JSON.stringify({ ...b, name: "" });

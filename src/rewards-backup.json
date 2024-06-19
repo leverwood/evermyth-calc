@@ -1,0 +1,649 @@
+[
+  {
+    "name": "Aetherplume",
+    "consumable": true,
+    "grantsAbilities": ["slow fall"],
+    "aoe": true,
+    "instructions": "Throw this in the air and up to 4 creatures of your choice fall slowly for 1 minute. Single use.",
+    "id": "a1a8a904-9b4a-4f8b-a944-c5f0975fef5f"
+  },
+  {
+    "name": "Alchemist's Supplies",
+    "type": "equipment",
+    "instructions": "It's up to you to harvest materials you think have alchemical properties. The materials are consumed on success or failure.\n\n***Learning Formulas (T0).*** You can either choose to create a formula you already know, or experiment with learning a new one. Make a medium difficulty check. On a success, you learn and brew a new formula.\n\n***Craft potion or poison (T0).*** Takes 1 hour. If trained, no check is required.",
+    "multiRewards": [],
+    "id": "e2708683-46b2-4b6c-b09d-8e2920bce44a"
+  },
+  {
+    "name": "Antitoxin",
+    "type": "equipment",
+    "advantage": true,
+    "advantageMsg": "advantage to resist poison",
+    "consumable": true,
+    "noCheck": true,
+    "multiRewards": [],
+    "instructions": "",
+    "duration": 1,
+    "durationMsg": "8 hours",
+    "id": "fdedab7a-4c49-4608-9cb0-6cb713ff104e"
+  },
+  {
+    "name": "Basic Poison",
+    "multiRewards": [
+      {
+        "name": "Coat weapon",
+        "consumable": true,
+        "noCheck": true,
+        "deals": 2
+      },
+      { "name": "Ingested", "consumable": true, "deals": 4 }
+    ],
+    "type": "equipment",
+    "instructions": "",
+    "id": "c0ad94bc-0184-4de2-b0c5-129d462a09ae"
+  },
+  {
+    "name": "Blind Fire Mark",
+    "type": "feature",
+    "ranged": true,
+    "disadvantageMsg": "close your eyes and fire with disadvantage",
+    "disadvantage": true,
+    "deals": 3,
+    "id": "dfa510a9-ba65-4c8e-a1bc-68b7faaa58d3"
+  },
+  {
+    "name": "Blood Hunter",
+    "type": "training",
+    "instructions": "You practice the forbidden art of hemocraft to cast blood curses. Your ability for this is AGI.\n\n***Pushing the limit.*** If you are out of wellspring, you can attempt to cast again. Make a check, DC + the feature's tier. On a failure, instantly drop to 0 AGI pool.",
+    "id": "474b43f3-a547-4576-8999-5e3e4d63e89f"
+  },
+  {
+    "type": "feature",
+    "name": "Bloodied Resurgence",
+    "cost": 2,
+    "relentlessMsg": "a physical pool",
+    "relentless": true,
+    "recoverWellspring": 0,
+    "noCheck": true,
+    "id": "713ddab0-880f-4b38-9616-b0556bf5d3b9"
+  },
+  {
+    "name": "Burning Hands",
+    "aoe": true,
+    "deals": 1,
+    "cost": 1,
+    "upcast": { "name": "Increase damage", "deals": 1, "cost": 1 },
+    "id": "b6c28290-8b94-4f24-8271-0d028b45d2cb"
+  },
+  {
+    "name": "Coat weapon",
+    "consumable": true,
+    "noCheck": true,
+    "deals": 2,
+    "id": "8bff3677-13e7-4b68-af0b-338e888755bb"
+  },
+  {
+    "name": "Crimson Chains",
+    "restrained": true,
+    "type": "feature",
+    "advantage": true,
+    "advantageMsg": "all creatures have advantage to act against it while it is restrained",
+    "id": "a06b2fd0-c142-463a-b0b0-d5fbc9da2762"
+  },
+  {
+    "name": "Cult Leader",
+    "stunned": false,
+    "specific": false,
+    "consumable": false,
+    "restrained": false,
+    "disadvantage": false,
+    "advantage": false,
+    "aoe": false,
+    "relentless": false,
+    "specificMsg": "",
+    "maxWellspring": 2,
+    "type": "feature",
+    "instructions": "Convince a person to make a pact with your patron and increase your max wellspring by 1",
+    "heals": 0,
+    "id": "a3139d71-e1bd-45bb-9320-b2cafb39e461"
+  },
+  {
+    "name": "Hellish Rebuke",
+    "noCheck": false,
+    "deals": 2,
+    "cost": 1,
+    "instructions": "while defending, deal 2 points, costs 1 wellspring\n\nYou point your finger, and the creature that damaged you is momentarily surrounded by the flames of Vortun.",
+    "notes": "",
+    "whileDefending": true,
+    "id": "555009c6-064b-4ef0-969c-c951976b9f64",
+    "type": "feature"
+  },
+  {
+    "name": "Formula: Antitoxin",
+    "type": "feature",
+    "advantage": true,
+    "advantageMsg": "advantage to resist poison",
+    "consumable": true,
+    "noCheck": true,
+    "durationMsg": "8 hours",
+    "duration": 1,
+    "id": "60131c34-9055-43e9-9144-3ada70768966"
+  },
+  {
+    "name": "Formula: Basic Poison",
+    "multiRewards": [
+      {
+        "name": "Poison Coating",
+        "deals": 2,
+        "consumable": true,
+        "noCheck": true
+      },
+      {
+        "name": "Ingested Poison",
+        "consumable": true,
+        "deals": 4,
+        "instructions": ""
+      }
+    ],
+    "type": "feature",
+    "id": "82e9abd6-cb4f-4a81-94e4-a2a1de964599"
+  },
+  {
+    "name": "Golem Familiar",
+    "type": "feature",
+    "summon": true,
+    "summonTierIncrease": 0,
+    "instructions": "",
+    "notes": "summon a tier 0 tiny golem\n\nYour patron lends one of their tiny minions to follow your commands and keep an eye on you. When their pool hits zero, they disappear back to your patron. It takes an hour to summon them again with an elaborate ritual. Work the DM to make them.",
+    "cost": 1,
+    "upcast": {
+      "name": "Increase summon tier",
+      "summonTierIncrease": 1,
+      "cost": 1,
+      "summon": false,
+      "noAction": false,
+      "noCheck": false
+    },
+    "restrained": false,
+    "disadvantage": false,
+    "aoe": false,
+    "noAction": false,
+    "id": "2c8b70c8-1986-47db-a009-2f064c684c43"
+  },
+  {
+    "name": "Grafted Cleaver",
+    "deals": 2,
+    "type": "equipment",
+    "id": "08d25dfe-e443-46e3-84d2-444affc9baec"
+  },
+  {
+    "name": "Hare Trigger",
+    "type": "feature",
+    "grantsAbilities": ["", ""],
+    "instructions": "If the enemy side goes before you bullet time, you can roll an Agile check to take your turn before them. The target number based on the highest tier enemy.",
+    "id": "64607805-8b4c-4034-a0f7-c4b57380e190"
+  },
+  {
+    "name": "Warlock of Vortun",
+    "type": "training",
+    "instructions": "You draw magic from Vortun, the god of fire. He dreams of your experiences, and power flows through you. You use your Social score for Glomtili powers.\n\n***Pushing the limit.*** If you are out of wellspring, you can attempt to cast again. Make a check with a target of 10 + the feature's level. On a failure, instantly drop to 0 Social pool.\n\n***Waking the dragon.*** Displeasing Vortun disturbs his slumber, and blocks your ability to cast spells until he is calmed.",
+    "id": "a2fee5d0-2e3c-481d-b106-d5681d482c42"
+  },
+  {
+    "name": "Hooded Lantern",
+    "instructions": "Runs on flasks of lamp oil. Gives off light around it with a range of 1.",
+    "id": "d264204b-3686-4280-bf35-bbdcae217be4"
+  },
+  {
+    "name": "Increase damage",
+    "deals": 1,
+    "cost": 1,
+    "id": "366f4a0a-3874-4a2d-9abe-fd6e80c50c90"
+  },
+  {
+    "name": "Increase summon tier",
+    "summonTierIncrease": 1,
+    "cost": 1,
+    "summon": false,
+    "noAction": false,
+    "noCheck": false,
+    "id": "49e20877-8af8-4ef3-804f-be85e9bc1d1d"
+  },
+  {
+    "name": "Ingested",
+    "consumable": true,
+    "deals": 4,
+    "id": "26a95e46-1937-4fe3-98c6-5151fa9843c4"
+  },
+  {
+    "name": "Jug of oil",
+    "type": "equipment",
+    "instructions": "lasts 48 hours in lamp or lantern",
+    "multiRewards": [
+      {
+        "name": "Minor Grenade",
+        "type": "equipment",
+        "deals": 1,
+        "aoe": true,
+        "consumable": true
+      }
+    ],
+    "id": "f90f7f40-3eb9-42ad-b063-d6b492e94216"
+  },
+  {
+    "name": "Kill it with fire",
+    "type": "training",
+    "instructions": "Getting the killing blow with fire pleases Vortun and soothes him in his slumber. Each person you kill with flame has a chance to unlock further power from Vortun, such as a new spell or feature.",
+    "id": "3cb414c8-3962-48b4-a698-88eaaf2b7cb1"
+  },
+  {
+    "name": "Leather Armor",
+    "reduceDamage": 1,
+    "noCheck": true,
+    "cost": 1,
+    "id": "9698cf54-63ef-4a7c-bf7e-780c6ea9695f"
+  },
+  {
+    "name": "Magic Sword",
+    "deals": 3,
+    "cost": 3,
+    "stunned": true,
+    "id": "5a3608dd-dd02-4b77-83ae-c6652573486b"
+  },
+  {
+    "type": "training",
+    "name": "Marks of the Thief",
+    "grantsAbilities": [],
+    "instructions": "If you rob a building that has been marked by the local thieves guild, and then gift a valuable stolen item to that guild, you earn the thieves' marks of that city.\n\nEach guild will tattoo you with two marks, each of which provides a feature.",
+    "id": "2bcbc12b-c05b-4775-83d5-6f11dc326c8f"
+  },
+  {
+    "name": "Minor Grenade",
+    "type": "equipment",
+    "deals": 1,
+    "aoe": true,
+    "consumable": true,
+    "id": "70f275a4-f4ce-47e0-8ee1-37a5262d972c"
+  },
+  {
+    "name": "Mystic Pebble",
+    "consumable": false,
+    "deals": 2,
+    "instructions": "deals 2 points, ranged when used with a sling",
+    "ranged": true,
+    "castTime": 0,
+    "id": "5d54057f-d772-416b-b77e-fe35aa2e4315"
+  },
+  {
+    "name": "Mystic Pebbles",
+    "multiRewards": [
+      {
+        "name": "Mystic Pebble",
+        "consumable": false,
+        "deals": 2,
+        "instructions": "deals 2 points, ranged when used with a sling",
+        "ranged": true,
+        "castTime": 0
+      }
+    ],
+    "type": "feature",
+    "instructions": "You imbue 5 pebbles with magic. After a full reset, they become ordinary pebbles again.",
+    "id": "fa5034aa-2f7b-44c2-8411-95137ff5036c"
+  },
+  {
+    "name": "Needle of Mending",
+    "type": "equipment",
+    "grantsAbilities": ["repair things"],
+    "instructions": "With this needle, you can repair a single break or tear in an object, as long as the break or tear is no larger than 1 foot in any dimension. It leaves no trace of the former damage.",
+    "id": "fd717b79-aab6-42fe-8f0c-a13568fa7cec"
+  },
+  {
+    "id": "9a3fefd6-4026-4e90-8ece-a8b86c806a6f",
+    "name": "Songwriter",
+    "type": "feature",
+    "instructions": "Take 1 hour to write a song about a recent adventure. Select an effect from a list the DM provides. You must give the song a name."
+  },
+  {
+    "name": "Orb of Depths Direction",
+    "instructions": "This item can orient you while traveling underground.",
+    "id": "e4cfbe51-0345-45f6-9f0d-f7e95aacebd8"
+  },
+  {
+    "name": "Rabbit Hop",
+    "noChase": true,
+    "type": "feature",
+    "id": "99ca1ab2-fc24-439d-96c8-1e564568697f"
+  },
+  {
+    "name": "Shadowstep mark",
+    "teleport": true,
+    "wellspringRecover": 0,
+    "cost": 1,
+    "noAction": false,
+    "specific": false,
+    "type": "feature",
+    "noChase": false,
+    "isMove": true,
+    "deals": 1,
+    "speed": 0,
+    "instructions": "as your move, teleport to a nearby zone, deal +1 on your next successful attack, costs 1 wellspring",
+    "id": "acc3d427-8628-4ea8-879c-2d199dd6b547"
+  },
+  {
+    "name": "Sneak Attack",
+    "noAction": false,
+    "deals": 4,
+    "cost": 1,
+    "specificMsg": "when attacking from hiding",
+    "specific": true,
+    "id": "01e9c60e-7ab7-48ea-b988-bb600e78ff41"
+  },
+  {
+    "name": "Speaking Stone Carver",
+    "instructions": "You can take an hour to carve a pair of speaking stones. All speaking stones are trinkets for you, but equipment for others.",
+    "multiRewards": [
+      {
+        "name": "Speaking Stones",
+        "instructions": "Stones come in matching pairs, and are carved so they are easily distinguished. While you touch a stone, you can speak into it. The sound of your voice emits from the paired stone.",
+        "duration": 0,
+        "noCheck": true
+      }
+    ],
+    "type": "feature",
+    "id": "477449df-e2b7-4147-ae34-0c3308571cff"
+  },
+  {
+    "name": "Speaking Stones",
+    "instructions": "Stones come in matching pairs, and are carved so they are easily distinguished. While you touch a stone, you can speak into it. The sound of your voice emits from the paired stone.",
+    "duration": 0,
+    "noCheck": true,
+    "id": "efedf6f1-71c4-4123-b9f4-5edafd4a347a"
+  },
+  {
+    "type": "equipment",
+    "name": "Spidersilk Gloves",
+    "deals": 0,
+    "advantageMsg": "picking locks and picking pockets",
+    "advantage": true,
+    "trainedMsg": "picking locks and picking pockets",
+    "trained": true,
+    "instructions": "These gloves are invisible when worn. While wearing them, you roll with training and advantage when picking locks, picking pockets, or performing other acts of manipulating small objects for the purpose of stealing.",
+    "id": "9e97a31d-085e-41ad-a1c5-29af3c9b3c19"
+  },
+  {
+    "name": "Stone Step",
+    "cost": 1,
+    "speed": 1,
+    "type": "feature",
+    "noChase": false,
+    "instructions": "",
+    "teleport": true,
+    "noCheck": false,
+    "notes": "teleport up to 2 zones away, costs 1 wellspring",
+    "noAction": false,
+    "isMove": true,
+    "aoe": false,
+    "id": "86aad1be-3ccf-430e-8edc-6b81e01d4026"
+  },
+  {
+    "name": "Tide Caller's Veil",
+    "grantsAbilities": ["breathe underwater"],
+    "speed": 1,
+    "instructions": "breathe underwater, swim speed of 1",
+    "id": "5117555f-b44e-4e2e-9ac1-bed37df99af1"
+  },
+  {
+    "name": "Torch",
+    "instructions": "Lasts 1 hour. Each torch takes 1 gear slot.",
+    "id": "305996a5-7318-4314-8d56-05a255578b5f"
+  },
+  {
+    "id": "e734b73c-6bb9-437a-94dc-e2c699b6363d",
+    "name": "Inspiring Song",
+    "advantage": true,
+    "advantageMsg": "",
+    "instructions": "Grant a creature 3 inspiration. Each can be used whenever they choose to gain advantage on a  roll. A creature may only have 3 inspiration at a time and they expire on a full reset. Costs 1 wellspring. JULIAN: This needs a name",
+    "cost": 1,
+    "grantsAbilities": ["", ""],
+    "type": "feature"
+  },
+  {
+    "name": "Wall of Fire",
+    "restrained": false,
+    "deals": 2,
+    "cost": 1,
+    "aoe": true,
+    "specificMsg": "if they move through the wall of fire",
+    "specific": true,
+    "type": "feature",
+    "id": "4b0fddf2-444c-461d-a18c-0d92408a4177"
+  },
+  {
+    "name": "Warlock of Glomtili",
+    "type": "training",
+    "instructions": "You draw magic from Glomtili, the god of earth. They dream of your experiences, and power flows through you. You use your Social score for Glomtili powers.\n\n***Pushing the limit.*** If you are out of wellspring, you can attempt to cast again. Make a check with a target of 10 + the feature's level. On a failure, instantly drop to 0 Social pool.\n\n***Waking the kaiju.*** Displeasing Glomtili disturbs their slumber, and blocks your ability to cast spells until they are calmed.",
+    "id": "04869ebe-859f-408f-a4cf-abd96d1a5644"
+  },
+  {
+    "name": "Flame Blade",
+    "type": "feature",
+    "instructions": "TODO: Lingering damage",
+    "deals": 1,
+    "restrained": false,
+    "id": "411ee852-d025-432d-8ef2-9bb907690403",
+    "multiRewards": []
+  },
+  { "id": "7186890c-5e90-4b37-9072-dc3a685c1bff" },
+  {
+    "id": "8a09f15d-571f-4e46-9f4b-1896c342ff95",
+    "name": "Finger of the Five-Fingered Viscount"
+  },
+  {
+    "id": "cd16e1c8-55e7-401e-ba43-b094e1f93ca2",
+    "name": "Healer's Kit",
+    "heals": 2,
+    "consumable": true,
+    "instructions": " single use, no check, restore 2 to physical pool",
+    "noCheck": true,
+    "specificMsg": "heal physical pool",
+    "specific": true
+  },
+  {
+    "id": "c45fa22b-8b22-4af9-a11d-2c8c58ad8792",
+    "name": "Chocolate",
+    "consumable": true,
+    "heals": 2,
+    "instructions": "single use, no check, restore 2 to mental pool",
+    "noCheck": true,
+    "specificMsg": "restores mental pool",
+    "specific": true
+  },
+  {
+    "id": "fabd81e7-99b7-48cd-afd7-bfc8adf7d588",
+    "name": "Herbal Distillation",
+    "consumable": true,
+    "noCheck": true,
+    "type": "equipment",
+    "grantsAbilities": ["negates the effects of living light spell fields"]
+  },
+  {
+    "id": "c919abe2-4f51-4ab0-9821-9c1fc239a025",
+    "name": "Finger of the Viscount",
+    "type": "equipment",
+    "consumable": true,
+    "noCheck": true,
+    "grantsAbilities": [
+      "duplicates one item but not any of its magical properties"
+    ]
+  },
+  {
+    "id": "f97ae5c4-dc5a-4ec9-8950-4b4c023c1f4d",
+    "name": "Living Light Tuning Fork",
+    "noCheck": true,
+    "grantsAbilities": ["hums in the presence of living light magic"],
+    "specific": true,
+    "consumable": false
+  },
+  {
+    "id": "70e76666-503c-419e-ab71-8c9727aa4b00",
+    "name": "Mirrogold",
+    "wellspringMax": 3,
+    "specificMsg": "if you haven't upset Mirrogold in the past 7 days",
+    "specific": true,
+    "instructions": "Sentient pocket mirror. If you haven't upset Mirrogold in the past 7 days, increase max wellspring by 3."
+  },
+  {
+    "id": "c1cdf5e5-8421-4b81-b8dd-89ba46724633",
+    "name": "Pallo Aldo Sauce",
+    "notes": "",
+    "instructions": "***Sample it.*** Try it to find out what this does.\n\n***Chug the entire bottle.*** Gain a short-term madness effect but have permanent resistance to fire damage. Action, 1 use, consumable.",
+    "advantage": true,
+    "durationMsg": "forever",
+    "duration": 1,
+    "advantageMsg": "actually resistance, I need to set this up"
+  },
+  {
+    "id": "9aa75bc1-f25c-4e9f-9a55-8e0914f4765a",
+    "name": "Pilfer's Doorway",
+    "consumable": true,
+    "noCheck": true,
+    "grantsAbilities": [
+      "When inserted into any door’s lock, the door opens and becomes a portal to the Feywild"
+    ]
+  },
+  {
+    "id": "7b38f7ad-a049-45b1-b563-fda24fba3362",
+    "name": "Rosewood",
+    "type": "equipment",
+    "restrained": true,
+    "deals": 1
+  },
+  {
+    "id": "08dd2c31-783a-4a16-aef9-7053fd27d8b6",
+    "trained": true,
+    "trainedMsg": "Training in persuasion and deception of Seelie fey",
+    "name": "Seelie Ambassador",
+    "type": "feature",
+    "instructions": "",
+    "grantsAbilities": [],
+    "notes": "TODO: Add multiple training"
+  },
+  {
+    "id": "c7204946-5a78-48ec-a5f8-87c6abd44bc3",
+    "name": "Serving of Smarmalade",
+    "trainedMsg": "Grants training in persuading and deceiving for 1 hour. If you are already trained, you roll with advantage",
+    "trained": true,
+    "consumable": true,
+    "noCheck": true
+  },
+  {
+    "id": "ebda8c4a-87b9-42c1-9d21-97e9239a1da4",
+    "name": "Splatterbeast Paint",
+    "consumable": true,
+    "noCheck": false,
+    "grantsAbilities": [],
+    "summon": true,
+    "instructions": "Paints a splatterbeast (tier 0) into existence, single use",
+    "notes": ""
+  },
+  {
+    "id": "8b7ec689-e971-4061-bf78-33affa9fbc34",
+    "name": "Trick Pony",
+    "summon": true,
+    "cost": 1,
+    "instructions": "Pantomime riding a horse, complete with self-made horse noises and a name for the mighty beast, and you will summon a steed (tier 0) for 24 hours. Costs 1 wellspring",
+    "notes": ""
+  },
+  { "id": "bf3757f6-67a0-49e3-be94-ee921174f916", "cost": 1, "deals": 2 },
+  {
+    "id": "94fbd8a6-e86c-4dbd-883b-b10128540560",
+    "name": "Lobster Arms",
+    "type": "equipment",
+    "deals": 1,
+    "trained": true,
+    "trainedMsg": "trained in Claw Crushin', takes 0 gear slots"
+  },
+  {
+    "id": "ffef228b-45ec-4083-bc41-724eef7a6577",
+    "name": "Ocean's Drone",
+    "aoe": true,
+    "noCheck": false,
+    "deals": 1,
+    "castTime": 1,
+    "castTimeMsg": "spend 2 turns playing",
+    "instructions": "spend 2 turns playing this hurdy gurdy and deal 1 point to all creatures in a zone on the second turn"
+  },
+  {
+    "id": "53832f00-7a99-49bb-8186-99c6a7f9ec45",
+    "name": "Slumber Song",
+    "type": "feature",
+    "stunned": true,
+    "cost": 1,
+    "instructions": "Put a creature to sleep. It cannot act or move. Make a check to maintain the effect if a creature attempts to help them. Costs 1 wellspring. JULIAN: This needs a name"
+  },
+  {
+    "id": "a9cf0549-9b1b-4e95-a453-98c6edbc5cd8",
+    "name": "I Know a Guy",
+    "grantsAbilities": ["you know a guy"],
+    "instructions": "For any given objective, you might know a someone who can help. Roll a chance roll for one of the following specialties: Pickpocket (50%), Footpad or Fence (25%), Enforcer (10%), Informant (5%), Kingpin (1%). If you want to find another type of entrepreneur in the criminal arts, the DM will set the chance target. You can only roll once per objective.",
+    "type": "feature"
+  },
+  {
+    "id": "15413cc9-fe35-4f20-9c50-b1e3e81d7c1d",
+    "name": "Silence",
+    "grantsAbilities": ["create a sphere of silence in 1 zone"],
+    "duration": 2,
+    "durationMsg": "lasts until your next full reset or you dismiss it",
+    "cost": 1,
+    "type": "feature"
+  },
+  {
+    "name": "Twin Shortswords",
+    "deals": 2,
+    "instructions": "With their swift and nimble design, you can execute dual attacks simultaneously, dealing 2 points",
+    "id": "cff2be3c-61b5-4880-9901-c2aa0f1f3583"
+  },
+  {
+    "id": "553819de-543b-4d27-8a66-f49d706d7553",
+    "name": "Charm Person",
+    "type": "feature",
+    "instructions": "Charm a creature who speaks your language. On a success, they regard you as a friendly acquaintance and you have advantage on social rolls with them. Ten minutes after the casting of the spell, they realize they were charmed and you have disadvantage. Costs 1 wellspring.",
+    "cost": 1,
+    "advantage": true,
+    "disadvantage": false,
+    "grantsAbilities": ["regard you as a friendly acquaintance "],
+    "trained": true,
+    "trainedMsg": "social rolls",
+    "specific": true,
+    "specificMsg": "while you're talking to them",
+    "advantageMsg": "social rolls"
+  },
+  {
+    "id": "02863eba-5d32-4916-b509-1f180d1f5de7",
+    "name": "Enlarge / Reduce",
+    "advantage": true,
+    "advantageMsg": "cause a creature to become  twice or half as big for one hour. They have advantage on actions when their new size is helpful",
+    "cost": 1,
+    "noCheck": true,
+    "type": "feature"
+  },
+  {
+    "name": "No-Stones",
+    "cost": 1,
+    "aoe": true,
+    "grantsAbilities": ["can see through walls"],
+    "instructions": "see through walls, costs 1 wellspring\n\nYou can use an action to speak the command word, \"unturned\" and turn it over so the flat side is pressed against a natural surface. When you do, the geode is fixed in place and projects a map above it, showing the layout of the area around it with a range of 3. It shows all walls, floors, and surfaces made of stone, natural metal, or earth.\n\nTo remove the geode, speak the command word again.",
+    "id": "2513dece-5669-4c40-b5a2-818b522f178c"
+  },
+  {
+    "id": "7bd70c18-3bec-4b7c-bf8c-266fa23117b7",
+    "name": "Con Artist's Pack",
+    "instructions": "Contains a hooded lantern, tinderbox, crowbar, climbing kit, and 50 ft of rope"
+  },
+  {
+    "id": "892353a9-da0a-4be2-93c5-8b9c1a9378f9",
+    "name": "Dagger",
+    "type": "equipment",
+    "deals": 1
+  }
+]

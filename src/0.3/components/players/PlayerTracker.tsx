@@ -3,14 +3,16 @@ import { Button, Accordion, Form, ListGroup } from "react-bootstrap";
 
 import { SavedPCData } from "../../types/system-types";
 import styles from "./PlayerTracker.module.scss";
-import { getRewardOptionsFromIds, initReward } from "../../util/reward-calcs";
+import { getRewardOptionsFromId, initReward } from "../../util/reward-calcs";
 import { getPCLearnedFeatures, getPCWellspring } from "../../util/pc-calcs";
 import { SingleRewardText } from "../rewards/SingleRewardText";
-import { RewardOptions } from "../../types/reward-types";
+import { Reward, RewardOptions } from "../../types/reward-types";
 import { getRewardsFromStorage } from "../../util/reward-make";
 import { PlayerBasicInfo } from "./PlayerBasicInfo";
 import AddReward from "./AddReward";
 import { HandleModifyPlayerFunc } from "../../types/pc-types";
+
+const defaultActivePlayer = "3";
 
 const getPlayersFromStorage = () => {
   const players = localStorage.getItem("players");
@@ -25,6 +27,7 @@ export default function PlayerTracker() {
   const [players, setPlayers] = useState<SavedPCData[]>(
     getPlayersFromStorage()
   );
+  const [mode, setMode] = useState<"view" | "edit">("edit");
   const rewards = getRewardsFromStorage();
 
   const handleModifyPlayer: HandleModifyPlayerFunc = useCallback(
@@ -57,7 +60,11 @@ export default function PlayerTracker() {
     <section className={styles.root}>
       <h1>Player Rewards</h1>
       <AddPlayer handleModifyPlayer={handleModifyPlayer} />
+      <Button onClick={() => setMode(mode === "view" ? "edit" : "view")}>
+        {mode === "view" ? "Edit Mode" : "View Mode"}
+      </Button>
       <Players
+        mode={mode}
         players={players}
         handleModifyPlayer={handleModifyPlayer}
         rewards={rewards}
@@ -126,14 +133,16 @@ function Players({
   players,
   handleModifyPlayer,
   rewards,
+  mode,
 }: {
   players: SavedPCData[];
   handleModifyPlayer: HandleModifyPlayerFunc;
   rewards: RewardOptions[];
+  mode: "view" | "edit";
 }) {
   return (
     <div>
-      <Accordion defaultActiveKey="0">
+      <Accordion defaultActiveKey={defaultActivePlayer}>
         {players.map((player, i) => (
           <Player
             player={player}
@@ -141,6 +150,7 @@ function Players({
             index={i}
             handleModifyPlayer={handleModifyPlayer}
             rewards={rewards}
+            mode={mode}
           />
         ))}
       </Accordion>
@@ -153,17 +163,30 @@ function Player({
   index,
   handleModifyPlayer,
   rewards,
+  mode,
 }: {
   player: SavedPCData;
   index: number;
   handleModifyPlayer: HandleModifyPlayerFunc;
   rewards: RewardOptions[];
+  mode: "view" | "edit";
 }) {
-  const playerRewards = getRewardOptionsFromIds(player.rewards, rewards);
+  // ids are player.rewards
+  const playerRewards = player.rewards.map((id, i) => {
+    return {
+      id,
+      data: initReward(getRewardOptionsFromId(id, rewards) || {}),
+    };
+  });
+
+  const sortedRewards = playerRewards.sort((a, b) =>
+    a.data.name.localeCompare(b.data.name)
+  );
 
   const handleDeleteReward = useCallback(
-    (rewardIndex: number) => {
-      const newRewards = player.rewards.filter((_, i) => i !== rewardIndex);
+    (deleteId: string) => {
+      // these are reward ids
+      const newRewards = player.rewards.filter((id) => deleteId !== id);
       const newPlayer = {
         ...player,
         rewards: newRewards,
@@ -183,27 +206,19 @@ function Player({
       </Accordion.Header>
       <Accordion.Body>
         <PlayerBasicInfo {...{ index, handleModifyPlayer, player }} />
-        <AddReward
-          {...{ index, playerRewards, rewards, handleModifyPlayer, player }}
-        />
-        <ListGroup className={`mb-4`} variant="flush">
-          {playerRewards.map((opt, i) => {
-            const reward = initReward(opt);
-            return (
-              <ListGroup.Item className={styles.playerReward} key={i}>
-                <Button
-                  size="sm"
-                  variant="outline-danger"
-                  className="me-2 px-2"
-                  onClick={() => handleDeleteReward(i)}
-                >
-                  &nbsp;x&nbsp;
-                </Button>
-                <SingleRewardText reward={reward} oneLine={true} />
-              </ListGroup.Item>
-            );
-          })}
-        </ListGroup>
+        {mode === "view" ? null : (
+          <AddReward
+            {...{ index, playerRewards, rewards, handleModifyPlayer, player }}
+          />
+        )}
+        {mode === "view" ? (
+          <RewardListView sortedRewards={sortedRewards} />
+        ) : (
+          <RewardListEdit
+            sortedRewards={sortedRewards}
+            handleDeleteReward={handleDeleteReward}
+          />
+        )}
         <Button
           onClick={() => handleModifyPlayer(index, player, "delete")}
           variant="danger"
@@ -212,5 +227,53 @@ function Player({
         </Button>
       </Accordion.Body>
     </Accordion.Item>
+  );
+}
+
+function RewardListEdit({
+  sortedRewards,
+  handleDeleteReward,
+}: {
+  sortedRewards: {
+    id: string;
+    data: Reward;
+  }[];
+  handleDeleteReward: (id: string) => string[];
+}) {
+  return (
+    <ListGroup className={`mb-4`} variant="flush">
+      {sortedRewards.map(({ id, data }, i) => (
+        <ListGroup.Item className={styles.playerReward}>
+          <Button
+            size="sm"
+            variant="outline-danger"
+            className="me-2 px-2"
+            onClick={() => handleDeleteReward(id)}
+          >
+            &nbsp;x&nbsp;
+          </Button>
+          <SingleRewardText reward={data} oneLine={true} />
+        </ListGroup.Item>
+      ))}
+    </ListGroup>
+  );
+}
+
+function RewardListView({
+  sortedRewards,
+}: {
+  sortedRewards: {
+    id: string;
+    data: Reward;
+  }[];
+}) {
+  return (
+    <ul>
+      {sortedRewards.map(({ id, data }, i) => (
+        <li key={id}>
+          <SingleRewardText reward={data} oneLine={true} />
+        </li>
+      ))}
+    </ul>
   );
 }
