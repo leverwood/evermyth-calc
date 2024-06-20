@@ -21,7 +21,9 @@ export function CombinedReward({
 
   return (
     <>
-      <h3 className={"mt-5"}>Combine{!adding ? "d" : ""} rewards</h3>
+      {!!list.length && (
+        <h3 className={"mt-5"}>Combine{!adding ? "d" : ""} rewards</h3>
+      )}
       <ul className={styles.combinedRewardsList}>
         {list.map((RewardData, index) => {
           // Adding: if it is already included, don't show it

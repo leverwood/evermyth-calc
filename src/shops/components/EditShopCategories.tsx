@@ -10,13 +10,16 @@ function ShopCategoriesEdit() {
         <Col>
           <h1 className={"mb-3"}>Edit Shop Categories</h1>
           <ListGroup className={"mb-3"}>
-            {shopCategories.map((category) => (
-              <ListGroup.Item key={category.slug}>
-                <Link to={`/shop-categories/${category.slug}/edit`}>
-                  {category.name}
-                </Link>
-              </ListGroup.Item>
-            ))}
+            {shopCategories &&
+              shopCategories
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((category) => (
+                  <ListGroup.Item key={category.slug}>
+                    <Link to={`/shop-categories/${category.slug}/edit`}>
+                      {category.name}
+                    </Link>
+                  </ListGroup.Item>
+                ))}
           </ListGroup>
         </Col>
       </Row>

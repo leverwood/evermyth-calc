@@ -9,6 +9,7 @@ import { REWARD_TYPE, RewardData } from "../types/reward-types";
 import TierRangeSlider from "./TierRangeSlider";
 import { SingleRewardText } from "./SingleRewardText";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const logger = Logger(LOG_LEVEL.INFO);
 
@@ -24,6 +25,7 @@ const findMaxTier = (rewards: RewardData[]) => {
 export default function RewardCreator() {
   const { rewards, addReward, deleteReward, getRewardById } =
     useRewardContext();
+  const navigate = useNavigate();
 
   const globalMax = findMaxTier(rewards);
   const [shownTierRange, setShownTierRange] = useState<[number, number]>([
@@ -78,7 +80,7 @@ export default function RewardCreator() {
   const handleCreateNew = () => {
     const id = addReward({ name: "", type: REWARD_TYPE.EQUIPMENT });
     // navigate to edit page
-    window.location.href = `/rewards/${id}/edit`;
+    navigate(`/rewards/${id}/edit`);
   };
 
   return (

@@ -42,10 +42,6 @@ export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   }, [rewards]);
 
   useEffect(() => {
-    localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(rewards));
-  }, [rewards]);
-
-  useEffect(() => {
     window.addEventListener("beforeunload", handleWindowUnload);
     return () => {
       window.removeEventListener("beforeunload", handleWindowUnload);
@@ -55,22 +51,33 @@ export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   const addReward = (reward: Omit<RewardData, "id">): string => {
     const id = crypto.randomUUID();
     const newReward: RewardData = { ...reward, id };
-    setRewards((prevRewards) => [...prevRewards, newReward]);
+    setRewards((prevRewards) => {
+      const newRewards = [...prevRewards, newReward];
+      localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));
+      console.log(`adding reward: ${JSON.stringify(newReward)}`);
+      return newRewards;
+    });
     return id;
   };
 
   const updateReward = (updatedReward: RewardData) => {
-    setRewards((prevRewards) =>
-      prevRewards.map((reward) =>
+    setRewards((prevRewards) => {
+      const newRewards = prevRewards.map((reward) =>
         reward.id === updatedReward.id ? updatedReward : reward
-      )
-    );
+      );
+      localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));
+      console.log(`updating reward: ${JSON.stringify(updatedReward)}`);
+      return newRewards;
+    });
   };
 
   const deleteReward = (id: string) => {
-    setRewards((prevRewards) =>
-      prevRewards.filter((reward) => reward.id !== id)
-    );
+    setRewards((prevRewards) => {
+      const newRewards = prevRewards.filter((reward) => reward.id !== id);
+      localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));
+      console.log(`deleting reward: ${id}`);
+      return newRewards;
+    });
   };
 
   const getRewardById = (id: string) => {

@@ -24,7 +24,6 @@ function EditShopCategory({ slug }: { slug?: string }) {
     deleteShopCategory,
   } = useShopContext();
   const navigate = useNavigate();
-  const [slugValue, setSlugValue] = useState<string>(slug || "");
   const [nameValue, setNameValue] = useState<string>(
     slug ? getShopCategoryBySlug(slug)?.name || "" : ""
   );
@@ -36,13 +35,14 @@ function EditShopCategory({ slug }: { slug?: string }) {
       if (slug) {
         return;
       }
+      const newSlug = nameValue.toLocaleLowerCase().replace(" ", "-");
       addShopCategory({
-        slug: slugValue,
+        slug: newSlug,
         name: nameValue,
       });
-      navigate(`/shop-categories/${slugValue}/edit`);
+      navigate(`/shop-categories/${newSlug}/edit`);
     },
-    [addShopCategory, nameValue, navigate, slug, slugValue]
+    [addShopCategory, nameValue, navigate, slug]
   );
 
   const handleChangeName = useCallback(
@@ -69,16 +69,6 @@ function EditShopCategory({ slug }: { slug?: string }) {
     <Container>
       <h1>{slug ? `Edit Shop Category: ${slug}` : "Add Shop Category"}</h1>
       <Form>
-        {!slug && (
-          <Form.Group>
-            <Form.Label>Slug</Form.Label>
-            <Form.Control
-              type="text"
-              value={slugValue}
-              onChange={(e) => setSlugValue(e.target.value)}
-            />
-          </Form.Group>
-        )}
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control

@@ -138,6 +138,12 @@ export type ChangeValueFunc = (
     | "addAbility"
     | "deleteAbility"
     | "changeAbility",
-  value: number | boolean | string | RewardData,
+  value:
+    | number
+    | boolean
+    | string
+    | RewardData
+    | ShopCategory["slug"][]
+    | undefined,
   index?: number
 ) => void;

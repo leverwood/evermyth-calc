@@ -3,23 +3,23 @@ import { useShopContext } from "../contexts/ShopContext";
 import { ShopCategory } from "../types/shop-types";
 import { useCallback } from "react";
 
-function FilterByShopCategories({
-  filteredCategories,
-  setFilteredCategories,
+function ShopCategoryCheckboxes({
+  checkedCategories,
+  setChecked,
 }: {
-  filteredCategories: ShopCategory[];
-  setFilteredCategories: React.Dispatch<React.SetStateAction<ShopCategory[]>>;
+  checkedCategories: ShopCategory["slug"][];
+  setChecked: React.Dispatch<React.SetStateAction<ShopCategory["slug"][]>>;
 }) {
   const { shopCategories } = useShopContext();
 
   const handleClear = useCallback(() => {
-    setFilteredCategories([]);
-  }, [setFilteredCategories]);
+    setChecked([]);
+  }, [setChecked]);
 
   return (
     <Form>
-      <p>
-        <strong>Filter by Category</strong>
+      <p className="mb-2">
+        <strong>Shop Category</strong>
         <Button size="sm" onClick={handleClear}>
           Clear
         </Button>
@@ -29,14 +29,12 @@ function FilterByShopCategories({
           key={category.slug}
           type="checkbox"
           label={category.name}
-          checked={filteredCategories.includes(category)}
+          checked={checkedCategories.includes(category.slug)}
           onChange={(e) => {
             if (e.target.checked) {
-              setFilteredCategories([...filteredCategories, category]);
+              setChecked([...checkedCategories, category.slug]);
             } else {
-              setFilteredCategories(
-                filteredCategories.filter((c) => c !== category)
-              );
+              setChecked(checkedCategories.filter((c) => c !== category.slug));
             }
           }}
         />
@@ -45,4 +43,4 @@ function FilterByShopCategories({
   );
 }
 
-export default FilterByShopCategories;
+export default ShopCategoryCheckboxes;

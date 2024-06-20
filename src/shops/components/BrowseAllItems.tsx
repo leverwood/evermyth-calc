@@ -1,15 +1,15 @@
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useShopContext } from "../contexts/ShopContext";
-import FilterByShopCategories from "./FilterByShopCategories";
+import ShopCategoryCheckboxes from "./ShopCategoryCheckboxes";
 import { useEffect, useState } from "react";
 import { ShopCategory } from "../types/shop-types";
 
 function BrowseAllItems() {
   const { rewards, services } = useShopContext();
   const [filteredItems, setFilteredItems] = useState([...rewards, ...services]);
-  const [filteredCategories, setFilteredCategories] = useState<ShopCategory[]>(
-    []
-  );
+  const [filteredCategories, setFilteredCategories] = useState<
+    ShopCategory["slug"][]
+  >([]);
 
   useEffect(() => {
     let items = [...rewards, ...services];
@@ -18,8 +18,8 @@ function BrowseAllItems() {
         if (filteredCategories.length === 0) {
           return true;
         }
-        return filteredCategories.some((category) =>
-          item.shopCategories?.includes(category.slug)
+        return filteredCategories.some((slug) =>
+          item.shopCategories?.includes(slug)
         );
       })
       .sort((a, b) => {
@@ -35,9 +35,9 @@ function BrowseAllItems() {
     <Container>
       <Row>
         <Col sm="4">
-          <FilterByShopCategories
-            filteredCategories={filteredCategories}
-            setFilteredCategories={setFilteredCategories}
+          <ShopCategoryCheckboxes
+            checkedCategories={filteredCategories}
+            setChecked={setFilteredCategories}
           />
         </Col>
         <Col sm="8">

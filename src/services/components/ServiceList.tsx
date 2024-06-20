@@ -4,6 +4,7 @@ import ViewService from "./ViewService";
 import { Col, Row, Form, Button, Container, InputGroup } from "react-bootstrap";
 import { Service } from "../types/service-types";
 import PriceRangeSlider from "./PriceRangeSlider";
+import { useNavigate } from "react-router-dom";
 
 const findMaxPrice = (services: Service[]) => {
   return Math.max(...services.map((service) => service.price));
@@ -11,6 +12,7 @@ const findMaxPrice = (services: Service[]) => {
 
 export default function ServiceList() {
   const { services, addService } = useServiceContext();
+  const navigate = useNavigate();
   const globalMax = findMaxPrice(services);
   const [priceRange, setPriceRange] = useState<[number, number]>([
     0,
@@ -34,7 +36,7 @@ export default function ServiceList() {
   const handleCreateNew = () => {
     const id = addService({ name: "", price: 0, description: "", notes: "" });
     // navigate to edit page
-    window.location.href = `/services/${id}/edit`;
+    navigate(`/services/${id}/edit`);
   };
 
   return (
