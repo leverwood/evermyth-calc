@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { Button, Accordion, Form, ListGroup } from "react-bootstrap";
 
-import { SavedPCData } from "../types/pc-types";
+import { PlayerData } from "../types/pc-types";
 import styles from "./PlayerTracker.module.scss";
 import {
   getRewardDataFromId,
@@ -27,16 +27,14 @@ const getPlayersFromStorage = () => {
 };
 
 export default function PlayerTracker() {
-  const [players, setPlayers] = useState<SavedPCData[]>(
-    getPlayersFromStorage()
-  );
+  const [players, setPlayers] = useState<PlayerData[]>(getPlayersFromStorage());
   const [mode, setMode] = useState<"view" | "edit">("edit");
   const rewards = getRewardsFromStorage();
 
   const handleModifyPlayer: HandleModifyPlayerFunc = useCallback(
     (
       index: number,
-      player: SavedPCData,
+      player: PlayerData,
       action: "add" | "update" | "delete"
     ) => {
       setPlayers((prevPlayers) => {
@@ -85,7 +83,7 @@ function AddPlayer({
   const [level, setLevel] = useState(1);
 
   const addPlayer = useCallback(() => {
-    const newPC: SavedPCData = {
+    const newPC: PlayerData = {
       name: name,
       level: level,
       rewards: [],
@@ -138,7 +136,7 @@ function Players({
   rewards,
   mode,
 }: {
-  players: SavedPCData[];
+  players: PlayerData[];
   handleModifyPlayer: HandleModifyPlayerFunc;
   rewards: RewardData[];
   mode: "view" | "edit";
@@ -168,7 +166,7 @@ function Player({
   rewards,
   mode,
 }: {
-  player: SavedPCData;
+  player: PlayerData;
   index: number;
   handleModifyPlayer: HandleModifyPlayerFunc;
   rewards: RewardData[];

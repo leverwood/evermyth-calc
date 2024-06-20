@@ -2,11 +2,11 @@ import { RewardDataID } from "../../rewards/types/reward-types";
 
 export type HandleModifyPlayerFunc = (
   index: number,
-  player: SavedPCData,
+  player: PlayerData,
   action: "add" | "update" | "delete"
 ) => void;
 
-export interface SavedPCData {
+export interface PlayerData {
   name: string;
   playerName?: string;
   level: number;

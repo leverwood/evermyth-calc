@@ -3,8 +3,7 @@ import { useCallback, useState } from "react";
 import Select from "react-select";
 
 import { RewardData, RewardDataID } from "../../rewards/types/reward-types";
-import { HandleModifyPlayerFunc } from "../types/pc-types";
-import { SavedPCData } from "../types/pc-types";
+import { HandleModifyPlayerFunc, PlayerData } from "../types/pc-types";
 
 export default function AddReward({
   index,
@@ -17,7 +16,7 @@ export default function AddReward({
   playerRewards: RewardData[];
   rewards: RewardData[];
   handleModifyPlayer: HandleModifyPlayerFunc;
-  player: SavedPCData;
+  player: PlayerData;
 }) {
   const [selectedReward, setSelectedReward] = useState<RewardDataID>("-1");
 

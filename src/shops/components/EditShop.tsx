@@ -206,7 +206,7 @@ const EditShop: React.FC = () => {
             {shopData.rewards &&
               shopData.rewards.map((reward, index) => (
                 <li key={index}>
-                  {reward.name}
+                  <a href={`/rewards/${reward.id}/edit`}>{reward.name}</a>
                   <Button
                     variant="danger"
                     onClick={() =>

@@ -4,13 +4,15 @@ import "./App.scss";
 
 import OldApp from "./0.2/components/App-0.2";
 import SystemOverview from "./0.3/components/SystemOverview";
-import RewardCreator from "./rewards/components/RewardCreator";
+import RewardCreator from "./rewards/components/RewardList";
 import PlayerTracker from "./players/components/PlayerTracker";
 import ShopList from "./shops/components/ShopList";
 import Layout from "./Layout";
 import { ShopProvider } from "./shops/contexts/ShopContext";
 import EditShop from "./shops/components/EditShop";
 import Map from "./map/components/Map";
+import RewardPage from "./rewards/components/EditRewardPage";
+import { RewardProvider } from "./rewards/contexts/RewardContext";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +35,17 @@ const router = createBrowserRouter([
     path: "/rewards",
     element: (
       <Layout>
-        <RewardCreator />
+        <RewardProvider>
+          <RewardCreator />
+        </RewardProvider>
+      </Layout>
+    ),
+  },
+  {
+    path: "/rewards/:id/edit",
+    element: (
+      <Layout>
+        <RewardPage />
       </Layout>
     ),
   },

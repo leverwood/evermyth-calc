@@ -1,5 +1,5 @@
 import { Condition, ENEMY_STATUS, PC, PC_STATUS } from "../types/system-types";
-import { SavedPCData } from "../../players/types/pc-types";
+import { PlayerData } from "../../players/types/pc-types";
 import { getTier } from "../../util/calcs";
 import { FLED_AFTER_ROUNDS } from "../../util/constants";
 import { getRandomNum } from "../../util/math";
@@ -47,7 +47,7 @@ export const getPCWellspring = (level: number) => {
   return 3 + level;
 };
 
-export const getPCLearnedFeatures = (pc: SavedPCData) => {
+export const getPCLearnedFeatures = (pc: PC | PlayerData) => {
   return 6 + (pc.eduMod || 0) * 4;
 };
 

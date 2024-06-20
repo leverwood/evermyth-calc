@@ -147,6 +147,7 @@ export interface PC {
   rewards: RewardData[];
   deathFails: number;
   dead: boolean;
+  eduMod?: number;
 }
 
 export interface Creatures {

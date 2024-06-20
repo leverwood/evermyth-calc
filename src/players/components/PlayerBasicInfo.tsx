@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Form, Row, Col } from "react-bootstrap";
-import { SavedPCData } from "../types/pc-types";
+import { PlayerData } from "../types/pc-types";
 import { HandleModifyPlayerFunc } from "../types/pc-types";
 
 export function PlayerBasicInfo({
@@ -9,7 +9,7 @@ export function PlayerBasicInfo({
   handleModifyPlayer,
 }: {
   index: number;
-  player: SavedPCData;
+  player: PlayerData;
   handleModifyPlayer: HandleModifyPlayerFunc;
 }) {
   const [name, setName] = useState(player.name);
@@ -34,7 +34,7 @@ export function PlayerBasicInfo({
         storedValue = 1;
       }
 
-      const newPlayerData: SavedPCData = {
+      const newPlayerData: PlayerData = {
         ...player,
         [key]: storedValue,
       };
