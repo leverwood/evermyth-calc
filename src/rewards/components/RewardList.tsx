@@ -49,15 +49,18 @@ export default function RewardCreator() {
 
   // grab all the rewards but the last one
   const showRewards = rewards
-    .slice(0, rewards.length - 1)
-    .filter((options) =>
-      options.name?.toLowerCase().includes(searchText.toLowerCase())
+    .filter(
+      (options) =>
+        !searchText ||
+        options.name?.toLowerCase().includes(searchText.toLowerCase())
     )
     // filter rewards not in tier range
     .filter((options) => {
+      if (shownTierRange[0] === 0) return true;
       const r = initReward(options);
       return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
     })
+    // sort them by tier
     .sort((opt1, opt2) => {
       const r1 = initReward(opt1);
       const r2 = initReward(opt2);

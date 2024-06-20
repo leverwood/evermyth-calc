@@ -67,6 +67,7 @@ export function initReward({
   wellspringMax = 0,
   wellspringRecover = 0,
   whileDefending = false,
+  price = 0,
 }: RewardData): Reward {
   const reward: Reward = {
     __typename: "Reward",
@@ -76,6 +77,7 @@ export function initReward({
     cost: 0,
     tier: -1,
     type,
+    price,
   };
   if (advantage) {
     reward.tier += OPTION_COST.advantage;

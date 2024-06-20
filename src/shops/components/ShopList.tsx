@@ -1,61 +1,58 @@
 import React from "react";
-import { Button, Card } from "react-bootstrap";
-import { Shop } from "../types/shop-types";
+import { Container, Button, Card, Row, Col } from "react-bootstrap";
+import { ShopProvider, useShopContext } from "../contexts/ShopContext";
+import ShopCategoriesEdit from "./EditShopCategories";
 
 interface ShopListProps {}
 
-const ShopListContext = React.createContext<{
-  shops: Shop[];
-  updateShops: (updatedShops: Shop[]) => void;
-}>({
-  shops: [],
-  updateShops: () => {},
-});
-
-const ShopList: React.FC<ShopListProps> = () => {
-  const shopsFromLocalStorage = localStorage.getItem("shops");
-  const parsedShops = shopsFromLocalStorage
-    ? JSON.parse(shopsFromLocalStorage)
-    : [];
-  const [shops, setShops] = React.useState<Shop[]>(parsedShops);
-
-  const updateShops = (updatedShops: Shop[]) => {
-    setShops(updatedShops);
-    localStorage.setItem("shops", JSON.stringify(updatedShops));
-  };
-
+const ShopListPage: React.FC<ShopListProps> = () => {
   return (
-    <ShopListContext.Provider value={{ shops, updateShops }}>
-      <div>
-        {shops.map((shop) => (
-          <Card key={shop.id}>
-            <Card.Img variant="top" src={shop.image} />
-            <Card.Body>
-              <Card.Title>{shop.name}</Card.Title>
-              {shop.proprietor && (
-                <Card.Subtitle className="mb-2 text-muted">
-                  Proprietor: {shop.proprietor}
-                </Card.Subtitle>
-              )}
-              <a href={`/shop/${shop.id}/edit`}>
-                <Button variant="primary">Edit Shop</Button>
-              </a>
-              <Card.Text>{shop.description}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-        <Card key="add" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="https://placehold.co/400x400" />
-          <Card.Body>
-            <a href="/shop/add">
-              <Button variant="primary">Add Shop</Button>
-            </a>
-          </Card.Body>
-        </Card>
-      </div>
-    </ShopListContext.Provider>
+    <ShopProvider>
+      <ShopList />
+    </ShopProvider>
   );
 };
 
-export default ShopList;
-export { ShopListContext };
+function ShopList() {
+  const { shops } = useShopContext();
+  return (
+    <Container>
+      <Row className={"mb-5"}>
+        {shops.map((shop) => (
+          <Col sm="6" key={shop.id}>
+            <Card>
+              <Card.Img variant="top" src={shop.image} />
+              <Card.Body>
+                <Card.Title>{shop.name}</Card.Title>
+                {shop.proprietor && (
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Proprietor: {shop.proprietor}
+                  </Card.Subtitle>
+                )}
+                <a href={`/shop/${shop.id}/edit`}>
+                  <Button variant="primary">Edit Shop</Button>
+                </a>
+                <Card.Text>{shop.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+        <Col sm="6">
+          <Card key="add" className={`ph-0`}>
+            <Card.Img variant="top" src="https://placehold.co/400x400" />
+            <Card.Body>
+              <a href="/shop/add">
+                <Button variant="primary">Add Shop</Button>
+              </a>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <ShopCategoriesEdit />
+      </Row>
+    </Container>
+  );
+}
+
+export default ShopListPage;

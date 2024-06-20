@@ -20,6 +20,19 @@
   color: $body-color;
 }
 
+:global(.badge).price {
+  background-color: $priceColor !important;
+  color: $body-color;
+}
+
+.price {
+  &::before {
+    content: '🪙';
+  }
+  color: rgb(223, 134, 0);
+  font-weight: bold;
+}
+
 .singleRewardText {
   &.oneLine {
     white-space: nowrap;

@@ -12,6 +12,7 @@ export function SingleRewardText({
   oneLine = false,
   noTier = false,
   upcast = false,
+  showPrice = false,
 }: {
   reward: Reward;
   className?: string;
@@ -20,6 +21,7 @@ export function SingleRewardText({
   oneLine?: boolean;
   noTier?: boolean;
   upcast?: boolean;
+  showPrice?: boolean;
 }) {
   return (
     <span className={`${styles.singleRewardText} ${className}`}>
@@ -30,6 +32,11 @@ export function SingleRewardText({
         </strong>
       ) : null}
       &nbsp;
+      {showPrice && reward.price ? (
+        <span className={`${styles.price} me-2`}>
+          &nbsp;{reward.price} cp&nbsp;
+        </span>
+      ) : null}
       {!noType ? (
         <Badge className={`${styles[reward.type.toLocaleLowerCase()]} me-2`}>
           &nbsp;{reward.type}&nbsp;

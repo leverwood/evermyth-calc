@@ -5,26 +5,38 @@ import Select from "react-select";
 
 import { useShopContext } from "../contexts/ShopContext";
 import { Shop } from "../types/shop-types";
+import { SingleRewardText } from "../../rewards/components/SingleRewardText";
+import { initReward } from "../../rewards/util/reward-calcs";
+import ViewService from "../../services/components/ViewService";
+import { Service } from "../../services/types/service-types";
+import BrowseAllItems from "./BrowseAllItems";
 
-type RewardSelectOption = {
+const DELIMINATOR = "------";
+
+type ForSaleSelectOption = {
   value: string;
   label: string;
 };
 
 const EditShop: React.FC = () => {
-  const { addShop, updateShop, getShopById, rewards } = useShopContext();
+  const { addShop, updateShop, getShopById, rewards, services } =
+    useShopContext();
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const rewardSelectOptions = rewards.map((reward) => ({
-    value: reward.id || "",
-    label: reward.name || "",
-  }));
-
-  const [selectedReward, setChosenReward] = useState<RewardSelectOption | null>(
-    null
-  );
+  const forSaleSelectOptions = [
+    ...rewards.map((reward) => ({
+      value: `${reward.id || ""}${DELIMINATOR}reward`,
+      label: reward.name || "",
+    })),
+    ...services.map((service) => ({
+      value: `${service.id || ""}${DELIMINATOR}service`,
+      label: service.name || "",
+    })),
+  ];
+  const [selectedForSale, setSelectedForSale] =
+    useState<ForSaleSelectOption | null>(null);
 
   const [shopData, setShopData] = useState<Shop>({
     id: "",
@@ -34,7 +46,7 @@ const EditShop: React.FC = () => {
     proprietorImage: "",
     description: "",
     discount: 0,
-    rewards: [],
+    forSale: [],
   });
 
   useEffect(() => {
@@ -68,31 +80,35 @@ const EditShop: React.FC = () => {
     }
   };
 
-  const handleAddReward = () => {
-    if (selectedReward) {
+  const handleAddForSale = () => {
+    if (selectedForSale) {
       setShopData((prevData) => {
-        const reward = rewards.find((r) => r.id === selectedReward.value);
-        if (!reward) return prevData;
+        const [id, type] = selectedForSale.value.split(DELIMINATOR);
+
         const updatedData: Shop = {
           ...prevData,
-          rewards: [...(prevData.rewards || []), reward],
+          forSale: [
+            ...(prevData.forSale || []),
+            {
+              id,
+              type: type as "reward" | "service",
+            },
+          ],
         };
         if (id) {
           updateShop(updatedData);
         }
         return updatedData;
       });
-      setChosenReward(null); // Reset selected reward after adding
+      setSelectedForSale(null); // Reset selected item after adding
     }
   };
 
-  const handleDeleteReward = (rewardIdToDelete: string) => {
+  const handleDeleteForSale = (itemIdToDelete: string) => {
     setShopData((prevData) => {
       const updatedData = {
         ...prevData,
-        RewardData: prevData.rewards.filter(
-          (reward) => reward.id !== rewardIdToDelete
-        ),
+        forSale: prevData.forSale.filter((item) => item.id !== itemIdToDelete),
       };
       if (id) {
         updateShop({ ...updatedData, id });
@@ -185,40 +201,60 @@ const EditShop: React.FC = () => {
           <Row>
             <Col xs={8}>
               <Select
-                value={selectedReward}
-                onChange={setChosenReward}
-                options={rewardSelectOptions}
-                placeholder="Select a reward"
+                value={selectedForSale}
+                onChange={setSelectedForSale}
+                options={forSaleSelectOptions}
+                placeholder="Select an item"
               />
             </Col>
             <Col xs={4}>
               <Button
                 variant="primary"
-                onClick={handleAddReward}
-                disabled={!selectedReward}
+                onClick={handleAddForSale}
+                disabled={!selectedForSale}
               >
-                {" "}
-                Add Reward{" "}
+                Add
               </Button>
             </Col>
           </Row>
           <ul>
-            {shopData.rewards &&
-              shopData.rewards.map((reward, index) => (
-                <li key={index}>
-                  <a href={`/rewards/${reward.id}/edit`}>{reward.name}</a>
-                  <Button
-                    variant="danger"
-                    onClick={() =>
-                      reward.id ? handleDeleteReward(reward.id) : null
-                    }
-                  >
-                    Delete
-                  </Button>
-                </li>
-              ))}
+            {shopData.forSale &&
+              shopData.forSale.map((item, index) => {
+                const data =
+                  item.type === "reward"
+                    ? rewards.find((r) => r.id === item.id)
+                    : services.find((s) => s.id === item.id);
+                if (!data) return null;
+                return (
+                  <li key={index}>
+                    {item.type === "reward" ? (
+                      <SingleRewardText
+                        reward={initReward(data)}
+                        oneLine={true}
+                        showPrice={true}
+                      />
+                    ) : (
+                      <ViewService service={data as Service} />
+                    )}
+                    <a href={`/${item.type}s/${item.id}/edit`}>
+                      <Button variant="primary">Load</Button>
+                    </a>
+                    <Button
+                      variant="danger"
+                      onClick={() =>
+                        item.id ? handleDeleteForSale(item.id) : null
+                      }
+                    >
+                      Delete
+                    </Button>
+                  </li>
+                );
+              })}
           </ul>
         </Col>
+      </Row>
+      <Row>
+        <BrowseAllItems />
       </Row>
     </Container>
   );

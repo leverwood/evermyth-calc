@@ -31,8 +31,7 @@ const REWARDS_BACKUP_KEY = "rewards_backup";
 export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   const [rewards, setRewards] = useState<RewardData[]>(() => {
     const storedRewards = localStorage.getItem(REWARDS_STORAGE_KEY);
-    const allRewards = storedRewards ? JSON.parse(storedRewards) : [];
-    return allRewards;
+    return storedRewards ? JSON.parse(storedRewards) : [];
   });
 
   const handleWindowUnload = useCallback(() => {

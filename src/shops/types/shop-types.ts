@@ -1,5 +1,3 @@
-import { RewardData } from "../../rewards/types/reward-types";
-
 export interface Shop {
   id: string;
   name: string;
@@ -8,5 +6,13 @@ export interface Shop {
   proprietorImage: string;
   description: string;
   discount: number;
-  rewards: RewardData[];
+  forSale: {
+    id: string;
+    type: "reward" | "service";
+  }[];
+}
+
+export interface ShopCategory {
+  slug: string;
+  name: string;
 }

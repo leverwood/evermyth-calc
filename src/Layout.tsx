@@ -22,6 +22,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <Nav.Link as={NavLink} to="/shop">
                 Shops
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/services">
+                Services
+              </Nav.Link>
               <Nav.Link as={NavLink} to="/map">
                 Map
               </Nav.Link>

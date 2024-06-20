@@ -2,7 +2,7 @@ import styles from "./RewardCreator.module.scss";
 import { RewardData, REWARD_TYPE } from "../types/reward-types";
 import { AddAttributes } from "./AddAttributes";
 import { ChangeValueFunc } from "../types/reward-types";
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { logger } from "./RewardList";
 import { CombinedReward } from "./CombinedReward";
 import { useCallback, useState } from "react";
@@ -14,7 +14,6 @@ import { useRewardContext } from "../contexts/RewardContext";
 export function EditReward({ id }: { id: string }) {
   const {
     rewards: savedRewards,
-    addReward,
     updateReward,
     getRewardById,
   } = useRewardContext();
@@ -107,10 +106,6 @@ export function EditReward({ id }: { id: string }) {
     [changeValue]
   );
 
-  const handleCreateNew = useCallback(() => {
-    if (selectedOptions) addReward(selectedOptions);
-  }, [addReward, selectedOptions]);
-
   logger.debug("EditReward - selectedOptions", selectedOptions);
 
   if (!selectedOptions) return null;
@@ -199,9 +194,6 @@ export function EditReward({ id }: { id: string }) {
         )}
       </Form>
       <Col className={styles.resultsColumn}>
-        {Object.keys(selectedOptions).length ? (
-          <Button onClick={handleCreateNew}>Create New</Button>
-        ) : null}
         {errors.length && Object.keys(selectedOptions).length ? (
           <div>
             <strong className={styles.errorTitle}>Errors</strong>

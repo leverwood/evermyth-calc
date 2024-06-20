@@ -1,4 +1,5 @@
 import { Condition, PC_STATUS } from "../../0.3/types/system-types";
+import { ShopCategory } from "../../shops/types/shop-types";
 
 export enum REWARD_TYPE {
   EQUIPMENT = "equipment",
@@ -63,6 +64,7 @@ export interface RewardData extends RewardBase {
   id?: RewardDataID; // the options and the reward should share an ID
   name?: string;
   modifyTier?: number;
+  shopCategories?: ShopCategory["slug"][];
 }
 
 export interface Reward extends RewardBase {
