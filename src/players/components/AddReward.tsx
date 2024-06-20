@@ -2,9 +2,9 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useCallback, useState } from "react";
 import Select from "react-select";
 
-import { RewardOptions, RewardOptionsID } from "../../types/reward-types";
-import { HandleModifyPlayerFunc } from "../../types/pc-types";
-import { SavedPCData } from "../../types/system-types";
+import { RewardData, RewardDataID } from "../../rewards/types/reward-types";
+import { HandleModifyPlayerFunc } from "../types/pc-types";
+import { SavedPCData } from "../types/pc-types";
 
 export default function AddReward({
   index,
@@ -14,12 +14,12 @@ export default function AddReward({
   player,
 }: {
   index: number;
-  playerRewards: RewardOptions[];
-  rewards: RewardOptions[];
+  playerRewards: RewardData[];
+  rewards: RewardData[];
   handleModifyPlayer: HandleModifyPlayerFunc;
   player: SavedPCData;
 }) {
-  const [selectedReward, setSelectedReward] = useState<RewardOptionsID>("-1");
+  const [selectedReward, setSelectedReward] = useState<RewardDataID>("-1");
 
   const options = rewards
     .map((reward) => {
@@ -32,7 +32,7 @@ export default function AddReward({
   options.unshift({ value: "-1", label: "Select Reward" });
 
   const handleAddReward = useCallback(
-    (rewardId: RewardOptionsID) => {
+    (rewardId: RewardDataID) => {
       if (rewardId === "-1") return;
 
       const newPlayer = {

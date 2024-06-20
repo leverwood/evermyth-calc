@@ -11,13 +11,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={NavLink} to="/">
-                System Calcs
+                Calcs
               </Nav.Link>
               <Nav.Link as={NavLink} to="/rewards">
-                Reward Creator
+                Rewards
               </Nav.Link>
               <Nav.Link as={NavLink} to="/players">
-                Player Tracker
+                Players
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/shop">
+                Shops
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/map">
+                Map
               </Nav.Link>
               <Nav.Link as={NavLink} to="/0.2">
                 Version 0.2

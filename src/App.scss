@@ -1,3 +1,8 @@
 @import 'bootstrap-vars';
 @import '~bootstrap/scss/bootstrap';
 @import 'bootswatch';
+
+
+.card {
+  border-radius: var(--bs-card-border-radius);
+}

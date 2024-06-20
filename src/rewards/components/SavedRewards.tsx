@@ -1,13 +1,13 @@
 import { Button, Form, InputGroup, ListGroup } from "react-bootstrap";
 
-import { initReward } from "../../util/reward-calcs";
-import { RewardOptions } from "../../types/reward-types";
+import { initReward } from "../util/reward-calcs";
+import { RewardData } from "../types/reward-types";
 import TierRangeSlider from "./TierRangeSlider";
 import { SingleRewardText } from "./SingleRewardText";
 import styles from "./SavedRewards.module.scss";
 import { useState } from "react";
 
-const findMaxTier = (rewards: RewardOptions[]) => {
+const findMaxTier = (rewards: RewardData[]) => {
   let max = 0;
   rewards.forEach((reward) => {
     const r = initReward(reward);
@@ -22,7 +22,7 @@ export function SavedRewards({
   handleClickDelete,
   handleClickCopy,
 }: {
-  savedRewards: RewardOptions[];
+  savedRewards: RewardData[];
   handleClickLoad: (index: number) => void;
   handleClickDelete: (index: number) => void;
   handleClickCopy: (index: number) => void;

@@ -1,17 +1,13 @@
 import styles from "./RewardCreator.module.scss";
-import { initReward } from "../../util/reward-calcs";
+import { initReward } from "../util/reward-calcs";
 import Markdown from "markdown-to-jsx";
-import { RewardOptions, REWARD_TYPE } from "../../types/reward-types";
+import { RewardData, REWARD_TYPE } from "../types/reward-types";
 import { SingleRewardText } from "./SingleRewardText";
 
-export function RewardCard({
-  rewardOptions,
-}: {
-  rewardOptions: RewardOptions;
-}) {
-  if (Object.keys(rewardOptions).length === 0) return null;
+export function RewardCard({ RewardData }: { RewardData: RewardData }) {
+  if (Object.keys(RewardData).length === 0) return null;
 
-  const reward = initReward(rewardOptions);
+  const reward = initReward(RewardData);
 
   return (
     <div className={`${styles.card} ${styles.cardMultiReward}`}>

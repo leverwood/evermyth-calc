@@ -9,15 +9,13 @@ import {
   PCRollOptions,
 } from "../types/system-types";
 import { getMaxMod, getTargetablePCs, hasAdv } from "./pc-calcs";
-import {
-  decrementConditionDurations,
-} from "./reward-calcs";
+import { decrementConditionDurations } from "../../rewards/util/reward-calcs";
 import {
   makeStandardAoE,
   makeStandardArmor,
   makeStandardSpell,
-  makeStandardWeapon
-} from "./reward-make";
+  makeStandardWeapon,
+} from "../../rewards/util/reward-make";
 import { makeARoll, tryFortuneToHit } from "./simulate";
 import { tryReduceDamage } from "./simulate";
 import { chooseBestReward, makeRandomReward } from "./simulate-rewards";

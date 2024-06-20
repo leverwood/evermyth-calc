@@ -24,9 +24,9 @@ import { doSimulation, printCreatureName } from "../util/simulate";
 import { randomPC } from "../util/simulate-pc";
 import styles from "./Simulation.module.scss";
 import { PCRoll } from "../util/dice-calcs";
-import { initReward } from "../util/reward-calcs";
-import { Reward } from "../types/reward-types";
-import { SingleRewardText } from "./rewards/SingleRewardText";
+import { initReward } from "../../rewards/util/reward-calcs";
+import { Reward } from "../../rewards/types/reward-types";
+import { SingleRewardText } from "../../rewards/components/SingleRewardText";
 
 export default function Simulation({
   level,

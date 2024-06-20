@@ -1,11 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import "./App.scss";
+
 import OldApp from "./0.2/components/App-0.2";
 import SystemOverview from "./0.3/components/SystemOverview";
-import RewardCreator from "./0.3/components/rewards/RewardCreator";
-import PlayerTracker from "./0.3/components/players/PlayerTracker";
+import RewardCreator from "./rewards/components/RewardCreator";
+import PlayerTracker from "./players/components/PlayerTracker";
+import ShopList from "./shops/components/ShopList";
 import Layout from "./Layout";
-import "./App.scss";
+import { ShopProvider } from "./shops/contexts/ShopContext";
+import EditShop from "./shops/components/EditShop";
+import Map from "./map/components/Map";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +45,46 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
+  {
+    path: "/shop",
+    element: (
+      <Layout>
+        <ShopProvider>
+          <ShopList />
+        </ShopProvider>
+      </Layout>
+    ),
+  },
+  {
+    path: "/shop/:id/edit",
+    element: (
+      <Layout>
+        <ShopProvider>
+          <EditShop />
+        </ShopProvider>
+      </Layout>
+    ),
+  },
+  {
+    path: "/shop/add",
+    element: (
+      <Layout>
+        <ShopProvider>
+          <EditShop />
+        </ShopProvider>
+      </Layout>
+    ),
+  },
+  {
+    path: "/map",
+    element: (
+      <Layout>
+        <Map />
+      </Layout>
+    ),
+  },
 ]);
+
 
 const App = () => {
   return <RouterProvider router={router} />;

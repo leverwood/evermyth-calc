@@ -1,7 +1,11 @@
 import { initReward } from "./reward-calcs";
 
-import { Reward, RewardOptions } from "../types/reward-types";
-import { Condition, PC_STATUS, ENEMY_STATUS } from "../types/system-types";
+import { Reward, RewardData } from "../types/reward-types";
+import {
+  Condition,
+  PC_STATUS,
+  ENEMY_STATUS,
+} from "../../0.3/types/system-types";
 import { LOG_LEVEL, Logger } from "../../util/log";
 
 const logger = Logger(LOG_LEVEL.INFO);
@@ -173,7 +177,7 @@ export const makeHealingSpell = (tier: number): Reward => {
 export const getRewardsFromStorage = () => {
   const rewards = localStorage.getItem("rewards")
     ? JSON.parse(localStorage.getItem("rewards") as string)
-    : ([] as RewardOptions[]);
+    : ([] as RewardData[]);
   if (!Array.isArray(rewards)) {
     logger.error("Rewards is not an array", rewards);
     return [];
@@ -187,4 +191,3 @@ export const getRewardsFromStorage = () => {
 
   return rewards;
 };
-

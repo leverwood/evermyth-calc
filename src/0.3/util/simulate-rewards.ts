@@ -1,7 +1,10 @@
 import { getRandomNum } from "../../util/math";
 import { Enemy, PC } from "../types/system-types";
-import { conditionNotYetApplied, initReward } from "./reward-calcs";
-import { Reward } from "../types/reward-types";
+import {
+  conditionNotYetApplied,
+  initReward,
+} from "../../rewards/util/reward-calcs";
+import { Reward } from "../../rewards/types/reward-types";
 
 export function chooseBestReward(
   actingCreature: PC | Enemy,

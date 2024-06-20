@@ -1,7 +1,7 @@
-import { Reward } from "../types/reward-types";
+import { Reward } from "../../rewards/types/reward-types";
 import { printModifier } from "../../0.2/util/dice-calcs-0.2";
 import { LOG_LEVEL, Logger } from "../../util/log";
-import { initReward } from "./reward-calcs";
+import { initReward } from "../../rewards/util/reward-calcs";
 
 const logger = Logger(LOG_LEVEL.INFO);
 

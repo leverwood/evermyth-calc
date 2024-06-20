@@ -1,5 +1,5 @@
 import { PCRoll } from "../util/dice-calcs";
-import { RewardOptions, Reward, RewardOptionsID } from "./reward-types";
+import { RewardData, Reward } from "../../rewards/types/reward-types";
 
 export const INITIAL_SIMULATION_DATA: SimulationData = {
   rounds: [],
@@ -88,7 +88,9 @@ export const ENEMY_STATUS = {
   ENEMY_LING_DMG: "ENEMY_LING_DMG",
 };
 
-export const isEnemyStatus = (status: string): status is keyof typeof ENEMY_STATUS => {
+export const isEnemyStatus = (
+  status: string
+): status is keyof typeof ENEMY_STATUS => {
   return status in ENEMY_STATUS;
 };
 
@@ -119,21 +121,12 @@ export interface Enemy {
   number: number;
   conditions: Condition[];
   wellspring: number;
-  rewards: RewardOptions[];
+  rewards: RewardData[];
 }
 
 export interface GM {
   enemies: Enemy[];
   initiative: Enemy[][];
-}
-
-export interface SavedPCData {
-  name: string;
-  playerName?: string;
-  level: number;
-  rewards: RewardOptionsID[];
-  // for calculating number of features
-  eduMod?: number;
 }
 
 // while simulating a game
@@ -151,10 +144,11 @@ export interface PC {
   fleeing?: boolean;
   fledRounds: number;
   conditions: Condition[];
-  rewards: RewardOptions[];
+  rewards: RewardData[];
   deathFails: number;
   dead: boolean;
 }
+
 export interface Creatures {
   GM: GM;
   pcs: PC[];

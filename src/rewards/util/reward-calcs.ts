@@ -1,10 +1,10 @@
 import {
   REWARD_TYPE,
-  RewardOptions,
+  RewardData,
   Reward,
   OPTION_COST,
   isReward,
-  RewardOptionsID,
+  RewardDataID,
 } from "../types/reward-types";
 import {
   Condition,
@@ -14,10 +14,10 @@ import {
   PC,
   isBeneficialStatus,
   isEnemyStatus,
-} from "../types/system-types";
-import { getDCHard } from "./enemy-calc";
+} from "../../0.3/types/system-types";
+import { getDCHard } from "../../0.3/util/enemy-calc";
 import { LOG_LEVEL, Logger } from "../../util/log";
-import { hasAdv } from "./pc-calcs";
+import { hasAdv } from "../../0.3/util/pc-calcs";
 
 const logger = Logger(LOG_LEVEL.ERROR);
 
@@ -67,7 +67,7 @@ export function initReward({
   wellspringMax = 0,
   wellspringRecover = 0,
   whileDefending = false,
-}: RewardOptions): Reward {
+}: RewardData): Reward {
   const reward: Reward = {
     __typename: "Reward",
     name,
@@ -245,7 +245,7 @@ export function initReward({
   return reward;
 }
 
-export function maxDamageReduction(reward: Reward | RewardOptions): number {
+export function maxDamageReduction(reward: Reward | RewardData): number {
   if (!isReward(reward)) {
     reward = initReward(reward);
   }
@@ -328,7 +328,7 @@ export function getRewardDC(reward: Reward): number {
   return getDCHard(reward.tier);
 }
 
-export function validateRewardOptions(options: RewardOptions): {
+export function validateRewardData(options: RewardData): {
   errors: string[];
   valid: boolean;
 } {
@@ -418,25 +418,24 @@ export function validateRewardOptions(options: RewardOptions): {
   return { errors, valid };
 }
 
-export function getRewardOptionsFromId(
-  id: RewardOptionsID,
-  rewards: RewardOptions[]
-): RewardOptions | undefined {
+export function getRewardDataFromId(
+  id: RewardDataID,
+  rewards: RewardData[]
+): RewardData | undefined {
   return rewards.find((r) => r.id === id);
 }
 
-export function getRewardOptionsFromIds(
-  ids: RewardOptionsID[],
-  rewards: RewardOptions[]
-): RewardOptions[] {
+export function getRewardDataFromIds(
+  ids: RewardDataID[],
+  rewards: RewardData[]
+): RewardData[] {
   const results = ids.map((id) => rewards.find((r) => r.id === id));
-  return results.filter((r) => r) as RewardOptions[];
+  return results.filter((r) => r) as RewardData[];
 } // ignore name
 
-export const isSameReward = (a: RewardOptions, b: RewardOptions) => {
+export const isSameReward = (a: RewardData, b: RewardData) => {
   const isSame =
     JSON.stringify({ ...a, name: "" }) === JSON.stringify({ ...b, name: "" });
   logger.debug(`isSameReward: ${isSame}`, a, b);
   return isSame;
 };
-

@@ -1,16 +1,19 @@
 import { useCallback, useState } from "react";
 import { Button, Accordion, Form, ListGroup } from "react-bootstrap";
 
-import { SavedPCData } from "../../types/system-types";
+import { SavedPCData } from "../types/pc-types";
 import styles from "./PlayerTracker.module.scss";
-import { getRewardOptionsFromId, initReward } from "../../util/reward-calcs";
-import { getPCLearnedFeatures, getPCWellspring } from "../../util/pc-calcs";
-import { SingleRewardText } from "../rewards/SingleRewardText";
-import { Reward, RewardOptions } from "../../types/reward-types";
-import { getRewardsFromStorage } from "../../util/reward-make";
+import {
+  getRewardDataFromId,
+  initReward,
+} from "../../rewards/util/reward-calcs";
+import { getPCLearnedFeatures, getPCWellspring } from "../../0.3/util/pc-calcs";
+import { SingleRewardText } from "../../rewards/components/SingleRewardText";
+import { Reward, RewardData } from "../../rewards/types/reward-types";
+import { getRewardsFromStorage } from "../../rewards/util/reward-make";
 import { PlayerBasicInfo } from "./PlayerBasicInfo";
 import AddReward from "./AddReward";
-import { HandleModifyPlayerFunc } from "../../types/pc-types";
+import { HandleModifyPlayerFunc } from "../types/pc-types";
 
 const defaultActivePlayer = "3";
 
@@ -137,7 +140,7 @@ function Players({
 }: {
   players: SavedPCData[];
   handleModifyPlayer: HandleModifyPlayerFunc;
-  rewards: RewardOptions[];
+  rewards: RewardData[];
   mode: "view" | "edit";
 }) {
   return (
@@ -168,14 +171,14 @@ function Player({
   player: SavedPCData;
   index: number;
   handleModifyPlayer: HandleModifyPlayerFunc;
-  rewards: RewardOptions[];
+  rewards: RewardData[];
   mode: "view" | "edit";
 }) {
   // ids are player.rewards
   const playerRewards = player.rewards.map((id, i) => {
     return {
       id,
-      data: initReward(getRewardOptionsFromId(id, rewards) || {}),
+      data: initReward(getRewardDataFromId(id, rewards) || {}),
     };
   });
 

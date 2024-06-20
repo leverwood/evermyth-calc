@@ -1,7 +1,7 @@
 import styles from "./SingleRewardText.module.scss";
-import { printRewardMessage } from "../../util/printRewardMessage";
+import { printRewardMessage } from "../../0.3/util/printRewardMessage";
 import Markdown from "markdown-to-jsx";
-import { Reward } from "../../types/reward-types";
+import { Reward } from "../types/reward-types";
 import { Badge } from "react-bootstrap";
 
 export function SingleRewardText({

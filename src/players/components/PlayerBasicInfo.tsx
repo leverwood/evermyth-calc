@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import { Form, Container, Row, Col } from "react-bootstrap";
-import { SavedPCData } from "../../types/system-types";
-import { HandleModifyPlayerFunc } from "../../types/pc-types";
+import { Form, Row, Col } from "react-bootstrap";
+import { SavedPCData } from "../types/pc-types";
+import { HandleModifyPlayerFunc } from "../types/pc-types";
 
 export function PlayerBasicInfo({
   index,

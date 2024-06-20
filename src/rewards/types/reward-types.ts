@@ -1,4 +1,4 @@
-import { Condition, PC_STATUS } from "./system-types";
+import { Condition, PC_STATUS } from "../../0.3/types/system-types";
 
 export enum REWARD_TYPE {
   EQUIPMENT = "equipment",
@@ -8,7 +8,7 @@ export enum REWARD_TYPE {
 }
 
 // generate with crypto.randomUUID()
-export type RewardOptionsID = string;
+export type RewardDataID = string;
 
 interface RewardBase {
   type?: REWARD_TYPE;
@@ -31,7 +31,7 @@ interface RewardBase {
   heals?: number;
   instructions?: string;
   isMove?: boolean;
-  multiRewards?: RewardOptions[];
+  multiRewards?: RewardData[];
   noAction?: boolean;
   noChase?: boolean;
   noCheck?: boolean;
@@ -49,17 +49,18 @@ interface RewardBase {
   teleport?: boolean;
   trained?: boolean;
   trainedMsg?: string;
-  upcast?: RewardOptions;
+  upcast?: RewardData;
   upcastMax?: number;
   wellspringMax?: number;
   wellspringRecover?: number;
   whileDefending?: boolean;
   summon?: boolean;
   summonTierIncrease?: number;
+  price?: number;
 }
 
-export interface RewardOptions extends RewardBase {
-  id?: RewardOptionsID; // the options and the reward should share an ID
+export interface RewardData extends RewardBase {
+  id?: RewardDataID; // the options and the reward should share an ID
   name?: string;
   modifyTier?: number;
 }
@@ -72,7 +73,7 @@ export interface Reward extends RewardBase {
   cost: number;
   deals: number;
   heals: number;
-  optionsId?: RewardOptionsID;
+  optionsId?: RewardDataID;
 }
 
 export const TEMPORARY_ADV_ACTION: Condition = {
@@ -129,12 +130,12 @@ export function isReward(reward: any): reward is Reward {
 }
 export type ChangeValueFunc = (
   key:
-    | keyof RewardOptions
+    | keyof RewardData
     | "addMultiReward"
     | "deleteMultiReward"
     | "addAbility"
     | "deleteAbility"
     | "changeAbility",
-  value: number | boolean | string | RewardOptions,
+  value: number | boolean | string | RewardData,
   index?: number
 ) => void;

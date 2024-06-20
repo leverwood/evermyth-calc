@@ -18,7 +18,7 @@ import {
 import {
   decrementConditionDurations,
   getRewardDC,
-} from "./reward-calcs";
+} from "../../rewards/util/reward-calcs";
 import {
   makeAdvGranter,
   makeHealingSpell,
@@ -26,8 +26,8 @@ import {
   makeStandardAoE,
   makeStandardArmor,
   makeStandardSpell,
-  makeStandardWeapon
-} from "./reward-make";
+  makeStandardWeapon,
+} from "../../rewards/util/reward-make";
 import { names } from "./pc-calcs";
 import { shuffleArray } from "../../util/array";
 import { makeARoll, tryFortuneToHit, tryReduceDamage } from "./simulate";
@@ -40,7 +40,7 @@ import {
   TEMPORARY_ADV_ACTION,
   TEMPORARY_ADV_DEFENSE,
   Reward,
-} from "../types/reward-types";
+} from "../../rewards/types/reward-types";
 
 const logger = Logger(LOG_LEVEL.WARN);
 

@@ -15,7 +15,7 @@ import { LOG_LEVEL, Logger } from "../../util/log";
 import { randomPCs } from "./simulate-pc";
 import { pcTurn } from "./simulate-pc";
 import { enemyTurn } from "./simulate-enemy";
-import { maxDamageReduction } from "./reward-calcs";
+import { maxDamageReduction } from "../../rewards/util/reward-calcs";
 import { DiceHandful, PCRoll, isMiss, rollDice } from "./dice-calcs";
 import { FLED_AFTER_ROUNDS } from "../../util/constants";
 

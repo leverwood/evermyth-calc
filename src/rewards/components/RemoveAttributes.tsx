@@ -1,8 +1,8 @@
 import styles from "./RewardCreator.module.scss";
 import AttributeDescription from "./AttributeDescription";
-import { RewardOptions } from "../../types/reward-types";
-import { CombinedReward } from "./RewardCreator";
-import { ChangeValueFunc } from "../../types/reward-types";
+import { RewardData } from "../types/reward-types";
+import { CombinedReward } from "./CombinedReward";
+import { ChangeValueFunc } from "../types/reward-types";
 import AddRemoveButton from "./AddRemoveButton";
 
 export function RemoveAttributes({
@@ -10,9 +10,9 @@ export function RemoveAttributes({
   changeValue,
   savedRewards,
 }: {
-  selectedOptions: RewardOptions;
+  selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
-  savedRewards: RewardOptions[];
+  savedRewards: RewardData[];
 }) {
   if (Object.keys(selectedOptions).length === 0) return null;
 

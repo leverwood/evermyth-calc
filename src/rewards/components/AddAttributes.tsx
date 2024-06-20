@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./AddAttributes.module.scss";
 import AttributeDescription from "./AttributeDescription";
-import { RewardOptions } from "../../types/reward-types";
-import { ChangeValueFunc } from "../../types/reward-types";
+import { RewardData } from "../types/reward-types";
+import { ChangeValueFunc } from "../types/reward-types";
 import AddRemoveButton from "./AddRemoveButton";
 import { Form } from "react-bootstrap";
 
@@ -11,9 +11,9 @@ export function AddAttributes({
   changeValue,
   rewards,
 }: {
-  selectedOptions: RewardOptions;
+  selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
-  rewards: RewardOptions[];
+  rewards: RewardData[];
 }) {
   const [newAbility, setNewAbility] = useState("");
   const [upcastRewardIndex, setUpcastReward] = useState<number>(-1);
