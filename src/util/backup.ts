@@ -13,7 +13,7 @@ export const downloadLocalStorage = () => {
   keys.forEach((key) => {
     const value = localStorage.getItem(key);
     if (value !== null) {
-      localStorageData[key] = value;
+      localStorageData[key] = JSON.parse(value);
     }
   });
 

@@ -39,9 +39,9 @@ export function PlayerBasicInfo({
         [key]: storedValue,
       };
 
-      handleModifyPlayer(index, newPlayerData, "update");
+      handleModifyPlayer(newPlayerData.id, newPlayerData, "update");
     },
-    [index, player, handleModifyPlayer]
+    [player, handleModifyPlayer]
   );
 
   return (

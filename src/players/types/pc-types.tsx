@@ -1,12 +1,13 @@
 import { RewardDataID } from "../../rewards/types/reward-types";
 
 export type HandleModifyPlayerFunc = (
-  index: number,
+  id: string,
   player: PlayerData,
   action: "add" | "update" | "delete"
 ) => void;
 
 export interface PlayerData {
+  id: string;
   name: string;
   playerName?: string;
   level: number;

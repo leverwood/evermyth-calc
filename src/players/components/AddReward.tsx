@@ -19,11 +19,10 @@ export default function AddReward({
   player: PlayerData;
 }) {
   const [selectedReward, setSelectedReward] = useState<RewardDataID>("-1");
-
   const options = rewards
     .map((reward) => {
       // omit rewards already added
-      if (playerRewards.find((r) => r.name === reward.name)) return null;
+      if (playerRewards.find((r) => r.id === reward.id)) return null;
       if (!reward.name || !reward.id) return null;
       return { value: reward.id || "", label: reward.name || "" };
     })
@@ -34,14 +33,17 @@ export default function AddReward({
     (rewardId: RewardDataID) => {
       if (rewardId === "-1") return;
 
+      // don't add it if it's already there
+      if (player.rewards.includes(rewardId)) return;
+
       const newPlayer = {
         ...player,
         rewards: [...player.rewards, rewardId],
       };
-      handleModifyPlayer(index, newPlayer, "update");
+      handleModifyPlayer(player.id, newPlayer, "update");
       setSelectedReward("-1");
     },
-    [index, player, handleModifyPlayer]
+    [player, handleModifyPlayer]
   );
   return (
     <Form as={Row} className={`mb-4`}>

@@ -15,8 +15,6 @@ import { PlayerBasicInfo } from "./PlayerBasicInfo";
 import AddReward from "./AddReward";
 import { HandleModifyPlayerFunc } from "../types/pc-types";
 
-const defaultActivePlayer = "3";
-
 const getPlayersFromStorage = () => {
   const players = localStorage.getItem("players");
   const parsed = players ? JSON.parse(players) : [];
@@ -32,22 +30,19 @@ export default function PlayerTracker() {
   const rewards = getRewardsFromStorage();
 
   const handleModifyPlayer: HandleModifyPlayerFunc = useCallback(
-    (
-      index: number,
-      player: PlayerData,
-      action: "add" | "update" | "delete"
-    ) => {
+    (id: string, data: PlayerData, action: "add" | "update" | "delete") => {
       setPlayers((prevPlayers) => {
         const newPlayers = [...prevPlayers];
+        const playerIndex = newPlayers.findIndex((p) => p.id === id);
         switch (action) {
           case "add":
-            newPlayers.push(player);
+            newPlayers.push(data);
             break;
           case "delete":
-            newPlayers.splice(index, 1);
+            newPlayers.splice(playerIndex, 1);
             break;
           case "update":
-            newPlayers[index] = player;
+            newPlayers[playerIndex] = data;
             break;
         }
         localStorage.setItem("players", JSON.stringify(newPlayers));
@@ -83,24 +78,21 @@ function AddPlayer({
   const [level, setLevel] = useState(1);
 
   const addPlayer = useCallback(() => {
+    console.log("adding player", name, level);
+    const id = crypto.randomUUID();
     const newPC: PlayerData = {
+      id,
       name: name,
       level: level,
       rewards: [],
     };
-    handleModifyPlayer(-1, newPC, "add");
+    handleModifyPlayer(id, newPC, "add");
     setName("");
     setLevel(1);
   }, [level, name, handleModifyPlayer]);
 
   return (
-    <Form
-      className={`${styles.addPlayerForm} mb-4 mt-4`}
-      onSubmit={(e) => {
-        e.preventDefault();
-        addPlayer();
-      }}
-    >
+    <Form className={`${styles.addPlayerForm} mb-4 mt-4`}>
       <Form.Label className={"me-2"} htmlFor="name">
         Name
       </Form.Label>
@@ -143,17 +135,28 @@ function Players({
 }) {
   return (
     <div>
-      <Accordion defaultActiveKey={defaultActivePlayer}>
-        {players.map((player, i) => (
-          <Player
-            player={player}
-            key={player.name}
-            index={i}
-            handleModifyPlayer={handleModifyPlayer}
-            rewards={rewards}
-            mode={mode}
-          />
-        ))}
+      <Accordion>
+        {players
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((player, i) => {
+            if (!player)
+              player = {
+                id: "",
+                name: "Unknown",
+                level: 1,
+                rewards: [],
+              };
+            return (
+              <Player
+                player={player}
+                key={player.name + player.id + i}
+                index={i}
+                handleModifyPlayer={handleModifyPlayer}
+                rewards={rewards}
+                mode={mode}
+              />
+            );
+          })}
       </Accordion>
     </div>
   );
@@ -187,20 +190,22 @@ function Player({
   const handleDeleteReward = useCallback(
     (deleteId: string) => {
       // these are reward ids
-      const newRewards = player.rewards.filter((id) => deleteId !== id);
+      const rewardIndex = player.rewards.findIndex((id) => id === deleteId);
+      const newRewards = [...player.rewards];
+      newRewards.splice(rewardIndex, 1);
       const newPlayer = {
         ...player,
         rewards: newRewards,
       };
-      handleModifyPlayer(index, newPlayer, "update");
+      handleModifyPlayer(newPlayer.id, newPlayer, "update");
       return newRewards;
     },
-    [index, player, handleModifyPlayer]
+    [player, handleModifyPlayer]
   );
 
   return (
     <Accordion.Item eventKey={index.toString()}>
-      <Accordion.Header>
+      <Accordion.Header style={{ fontFamily: "var(--bs-body-font-family)" }}>
         <strong>{player.name}&nbsp;</strong> | Can learn{" "}
         {getPCLearnedFeatures(player)} features | Wellspring{" "}
         {getPCWellspring(player.level)}
@@ -221,7 +226,7 @@ function Player({
           />
         )}
         <Button
-          onClick={() => handleModifyPlayer(index, player, "delete")}
+          onClick={() => handleModifyPlayer(player.id, player, "delete")}
           variant="danger"
         >
           Delete {player.name}
@@ -244,7 +249,7 @@ function RewardListEdit({
   return (
     <ListGroup className={`mb-4`} variant="flush">
       {sortedRewards.map(({ id, data }, i) => (
-        <ListGroup.Item className={styles.playerReward}>
+        <ListGroup.Item className={styles.playerReward} key={i}>
           <Button
             size="sm"
             variant="outline-danger"

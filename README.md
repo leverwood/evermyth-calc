@@ -15,10 +15,11 @@
 
 ### In Progress
 
-- Add requires ammunition field
+- Delete shop
 
 ### Done
 
+- Add requires ammunition field
 - Add shop category checks to services list
 - Add lingering damage
 - Add Shop Categories to data
