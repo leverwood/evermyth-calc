@@ -32,6 +32,7 @@ interface RewardBase {
   heals?: number;
   instructions?: string;
   isMove?: boolean;
+  lingeringDamage?: number;
   multiRewards?: RewardData[];
   noAction?: boolean;
   noChase?: boolean;
@@ -101,6 +102,7 @@ export const OPTION_COST = {
   aoe: 2,
   teleport: 2,
   trained: 2,
+  lingeringDamage: 1,
   avoidAllies: 1,
   summonTierIncrease: 1,
   deals: 1,

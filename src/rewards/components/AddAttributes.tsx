@@ -67,18 +67,22 @@ export function AddAttributes({
             <AttributeDescription keyName="aoe" />
           </li>
         )}
-        {!selectedOptions.teleport && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("teleport", true)} />
-
-            <AttributeDescription keyName="teleport" />
-          </li>
-        )}
         {selectedOptions.aoe && (
           <li>
             <AddRemoveButton onClick={() => changeValue("avoidAllies", true)} />
 
             <AttributeDescription keyName="avoidAllies" />
+          </li>
+        )}
+        <li>
+          <AddRemoveButton onClick={() => changeValue("lingeringDamage", 1)} />
+          <AttributeDescription keyName="lingeringDamage" />
+        </li>
+        {!selectedOptions.teleport && (
+          <li>
+            <AddRemoveButton onClick={() => changeValue("teleport", true)} />
+
+            <AttributeDescription keyName="teleport" />
           </li>
         )}
         <li>

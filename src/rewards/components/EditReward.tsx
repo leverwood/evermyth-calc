@@ -6,13 +6,18 @@ import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { logger } from "./RewardList";
 import { CombinedReward } from "./CombinedReward";
 import { useCallback, useState } from "react";
-import { isSameReward, validateRewardData } from "../util/reward-calcs";
+import {
+  initReward,
+  isSameReward,
+  validateRewardData,
+} from "../util/reward-calcs";
 import { RewardCard } from "./RewardCard";
 import { RemoveAttributes } from "./RemoveAttributes";
 import { useRewardContext } from "../contexts/RewardContext";
 import ShopCategoryCheckboxes from "../../shops/components/ShopCategoryCheckboxes";
 import { ShopCategory } from "../../shops/types/shop-types";
 import { ShopProvider } from "../../shops/contexts/ShopContext";
+import { printRewardMessage } from "../../0.3/util/printRewardMessage";
 
 export function EditReward({ id }: { id: string }) {
   const {
@@ -260,6 +265,12 @@ export function EditReward({ id }: { id: string }) {
               placeholder="description"
             ></textarea>
           </div>
+          {selectedOptions.instructions && (
+            <p>
+              <strong>Original text:</strong>{" "}
+              {printRewardMessage(initReward(selectedOptions), false, true)}
+            </p>
+          )}
           <div>
             Notes
             <br />

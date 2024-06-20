@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Service } from "../types/service-types";
 
 interface ServiceContextProps {
@@ -28,7 +22,6 @@ export const useServiceContext = () => {
 };
 
 const SERVICES_STORAGE_KEY = "services";
-const SERVICES_BACKUP_KEY = "services_backup";
 
 export const ServiceProvider = ({
   children,
@@ -40,23 +33,9 @@ export const ServiceProvider = ({
     return storedServices ? JSON.parse(storedServices) : [];
   });
 
-  const handleWindowUnload = useCallback(() => {
-    localStorage.setItem(
-      SERVICES_BACKUP_KEY + new Date().toISOString(),
-      JSON.stringify(services)
-    );
-  }, [services]);
-
   useEffect(() => {
     localStorage.setItem(SERVICES_STORAGE_KEY, JSON.stringify(services));
   }, [services]);
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleWindowUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleWindowUnload);
-    };
-  }, [handleWindowUnload, services]);
 
   const addService = (service: Omit<Service, "id">): string => {
     const id = crypto.randomUUID();

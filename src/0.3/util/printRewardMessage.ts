@@ -9,7 +9,8 @@ const logger = Logger(LOG_LEVEL.INFO);
 // TODO: conditions
 export const printRewardMessage = (
   reward: Reward,
-  isUpcast = false
+  isUpcast = false,
+  ignoreInstructions = false
 ): string => {
   const messages: string[] = [];
 
@@ -17,7 +18,8 @@ export const printRewardMessage = (
     reward.instructions &&
     reward.instructions.length &&
     reward.multiRewards &&
-    reward.multiRewards.length
+    reward.multiRewards.length &&
+    !ignoreInstructions
   ) {
     reward.multiRewards.forEach((opt) =>
       messages.push(
@@ -26,7 +28,11 @@ export const printRewardMessage = (
     );
     return messages.join("\n");
   }
-  if (reward.instructions && reward.instructions.length) {
+  if (
+    reward.instructions &&
+    reward.instructions.length &&
+    !ignoreInstructions
+  ) {
     return reward.instructions;
   }
 
@@ -96,6 +102,11 @@ export const printRewardMessage = (
       }${reward.heals > 1 ? "s" : ""}`
     );
   }
+  if (reward.lingeringDamage) {
+    messages.push(
+      `deals ${reward.lingeringDamage} damage at the end of their turn unless an action is taken to end the effect`
+    );
+  }
   if (reward.reduceDamage)
     messages.push(`reduce damage by ${reward.reduceDamage}`);
   if (reward.wellspringRecover)
@@ -130,5 +141,8 @@ export const printRewardMessage = (
     );
   }
 
-  return messages.join(", ");
+  return messages
+    .map((m) => m.trim())
+    .filter((m) => m.length)
+    .join(", ");
 };

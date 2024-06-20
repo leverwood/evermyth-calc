@@ -37,7 +37,7 @@ export const HexProvider = ({ children }: { children: ReactNode }) => {
     row: number;
   } | null>(null);
   const [coordinates, setCoordinates] = useState<HexCoordinate[]>(() => {
-    const storedCoordinates = localStorage.getItem("hexCoordinates");
+    const storedCoordinates = localStorage.getItem("hex_coordinates");
     return storedCoordinates
       ? JSON.parse(storedCoordinates)
       : [
@@ -55,11 +55,11 @@ export const HexProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCoordinates = (updatedCoordinates: HexCoordinate[]) => {
     setCoordinates(updatedCoordinates);
-    localStorage.setItem("hexCoordinates", JSON.stringify(updatedCoordinates));
+    localStorage.setItem("hex_coordinates", JSON.stringify(updatedCoordinates));
   };
 
   useEffect(() => {
-    const storedCoordinates = localStorage.getItem("hexCoordinates");
+    const storedCoordinates = localStorage.getItem("hex_coordinates");
     if (storedCoordinates) {
       setCoordinates(JSON.parse(storedCoordinates));
     }

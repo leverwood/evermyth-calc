@@ -41,11 +41,13 @@ export function initReward({
   heals = 0,
   instructions,
   isMove = false,
+  lingeringDamage = 0,
   multiRewards = [],
   noAction = false,
   noChase = false,
   noCheck = false,
   notes = "",
+  price = 0,
   ranged = false,
   rangeIncrease = 0,
   reduceDamage = 0,
@@ -67,7 +69,6 @@ export function initReward({
   wellspringMax = 0,
   wellspringRecover = 0,
   whileDefending = false,
-  price = 0,
 }: RewardData): Reward {
   const reward: Reward = {
     __typename: "Reward",
@@ -152,6 +153,10 @@ export function initReward({
   }
   if (isMove) {
     reward.isMove = true;
+  }
+  if (lingeringDamage) {
+    reward.lingeringDamage = lingeringDamage;
+    reward.tier += OPTION_COST.lingeringDamage * lingeringDamage;
   }
   if (multiRewards && multiRewards.length) {
     const multiRewardsResult = multiRewards.map(initReward);

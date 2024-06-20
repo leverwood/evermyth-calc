@@ -67,6 +67,12 @@ const DESCRIPTIONS = {
       turn. It doesn't require a roll. Cannot deal points or heal.
     </>
   ),
+  lingeringDamage: (
+    <>
+      <strong>Lingering Damage.</strong> Deal +1 damage at the end of their turn
+      unless an action is taken to end the effect.
+    </>
+  ),
   noAction: (
     <>
       <strong>No Action.</strong> If this reward is used during your turn, it

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useState } from "react";
 import { Shop, ShopCategory } from "../types/shop-types";
 import { RewardData } from "../../rewards/types/reward-types";
 import { Service } from "../../services/types/service-types";
@@ -35,7 +29,6 @@ export const useShopContext = () => {
 };
 
 const SHOP_STORAGE_KEY = "shops";
-const SHOP_BACKUP_KEY = "shops_backup";
 const SHOP_CATEGORY_STORAGE_KEY = "shop_categories";
 const REWARDS_STORAGE_KEY = "rewards";
 const SERVICES_STORAGE_KEY = "services";
@@ -62,17 +55,6 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     const storedServices = localStorage.getItem(SERVICES_STORAGE_KEY);
     return storedServices ? JSON.parse(storedServices) : [];
   });
-
-  const handleWindowUnload = useCallback(() => {
-    localStorage.setItem(SHOP_BACKUP_KEY, JSON.stringify(shops));
-  }, [shops]);
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleWindowUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleWindowUnload);
-    };
-  }, [handleWindowUnload, shops]);
 
   const addShop = (shop: Omit<Shop, "id">): string => {
     const newShop: Shop = { ...shop, id: crypto.randomUUID() };
@@ -118,17 +100,16 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const updateShopCategory = (updatedCategory: ShopCategory) => {
-    setShopCategories((prevCategories) =>
-      prevCategories.map((category) => {
-        const newCategories =
-          category.slug === updatedCategory.slug ? updatedCategory : category;
-        localStorage.setItem(
-          SHOP_CATEGORY_STORAGE_KEY,
-          JSON.stringify(newCategories)
-        );
-        return newCategories;
-      })
-    );
+    setShopCategories((prevCategories) => {
+      const newCategories = prevCategories.map((category) =>
+        category.slug === updatedCategory.slug ? updatedCategory : category
+      );
+      localStorage.setItem(
+        SHOP_CATEGORY_STORAGE_KEY,
+        JSON.stringify(newCategories)
+      );
+      return newCategories;
+    });
   };
 
   const deleteShopCategory = (slug: string) => {

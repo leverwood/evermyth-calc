@@ -60,6 +60,14 @@ export function RemoveAttributes({
             <AttributeDescription keyName="aoe" />
           </li>
         )}
+        {selectedOptions.lingeringDamage && (
+          <li>
+            <button onClick={() => changeValue("lingeringDamage", -1)}>
+              -1 (now {selectedOptions.lingeringDamage})
+            </button>
+            <AttributeDescription keyName="lingeringDamage" />
+          </li>
+        )}
         {selectedOptions.teleport && (
           <li>
             <button onClick={() => changeValue("teleport", false)}>

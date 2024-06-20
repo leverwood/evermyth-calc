@@ -31,7 +31,6 @@ export function SingleRewardText({
           {!noTier && ` (T${reward.tier < 0 ? 0 : reward.tier})`}.
         </strong>
       ) : null}
-      &nbsp;
       {showPrice && reward.price ? (
         <span className={`${styles.price} me-2`}>
           &nbsp;{reward.price} cp&nbsp;
@@ -42,7 +41,6 @@ export function SingleRewardText({
           &nbsp;{reward.type}&nbsp;
         </Badge>
       ) : null}
-      &nbsp;
       {reward.instructions && !oneLine ? (
         <Markdown>{reward.instructions}</Markdown>
       ) : (

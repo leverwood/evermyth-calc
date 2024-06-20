@@ -1,5 +1,6 @@
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { downloadLocalStorage } from "./util/backup";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -31,6 +32,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <Nav.Link as={NavLink} to="/0.2">
                 Version 0.2
               </Nav.Link>
+              <Button onClick={downloadLocalStorage}>Backup</Button>
             </Nav>
           </Navbar.Collapse>
         </Container>

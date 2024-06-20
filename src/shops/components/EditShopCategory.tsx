@@ -65,9 +65,14 @@ function EditShopCategory({ slug }: { slug?: string }) {
     }
   }, [deleteShopCategory, navigate, slug]);
 
+  const handleAddAnother = useCallback(() => {
+    setNameValue("");
+    navigate("/shop-categories/add");
+  }, [navigate]);
+
   return (
     <Container>
-      <h1>{slug ? `Edit Shop Category: ${slug}` : "Add Shop Category"}</h1>
+      <h1>{slug ? `Edit Shop Category: ${nameValue}` : "Add Shop Category"}</h1>
       <Form>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
@@ -82,10 +87,15 @@ function EditShopCategory({ slug }: { slug?: string }) {
             Add Shop Category
           </Button>
         ) : (
-          <Button variant="danger" onClick={handleDeleteCategory}>
-            {" "}
-            Delete
-          </Button>
+          <>
+            <Button variant="danger" onClick={handleDeleteCategory}>
+              {" "}
+              Delete
+            </Button>
+            <Button variant="primary" onClick={handleAddAnother}>
+              Add Another
+            </Button>
+          </>
         )}
       </Form>
     </Container>

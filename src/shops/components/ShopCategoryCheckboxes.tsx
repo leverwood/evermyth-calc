@@ -24,21 +24,25 @@ function ShopCategoryCheckboxes({
           Clear
         </Button>
       </p>
-      {shopCategories.map((category) => (
-        <Form.Check
-          key={category.slug}
-          type="checkbox"
-          label={category.name}
-          checked={checkedCategories.includes(category.slug)}
-          onChange={(e) => {
-            if (e.target.checked) {
-              setChecked([...checkedCategories, category.slug]);
-            } else {
-              setChecked(checkedCategories.filter((c) => c !== category.slug));
-            }
-          }}
-        />
-      ))}
+      {shopCategories
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((category) => (
+          <Form.Check
+            key={category.slug}
+            type="checkbox"
+            label={category.name}
+            checked={checkedCategories.includes(category.slug)}
+            onChange={(e) => {
+              if (e.target.checked) {
+                setChecked([...checkedCategories, category.slug]);
+              } else {
+                setChecked(
+                  checkedCategories.filter((c) => c !== category.slug)
+                );
+              }
+            }}
+          />
+        ))}
     </Form>
   );
 }

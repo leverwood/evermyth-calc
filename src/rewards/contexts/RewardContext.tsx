@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useState } from "react";
 import { RewardData } from "../types/reward-types";
 
 interface RewardContextProps {
@@ -26,27 +20,12 @@ export const useRewardContext = () => {
 };
 
 const REWARDS_STORAGE_KEY = "rewards";
-const REWARDS_BACKUP_KEY = "rewards_backup";
 
 export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   const [rewards, setRewards] = useState<RewardData[]>(() => {
     const storedRewards = localStorage.getItem(REWARDS_STORAGE_KEY);
     return storedRewards ? JSON.parse(storedRewards) : [];
   });
-
-  const handleWindowUnload = useCallback(() => {
-    localStorage.setItem(
-      REWARDS_BACKUP_KEY + new Date(),
-      JSON.stringify(rewards)
-    );
-  }, [rewards]);
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleWindowUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleWindowUnload);
-    };
-  }, [handleWindowUnload, rewards]);
 
   const addReward = (reward: Omit<RewardData, "id">): string => {
     const id = crypto.randomUUID();
