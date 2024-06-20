@@ -1,0 +1,9 @@
+.forSaleLink {
+  color: black;
+  display:block;
+  text-decoration: none;
+
+  &:hover {
+    background-color: whitesmoke;
+  }
+}

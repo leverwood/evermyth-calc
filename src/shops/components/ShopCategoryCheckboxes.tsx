@@ -20,7 +20,12 @@ function ShopCategoryCheckboxes({
     <Form>
       <p className="mb-2">
         <strong>Shop Category</strong>
-        <Button size="sm" onClick={handleClear}>
+        <Button
+          size="sm"
+          variant="light"
+          onClick={handleClear}
+          style={{ float: "right" }}
+        >
           Clear
         </Button>
       </p>

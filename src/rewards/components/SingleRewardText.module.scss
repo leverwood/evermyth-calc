@@ -25,14 +25,6 @@
   color: $body-color;
 }
 
-.price {
-  &::before {
-    content: '🪙';
-  }
-  color: rgb(223, 134, 0);
-  font-weight: bold;
-}
-
 .singleRewardText {
   &.oneLine {
     white-space: nowrap;

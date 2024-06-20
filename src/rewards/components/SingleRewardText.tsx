@@ -3,6 +3,7 @@ import { printRewardMessage } from "../../0.3/util/printRewardMessage";
 import Markdown from "markdown-to-jsx";
 import { Reward } from "../types/reward-types";
 import { Badge } from "react-bootstrap";
+import Price from "../../shops/components/Price";
 
 export function SingleRewardText({
   reward,
@@ -32,9 +33,7 @@ export function SingleRewardText({
         </strong>
       ) : null}
       {showPrice && reward.price ? (
-        <span className={`${styles.price} me-2`}>
-          &nbsp;{reward.price} cp&nbsp;
-        </span>
+        <Price cp={reward.price} tier={reward.tier} />
       ) : null}
       {!noType ? (
         <Badge className={`${styles[reward.type.toLocaleLowerCase()]} me-2`}>

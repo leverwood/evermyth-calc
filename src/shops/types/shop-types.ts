@@ -6,6 +6,7 @@ export interface Shop {
   proprietorImage: string;
   description: string;
   discount: number;
+  tier: number;
   forSale: {
     id: string;
     type: "reward" | "service";
