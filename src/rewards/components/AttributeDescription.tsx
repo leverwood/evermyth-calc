@@ -9,7 +9,7 @@ const DESCRIPTIONS = {
   ),
   aoe: (
     <>
-      <strong>Area of Effect.</strong> Deal points to all creatures in a zone
+      <strong>Area of Effect.</strong> Affect all creatures in a zone
     </>
   ),
   avoidAllies: (
@@ -52,8 +52,8 @@ const DESCRIPTIONS = {
   ),
   grantsAbilities: (
     <>
-      <strong>Grants Ability.</strong> Grants the ability to do something.
-      Ability:
+      <strong>Grants ability or applies a condition.</strong> Ability or
+      condition:
     </>
   ),
   heals: (
@@ -115,6 +115,12 @@ const DESCRIPTIONS = {
     <>
       <strong>Restrained.</strong> Make a check to maintain the effect if they
       attempt to break free.
+    </>
+  ),
+  requiresAmmo: (
+    <>
+      <strong>Requires Ammo.</strong> Requires ammunition to use. Ammunition
+      takes another gear slot.
     </>
   ),
   specific: (

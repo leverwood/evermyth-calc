@@ -131,6 +131,9 @@ export const printRewardMessage = (
   // duration should be near last
   if (reward.durationMsg) messages.push(reward.durationMsg);
 
+  // ammo cost should be near last
+  if (reward.requiresAmmo) messages.push("requires ammunition");
+
   // cost should be last
   if (reward.consumable) messages.push("single use");
   if (reward.cost) messages.push(`costs ${reward.cost} wellspring`);

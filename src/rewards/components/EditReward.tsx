@@ -241,6 +241,11 @@ export function EditReward({ id }: { id: string }) {
                       onChange={handleChangePrice}
                     />
                   </InputGroup>
+                  <ul>
+                    <li>Tier 0 is 1c - 25c </li>
+                    <li>Tier 1 is 26c - 250c</li>
+                    <li>Tier 2 is 251c - 2500c</li>
+                  </ul>
                   <ShopCategoryCheckboxes
                     checkedCategories={selectedOptions.shopCategories || []}
                     setChecked={handleSetCheckedCategories}

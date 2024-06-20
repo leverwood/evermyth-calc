@@ -191,6 +191,14 @@ export function AddAttributes({
             <AttributeDescription keyName="rangeIncrease" />
           </li>
         )}
+        {!selectedOptions.requiresAmmo && (
+          <li>
+            <AddRemoveButton
+              onClick={() => changeValue("requiresAmmo", true)}
+            />
+            <AttributeDescription keyName="requiresAmmo" />
+          </li>
+        )}
         {!selectedOptions.isMove && (
           <li>
             <AddRemoveButton onClick={() => changeValue("isMove", true)} />

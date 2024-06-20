@@ -44,6 +44,7 @@ interface RewardBase {
   relentless?: boolean;
   relentlessMsg?: string;
   restrained?: boolean;
+  requiresAmmo?: boolean;
   specific?: boolean;
   specificMsg?: string;
   speed?: number;
@@ -119,6 +120,7 @@ export const OPTION_COST = {
   whileDefending: 1,
   rangeIncrease: 1,
   ranged: 0,
+  requiresAmmo: 0,
   isMove: 0,
   upcast: 0,
   disadvantage: -1,

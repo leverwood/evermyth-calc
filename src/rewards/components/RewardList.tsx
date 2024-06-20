@@ -110,7 +110,11 @@ export default function RewardCreator() {
             return (
               <ListGroup.Item className={`d-flex`} key={index}>
                 <p className={`flex-grow-1`}>
-                  <SingleRewardText reward={reward} oneLine={true} />
+                  <SingleRewardText
+                    reward={reward}
+                    oneLine={true}
+                    showPrice={true}
+                  />
                 </p>
 
                 <div className={`flex-shrink-1 d-flex align-items-center`}>

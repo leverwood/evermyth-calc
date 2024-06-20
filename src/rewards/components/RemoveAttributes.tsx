@@ -216,6 +216,14 @@ export function RemoveAttributes({
             <AttributeDescription keyName="ranged" />
           </li>
         )}
+        {selectedOptions.requiresAmmo && (
+          <li>
+            <button onClick={() => changeValue("requiresAmmo", false)}>
+              x
+            </button>
+            <AttributeDescription keyName="requiresAmmo" />
+          </li>
+        )}
         {selectedOptions.isMove ? (
           <li>
             <button onClick={() => changeValue("isMove", false)}>x</button>

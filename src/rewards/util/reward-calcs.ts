@@ -54,6 +54,7 @@ export function initReward({
   relentless = false,
   relentlessMsg = "",
   restrained = false,
+  requiresAmmo = false,
   specific = false,
   specificMsg = "",
   speed = 0,
@@ -199,6 +200,10 @@ export function initReward({
   if (restrained) {
     reward.tier += OPTION_COST.restrained;
     reward.restrained = true;
+  }
+  if (requiresAmmo) {
+    reward.tier += OPTION_COST.requiresAmmo;
+    reward.requiresAmmo = true;
   }
   if (specific) {
     reward.tier += OPTION_COST.specific;

@@ -15,10 +15,11 @@
 
 ### In Progress
 
-- Add shop category checks to services list
+- Add requires ammunition field
 
 ### Done
 
+- Add shop category checks to services list
 - Add lingering damage
 - Add Shop Categories to data
 - Add shop category checks to rewards list
