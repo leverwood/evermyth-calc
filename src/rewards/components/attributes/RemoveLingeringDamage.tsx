@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveLingeringDamageProps {
@@ -20,6 +20,7 @@ const RemoveLingeringDamage: React.FC<RemoveLingeringDamageProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("lingeringDamage", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.lingeringDamage})`}
       />
       <AttributeDescription keyName="lingeringDamage" />
     </li>

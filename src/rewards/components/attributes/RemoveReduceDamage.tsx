@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveReduceDamageProps {
@@ -20,6 +20,7 @@ const RemoveReduceDamage: React.FC<RemoveReduceDamageProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("reduceDamage", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.reduceDamage})`}
       />
       <AttributeDescription keyName="reduceDamage" />
     </li>

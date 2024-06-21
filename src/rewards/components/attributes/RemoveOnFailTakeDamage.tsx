@@ -2,29 +2,29 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
-interface RemoveCostProps {
+interface OnFailTakeDamageProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
   className?: string;
 }
 
-const RemoveCost: React.FC<RemoveCostProps> = ({
+const OnFailTakeDamage: React.FC<OnFailTakeDamageProps> = ({
   selectedOptions,
   changeValue,
   className,
 }) => {
-  if (!selectedOptions.cost) return null;
+  if (!selectedOptions.onFailTakeDamage || selectedOptions.noCheck) return null;
 
   return (
     <li className={className}>
       <AddRemoveButton
         adding={false}
-        onClick={() => changeValue("cost", -1)}
-        overrideText={`❌ (current: ${selectedOptions.cost})`}
+        onClick={() => changeValue("onFailTakeDamage", -1)}
+        overrideText={`❌ (current: ${selectedOptions.onFailTakeDamage})`}
       />
-      <AttributeDescription keyName="cost" />
+      <AttributeDescription keyName="onFailTakeDamage" />
     </li>
   );
 };
 
-export default RemoveCost;
+export default OnFailTakeDamage;

@@ -91,6 +91,12 @@ export const DESCRIPTIONS: {
       <strong>No Roll</strong> is required
     </>
   ),
+  onFailTakeDamage: (
+    <>
+      <strong>On Fail Take Damage.</strong> If the check fails, take -1 to the
+      pool of the ability you used.
+    </>
+  ),
   ranged: (
     <>
       <strong>Ranged.</strong> Can target 1 nearby zone.

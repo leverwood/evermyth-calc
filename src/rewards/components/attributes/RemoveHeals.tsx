@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveHealsProps {
@@ -20,6 +20,7 @@ const RemoveHeals: React.FC<RemoveHealsProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("heals", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.heals})`}
       />
       <AttributeDescription keyName="heals" />
     </li>

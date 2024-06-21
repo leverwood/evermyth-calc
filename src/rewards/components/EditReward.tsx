@@ -234,14 +234,21 @@ export function EditReward({ id }: { id: string }) {
           <Row>
             <Col>
               <RewardCard rewardData={selectedOptions} />
-              {/* Checkbox for stretchImgY */}
               <Form.Check
                 className={`mt-3`}
                 id="stretchImgY"
                 type="checkbox"
-                label="Force image to cover entire card"
+                label="Force image cover entire card"
                 checked={selectedOptions.stretchImgY || false}
                 onChange={(e) => changeValue("stretchImgY", e.target.checked)}
+              />
+              <Form.Check
+                className={`mt-3`}
+                id="padImage"
+                type="checkbox"
+                label="Add padding to image"
+                checked={selectedOptions.padImage || false}
+                onChange={(e) => changeValue("padImage", e.target.checked)}
               />
             </Col>
             <Col>

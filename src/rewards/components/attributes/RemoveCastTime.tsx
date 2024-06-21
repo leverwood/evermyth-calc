@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveCastTimeProps {
@@ -20,6 +20,7 @@ const RemoveCastTime: React.FC<RemoveCastTimeProps> = ({
       <AddRemoveButton
         adding={false}
         onClick={() => changeValue("castTime", -1)}
+        overrideText={`❌ (current: ${selectedOptions.castTime})`}
       />
       <AttributeDescription keyName="castTime" />
       <input

@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveRangeIncreaseProps {
@@ -20,6 +20,7 @@ const RemoveRangeIncrease: React.FC<RemoveRangeIncreaseProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("rangeIncrease", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.rangeIncrease})`}
       />
       <AttributeDescription keyName="rangeIncrease" />
     </li>

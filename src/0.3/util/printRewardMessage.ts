@@ -2,6 +2,7 @@ import { Reward } from "../../rewards/types/reward-types";
 import { printModifier } from "../../0.2/util/dice-calcs-0.2";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { initReward } from "../../rewards/util/reward-calcs";
+import { getDCMedium } from "./enemy-calc";
 
 const logger = Logger(LOG_LEVEL.INFO);
 
@@ -36,6 +37,12 @@ export const printRewardMessage = (
     return reward.instructions;
   }
 
+  const aoeCreatures = reward.avoidAllies
+    ? "creatures of your choice"
+    : "all creatures";
+  const zoneSize = reward.rangeIncrease ? reward.rangeIncrease + 1 : 1;
+  const zoneMsg = `${zoneSize} zone${zoneSize > 1 ? "s" : ""}`;
+
   if (reward.specificMsg) messages.push(reward.specificMsg);
 
   // Decide to cast it
@@ -49,14 +56,14 @@ export const printRewardMessage = (
     messages.push(
       `when ${reward.relentlessMsg} is depleted, drop to 1 instead`
     );
-  if (reward.restrained)
-    messages.push(
-      "restrain a creature so it cannot move, make a check to maintain the effect if they attempt to break free"
-    );
+  if (reward.restrained) messages.push("restrain a creature so it cannot move");
   if (reward.stunned)
     messages.push(
-      "stun a creature so it cannot act or move, make a check to maintain the effect if a creature attempts to help them"
+      `stun ${
+        reward.aoe ? `creatures` : "a creature"
+      } so they cannot act or move`
     );
+
   // movement
   if (reward.teleport) {
     messages.push(
@@ -75,20 +82,18 @@ export const printRewardMessage = (
   }
 
   // DEAL OR HEAL
-  if (reward.deals)
+  if (reward.deals) {
     messages.push(
       `deal ${isUpcast ? printModifier(reward.deals) : reward.deals} point${
         reward.deals > 1 ? "s" : ""
-      }${
-        reward.aoe
-          ? " to " +
-            (reward.avoidAllies
-              ? "creatures of your choice"
-              : "all creatures") +
-            " in a zone"
-          : ""
-      }`
+      }${reward.aoe ? " to " + aoeCreatures + ` in ${zoneMsg}` : ""}`
     );
+    if (reward.aoe) messages.push(`DC ${getDCMedium(reward.tier)}`);
+  }
+  if (!reward.deals && reward.aoe) {
+    messages.push(`affects ${aoeCreatures} in ${zoneMsg}`);
+    messages.push(`DC ${getDCMedium(reward.tier)}`);
+  }
   if (reward.heals) {
     messages.push(
       `heals ${reward.heals} point${
@@ -126,7 +131,20 @@ export const printRewardMessage = (
   if (reward.advantage) messages.push(reward.advantageMsg || "");
   if (reward.disadvantage) messages.push(reward.disadvantageMsg || "");
   if (reward.noAction) messages.push("no action");
-  else if (reward.noCheck) messages.push("no check");
+  else if (reward.noCheck) messages.push("no roll required");
+  if (reward.stunned)
+    messages.push(
+      "make a check to maintain the effect if a creature attempts to help them"
+    );
+  if (reward.restrained)
+    messages.push(
+      "make a check to maintain the effect if they attempt to break free"
+    );
+  if (reward.onFailTakeDamage) {
+    messages.push(
+      `on a failure take ${reward.onFailTakeDamage} damage to the pool of the ability you used`
+    );
+  }
 
   // duration should be near last
   if (reward.durationMsg) messages.push(reward.durationMsg);

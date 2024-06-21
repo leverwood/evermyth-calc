@@ -43,13 +43,21 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
   return (
     <>
       {rewardData.frontImg && (
-        <div className={`mb-3`} ref={frontRef}>
+        <div className={`mb-3 `} ref={frontRef}>
           <div
             className={`${styles.front} ${
-              rewardData.stretchImgY ? styles.stretchImgY : ""
+              rewardData.padImage ? styles.padImage : ""
             }`}
-            style={{ backgroundImage: `url(${rewardData.frontImg})` }}
-          />
+          >
+            <div
+              className={`${styles.frontImage} ${
+                rewardData.stretchImgY ? styles.stretchImgY : ""
+              }`}
+              style={{
+                backgroundImage: `url(${rewardData.frontImg})`,
+              }}
+            />
+          </div>
         </div>
       )}
 

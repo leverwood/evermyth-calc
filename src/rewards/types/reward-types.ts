@@ -70,6 +70,7 @@ export interface RewardData extends RewardBase {
   shopCategories?: ShopCategory["slug"][];
   frontImg?: string;
   stretchImgY?: boolean;
+  padImage?: boolean;
 }
 
 export interface Reward extends RewardBase {

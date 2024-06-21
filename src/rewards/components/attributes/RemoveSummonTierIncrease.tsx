@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveSummonTierIncreaseProps {
@@ -20,6 +20,7 @@ const RemoveSummonTierIncrease: React.FC<RemoveSummonTierIncreaseProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("summonTierIncrease", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.summonTierIncrease})`}
       />
       <AttributeDescription keyName="summonTierIncrease" />
     </li>

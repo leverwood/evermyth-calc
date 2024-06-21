@@ -1,7 +1,6 @@
 import AddStunned from "./attributes/AddStunned";
-import AddNoAction from "./attributes/AddNoAction";
-import AddSummon from "./attributes/AddSummon";
 import AddNoCheck from "./attributes/AddNoCheck";
+import AddSummon from "./attributes/AddSummon";
 import AddRelentless from "./attributes/AddRelentless";
 import AddAoe from "./attributes/AddAoE";
 import AddAvoidAllies from "./attributes/AddAvoidAllies";
@@ -38,9 +37,8 @@ export const attributeComponents: readonly {
   component: React.FC<any>;
 }[] = [
   { key: "stunned", component: AddStunned },
-  { key: "noAction", component: AddNoAction },
-  { key: "summon", component: AddSummon },
   { key: "noCheck", component: AddNoCheck },
+  { key: "summon", component: AddSummon },
   { key: "relentless", component: AddRelentless },
   { key: "aoe", component: AddAoe },
   { key: "avoidAllies", component: AddAvoidAllies },

@@ -31,6 +31,7 @@ import RemoveCost from "./attributes/RemoveCost";
 import RemoveCastTime from "./attributes/RemoveCastTime";
 import RemoveSpecific from "./attributes/RemoveSpecific";
 import RemoveConsumable from "./attributes/RemoveConsumable";
+import RemoveOnFailTakeDamage from "./attributes/RemoveOnFailTakeDamage";
 
 export const attributeComponents = [
   { key: "stunned", component: RemoveStunned },
@@ -66,4 +67,5 @@ export const attributeComponents = [
   { key: "castTime", component: RemoveCastTime },
   { key: "specific", component: RemoveSpecific },
   { key: "consumable", component: RemoveConsumable },
+  { key: "onFailTakeDamage", component: RemoveOnFailTakeDamage },
 ];

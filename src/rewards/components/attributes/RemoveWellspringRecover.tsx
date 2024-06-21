@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveWellspringRecoverProps {
@@ -20,6 +20,7 @@ const RemoveWellspringRecover: React.FC<RemoveWellspringRecoverProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("wellspringRecover", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.wellspringRecover})`}
       />
       <AttributeDescription keyName="wellspringRecover" />
     </li>

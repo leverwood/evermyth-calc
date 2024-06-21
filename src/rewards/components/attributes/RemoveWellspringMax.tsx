@@ -1,5 +1,5 @@
 import React from "react";
-import AddRemoveButton from "../AddRemoveButton";
+import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 interface RemoveWellspringMaxProps {
@@ -20,6 +20,7 @@ const RemoveWellspringMax: React.FC<RemoveWellspringMaxProps> = ({
       <AddRemoveButton
         onClick={() => changeValue("wellspringMax", -1)}
         adding={false}
+        overrideText={`❌ (current: ${selectedOptions.wellspringMax})`}
       />
       <AttributeDescription keyName="wellspringMax" />
     </li>
