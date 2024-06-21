@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import styles from "./AddAttributes.module.scss";
-import AttributeDescription from "./AttributeDescription";
-import { RewardData } from "../types/reward-types";
+import { OPTION_COST, RewardData } from "../types/reward-types";
 import { ChangeValueFunc } from "../types/reward-types";
-import AddRemoveButton from "./AddRemoveButton";
-import { Form } from "react-bootstrap";
+import { attributeComponents } from "./AddAttributeComponents";
+import { jsxToString } from "../util/jsx-to-string";
+import { DESCRIPTIONS } from "./AttributeDescription";
+import { Form, InputGroup } from "react-bootstrap";
+import Slider from "rc-slider";
+
+const findMinMaxTier = () => {
+  let [minTier, maxTier] = [0, 0];
+  // search OPTION_COST for the lowest and highest values
+  Object.values(OPTION_COST).forEach((value) => {
+    if (value < minTier) minTier = value;
+    if (value > maxTier) maxTier = value;
+  });
+  return [minTier, maxTier];
+};
 
 export function AddAttributes({
   selectedOptions,
@@ -17,282 +30,84 @@ export function AddAttributes({
 }) {
   const [newAbility, setNewAbility] = useState("");
   const [upcastRewardIndex, setUpcastReward] = useState<number>(-1);
+  const [filteredComponents, setFilteredComponents] =
+    useState(attributeComponents);
+  const [searchString, setSearchString] = useState("");
+  const [minTier, maxTier] = findMinMaxTier();
+  const [shownTierRange, setShownTierRange] = useState<[number, number]>([
+    minTier,
+    maxTier,
+  ]);
+  const marks: {
+    [key: number]: string;
+  } = {};
+  for (let i = minTier; i <= maxTier; i++) {
+    marks[i] = `T${i}`;
+  }
+
+  useEffect(() => {
+    const results: { key: string; component: React.FC<any> }[] = [];
+
+    if (searchString.trim()) {
+      Object.keys(DESCRIPTIONS).forEach((key) => {
+        const htmlString = jsxToString(DESCRIPTIONS[key]);
+        if (htmlString.toLowerCase().includes(searchString.toLowerCase())) {
+          const item = attributeComponents.find(({ key: k }) => k === key);
+          if (item) results.push(item);
+        }
+      });
+    } else {
+      results.push(...attributeComponents);
+    }
+
+    const filtered = results
+      .filter(({ key }) => {
+        const tier = OPTION_COST[key];
+        return tier >= shownTierRange[0] && tier <= shownTierRange[1];
+      })
+      .sort((a, b) => a.key.localeCompare(b.key));
+
+    setFilteredComponents(filtered);
+  }, [searchString, shownTierRange]);
 
   return (
     <>
       <h3 className="mb-3 mt-3">Add attributes</h3>
+      <InputGroup className="mb-4">
+        <Form.Control
+          value={searchString}
+          onChange={(e) => setSearchString(e.target.value)}
+          placeholder="Search"
+        ></Form.Control>
+        <InputGroup.Text>🔎</InputGroup.Text>
+      </InputGroup>
+      <Slider
+        range
+        className={`mb-5`}
+        min={minTier}
+        max={maxTier}
+        marks={marks}
+        step={null}
+        defaultValue={[minTier, maxTier]}
+        onChangeComplete={(value) =>
+          setShownTierRange(
+            typeof value === "number" ? [value, value] : [value[0], value[1]]
+          )
+        }
+      />
       <ul className={styles.addList}>
-        {!selectedOptions.stunned && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("stunned", true)} />
-            <AttributeDescription keyName="stunned" />
-          </li>
-        )}
-        {!selectedOptions.noAction && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("noAction", true)} />
-            <AttributeDescription keyName="noAction" />
-          </li>
-        )}
-        {!selectedOptions.summon ? (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("summon", true)} />
-
-            <AttributeDescription keyName="summon" />
-          </li>
-        ) : null}
-        {!selectedOptions.noCheck && !selectedOptions.noAction && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("noCheck", true)} />
-
-            <AttributeDescription keyName="noCheck" />
-          </li>
-        )}
-        {!selectedOptions.relentless && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("relentless", true)} />
-
-            <AttributeDescription keyName="relentless" />
-            <Form.Control
-              value={selectedOptions.relentlessMsg || ""}
-              type="text"
-              onChange={(e) => changeValue("relentlessMsg", e.target.value)}
-            />
-          </li>
-        )}
-        {!selectedOptions.aoe && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("aoe", true)} />
-
-            <AttributeDescription keyName="aoe" />
-          </li>
-        )}
-        {selectedOptions.aoe && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("avoidAllies", true)} />
-
-            <AttributeDescription keyName="avoidAllies" />
-          </li>
-        )}
-        <li>
-          <AddRemoveButton onClick={() => changeValue("lingeringDamage", 1)} />
-          <AttributeDescription keyName="lingeringDamage" />
-        </li>
-        {!selectedOptions.teleport && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("teleport", true)} />
-
-            <AttributeDescription keyName="teleport" />
-          </li>
-        )}
-        <li>
-          <AddRemoveButton
-            onClick={() => changeValue("summonTierIncrease", 1)}
+        {filteredComponents.map(({ key, component: Component }) => (
+          <Component
+            key={key}
+            selectedOptions={selectedOptions}
+            changeValue={changeValue}
+            rewards={rewards}
+            newAbility={newAbility}
+            setNewAbility={setNewAbility}
+            upcastRewardIndex={upcastRewardIndex}
+            setUpcastReward={setUpcastReward}
           />
-
-          <AttributeDescription keyName="summonTierIncrease" />
-        </li>
-        <li>
-          <AddRemoveButton onClick={() => changeValue("deals", 1)} />
-
-          <AttributeDescription keyName="deals" />
-        </li>
-        <li>
-          <AddRemoveButton onClick={() => changeValue("heals", 1)} />
-
-          <AttributeDescription keyName="heals" />
-        </li>
-        <li>
-          <AddRemoveButton onClick={() => changeValue("reduceDamage", 1)} />
-
-          <AttributeDescription keyName="reduceDamage" />
-        </li>
-        <li>
-          <AddRemoveButton
-            onClick={() => {
-              changeValue("addAbility", newAbility);
-              setNewAbility("");
-            }}
-          />
-          <AttributeDescription keyName="grantsAbilities" />
-          <Form.Control
-            value={newAbility}
-            type="text"
-            onChange={(e) => setNewAbility(e.target.value)}
-          />
-        </li>
-        <li>
-          <AddRemoveButton onClick={() => changeValue("wellspringMax", 1)} />
-
-          <AttributeDescription keyName="wellspringMax" />
-        </li>
-        <li>
-          <AddRemoveButton
-            onClick={() => changeValue("wellspringRecover", 1)}
-          />
-
-          <AttributeDescription keyName="wellspringRecover" />
-        </li>
-        {!selectedOptions.restrained && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("restrained", true)} />
-
-            <AttributeDescription keyName="restrained" />
-          </li>
-        )}
-        <li>
-          <AddRemoveButton onClick={() => changeValue("speed", 1)} />
-
-          <AttributeDescription keyName="speed" />
-        </li>
-        {!selectedOptions.noChase && !selectedOptions.teleport ? (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("noChase", true)} />
-
-            <AttributeDescription keyName="noChase" />
-          </li>
-        ) : null}
-        <li>
-          <AddRemoveButton onClick={() => changeValue("duration", 1)} />
-
-          <AttributeDescription keyName="duration" />
-          <Form.Control
-            value={selectedOptions.durationMsg || ""}
-            type="text"
-            onChange={(e) => changeValue("durationMsg", e.target.value)}
-          />
-        </li>
-        {!selectedOptions.advantage && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("advantage", true)} />
-
-            <AttributeDescription keyName="advantage" />
-            <Form.Control
-              value={selectedOptions.advantageMsg || ""}
-              type="text"
-              onChange={(e) => changeValue("advantageMsg", e.target.value)}
-            />
-          </li>
-        )}
-        {!selectedOptions.whileDefending && (
-          <li>
-            <AddRemoveButton
-              size="sm"
-              onClick={() => changeValue("whileDefending", true)}
-            />
-
-            <AttributeDescription keyName="whileDefending" />
-          </li>
-        )}
-        {selectedOptions.ranged && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("rangeIncrease", 1)} />
-
-            <AttributeDescription keyName="rangeIncrease" />
-          </li>
-        )}
-        {!selectedOptions.requiresAmmo && (
-          <li>
-            <AddRemoveButton
-              onClick={() => changeValue("requiresAmmo", true)}
-            />
-            <AttributeDescription keyName="requiresAmmo" />
-          </li>
-        )}
-        {!selectedOptions.isMove && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("isMove", true)} />
-
-            <AttributeDescription keyName="isMove" />
-          </li>
-        )}
-        {!selectedOptions.ranged && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("ranged", true)} />
-
-            <AttributeDescription keyName="ranged" />
-          </li>
-        )}
-        {!selectedOptions.trained && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("trained", true)} />
-
-            <AttributeDescription keyName="trained" />
-            <Form.Control
-              value={selectedOptions.trainedMsg || ""}
-              type="text"
-              onChange={(e) => changeValue("trainedMsg", e.target.value)}
-            />
-          </li>
-        )}
-        {!selectedOptions.upcast ? (
-          <li>
-            <AddRemoveButton
-              onClick={() => changeValue("upcast", rewards[upcastRewardIndex])}
-            />
-
-            <AttributeDescription keyName="upcast" />
-            <select
-              className={styles.select}
-              value={upcastRewardIndex}
-              onChange={(e) => setUpcastReward(parseInt(e.target.value))}
-            >
-              <option value={-1}>Select a reward</option>
-              {rewards.map((reward, i) => (
-                <option key={i} value={i}>
-                  {reward.name}
-                </option>
-              ))}
-            </select>
-          </li>
-        ) : null}
-        {!selectedOptions.disadvantage && (
-          <li>
-            <AddRemoveButton
-              onClick={() => changeValue("disadvantage", true)}
-            />
-
-            <AttributeDescription keyName="disadvantage" />
-            <Form.Control
-              value={selectedOptions.disadvantageMsg || ""}
-              type="text"
-              onChange={(e) => changeValue("disadvantageMsg", e.target.value)}
-            />
-          </li>
-        )}
-        <li>
-          <AddRemoveButton onClick={() => changeValue("cost", 1)} />
-
-          <AttributeDescription keyName="cost" />
-        </li>
-        <li>
-          <AddRemoveButton onClick={() => changeValue("castTime", 1)} />
-
-          <AttributeDescription keyName="castTime" />
-          <Form.Control
-            value={selectedOptions.castTimeMsg || ""}
-            type="text"
-            onChange={(e) => changeValue("castTimeMsg", e.target.value)}
-          />
-        </li>
-        {!selectedOptions.specific && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("specific", true)} />
-
-            <AttributeDescription keyName="specific" />
-            <Form.Control
-              value={selectedOptions.specificMsg || ""}
-              onChange={(e) => changeValue("specificMsg", e.target.value)}
-            />
-          </li>
-        )}
-        {!selectedOptions.consumable && (
-          <li>
-            <AddRemoveButton onClick={() => changeValue("consumable", true)} />
-
-            <AttributeDescription keyName="consumable" />
-          </li>
-        )}
+        ))}
       </ul>
     </>
   );

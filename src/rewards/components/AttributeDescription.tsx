@@ -1,7 +1,9 @@
 import { OPTION_COST } from "../types/reward-types";
 import { printModifier } from "../../0.2/util/dice-calcs-0.2";
 
-const DESCRIPTIONS = {
+export const DESCRIPTIONS: {
+  [key: string]: JSX.Element;
+} = {
   advantage: (
     <>
       <strong>Advantage.</strong> Under condition:

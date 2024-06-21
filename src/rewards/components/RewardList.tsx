@@ -2,25 +2,17 @@ import { useCallback } from "react";
 import styles from "./RewardCreator.module.scss";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { useRewardContext } from "../contexts/RewardContext";
-import { Button, Col, Form, InputGroup, ListGroup, Row } from "react-bootstrap";
+import { Button, Form, InputGroup, ListGroup } from "react-bootstrap";
 
 import { initReward } from "../util/reward-calcs";
-import { REWARD_TYPE, RewardData } from "../types/reward-types";
+import { REWARD_TYPE } from "../types/reward-types";
 import TierRangeSlider from "./TierRangeSlider";
 import { SingleRewardText } from "./SingleRewardText";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { findMaxTier } from "../util/find-max-tier";
 
 export const logger = Logger(LOG_LEVEL.INFO);
-
-const findMaxTier = (rewards: RewardData[]) => {
-  let max = 0;
-  rewards.forEach((reward) => {
-    const r = initReward(reward);
-    if (r.tier > max) max = r.tier;
-  });
-  return max;
-};
 
 export default function RewardCreator() {
   const { rewards, addReward, deleteReward, getRewardById } =

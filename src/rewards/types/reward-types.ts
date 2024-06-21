@@ -38,17 +38,21 @@ interface RewardBase {
   noChase?: boolean;
   noCheck?: boolean;
   notes?: string;
+  onFailTakeDamage?: number;
+  price?: number;
   ranged?: boolean;
   rangeIncrease?: number;
   reduceDamage?: number;
   relentless?: boolean;
   relentlessMsg?: string;
-  restrained?: boolean;
   requiresAmmo?: boolean;
+  restrained?: boolean;
   specific?: boolean;
   specificMsg?: string;
   speed?: number;
   stunned?: boolean;
+  summon?: boolean;
+  summonTierIncrease?: number;
   teleport?: boolean;
   trained?: boolean;
   trainedMsg?: string;
@@ -57,9 +61,6 @@ interface RewardBase {
   wellspringMax?: number;
   wellspringRecover?: number;
   whileDefending?: boolean;
-  summon?: boolean;
-  summonTierIncrease?: number;
-  price?: number;
 }
 
 export interface RewardData extends RewardBase {
@@ -96,40 +97,43 @@ export const TEMPORARY_ADV_DEFENSE: Condition = {
   ends: "top",
 };
 
-export const OPTION_COST = {
-  stunned: 3,
-  noAction: 3,
-  summon: 3,
-  noCheck: 2,
-  relentless: 2,
+export const OPTION_COST: {
+  [key: string]: number;
+} = {
+  advantage: 1,
   aoe: 2,
+  avoidAllies: 1,
+  castTime: -1,
+  consumable: -2,
+  cost: -1,
+  deals: 1,
+  disadvantage: -1,
+  duration: 1,
+  grantsAbilities: 1,
+  heals: 1,
+  isMove: 0,
+  lingeringDamage: 1,
+  noAction: 3,
+  noChase: 1,
+  noCheck: 2,
+  onFailTakeDamage: -1,
+  ranged: 0,
+  rangeIncrease: 1,
+  reduceDamage: 1,
+  relentless: 2,
+  requiresAmmo: 0,
+  restrained: 1,
+  specific: -1,
+  speed: 1,
+  stunned: 3,
+  summon: 3,
+  summonTierIncrease: 1,
   teleport: 2,
   trained: 2,
-  lingeringDamage: 1,
-  avoidAllies: 1,
-  summonTierIncrease: 1,
-  deals: 1,
-  heals: 1,
-  reduceDamage: 1,
-  grantsAbilities: 1,
+  upcast: 0,
   wellspringMax: 1,
   wellspringRecover: 1,
-  restrained: 1,
-  speed: 1,
-  noChase: 1,
-  duration: 1,
-  advantage: 1,
   whileDefending: 1,
-  rangeIncrease: 1,
-  ranged: 0,
-  requiresAmmo: 0,
-  isMove: 0,
-  upcast: 0,
-  disadvantage: -1,
-  cost: -1,
-  castTime: -1,
-  specific: -1,
-  consumable: -2,
 } as const;
 
 // type gate for Reward

@@ -47,6 +47,7 @@ export function initReward({
   noChase = false,
   noCheck = false,
   notes = "",
+  onFailTakeDamage = 0,
   price = 0,
   ranged = false,
   rangeIncrease = 0,
@@ -182,6 +183,10 @@ export function initReward({
   }
   if (notes) {
     reward.notes = notes;
+  }
+  if (onFailTakeDamage) {
+    reward.tier += onFailTakeDamage * OPTION_COST.onFailTakeDamage;
+    reward.onFailTakeDamage = onFailTakeDamage;
   }
   if (ranged) {
     reward.ranged = true;
