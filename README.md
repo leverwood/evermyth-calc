@@ -16,6 +16,7 @@
 ### In Progress
 
 - Delete shop
+- Print preview of shop
 
 ### Done
 

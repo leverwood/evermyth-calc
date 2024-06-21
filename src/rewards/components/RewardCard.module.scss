@@ -1,0 +1,107 @@
+@use "sass:math";
+@import "../../variables";
+
+$multiplier: 1.4;
+  $width: 300px;
+  $height: $width * $multiplier;
+$headerHeight: 42px;
+$footerHeight: 35px;
+$bodyHeight: $height - $headerHeight - $footerHeight;
+$cardPadding: 12px;
+$headerFontStack: Neuton, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$bodyFontStack: Bookmania, Georgia, Times, "Times New Roman", serif;
+
+.card, .front {
+  box-shadow: 0px 0px 5px #a8a8a8;
+  line-height: 1.5em;
+  margin-top: $cardPadding;
+  width: $width;
+  height: $height;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  padding: $cardPadding;
+}
+
+.front {
+  background-size: cover;
+  background-position: center;
+}
+
+.cardMultiReward {
+  padding: 0;
+}
+
+
+.cardHeader {
+  height: $headerHeight;
+  padding: $cardPadding $cardPadding 0;
+  font-size: 20px;
+  font-style: italic;
+  margin-bottom: 0;
+  font-family: $headerFontStack;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+.cardBody {
+  height: $bodyHeight;
+  margin: 0;
+  padding: $cardPadding $cardPadding $cardPadding;
+  flex-grow: 1;
+  overflow: scroll;
+  box-sizing: border-box;
+  font-family: $bodyFontStack;
+
+  p {
+    margin-top: 0;
+    margin-bottom: $cardPadding/2;
+  }
+}
+
+.scrollBlock {
+  overflow-y: scroll;
+  position: relative;
+  height: 100%;
+}
+
+.cardRewardList {
+  list-style: none;
+
+  li {
+    margin-top: $half-gap;
+  }
+}
+
+.cardFooter {
+  font-family: $bodyFontStack;
+  height: $footerHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  background-color: $equipmentColor;
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.3em;
+  font-size: 13px;
+}
+
+.cardFooter.equipment {
+  background-color: $equipmentColor;
+}
+
+.cardFooter.training {
+  background-color: $trainingColor;
+}
+
+.cardFooter.feature {
+  background-color: $featureColor;
+}
+
+.cardFooter.trinket {
+  background-color: $trinketColor;
+}
+

@@ -144,7 +144,7 @@ export function EditReward({ id }: { id: string }) {
   return (
     <ShopProvider>
       <Row style={{ maxWidth: "100%" }}>
-        <Form as={Col} className={styles.selectColumn}>
+        <Form as={Col} className={`${styles.selectColumn} mb-3`}>
           <InputGroup size="lg">
             <InputGroup.Text>Name</InputGroup.Text>
             <Form.Control
@@ -152,6 +152,15 @@ export function EditReward({ id }: { id: string }) {
               type="text"
               value={selectedOptions.name || ""}
               onChange={(e) => changeValue("name", e.target.value)}
+            />
+          </InputGroup>
+          <InputGroup size="sm" className={`mt-3`}>
+            <InputGroup.Text>Image URL</InputGroup.Text>
+            <Form.Control
+              id="frontImg"
+              type="text"
+              value={selectedOptions.frontImg || ""}
+              onChange={(e) => changeValue("frontImg", e.target.value)}
             />
           </InputGroup>
           <Form.Group className="mt-3">
@@ -224,7 +233,7 @@ export function EditReward({ id }: { id: string }) {
           ) : null}
           <Row>
             <Col>
-              <RewardCard RewardData={selectedOptions} />
+              <RewardCard rewardData={selectedOptions} />
             </Col>
             <Col>
               {(selectedOptions.type === REWARD_TYPE.EQUIPMENT ||

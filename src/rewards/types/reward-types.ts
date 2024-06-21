@@ -60,6 +60,7 @@ interface RewardBase {
   summon?: boolean;
   summonTierIncrease?: number;
   price?: number;
+  frontImg?: string;
 }
 
 export interface RewardData extends RewardBase {

@@ -45,7 +45,6 @@ export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
         reward.id === updatedReward.id ? updatedReward : reward
       );
       localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));
-      console.log(`updating reward: ${JSON.stringify(updatedReward)}`);
       return newRewards;
     });
   };
