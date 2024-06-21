@@ -33,6 +33,7 @@ function ShopCategoryCheckboxes({
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((category) => (
           <Form.Check
+            id={category.slug}
             key={category.slug}
             type="checkbox"
             label={category.name}

@@ -143,7 +143,7 @@ export function EditReward({ id }: { id: string }) {
 
   return (
     <ShopProvider>
-      <Row>
+      <Row style={{ maxWidth: "100%" }}>
         <Form as={Col} className={styles.selectColumn}>
           <InputGroup size="lg">
             <InputGroup.Text>Name</InputGroup.Text>

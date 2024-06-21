@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Container, Row, Col, ListGroup } from "react-bootstrap";
+import { Button, Form, Row, Col, ListGroup } from "react-bootstrap";
 
 import styles from "./EditShop.module.scss";
 import { useShopContext } from "../contexts/ShopContext";
@@ -101,7 +101,7 @@ const EditShop: React.FC = () => {
   };
 
   return (
-    <Container style={{ maxWidth: 800 }}>
+    <div style={{ width: "100%", maxWidth: 800 }}>
       <h1>{id ? "Edit: " + shopData.name : "Add Shop"}</h1>
       <Form ref={formRef}>
         <Row>
@@ -220,13 +220,14 @@ const EditShop: React.FC = () => {
                           reward={initReward(data)}
                           oneLine={true}
                           showPrice={true}
+                          noType={true}
                         />
                       ) : (
                         <ViewService service={data as Service} />
                       )}
                     </Link>
                   </Col>
-                  <Col xs="1" style={{ textAlign: "right" }}>
+                  <Col xs="2" lg="1" style={{ textAlign: "right" }}>
                     <Button
                       size="sm"
                       className="mx-1"
@@ -249,7 +250,7 @@ const EditShop: React.FC = () => {
         handleAddForSale={handleAddForSale}
         alreadyAddedIds={alreadyAddedIds}
       />
-    </Container>
+    </div>
   );
 };
 

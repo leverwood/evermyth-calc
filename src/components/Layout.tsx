@@ -1,6 +1,7 @@
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { downloadLocalStorage } from "./util/backup";
+import { downloadLocalStorage } from "../util/backup";
+import styles from "./Layout.module.scss";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -37,7 +38,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container style={{ marginTop: "90px" }}>{children}</Container>
+      <Container className={styles.root}>{children}</Container>
     </>
   );
 };

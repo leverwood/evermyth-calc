@@ -1,7 +1,14 @@
-@import 'bootstrap-vars';
-@import '~bootstrap/scss/bootstrap';
+@import 'custom';
 
+html {
+  font-size: 14px;
+} 
 
 .card {
   border-radius: var(--bs-card-border-radius);
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }

@@ -1,11 +1,5 @@
 @use "sass:math";
 
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import 'bootstrap-vars';
-
-/* make customizations to the theme here */
-
 $gap: 16px;
 $half-gap: math.div($gap, 2);
 $featureColor: rgb(199, 235, 232);

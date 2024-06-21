@@ -101,8 +101,8 @@ const DESCRIPTIONS = {
   ),
   reduceDamage: (
     <>
-      <strong>Reduce Damage</strong> by +1 (must cost wellspring or be single
-      use)
+      <strong>Reduce Damage</strong> by +1 after a failed defense roll (must
+      cost wellspring or be single use). Does not require an additional check.
     </>
   ),
   relentless: (

@@ -1,13 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import "./App.scss";
 
 import OldApp from "./0.2/components/App-0.2";
 import SystemOverview from "./0.3/components/SystemOverview";
 import RewardCreator from "./rewards/components/RewardList";
 import PlayerTracker from "./players/components/PlayerTracker";
 import ShopListPage from "./shops/components/ShopList";
-import Layout from "./Layout";
+import Layout from "./components/Layout";
 import { ShopProvider } from "./shops/contexts/ShopContext";
 import EditShop from "./shops/components/EditShop";
 import Map from "./map/components/Map";
@@ -17,6 +16,8 @@ import ServiceList from "./services/components/ServiceList";
 import EditService from "./services/components/EditService";
 import { ServiceProvider } from "./services/contexts/ServiceContext";
 import EditShopCategory from "./shops/components/EditShopCategory";
+
+import "./App.scss";
 
 const router = createBrowserRouter([
   {

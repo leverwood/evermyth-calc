@@ -2,7 +2,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import { ShopProvider, useShopContext } from "../contexts/ShopContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useState } from "react";
-import Layout from "../../Layout";
+import Layout from "../../components/Layout";
 
 function EditShopCategoryPage() {
   const { slug } = useParams<{ slug?: string }>();

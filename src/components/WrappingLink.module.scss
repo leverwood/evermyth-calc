@@ -1,0 +1,9 @@
+.root {
+  text-decoration: none;
+  color: unset;
+  display: block;
+  
+  &:hover {
+    background-color: whitesmoke;
+  }
+}
