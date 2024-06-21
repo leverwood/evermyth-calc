@@ -60,7 +60,6 @@ interface RewardBase {
   summon?: boolean;
   summonTierIncrease?: number;
   price?: number;
-  frontImg?: string;
 }
 
 export interface RewardData extends RewardBase {
@@ -68,6 +67,8 @@ export interface RewardData extends RewardBase {
   name?: string;
   modifyTier?: number;
   shopCategories?: ShopCategory["slug"][];
+  frontImg?: string;
+  stretchImgY?: boolean;
 }
 
 export interface Reward extends RewardBase {

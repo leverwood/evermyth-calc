@@ -119,3 +119,12 @@
   overflow-y: scroll;
   max-height: 800px;
 }
+
+.lineImg {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  background-size: cover; 
+  background-position: center;
+  display: inline-block;
+}

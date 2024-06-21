@@ -9,6 +9,8 @@ import DynamicText from "../../components/DynamicText";
 import { useRef } from "react";
 import { Button } from "react-bootstrap";
 
+const MAX_FONT_SIZE = 15;
+
 export function RewardCard({ rewardData }: { rewardData: RewardData }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const frontRef = useRef<HTMLDivElement>(null);
@@ -43,7 +45,9 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
       {rewardData.frontImg && (
         <div className={`mb-3`} ref={frontRef}>
           <div
-            className={`${styles.front}`}
+            className={`${styles.front} ${
+              rewardData.stretchImgY ? styles.stretchImgY : ""
+            }`}
             style={{ backgroundImage: `url(${rewardData.frontImg})` }}
           />
         </div>
@@ -58,14 +62,20 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
           <ul className={`${styles.cardBody} ${styles.cardRewardList}`}>
             {reward.instructions ? (
               <li>
-                <DynamicText className={styles.scrollBlock}>
+                <DynamicText
+                  className={styles.scrollBlock}
+                  maxFontSize={MAX_FONT_SIZE}
+                >
                   <Markdown>{reward.instructions}</Markdown>
                 </DynamicText>
               </li>
             ) : null}
             {reward.multiRewards.map((opt, index) => (
               <li key={index}>
-                <DynamicText className={styles.scrollBlock}>
+                <DynamicText
+                  className={styles.scrollBlock}
+                  maxFontSize={MAX_FONT_SIZE}
+                >
                   <SingleRewardText
                     reward={initReward(opt)}
                     noType={true}
@@ -73,7 +83,10 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
                   />
                 </DynamicText>
                 {opt.upcast ? (
-                  <DynamicText className={styles.scrollBlock}>
+                  <DynamicText
+                    className={styles.scrollBlock}
+                    maxFontSize={MAX_FONT_SIZE}
+                  >
                     <SingleRewardText
                       reward={initReward(opt.upcast)}
                       noType={true}
@@ -87,7 +100,10 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
           </ul>
         ) : (
           <div className={`${styles.cardBody}`}>
-            <DynamicText className={styles.scrollBlock}>
+            <DynamicText
+              className={styles.scrollBlock}
+              maxFontSize={MAX_FONT_SIZE}
+            >
               {reward.instructions ? (
                 <Markdown>{reward.instructions}</Markdown>
               ) : (

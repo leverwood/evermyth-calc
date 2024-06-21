@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import styles from "./RewardCreator.module.scss";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { useRewardContext } from "../contexts/RewardContext";
-import { Button, Form, InputGroup, ListGroup } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, ListGroup, Row } from "react-bootstrap";
 
 import { initReward } from "../util/reward-calcs";
 import { REWARD_TYPE, RewardData } from "../types/reward-types";
@@ -109,14 +109,19 @@ export default function RewardCreator() {
             const index = rewards.findIndex((opt) => opt === options);
             return (
               <ListGroup.Item className={`d-flex`} key={index}>
-                <p className={`flex-grow-1`}>
+                {options.frontImg && (
+                  <div
+                    className={`${styles.lineImg} me-2 mt-1`}
+                    style={{ backgroundImage: `url('${options.frontImg}')` }}
+                  ></div>
+                )}
+                <div className={`flex-grow-1`}>
                   <SingleRewardText
                     reward={reward}
                     oneLine={true}
                     showPrice={true}
                   />
-                </p>
-
+                </div>
                 <div className={`flex-shrink-1 d-flex align-items-center`}>
                   <a href={`/rewards/${options.id}/edit`} className="me-2">
                     <Button size="sm" className="me-2">

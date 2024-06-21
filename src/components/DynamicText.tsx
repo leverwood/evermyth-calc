@@ -1,22 +1,26 @@
-// DynamicText.tsx
 import React, { useRef, useState, useEffect } from "react";
 
 interface DynamicTextProps {
   className?: string;
   children: React.ReactNode;
+  maxFontSize?: number;
 }
 
-const DynamicText = ({ className, children }: DynamicTextProps) => {
+const DynamicText = ({
+  className,
+  children,
+  maxFontSize = 16,
+}: DynamicTextProps) => {
   const textRef = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState<number>(16);
+  const [fontSize, setFontSize] = useState<number>(maxFontSize);
 
   // reset font size if children change
   useEffect(() => {
-    setFontSize(16);
-  }, [children]);
+    setFontSize(maxFontSize);
+  }, [children, maxFontSize]);
 
   useEffect(() => {
-    console.log("Resizing text");
+    console.log(`Resizing font size, currently ${fontSize}`);
     const currentTextRef = textRef.current;
     const resizeText = () => {
       if (!currentTextRef) return;
@@ -24,13 +28,7 @@ const DynamicText = ({ className, children }: DynamicTextProps) => {
 
       if (scrollHeight > clientHeight) {
         setFontSize((prevFontSize) => {
-          console.log(`Decreasing font size to ${prevFontSize - 1}`);
           return prevFontSize - 1;
-        });
-      } else if (scrollHeight + 30 < clientHeight) {
-        setFontSize((prevFontSize) => {
-          console.log(`Increasing font size to ${prevFontSize + 1}`);
-          return prevFontSize + 1;
         });
       }
     };
@@ -43,13 +41,17 @@ const DynamicText = ({ className, children }: DynamicTextProps) => {
     return () => {
       if (currentTextRef) observer.unobserve(currentTextRef);
     };
-  }, [fontSize]);
+  }, [fontSize, maxFontSize]);
 
   return (
     <div
       ref={textRef}
       className={className}
-      style={{ fontSize, overflow: "scroll" }}
+      style={{
+        fontSize: `${fontSize}px`,
+        lineHeight: `${1.4 * fontSize}px`,
+        overflow: "scroll",
+      }}
     >
       {children}
     </div>
