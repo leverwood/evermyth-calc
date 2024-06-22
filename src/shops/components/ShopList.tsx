@@ -5,6 +5,7 @@ import ShopCategoriesEdit from "./EditShopCategories";
 import { Link } from "react-router-dom";
 import SquareImage from "../../components/SquareImage";
 import DynamicText from "../../components/DynamicText";
+import styles from "./ShopList.module.scss";
 
 interface ShopListProps {}
 
@@ -36,6 +37,11 @@ function ShopList() {
                       {" "}
                       <DynamicText height={25}>{shop.name}</DynamicText>
                     </Card.Title>
+                    <Card.Subtitle className={styles.subtitle}>
+                      <DynamicText height={18} maxFontSize={12}>
+                        {shop.shopType}
+                      </DynamicText>
+                    </Card.Subtitle>
                   </Card.Body>
                 </Card>
               </Link>

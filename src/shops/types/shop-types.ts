@@ -11,6 +11,7 @@ export interface Shop {
     id: string;
     type: "reward" | "service";
   }[];
+  shopType: string;
 }
 
 export interface ShopCategory {

@@ -28,6 +28,7 @@ const EditShop: React.FC = () => {
     discount: 0,
     forSale: [],
     tier: 1,
+    shopType: "",
   });
   const alreadyAddedIds = shopData.forSale?.map((item) => item.id) || [];
 
@@ -124,6 +125,17 @@ const EditShop: React.FC = () => {
                 placeholder="Enter shop name"
                 required
                 autoComplete="off"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="shopType">
+              <Form.Label>Shop Type</Form.Label>
+              <Form.Control
+                type="text"
+                name="shopType"
+                value={shopData.shopType}
+                onChange={handleChange}
+                placeholder="Enter shop type"
               />
             </Form.Group>
 
