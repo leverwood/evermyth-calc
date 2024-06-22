@@ -3,6 +3,8 @@ import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import { ShopProvider, useShopContext } from "../contexts/ShopContext";
 import ShopCategoriesEdit from "./EditShopCategories";
 import { Link } from "react-router-dom";
+import SquareImage from "../../components/SquareImage";
+import DynamicText from "../../components/DynamicText";
 
 interface ShopListProps {}
 
@@ -18,34 +20,30 @@ function ShopList() {
   const { shops } = useShopContext();
   return (
     <Container>
-      <Row className={"mb-5"}>
-        {shops.map((shop) => (
-          <Col sm="6" md="4" lg="3" xl="2" key={shop.id}>
-            <Link
-              to={`/shop/${shop.id}/edit`}
-              style={{ textDecoration: "none" }}
-            >
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src={shop.image || shop.proprietorImage}
-                />
-                <Card.Body>
-                  <Card.Title>{shop.name}</Card.Title>
-                  {shop.proprietor && (
-                    <Card.Subtitle className="mb-2 text-muted">
-                      Proprietor: {shop.proprietor}
-                    </Card.Subtitle>
-                  )}
-                  <Card.Text>{shop.description}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Link>
-          </Col>
-        ))}
-        <Col sm="6" md="4" lg="3" xl="2">
-          <Card key="add" className={`ph-0`}>
-            <Card.Img variant="top" src="https://placehold.co/400x400" />
+      <Row className={"mb-5"} style={{ alignItems: "stretch" }}>
+        {shops
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((shop) => (
+            <Col className={`mb-4`} sm="6" md="4" lg="3" key={shop.id}>
+              <Link
+                to={`/shop/${shop.id}/edit`}
+                style={{ textDecoration: "none" }}
+              >
+                <Card style={{ height: "100%" }}>
+                  <SquareImage url={shop.image || shop.proprietorImage} />
+                  <Card.Body>
+                    <Card.Title>
+                      {" "}
+                      <DynamicText height={25}>{shop.name}</DynamicText>
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
+            </Col>
+          ))}
+        <Col className={`mb-4`} sm="6" md="4" lg="3">
+          <Card key="add" className={`ph-0`} style={{ height: "100%" }}>
+            <SquareImage url="" />
             <Card.Body>
               <a href="/shop/add">
                 <Button variant="primary">Add Shop</Button>

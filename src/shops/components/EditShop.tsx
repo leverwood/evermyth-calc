@@ -31,26 +31,34 @@ const EditShop: React.FC = () => {
   });
   const alreadyAddedIds = shopData.forSale?.map((item) => item.id) || [];
 
+  // set shop data if id changes
   useEffect(() => {
-    if (id) {
+    if (id && shopData.id !== id) {
+      console.log(`getShopById(${id})`);
       const shop = getShopById(id);
       if (shop) {
         setShopData(shop);
       }
     }
-  }, [id, getShopById]);
+  }, [id, getShopById, shopData.id]);
 
+  useEffect(() => {
+    console.log(`updateShop(${shopData.id})`);
+    if (id) {
+      updateShop({ ...shopData, id });
+    }
+  }, [shopData, id, updateShop]);
+
+  // update shop data when form changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    console.log(`handleChange(${e.target.name})`);
     const { name, value } = e.target;
-    setShopData((prevData) => {
-      const updatedData = { ...prevData, [name]: value };
-      if (id) {
-        updateShop({ ...updatedData, id });
-      }
-      return updatedData;
-    });
+    setShopData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleAddShop = () => {

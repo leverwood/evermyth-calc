@@ -4,12 +4,14 @@ interface DynamicTextProps {
   className?: string;
   children: React.ReactNode;
   maxFontSize?: number;
+  height?: number;
 }
 
 const DynamicText = ({
   className,
   children,
   maxFontSize = 16,
+  height,
 }: DynamicTextProps) => {
   const textRef = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState<number>(maxFontSize);
@@ -51,6 +53,7 @@ const DynamicText = ({
         fontSize: `${fontSize}px`,
         lineHeight: `${1.4 * fontSize}px`,
         overflow: "scroll",
+        height: height ? `${height}px` : "auto",
       }}
     >
       {children}
