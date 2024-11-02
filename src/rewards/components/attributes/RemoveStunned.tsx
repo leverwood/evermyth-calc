@@ -19,7 +19,8 @@ const RemoveStunned: React.FC<RemoveStunnedProps> = ({
     <li className={className}>
       <AddRemoveButton
         adding={false}
-        onClick={() => changeValue("stunned", false)}
+        onClick={() => changeValue("stunned", -1)}
+        overrideText={`❌ (current: ${selectedOptions.stunned})`}
       />
       <AttributeDescription keyName="stunned" />
     </li>

@@ -12,11 +12,9 @@ const AddStunnedAttribute: React.FC<AddStunnedAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (selectedOptions.stunned) return null;
-
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("stunned", true)} />
+      <AddRemoveButton onClick={() => changeValue("stunned", 1)} />
       <AttributeDescription keyName="stunned" />
     </li>
   );

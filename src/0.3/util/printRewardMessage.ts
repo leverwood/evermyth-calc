@@ -56,12 +56,17 @@ export const printRewardMessage = (
     messages.push(
       `when ${reward.relentlessMsg} is depleted, drop to 1 instead`
     );
-  if (reward.restrained) messages.push("restrain a creature so it cannot move");
+  if (reward.restrained)
+    messages.push(
+      `set ${reward.aoe ? `creatures` : "a creature"}  speed to 0 with ${
+        reward.aoe ? `tiers` : "a tier"
+      } of ${reward.restrained * 2} or less`
+    );
   if (reward.stunned)
     messages.push(
-      `stun ${
-        reward.aoe ? `creatures` : "a creature"
-      } so they cannot act or move`
+      `stun ${reward.aoe ? `creatures` : "a creature"} with ${
+        reward.aoe ? `tiers` : "a tier"
+      } of ${reward.stunned * 2} or less so they cannot act or move`
     );
 
   // movement
@@ -134,11 +139,11 @@ export const printRewardMessage = (
   else if (reward.noCheck) messages.push("no roll required");
   if (reward.stunned)
     messages.push(
-      "make a check to maintain the effect if a creature attempts to help them"
+      "make a check to maintain the stun if the target uses an action to break free"
     );
   if (reward.restrained)
     messages.push(
-      "make a check to maintain the effect if they attempt to break free"
+      "make a check to maintain the effect if the target or their ally uses an action to break them free"
     );
   if (reward.onFailTakeDamage) {
     messages.push(

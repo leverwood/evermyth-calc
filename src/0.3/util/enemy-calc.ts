@@ -1,26 +1,26 @@
 import { Enemy } from "../types/system-types";
 
 export function getDCMedium(tier: number) {
-  return 9 + tier;
+  return 10 + Math.ceil(tier);
 }
 
 export function getDCHard(tier: number) {
-  return getDCMedium(tier) + 3;
+  return getDCMedium(tier) + 4;
 }
 
 export function getDCEasy(tier: number) {
-  return getDCMedium(tier) - 3;
+  return getDCMedium(tier) - 4;
 }
 
 export function getDCToHitEnemy(enemyTier: number) {
-  return enemyTier === 0 ? 10 : getDCHard(enemyTier);
+  return getDCMedium(enemyTier);
 }
 
 export function getDCToDefend(enemyTier: number) {
-  return enemyTier === 0 ? 10 : getDCHard(enemyTier) + 3;
+  return getDCMedium(enemyTier);
 }
 
-export const getEnemyWellspring = (enemyTier: number) => enemyTier;
+export const getEnemyWellspring = (enemyTier: number) => enemyTier * 2;
 
 export const getTotalEnemyTiers = (enemies: Enemy[]) =>
   enemies.reduce((acc, enemy) => acc + enemy.tier, 0);

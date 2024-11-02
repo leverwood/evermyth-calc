@@ -34,7 +34,7 @@ export function CombinedReward({
             return null;
 
           // ignore final reward, which is the currently edited one
-          if (adding && index === list.length - 1) return null;
+          // if (adding && index === list.length - 1) return null;
 
           // if it's a blank reward, don't show it
           if (adding && Object.keys(RewardData).length === 0) return null;

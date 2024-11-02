@@ -46,11 +46,11 @@ interface RewardBase {
   relentless?: boolean;
   relentlessMsg?: string;
   requiresAmmo?: boolean;
-  restrained?: boolean;
+  restrained?: number;
   specific?: boolean;
   specificMsg?: string;
   speed?: number;
-  stunned?: boolean;
+  stunned?: number;
   summon?: boolean;
   summonTierIncrease?: number;
   teleport?: boolean;
@@ -126,7 +126,7 @@ export const OPTION_COST: {
   restrained: 1,
   specific: -1,
   speed: 1,
-  stunned: 3,
+  stunned: 2,
   summon: 3,
   summonTierIncrease: 1,
   teleport: 2,

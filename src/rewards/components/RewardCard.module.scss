@@ -12,7 +12,8 @@ $headerFontStack: Neuton, system-ui, -apple-system, "Segoe UI", Roboto, "Helveti
 $bodyFontStack: Bookmania, Georgia, Times, "Times New Roman", serif;
 
 .card, .front {
-  box-shadow: 0px 0px 5px #a8a8a8;
+  // box-shadow: 0px 0px 5px #a8a8a8;
+  outline: 1px solid black;
   line-height: 1.5em;
   margin-top: $cardPadding;
   width: $width;

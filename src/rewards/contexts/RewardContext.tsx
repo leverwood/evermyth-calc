@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { RewardData } from "../types/reward-types";
+import { migrateRewardData } from "../util/reward-calcs";
 
 interface RewardContextProps {
   rewards: RewardData[];
@@ -24,7 +25,8 @@ const REWARDS_STORAGE_KEY = "rewards";
 export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   const [rewards, setRewards] = useState<RewardData[]>(() => {
     const storedRewards = localStorage.getItem(REWARDS_STORAGE_KEY);
-    return storedRewards ? JSON.parse(storedRewards) : [];
+    const rewards = storedRewards ? JSON.parse(storedRewards) : [];
+    return rewards.map(migrateRewardData);
   });
 
   const addReward = (reward: Omit<RewardData, "id">): string => {

@@ -8,7 +8,7 @@ import { Aftermath, CreaturesDisplay, Rounds, SimulationResults } from "./Simula
 import { getRandomNum } from "../../util/math";
 // import { LOG_LEVEL, Logger } from "../util/log";
 
-const NUM_SIMULATIONS = 1000;
+const NUM_SIMULATIONS = 100;
 const MIN_LEVEL = 1;
 const MAX_LEVEL = 20;
 // const logger = Logger(LOG_LEVEL.INFO);

@@ -208,7 +208,7 @@ export function makeRandomEnemyTiers(
   numPCs: number,
   maxPCLevel: number
 ) {
-  const maxEnemyTier = getTier(maxPCLevel) + 1;
+  const maxEnemyTier = getTier(maxPCLevel) + 0.5;
   const maxEnemiesCount = numPCs * 2;
 
   // add tier 1+ enemies
@@ -219,7 +219,12 @@ export function makeRandomEnemyTiers(
 
     // if it's the last enemy, try to fill it out
     let minLevel = lastEnemy ? Math.min(remainingTiers, maxEnemyTier) : 1;
-    const tier = getRandomNum(minLevel, Math.min(maxEnemyTier, remainingTiers));
+    const randomDoubleTier = getRandomNum(
+      minLevel,
+      Math.min(maxEnemyTier, remainingTiers) * 2
+    );
+    const tier = randomDoubleTier / 2;
+
     remainingTiers -= tier;
     enemies.push(tier);
   }
@@ -258,21 +263,24 @@ function possibleRewards(tier: number) {
 }
 
 export function makeEnemyRewards(enemyTier: number) {
-  const rewardTier = Math.max(0, enemyTier - 1);
+  const rewardTier = Math.max(0, Math.floor(enemyTier));
+  const randomRewardTier = getRandomNum(0, rewardTier);
   const rewards = [
     makeStandardWeapon(rewardTier),
     makeRandomReward(rewardTier, possibleRewards(rewardTier)),
+    makeRandomReward(randomRewardTier, possibleRewards(randomRewardTier)),
   ];
   return rewards;
 }
 
-export function makeEnemyInitiative(enemies: Enemy[]){
+// TODO: Rewrite to support half tiers
+export function makeEnemyInitiative(enemies: Enemy[]) {
   // group enemies into tiers
-  const groups: Enemy[][] = [];
-  for (const enemy of enemies) {
-    if (!groups[enemy.tier]) groups[enemy.tier] = [];
-    groups[enemy.tier].push(enemy);
-  }
+  const groups: Enemy[][] = [enemies];
+  // for (const enemy of enemies) {
+  //   if (!groups[enemy.tier]) groups[enemy.tier] = [];
+  //   groups[enemy.tier].push(enemy);
+  // }
 
   // give each group an initiative
   const initiatives: {

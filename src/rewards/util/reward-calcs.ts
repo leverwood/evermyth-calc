@@ -54,12 +54,12 @@ export function initReward({
   reduceDamage = 0,
   relentless = false,
   relentlessMsg = "",
-  restrained = false,
+  restrained = 0,
   requiresAmmo = false,
   specific = false,
   specificMsg = "",
   speed = 0,
-  stunned = false,
+  stunned = 0,
   summon = false,
   summonTierIncrease = 0,
   teleport = false,
@@ -203,8 +203,8 @@ export function initReward({
     reward.relentlessMsg = relentlessMsg;
   }
   if (restrained) {
-    reward.tier += OPTION_COST.restrained;
-    reward.restrained = true;
+    reward.tier += OPTION_COST.restrained * restrained;
+    reward.restrained = restrained;
   }
   if (requiresAmmo) {
     reward.tier += OPTION_COST.requiresAmmo;
@@ -220,8 +220,8 @@ export function initReward({
     reward.speed = speed;
   }
   if (stunned) {
-    reward.tier += OPTION_COST.stunned;
-    reward.stunned = true;
+    reward.tier += OPTION_COST.stunned * stunned;
+    reward.stunned = stunned;
   }
   if (summon) {
     reward.tier += OPTION_COST.summon;
@@ -260,6 +260,19 @@ export function initReward({
   }
 
   return reward;
+}
+
+export function migrateRewardData(reward: any): RewardData {
+  const newData: RewardData = {
+    ...reward,
+  };
+  if (typeof reward.stunned === "boolean") {
+    newData.stunned = reward.stunned ? 1 : 0;
+  }
+  if (typeof reward.restrained === "boolean") {
+    newData.restrained = reward.restrained ? 1 : 0;
+  }
+  return newData;
 }
 
 export function maxDamageReduction(reward: Reward | RewardData): number {
@@ -430,6 +443,9 @@ export function validateRewardData(options: RewardData): {
   }
   if (options.wellspringRecover && !options.consumable) {
     errors.push("If it recovers wellspring, it must be consumable");
+  }
+  if (options.heals && !options.cost && !options.consumable) {
+    errors.push("If it heals, it must have a wellspring cost or be consumable");
   }
   const valid = errors.length === 0;
   return { errors, valid };

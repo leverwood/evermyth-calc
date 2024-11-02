@@ -121,8 +121,10 @@ export const DESCRIPTIONS: {
   ),
   restrained: (
     <>
-      <strong>Restrained.</strong> Make a check to maintain the effect if they
-      attempt to break free.
+      <strong>Restrained.</strong> Set a creature's speed to 0 with a tier of 2
+      or less. Make a check to maintain the effect if the target or an ally uses
+      an action to break them free. Apply multiple times to increase the tier
+      limit.
     </>
   ),
   requiresAmmo: (
@@ -143,8 +145,9 @@ export const DESCRIPTIONS: {
   ),
   stunned: (
     <>
-      <strong>Stunned.</strong> Stun a creature. Make a check to maintain the
-      effect if another creature attempts to help them.
+      <strong>Stunned.</strong> Stun a creature with a tier of 2 or less. Make a
+      check to maintain the stun if the target uses an action to break free.
+      Apply multiple times to increase the tier limit.
     </>
   ),
   summon: (
