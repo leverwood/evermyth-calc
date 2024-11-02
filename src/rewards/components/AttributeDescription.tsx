@@ -104,7 +104,7 @@ export const DESCRIPTIONS: {
   ),
   rangeIncrease: (
     <>
-      <strong>Range Increase.</strong> Can target a zone +1 further away.
+      <strong>Range Increase.</strong> Can target a zone +2 further away.
     </>
   ),
   reduceDamage: (

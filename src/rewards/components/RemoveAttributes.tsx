@@ -25,6 +25,7 @@ export function RemoveAttributes({
             selectedOptions={selectedOptions}
             changeValue={changeValue}
             className={styles.removeListItem}
+            rewards={savedRewards}
           />
         ))}
       </ul>

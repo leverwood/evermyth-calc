@@ -40,7 +40,7 @@ export const printRewardMessage = (
   const aoeCreatures = reward.avoidAllies
     ? "creatures of your choice"
     : "all creatures";
-  const zoneSize = reward.rangeIncrease ? reward.rangeIncrease + 1 : 1;
+  const zoneSize = reward.rangeIncrease ? reward.rangeIncrease * 2 + 1 : 1;
   const zoneMsg = `${zoneSize} zone${zoneSize > 1 ? "s" : ""}`;
 
   if (reward.specificMsg) messages.push(reward.specificMsg);
@@ -50,17 +50,16 @@ export const printRewardMessage = (
   if (reward.castTimeMsg) messages.push(reward.castTimeMsg);
   if (reward.ranged && !reward.rangeIncrease)
     messages.push("range: 1 zone away");
-  else if (reward.rangeIncrease)
-    messages.push(`range: ${reward.rangeIncrease + 1} zones away`);
+  else if (reward.rangeIncrease) messages.push(`range: ${zoneSize} zones away`);
   if (reward.relentless)
     messages.push(
       `when ${reward.relentlessMsg} is depleted, drop to 1 instead`
     );
   if (reward.restrained)
     messages.push(
-      `set ${reward.aoe ? `creatures` : "a creature"}  speed to 0 with ${
-        reward.aoe ? `tiers` : "a tier"
-      } of ${reward.restrained * 2} or less`
+      `set ${
+        reward.aoe ? `creatures'` : "a creature's"
+      }  speed to 0 (creature tier of ${reward.restrained * 2} or less)`
     );
   if (reward.stunned)
     messages.push(

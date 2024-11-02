@@ -6,6 +6,7 @@ interface RemoveUpcastProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
   className?: string;
+  rewards: RewardData[];
 }
 
 const RemoveUpcast: React.FC<RemoveUpcastProps> = ({
@@ -14,7 +15,6 @@ const RemoveUpcast: React.FC<RemoveUpcastProps> = ({
   className,
 }) => {
   if (!selectedOptions.upcast) return null;
-
   return (
     <li className={className}>
       <AddRemoveButton
@@ -22,6 +22,7 @@ const RemoveUpcast: React.FC<RemoveUpcastProps> = ({
         onClick={() => changeValue("upcast", false)}
       />
       <AttributeDescription keyName="upcast" />
+      <strong> {selectedOptions.upcast.name}</strong>
     </li>
   );
 };
