@@ -2,6 +2,7 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { Form } from "react-bootstrap";
 
 interface RemoveGrantsAbilitiesProps {
   selectedOptions: RewardData;
@@ -29,7 +30,8 @@ const RemoveGrantsAbilities: React.FC<RemoveGrantsAbilitiesProps> = ({
             onClick={() => changeValue("deleteAbility", ability, i)}
           />
           <AttributeDescription keyName="grantsAbilities" />
-          <input
+          <Form.Control
+            as="textarea"
             value={ability}
             onChange={(e) => changeValue("changeAbility", e.target.value, i)}
           />

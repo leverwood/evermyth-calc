@@ -1,6 +1,6 @@
 import { initReward } from "./reward-calcs";
 
-import { Reward, RewardData } from "../types/reward-types";
+import { Reward, RewardData, STAGE } from "../types/reward-types";
 import {
   Condition,
   PC_STATUS,
@@ -28,8 +28,8 @@ export const makeStandardArmor = (tier: number): Reward => {
   }
   const reward = initReward({
     name: `T${tier} Armor`,
+    stage: STAGE.DEFENSE,
     deals: 0,
-    noCheck: true,
     reduceDamage: 1,
     cost: 1,
     upcast: initReward({
@@ -50,7 +50,7 @@ export const makeStandardSpell = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} Spell`,
     deals: 1 + tier + tier,
-    cost: tier,
+    cost: 1,
   });
   if (reward.tier !== tier)
     console.error(
@@ -66,7 +66,7 @@ export const makeStandardAoE = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} AoE Spell`,
     deals: tier + tier - 1,
-    cost: tier,
+    cost: 1,
     aoe: true,
   });
   if (reward.tier !== tier)
@@ -95,7 +95,7 @@ export const makeAdvGranter = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} Advantage Granter`,
     deals: 1 + tier,
-    cost: tier,
+    cost: 1,
     conditions: [
       possibilities[Math.floor(Math.random() * possibilities.length)],
     ],
@@ -131,7 +131,7 @@ export const makeDisadvImposer = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} Disadvantage Imposer`,
     deals: 1 + tier,
-    cost: tier,
+    cost: 1,
     conditions: [
       possibilities[Math.floor(Math.random() * possibilities.length)],
     ],
@@ -148,7 +148,7 @@ export const makePotionOfHealing = (tier: number): Reward => {
     name: `T${tier} Potion of Healing`,
     deals: 0,
     consumable: true,
-    noCheck: true,
+    stage: STAGE.MINOR,
     heals: tier + 1,
   });
   if (reward.tier !== tier)
@@ -166,7 +166,7 @@ export const makeHealingSpell = (tier: number): Reward => {
     name: `T${tier} Healing Spell`,
     deals: 0,
     heals: 1 + tier + tier,
-    cost: tier,
+    cost: 1,
   });
   if (reward.tier !== tier)
     console.error(

@@ -15,7 +15,10 @@ import { LOG_LEVEL, Logger } from "../../util/log";
 import { randomPCs } from "./simulate-pc";
 import { pcTurn } from "./simulate-pc";
 import { enemyTurn } from "./simulate-enemy";
-import { maxDamageReduction } from "../../rewards/util/reward-calcs";
+import {
+  initReward,
+  maxDamageReduction,
+} from "../../rewards/util/reward-calcs";
 import { DiceHandful, PCRoll, isMiss, rollDice } from "./dice-calcs";
 import { FLED_AFTER_ROUNDS } from "../../util/constants";
 
@@ -319,10 +322,12 @@ export function tryReduceDamage(damage: number, victim: PC | Enemy) {
 
   if (reward) {
     let timesUpcast = 0;
-    let usedWellspring = reward.cost || 0;
+    let usedWellspring =
+      (reward.cost && reward.cost * initReward(reward).tier) || 0;
     // the amount you are going to reduce so far
     let damageReduction = reward.reduceDamage || 0;
 
+    // TODO: check this still works
     while (
       damageReduction < needReduction &&
       timesUpcast <= (reward.upcastMax || 0)

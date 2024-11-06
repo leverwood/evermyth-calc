@@ -2,28 +2,29 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
-interface RemoveNoActionProps {
+interface RemoveTierDecreaseProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
   className?: string;
 }
 
-const RemoveNoAction: React.FC<RemoveNoActionProps> = ({
+const RemoveTierDecrease: React.FC<RemoveTierDecreaseProps> = ({
   selectedOptions,
   changeValue,
   className,
 }) => {
-  if (!selectedOptions.noAction) return null;
+  if (!selectedOptions.tierDecrease) return null;
 
   return (
     <li className={className}>
       <AddRemoveButton
         adding={false}
-        onClick={() => changeValue("noAction", false)}
+        onClick={() => changeValue("tierDecrease", -1)}
+        overrideText={`❌ (current: ${selectedOptions.tierDecrease})`}
       />
-      <AttributeDescription keyName="noAction" />
+      <AttributeDescription keyName="tierDecrease" />
     </li>
   );
 };
 
-export default RemoveNoAction;
+export default RemoveTierDecrease;

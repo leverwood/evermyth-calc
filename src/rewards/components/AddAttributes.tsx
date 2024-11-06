@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import styles from "./AddAttributes.module.scss";
-import { OPTION_COST, RewardData } from "../types/reward-types";
+import { isStringArray, OPTION_COST, RewardData } from "../types/reward-types";
 import { ChangeValueFunc } from "../types/reward-types";
 import { attributeComponents } from "./AddAttributeComponents";
 import { jsxToString } from "../util/jsx-to-string";
@@ -23,16 +23,23 @@ export function AddAttributes({
   selectedOptions,
   changeValue,
   rewards,
+  searchString,
+  setSearchString,
 }: {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
   rewards: RewardData[];
+  searchString: string;
+  setSearchString: (value: string) => void;
 }) {
   const [newAbility, setNewAbility] = useState("");
   const [upcastRewardIndex, setUpcastReward] = useState<number>(-1);
-  const [filteredComponents, setFilteredComponents] =
-    useState(attributeComponents);
-  const [searchString, setSearchString] = useState("");
+  const [filteredComponents, setFilteredComponents] = useState<
+    {
+      key: keyof RewardData;
+      component: React.FC<any>;
+    }[]
+  >([...attributeComponents]);
   const [minTier, maxTier] = findMinMaxTier();
   const [shownTierRange, setShownTierRange] = useState<[number, number]>([
     minTier,
@@ -46,7 +53,7 @@ export function AddAttributes({
   }
 
   useEffect(() => {
-    const results: { key: string; component: React.FC<any> }[] = [];
+    const results: { key: keyof RewardData; component: React.FC<any> }[] = [];
 
     if (searchString.trim()) {
       Object.keys(DESCRIPTIONS).forEach((key) => {
@@ -63,7 +70,11 @@ export function AddAttributes({
     const filtered = results
       .filter(({ key }) => {
         const tier = OPTION_COST[key];
-        return tier >= shownTierRange[0] && tier <= shownTierRange[1];
+        return (
+          tier !== undefined &&
+          tier >= shownTierRange[0] &&
+          tier <= shownTierRange[1]
+        );
       })
       .sort((a, b) => a.key.localeCompare(b.key));
 
@@ -99,6 +110,11 @@ export function AddAttributes({
         {filteredComponents.map(({ key, component: Component }) => (
           <Component
             key={key}
+            index={
+              (isStringArray(selectedOptions[key]) &&
+                (selectedOptions[key] as string[]).length) ||
+              0
+            }
             selectedOptions={selectedOptions}
             changeValue={changeValue}
             rewards={rewards}

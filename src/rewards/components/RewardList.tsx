@@ -5,12 +5,13 @@ import { useRewardContext } from "../contexts/RewardContext";
 import { Button, Form, InputGroup, ListGroup } from "react-bootstrap";
 
 import { initReward } from "../util/reward-calcs";
-import { REWARD_TYPE } from "../types/reward-types";
+import { REWARD_TYPE, STAGE } from "../types/reward-types";
 import TierRangeSlider from "./TierRangeSlider";
 import { SingleRewardText } from "./SingleRewardText";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { findMaxTier } from "../util/find-max-tier";
+import RollRandomReward from "./RollRandomReward";
 
 export const logger = Logger(LOG_LEVEL.INFO);
 
@@ -21,7 +22,7 @@ export default function RewardCreator() {
 
   const globalMax = findMaxTier(rewards);
   const [shownTierRange, setShownTierRange] = useState<[number, number]>([
-    0,
+    -1,
     globalMax,
   ]);
   const [searchText, setSearchText] = useState<string>("");
@@ -50,7 +51,7 @@ export default function RewardCreator() {
     )
     // filter rewards not in tier range
     .filter((options) => {
-      if (shownTierRange[0] === 0) return true;
+      if (shownTierRange[0] === -1) return true;
       const r = initReward(options);
       return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
     })
@@ -58,8 +59,8 @@ export default function RewardCreator() {
     .sort((opt1, opt2) => {
       const r1 = initReward(opt1);
       const r2 = initReward(opt2);
-      if (r1.tier < 0) r1.tier = 0;
-      if (r2.tier < 0) r2.tier = 0;
+      if (r1.tier < 0) r1.tier = -1;
+      if (r2.tier < 0) r2.tier = -1;
       return r1.tier === r2.tier
         ? r1.name.localeCompare(r2.name)
         : r1.tier - r2.tier;
@@ -70,7 +71,11 @@ export default function RewardCreator() {
   };
 
   const handleCreateNew = () => {
-    const id = addReward({ name: "", type: REWARD_TYPE.EQUIPMENT });
+    const id = addReward({
+      name: "",
+      type: REWARD_TYPE.EQUIPMENT,
+      stage: STAGE.ACTION,
+    });
     // navigate to edit page
     navigate(`/rewards/${id}/edit`);
   };
@@ -92,8 +97,9 @@ export default function RewardCreator() {
         <InputGroup.Text>🔎</InputGroup.Text>
       </InputGroup>
       <Button onClick={handleCreateNew} className="mb-4">
-        Create New Reward
+        Create New
       </Button>
+      <RollRandomReward showRewards={showRewards} />
       <div className={styles.rewardList}>
         <ListGroup>
           {showRewards.map((options) => {

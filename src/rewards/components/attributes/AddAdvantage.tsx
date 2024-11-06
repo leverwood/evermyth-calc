@@ -2,7 +2,8 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
-import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { ChangeValueFunc, RewardData, STAGE } from "../../types/reward-types";
+import { REWARD_STAGE_LIMITS } from "../../util/reward-stage-limits";
 
 interface AddAdvantageAttributeProps {
   selectedOptions: RewardData;
@@ -14,6 +15,12 @@ const AddAdvantageAttribute: React.FC<AddAdvantageAttributeProps> = ({
   changeValue,
 }) => {
   if (selectedOptions.advantage) return null;
+  if (
+    REWARD_STAGE_LIMITS["advantage"][selectedOptions.stage || STAGE.ACTION] ===
+    false
+  ) {
+    return null;
+  }
 
   return (
     <li>

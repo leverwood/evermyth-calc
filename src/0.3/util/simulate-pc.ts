@@ -40,6 +40,7 @@ import {
   TEMPORARY_ADV_ACTION,
   TEMPORARY_ADV_DEFENSE,
   Reward,
+  STAGE,
 } from "../../rewards/types/reward-types";
 
 const logger = Logger(LOG_LEVEL.WARN);
@@ -69,7 +70,6 @@ export const randomPC = (
     dead: false,
   };
 };
-
 
 export const randomPCs = (minLevel = 1, maxLevel = 20) => {
   const pcNames = shuffleArray(names);
@@ -107,7 +107,13 @@ function pcHealAction(pc: PC, downPC: PC, options: PCRollOptions): PCAction {
   let usedFortune = 0;
 
   const getHits = () => {
-    if (reward.noCheck) return 1;
+    if (
+      reward.stage === STAGE.MINOR ||
+      reward.stage === STAGE.MOVE ||
+      reward.stage === STAGE.PASSIVE
+    ) {
+      return 1;
+    }
 
     // Roll the dice
     const advConditions = hasAdv("action", pc.conditions, []);
@@ -131,7 +137,7 @@ function pcHealAction(pc: PC, downPC: PC, options: PCRollOptions): PCAction {
 
   const hits = getHits();
   const healTotal = reward.heals * hits; // TODO: upcast
-  let usedWellspring = hits ? reward.cost || 0 : 0;
+  let usedWellspring = hits ? Math.max(reward.tier, 0) * reward.cost || 0 : 0;
 
   if (healTotal) {
     downPC.pool += healTotal;
@@ -160,12 +166,12 @@ const pcShouldFlee = (pc: PC, pcs: PC[], pcsWillFlee: boolean) => {
 
   // if somebody runs, everybody runs
   const pcsFleeing = pcs.filter((p) => p.fleeing);
-  if(pcsFleeing.length) return true;
+  if (pcsFleeing.length) return true;
 
   // if half the pcs are down, and everyone else is less than half health, abandon ship!
   const pcsAlive = pcs.filter((p) => p.pool > 0);
   const halfDown = pcsAlive.length <= pcs.length / 2;
-  const pcsWithHighPool = pcsAlive.filter((p) => p.pool > (p.startingPool / 2));
+  const pcsWithHighPool = pcsAlive.filter((p) => p.pool > p.startingPool / 2);
   return halfDown && pcsWithHighPool.length === 0;
 };
 
@@ -334,9 +340,10 @@ function pcAction(
 
   let rewardMessage = "";
   const killed: Enemy[] = [];
-  const printEnemies = "enemy" + enemiesToAttack.map((e) => e.number).join(", ");
+  const printEnemies =
+    "enemy" + enemiesToAttack.map((e) => e.number).join(", ");
 
-  if(!reward.aoe){
+  if (!reward.aoe) {
     enemiesToAttack = [enemiesToAttack[0]];
   }
 
@@ -344,7 +351,7 @@ function pcAction(
   if (reward?.conditions) {
     reward.conditions.forEach((c: Condition) => {
       if (isEnemyStatus(c.status)) {
-        enemiesToAttack.forEach(e=>e.conditions.push({ ...c }));
+        enemiesToAttack.forEach((e) => e.conditions.push({ ...c }));
         rewardMessage += `Imposed "${c.name}" on ${printEnemies}. `;
       } else {
         pc.conditions.push({ ...c });
@@ -353,9 +360,12 @@ function pcAction(
     });
   }
 
-
   // Roll the dice
-  const advConditions = hasAdv("action", pc.conditions, enemiesToAttack[0].conditions);
+  const advConditions = hasAdv(
+    "action",
+    pc.conditions,
+    enemiesToAttack[0].conditions
+  );
   const advantage = advConditions.rollWith === "ADV" || options.advToHit;
   const roll = makeARoll({
     mod: getTier(pc.level),
@@ -363,16 +373,17 @@ function pcAction(
     dadv: advConditions.rollWith === "DADV",
     trained: options.trainedToHit,
   });
-  const needed = enemiesToAttack.length === 0
-    ? getDCToHitEnemy(enemiesToAttack[0].tier)
-    : getRewardDC(reward);
+  const needed =
+    enemiesToAttack.length === 0
+      ? getDCToHitEnemy(enemiesToAttack[0].tier)
+      : getRewardDC(reward);
   let usedFortune = tryFortuneToHit(pc, roll, needed, advantage);
   usedFortune += tryFortuneToHit(pc, roll, needed * 2, true);
 
   // spend wellspring to increase my damage
   // TODO: factor in AoE
   const baseDamage = reward?.deals;
-  let usedWellspring = reward?.cost || 0;
+  let usedWellspring = reward?.cost * reward?.tier || 0;
 
   let hits = Math.floor(roll.total / needed);
   if (!hits && roll.autoWin) hits = 1;
@@ -390,7 +401,13 @@ function pcAction(
   } else {
     usedWellspring = 0;
   }
+
+  // figure out if they are vulnerable to the damage
+  const isVulnerable = reward.imposeVulnerable && getRandomNum(1, 10) === 1;
+
+  // calculate damage
   let damage = hits ? hits * baseDamage : 0;
+  if (isVulnerable) damage *= 2;
 
   const againstEnemies: PCAttackData[] = enemiesToAttack.map((enemy) => {
     const { newDamage, drMessage } = tryReduceDamage(damage, enemy);
@@ -405,7 +422,7 @@ function pcAction(
       damage: newDamage,
       pool: enemy.pool,
       message: `${newDamage} damage to enemy ${enemy.number}. ${drMessage}`,
-    }
+    };
   });
 
   return {

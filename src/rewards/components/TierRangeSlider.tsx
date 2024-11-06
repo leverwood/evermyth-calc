@@ -15,8 +15,8 @@ export default function TierRangeSlider({
   const marks: {
     [key: number]: string;
   } = {};
-  for (let i = 0; i <= max; i++) {
-    marks[i] = `T${i}`;
+  for (let i = -1; i <= max; i++) {
+    marks[i] = `T${i < 0 ? "<0" : i}`;
   }
 
   return (
@@ -24,11 +24,11 @@ export default function TierRangeSlider({
       <span className={styles.sliderLabel}>Tier</span>
       <Slider
         range
-        min={0}
+        min={-1}
         max={max}
         marks={marks}
         step={null}
-        defaultValue={[0, max]}
+        defaultValue={[-1, max]}
         onChangeComplete={(value) =>
           setShownTierRange(
             typeof value === "number" ? [value, value] : [value[0], value[1]]

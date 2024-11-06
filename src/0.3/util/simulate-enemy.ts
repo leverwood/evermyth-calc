@@ -106,7 +106,7 @@ export const enemyTurn = (
   turn.usedReward = reward;
 
   // always spend wellspring even if it fails
-  enemy.wellspring -= reward.cost;
+  enemy.wellspring -= reward.cost * Math.max(reward.tier, 0);
   if (!reward.aoe) {
     pcsToAttack = [pcsToAttack[0]];
   }
@@ -115,7 +115,7 @@ export const enemyTurn = (
   const needed = getDCToDefend(enemy.tier);
 
   const attacks = pcsToAttack.map((pc) => {
-    if(pc.pool <= 0) {
+    if (pc.pool <= 0) {
       debugger;
       logger.error(`PC ${pc.name} is downed, should not be targetable`);
     }
@@ -154,9 +154,30 @@ export const enemyTurn = (
       partialDodge = true;
     }
 
+    // check if player is immune to damage
+    const hasImmunity =
+      pc.rewards.some((r) => r.immune?.length) && getRandomNum(1, 10) === 1;
+    const hasResistance =
+      pc.rewards.some((r) => r.resistant?.length) && getRandomNum(1, 10) === 1;
+    const hasVulnerability =
+      pc.rewards.some((r) => r.vulnerable?.length) && getRandomNum(1, 10) === 1;
+
     const { newDamage, drMessage } = tryReduceDamage(damage, pc);
     message += drMessage;
     damage = newDamage;
+
+    if (hasImmunity) {
+      message += `${pc.name} is immune to this type of damage`;
+      damage = 0;
+    }
+    if (hasResistance) {
+      message += `${pc.name} has resistance to this type of damage`;
+      damage = Math.floor(damage / 2);
+    }
+    if (hasVulnerability) {
+      message += `${pc.name} has vulnerability to this type of damage`;
+      damage = damage * 2;
+    }
 
     if (damage < 0) {
       console.error("How did I get here? Damage should not be less than zero.");

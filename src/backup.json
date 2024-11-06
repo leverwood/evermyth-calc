@@ -721,7 +721,7 @@
       "cost": 3,
       "stunned": true,
       "id": "5a3608dd-dd02-4b77-83ae-c6652573486b",
-      "instructions": "Deal 3 points. For 3 wellspring, you can stun a creature so they cannot act or move, make a check to maintain the effect if they attempt to break free."
+      "instructions": "Deal 3 points. For 3 wellspring, you can stun a creature, make a check to maintain the effect if they attempt to break free."
     },
     {
       "type": "equipment",

@@ -24,8 +24,17 @@ export function SingleRewardText({
   upcast?: boolean;
   showPrice?: boolean;
 }) {
+
+  let message = printRewardMessage(reward, upcast);
+
+  if (oneLine) {
+    message = message.replaceAll("\n", " ");
+  }
+
+  const Component = oneLine ? "span" : "div";
+
   return (
-    <span className={`${styles.singleRewardText} ${className}`}>
+    <Component className={`${styles.singleRewardText} ${className}`}>
       {!noTitle ? (
         <strong className={"me-2"}>
           {reward.name}
@@ -41,13 +50,7 @@ export function SingleRewardText({
           &nbsp;{reward.type}&nbsp;
         </Badge>
       ) : null}
-      {reward.instructions && !oneLine ? (
-        <Markdown>{reward.instructions}</Markdown>
-      ) : (
-        <Markdown>
-          {printRewardMessage(reward, upcast).replaceAll("\n", " ")}
-        </Markdown>
-      )}{" "}
-    </span>
+      {<Markdown>{message}</Markdown>}{" "}
+    </Component>
   );
 }

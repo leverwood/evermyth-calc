@@ -13,6 +13,7 @@ export type RewardDataID = string;
 
 interface RewardBase {
   type?: REWARD_TYPE;
+  stage?: STAGE;
   // optional
   advantage?: boolean;
   advantageMsg?: string;
@@ -23,6 +24,8 @@ interface RewardBase {
   conditions?: Condition[];
   consumable?: boolean;
   cost?: number;
+  curse?: number;
+  curseMsg?: string;
   deals?: number;
   disadvantage?: boolean;
   disadvantageMsg?: string;
@@ -31,12 +34,10 @@ interface RewardBase {
   grantsAbilities?: string[];
   heals?: number;
   instructions?: string;
-  isMove?: boolean;
   lingeringDamage?: number;
+  meleeAndRanged?: boolean;
   multiRewards?: RewardData[];
-  noAction?: boolean;
   noChase?: boolean;
-  noCheck?: boolean;
   notes?: string;
   onFailTakeDamage?: number;
   price?: number;
@@ -54,13 +55,18 @@ interface RewardBase {
   summon?: boolean;
   summonTierIncrease?: number;
   teleport?: boolean;
+  tierDecrease?: number;
+  tierIncrease?: number;
   trained?: boolean;
   trainedMsg?: string;
   upcast?: RewardData;
   upcastMax?: number;
   wellspringMax?: number;
   wellspringRecover?: number;
-  whileDefending?: boolean;
+  resistant?: [];
+  vulnerable?: [];
+  immune?: [];
+  imposeVulnerable?: [];
 }
 
 export interface RewardData extends RewardBase {
@@ -71,6 +77,9 @@ export interface RewardData extends RewardBase {
   frontImg?: string;
   stretchImgY?: boolean;
   padImage?: boolean;
+  source?: string;
+  version?: string;
+  created?: string;
 }
 
 export interface Reward extends RewardBase {
@@ -98,6 +107,24 @@ export const TEMPORARY_ADV_DEFENSE: Condition = {
   ends: "top",
 };
 
+export enum STAGE {
+  ACTION = "check",
+  MOVE = "move",
+  DEFENSE = "defense",
+  PASSIVE = "passive",
+  MINOR = "minor",
+}
+
+export const STAGE_COST: {
+  [key in STAGE]: number;
+} = {
+  [STAGE.ACTION]: 0,
+  [STAGE.DEFENSE]: 0,
+  [STAGE.MOVE]: 1,
+  [STAGE.PASSIVE]: 1,
+  [STAGE.MINOR]: 3,
+} as const;
+
 export const OPTION_COST: {
   [key: string]: number;
 } = {
@@ -107,16 +134,17 @@ export const OPTION_COST: {
   castTime: -1,
   consumable: -2,
   cost: -1,
+  curse: -1,
   deals: 1,
   disadvantage: -1,
   duration: 1,
   grantsAbilities: 1,
   heals: 1,
-  isMove: 0,
+  immune: 3,
+  imposeVulnerable: 3,
   lingeringDamage: 1,
-  noAction: 3,
+  meleeAndRanged: 0,
   noChase: 1,
-  noCheck: 2,
   onFailTakeDamage: -1,
   ranged: 0,
   rangeIncrease: 1,
@@ -124,17 +152,20 @@ export const OPTION_COST: {
   relentless: 2,
   requiresAmmo: 0,
   restrained: 1,
+  resistant: 1,
   specific: -1,
   speed: 1,
-  stunned: 2,
+  stunned: 3,
   summon: 3,
   summonTierIncrease: 1,
   teleport: 2,
-  trained: 2,
+  tierDecrease: -1,
+  tierIncrease: 1,
+  trained: 1,
   upcast: 0,
+  vulnerable: -2,
   wellspringMax: 1,
   wellspringRecover: 1,
-  whileDefending: 1,
 } as const;
 
 // type gate for Reward
@@ -158,3 +189,10 @@ export type ChangeValueFunc = (
     | undefined,
   index?: number
 ) => void;
+
+// type gate for string[]
+export function isStringArray(value: any): value is string[] {
+  return (
+    Array.isArray(value) && value.every((item) => typeof item === "string")
+  );
+}

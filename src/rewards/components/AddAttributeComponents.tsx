@@ -1,5 +1,4 @@
 import AddStunned from "./attributes/AddStunned";
-import AddNoCheck from "./attributes/AddNoCheck";
 import AddSummon from "./attributes/AddSummon";
 import AddRelentless from "./attributes/AddRelentless";
 import AddAoe from "./attributes/AddAoE";
@@ -18,10 +17,8 @@ import AddSpeed from "./attributes/AddSpeed";
 import AddNoChase from "./attributes/AddNoChase";
 import AddDuration from "./attributes/AddDuration";
 import AddAdvantage from "./attributes/AddAdvantage";
-import AddWhileDefending from "./attributes/AddWhileDefending";
 import AddRangeIncrease from "./attributes/AddRangeIncrease";
 import AddRequiresAmmo from "./attributes/AddRequiresAmmo";
-import AddIsMove from "./attributes/AddIsMove";
 import AddRanged from "./attributes/AddRanged";
 import AddTrained from "./attributes/AddTrained";
 import AddUpcast from "./attributes/AddUpcast";
@@ -31,13 +28,21 @@ import AddCastTime from "./attributes/AddCastTime";
 import AddSpecific from "./attributes/AddSpecific";
 import AddConsumable from "./attributes/AddConsumable";
 import AddOnFailTakeDamage from "./attributes/AddOnFailTakeDamage";
+import AddResistantAttribute from "./attributes/AddResistant";
+import AddVulnerableAttribute from "./attributes/AddVulnerable";
+import AddImposeVulnerableAttribute from "./attributes/AddImposeVulnerable";
+import AddImmuneAttribute from "./attributes/AddImmune";
+import { RewardData } from "../types/reward-types";
+import AddCurse from "./attributes/AddCurse";
+import AddTierDecrease from "./attributes/AddTierDecrease";
+import AddTierIncrease from "./attributes/AddTierIncrease";
+import AddMeleeAndRangedAttribute from "./attributes/AddMeleeAndRanged";
 
 export const attributeComponents: readonly {
-  key: string;
+  key: keyof RewardData;
   component: React.FC<any>;
 }[] = [
   { key: "stunned", component: AddStunned },
-  { key: "noCheck", component: AddNoCheck },
   { key: "summon", component: AddSummon },
   { key: "relentless", component: AddRelentless },
   { key: "aoe", component: AddAoe },
@@ -56,10 +61,8 @@ export const attributeComponents: readonly {
   { key: "noChase", component: AddNoChase },
   { key: "duration", component: AddDuration },
   { key: "advantage", component: AddAdvantage },
-  { key: "whileDefending", component: AddWhileDefending },
   { key: "rangeIncrease", component: AddRangeIncrease },
   { key: "requiresAmmo", component: AddRequiresAmmo },
-  { key: "isMove", component: AddIsMove },
   { key: "ranged", component: AddRanged },
   { key: "trained", component: AddTrained },
   { key: "upcast", component: AddUpcast },
@@ -69,4 +72,12 @@ export const attributeComponents: readonly {
   { key: "specific", component: AddSpecific },
   { key: "consumable", component: AddConsumable },
   { key: "onFailTakeDamage", component: AddOnFailTakeDamage },
+  { key: "resistant", component: AddResistantAttribute },
+  { key: "vulnerable", component: AddVulnerableAttribute },
+  { key: "imposeVulnerable", component: AddImposeVulnerableAttribute },
+  { key: "immune", component: AddImmuneAttribute },
+  { key: "curse", component: AddCurse },
+  { key: "tierDecrease", component: AddTierDecrease },
+  { key: "tierIncrease", component: AddTierIncrease },
+  { key: "meleeAndRanged", component: AddMeleeAndRangedAttribute },
 ] as const;

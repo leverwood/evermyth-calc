@@ -3,23 +3,23 @@ import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 
-interface AddNoActionAttributeProps {
+interface AddTierIncreaseAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddNoActionAttribute: React.FC<AddNoActionAttributeProps> = ({
+const AddTierIncreaseAttribute: React.FC<AddTierIncreaseAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (selectedOptions.noAction) return null;
+  if (selectedOptions.tierIncrease) return null;
 
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("noAction", true)} />
-      <AttributeDescription keyName="noAction" />
+      <AddRemoveButton onClick={() => changeValue("tierIncrease", 1)} />
+      <AttributeDescription keyName="tierIncrease" />
     </li>
   );
 };
 
-export default AddNoActionAttribute;
+export default AddTierIncreaseAttribute;

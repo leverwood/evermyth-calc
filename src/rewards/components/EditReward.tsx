@@ -1,5 +1,5 @@
 import styles from "./RewardCreator.module.scss";
-import { RewardData, REWARD_TYPE } from "../types/reward-types";
+import { RewardData, REWARD_TYPE, STAGE } from "../types/reward-types";
 import { AddAttributes } from "./AddAttributes";
 import { ChangeValueFunc } from "../types/reward-types";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
@@ -28,6 +28,7 @@ export function EditReward({ id }: { id: string }) {
   const selectedOptions = getRewardById(id);
   const [priceStr, setPriceStr] = useState<string>("" + selectedOptions?.price);
   const errors = validateRewardData(selectedOptions || {}).errors;
+  const [searchString, setSearchString] = useState("");
   logger.debug("errors", errors);
 
   const changeValue = useCallback<ChangeValueFunc>(
@@ -78,6 +79,18 @@ export function EditReward({ id }: { id: string }) {
           break;
         case "price":
           newValue = parseInt(value as string);
+          break;
+        case "immune":
+        case "resistant":
+        case "vulnerable":
+        case "imposeVulnerable":
+          newKey = key;
+          const newArray = prevState[key as keyof RewardData]
+            ? [...(prevState[key as keyof RewardData] as string[])]
+            : [];
+          if (typeof value === "string") newArray[index] = value as string;
+          else if (typeof value === "undefined") newArray.splice(index, 1);
+          newValue = newArray;
           break;
         default:
           console.log("Unhandled value", key, value);
@@ -202,17 +215,84 @@ export function EditReward({ id }: { id: string }) {
               onChange={() => changeValue("type", REWARD_TYPE.TRINKET)}
             />
           </Form.Group>
-          {(!selectedOptions.multiRewards ||
-            selectedOptions.multiRewards.length === 0) &&
-          selectedOptions.type !== REWARD_TYPE.TRAINING ? (
+          <Form.Group className="mt-3">
+            <Form.Check
+              inline
+              id="stage-action"
+              type="radio"
+              label={"Check"}
+              value={STAGE.ACTION}
+              checked={selectedOptions.stage === STAGE.ACTION}
+              onChange={() => changeValue("stage", STAGE.ACTION)}
+            />
+            <Form.Check
+              inline
+              id="stage-defense"
+              type="radio"
+              label="Defense"
+              value={STAGE.DEFENSE}
+              checked={selectedOptions.stage === STAGE.DEFENSE}
+              onChange={() => changeValue("stage", STAGE.DEFENSE)}
+            />
+            <Form.Check
+              inline
+              id="stage-move"
+              type="radio"
+              label="Move (+1)"
+              value={STAGE.MOVE}
+              checked={selectedOptions.stage === STAGE.MOVE}
+              onChange={() => changeValue("stage", STAGE.MOVE)}
+            />
+
+            <Form.Check
+              inline
+              id="stage-passive"
+              type="radio"
+              label="Passive (+1)"
+              value={STAGE.PASSIVE}
+              checked={selectedOptions.stage === STAGE.PASSIVE}
+              onChange={() => changeValue("stage", STAGE.PASSIVE)}
+            />
+            <Form.Check
+              inline
+              id="stage-minor"
+              type="radio"
+              label="Minor Task (+3)"
+              value={STAGE.MINOR}
+              checked={selectedOptions.stage === STAGE.MINOR}
+              onChange={() => changeValue("stage", STAGE.MINOR)}
+            />
+          </Form.Group>
+          <InputGroup size="sm" className={`mt-3`}>
+            <InputGroup.Text>Source</InputGroup.Text>
+            <Form.Control
+              id="source"
+              type="text"
+              value={selectedOptions.source || ""}
+              onChange={(e) => changeValue("source", e.target.value)}
+            />
+          </InputGroup>
+          <InputGroup size="sm" className={`mt-3`}>
+            <InputGroup.Text>System Version</InputGroup.Text>
+            <Form.Control
+              id="version"
+              type="text"
+              value={selectedOptions.version || ""}
+              onChange={(e) => changeValue("version", e.target.value)}
+            />
+          </InputGroup>
+          {selectedOptions.type !== REWARD_TYPE.TRAINING ? (
             <AddAttributes
               selectedOptions={selectedOptions}
               changeValue={changeValue}
               rewards={savedRewards}
+              searchString={searchString}
+              setSearchString={setSearchString}
             />
           ) : null}
           {selectedOptions.type !== REWARD_TYPE.TRAINING && (
             <CombinedReward
+              searchString={searchString}
               selectedOptions={selectedOptions}
               savedRewards={savedRewards}
               changeValue={changeValue}
@@ -269,7 +349,9 @@ export function EditReward({ id }: { id: string }) {
                   <ul>
                     <li>Tier 0 is 1c - 25c </li>
                     <li>Tier 1 is 26c - 250c</li>
-                    <li>Tier 2 is 251c - 2500c</li>
+                    <li>Tier 2 is 251c - 2,500c</li>
+                    <li>Tier 3 is 2,501c - 25,000c</li>
+                    <li>Tier 4 is 25,001c - 250,000c</li>
                   </ul>
                   <ShopCategoryCheckboxes
                     checkedCategories={selectedOptions.shopCategories || []}
@@ -314,6 +396,12 @@ export function EditReward({ id }: { id: string }) {
           <pre className={styles.jsonDump}>
             {JSON.stringify(selectedOptions, null, 2)}
           </pre>
+          <p>
+            Created:{" "}
+            {selectedOptions.created
+              ? new Date(selectedOptions.created).toLocaleString()
+              : "N/A"}
+          </p>
         </Col>
       </Row>
     </ShopProvider>

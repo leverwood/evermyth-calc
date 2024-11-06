@@ -4,7 +4,7 @@ import {
   conditionNotYetApplied,
   initReward,
 } from "../../rewards/util/reward-calcs";
-import { Reward } from "../../rewards/types/reward-types";
+import { Reward, STAGE } from "../../rewards/types/reward-types";
 
 export function chooseBestReward(
   actingCreature: PC | Enemy,
@@ -21,16 +21,22 @@ export function chooseBestReward(
   // remove ones you can't afford the cost to
   for (let opt of actingCreature.rewards) {
     const reward = initReward(opt);
-    if (reward.cost <= actingCreature.wellspring) {
+    if (reward.cost * Math.max(reward.tier, 0) <= actingCreature.wellspring) {
       possibleRewards.push(reward);
     }
   }
 
+  // TODO: simulate stages better
+
   // remove ones that don't match the options
   if (options.action)
-    possibleRewards = possibleRewards.filter((reward) => !reward.noAction);
+    possibleRewards = possibleRewards.filter(
+      (reward) => reward.stage === STAGE.ACTION
+    );
   if (options.action === false)
-    possibleRewards = possibleRewards.filter((reward) => reward.noAction);
+    possibleRewards = possibleRewards.filter(
+      (reward) => reward.stage !== STAGE.ACTION
+    );
   if (options.deals)
     possibleRewards = possibleRewards.filter((reward) => reward.deals);
   if (options.deals === false)
@@ -40,20 +46,25 @@ export function chooseBestReward(
   if (options.heals === false)
     possibleRewards = possibleRewards.filter((reward) => !reward.heals);
   if (options.needsCheck)
-    possibleRewards = possibleRewards.filter((reward) => !reward.noCheck);
+    possibleRewards = possibleRewards.filter(
+      (reward) => reward.stage === STAGE.ACTION
+    );
   if (options.needsCheck === false)
-    possibleRewards = possibleRewards.filter((reward) => reward.noCheck);
+    possibleRewards = possibleRewards.filter(
+      (reward) => reward.stage !== STAGE.ACTION
+    );
 
   // remove those that place conditions which are already active
   possibleRewards = possibleRewards.filter((reward) => {
-    if (reward.conditions){
-      const enemy = targetCreature?.type === "enemy" ? targetCreature : actingCreature;
+    if (reward.conditions) {
+      const enemy =
+        targetCreature?.type === "enemy" ? targetCreature : actingCreature;
       const pc = actingCreature.type === "pc" ? actingCreature : targetCreature;
       return !reward.conditions.some(
         (c) => !conditionNotYetApplied(c, pc as PC, enemy as Enemy)
       );
     }
-      
+
     return true;
   });
 

@@ -33,7 +33,15 @@ export const DESCRIPTIONS: {
   ),
   cost: (
     <>
-      <strong>Wellspring Cost.</strong> costs +1 wellspring
+      <strong>Wellspring Cost.</strong> costs wellspring equal to the tier. Can
+      apply multiple times to multiply the wellspring
+    </>
+  ),
+  curse: (
+    <>
+      <strong>Curse.</strong> The curse takes effect when this reward is
+      equipped or learned. Apply this attribute multiple times for worse
+      effects. Curse:
     </>
   ),
   deals: (
@@ -43,7 +51,7 @@ export const DESCRIPTIONS: {
   ),
   disadvantage: (
     <>
-      <strong>Disadvantage.</strong> Under condition:
+      <strong>Target +5.</strong> Under condition:
     </>
   ),
   duration: (
@@ -69,10 +77,28 @@ export const DESCRIPTIONS: {
       turn. It doesn't require a roll. Cannot deal points or heal.
     </>
   ),
+  immune: (
+    <>
+      <strong>Immune.</strong> Take no damage from the following:
+    </>
+  ),
+  imposeVulnerable: (
+    <>
+      <strong>Imposes Vulnerable.</strong> Imposes vulnerable on a creature with
+      a tier of 3 or less. Make a check to maintain the effect if an action is
+      used to break it. Apply multiple times to increase the tier
+    </>
+  ),
   lingeringDamage: (
     <>
       <strong>Lingering Damage.</strong> Deal +1 damage at the end of their turn
       unless an action is taken to end the effect.
+    </>
+  ),
+  meleeAndRanged: (
+    <>
+      <strong>Melee and Ranged.</strong> Equally effective in both melee and at
+      range, but the range is limited to 1 zone.
     </>
   ),
   noAction: (
@@ -99,7 +125,7 @@ export const DESCRIPTIONS: {
   ),
   ranged: (
     <>
-      <strong>Ranged.</strong> Can target 1 nearby zone.
+      <strong>Ranged.</strong> Can target a zone up to 2 away. In the current zone, add +5 to the target.
     </>
   ),
   rangeIncrease: (
@@ -109,8 +135,8 @@ export const DESCRIPTIONS: {
   ),
   reduceDamage: (
     <>
-      <strong>Reduce Damage</strong> by +1 after a failed defense roll (must
-      cost wellspring or be single use). Does not require an additional check.
+      <strong>Reduce Damage</strong> up to +1 after a failed defense roll for 1
+      wellspring each point.
     </>
   ),
   relentless: (
@@ -119,12 +145,16 @@ export const DESCRIPTIONS: {
       with 1 pool instead:
     </>
   ),
+  resistant: (
+    <>
+      <strong>Resistant.</strong> Take half damage from the following:
+    </>
+  ),
   restrained: (
     <>
       <strong>Restrained.</strong> Set a creature's speed to 0 with a tier of 2
-      or less. Make a check to maintain the effect if the target or an ally uses
-      an action to break them free. Apply multiple times to increase the tier
-      limit.
+      or less. Make a check to maintain the effect if an action is used to break
+      it. Apply multiple times to increase the tier limit.
     </>
   ),
   requiresAmmo: (
@@ -146,8 +176,8 @@ export const DESCRIPTIONS: {
   stunned: (
     <>
       <strong>Stunned.</strong> Stun a creature with a tier of 2 or less. Make a
-      check to maintain the stun if the target uses an action to break free.
-      Apply multiple times to increase the tier limit.
+      check to maintain the stun if an action is used to break it. Apply
+      multiple times to increase the tier limit.
     </>
   ),
   summon: (
@@ -166,6 +196,16 @@ export const DESCRIPTIONS: {
       <strong>Teleport</strong> up to your speed. Does not provoke a chase.
     </>
   ),
+  tierDecrease: (
+    <>
+      <strong>Tier Decrease.</strong> Decrease the tier of the reward by 1
+    </>
+  ),
+  tierIncrease: (
+    <>
+      <strong>Tier Increase.</strong> Increase the tier of the reward by 1
+    </>
+  ),
   trained: (
     <>
       <strong>Trained.</strong> Gain training for something specific:
@@ -175,6 +215,11 @@ export const DESCRIPTIONS: {
     <>
       <strong>Upcast.</strong> Spend more wellspring to apply a stronger effect.
       Select a reward with a tier of -1:
+    </>
+  ),
+  vulnerable: (
+    <>
+      <strong>Vulnerable.</strong> Take double damage from the following:
     </>
   ),
   wellspringMax: (

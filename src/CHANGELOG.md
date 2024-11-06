@@ -4,10 +4,14 @@
 
 - Change restrained to have a tier limit and can be applied multiple times
 - Change stunned to have a tier limit and can be applied multiple times
-- Decrease stunned from +3 to +2 tiers
 - Change restrained and stunned breaking conditions
-- Add Chewie rules
+- Add Chewbaca rule
 - Change range increase to +2
+- Add source, version, create date
+- Add resist, vulnerable, immune
+- Make the item cost an amount of wellspring equal to the tier
+- Add stages
+- Training from +2 to +1
 
 ## 0.3.2
 

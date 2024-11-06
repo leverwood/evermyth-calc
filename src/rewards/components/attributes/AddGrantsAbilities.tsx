@@ -23,6 +23,7 @@ const AddGrantsAbilitiesAttribute: React.FC<
       />
       <AttributeDescription keyName="grantsAbilities" />
       <Form.Control
+        as="textarea"
         value={newAbility}
         type="text"
         onChange={(e) => setNewAbility(e.target.value)}

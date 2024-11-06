@@ -1,5 +1,4 @@
 import html2canvas from "html2canvas";
-import Markdown from "markdown-to-jsx";
 
 import styles from "./RewardCard.module.scss";
 import { initReward } from "../util/reward-calcs";
@@ -66,64 +65,22 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
         ref={cardRef}
       >
         <header className={styles.cardHeader}>{reward.name}</header>
-        {reward.multiRewards && reward.multiRewards.length ? (
-          <ul className={`${styles.cardBody} ${styles.cardRewardList}`}>
-            {reward.instructions ? (
-              <li>
-                <DynamicText
-                  className={styles.scrollBlock}
-                  maxFontSize={MAX_FONT_SIZE}
-                >
-                  <Markdown>{reward.instructions}</Markdown>
-                </DynamicText>
-              </li>
-            ) : null}
-            {reward.multiRewards.map((opt, index) => (
-              <li key={index}>
-                <DynamicText
-                  className={styles.scrollBlock}
-                  maxFontSize={MAX_FONT_SIZE}
-                >
-                  <SingleRewardText
-                    reward={initReward(opt)}
-                    noType={true}
-                    noTier={true}
-                  />
-                </DynamicText>
-                {opt.upcast ? (
-                  <DynamicText
-                    className={styles.scrollBlock}
-                    maxFontSize={MAX_FONT_SIZE}
-                  >
-                    <SingleRewardText
-                      reward={initReward(opt.upcast)}
-                      noType={true}
-                      noTier={true}
-                      upcast={true}
-                    />
-                  </DynamicText>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        ) : (
+        {
           <div className={`${styles.cardBody}`}>
             <DynamicText
               className={styles.scrollBlock}
               maxFontSize={MAX_FONT_SIZE}
             >
-              {reward.instructions ? (
-                <Markdown>{reward.instructions}</Markdown>
-              ) : (
+              {
                 <>
-                  <p>
+                  <div>
                     <SingleRewardText
                       reward={reward}
                       noTitle={true}
                       noType={true}
                       noTier={true}
                     />
-                  </p>
+                  </div>
                   {reward.upcast ? (
                     <p>
                       <SingleRewardText
@@ -135,10 +92,10 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
                     </p>
                   ) : null}
                 </>
-              )}
+              }
             </DynamicText>
           </div>
-        )}
+        }
         <footer
           className={`${styles.cardFooter} ${
             styles[reward.type || "".toLocaleLowerCase()]
@@ -148,7 +105,7 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
             {reward.type !== REWARD_TYPE.TRAINING &&
             reward.type !== REWARD_TYPE.TRINKET ? (
               <span className={styles.cardTier}>
-                tier {reward.tier < 0 ? 0 : reward.tier}{" "}
+                tier {Math.max(reward.tier, 0)}{" "}
               </span>
             ) : null}
             <span className={`${styles.cardType}`}>

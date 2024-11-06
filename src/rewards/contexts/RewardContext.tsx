@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { RewardData } from "../types/reward-types";
 import { migrateRewardData } from "../util/reward-calcs";
+import { CURRENT_VERSION } from "../../util/constants";
 
 interface RewardContextProps {
   rewards: RewardData[];
@@ -26,12 +27,19 @@ export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   const [rewards, setRewards] = useState<RewardData[]>(() => {
     const storedRewards = localStorage.getItem(REWARDS_STORAGE_KEY);
     const rewards = storedRewards ? JSON.parse(storedRewards) : [];
-    return rewards.map(migrateRewardData);
+    const newRewards = rewards.map(migrateRewardData);
+    localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));
+    return newRewards;
   });
 
   const addReward = (reward: Omit<RewardData, "id">): string => {
     const id = crypto.randomUUID();
-    const newReward: RewardData = { ...reward, id };
+    const newReward: RewardData = {
+      ...reward,
+      id,
+      version: CURRENT_VERSION,
+      created: new Date().toISOString(),
+    };
     setRewards((prevRewards) => {
       const newRewards = [...prevRewards, newReward];
       localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));

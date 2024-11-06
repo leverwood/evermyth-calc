@@ -1,3 +1,5 @@
+export const CURRENT_VERSION = "0.3.3";
+
 export const ABILITY_MIN_LVL = -3;
 
 export const TIER_0_ENEMY_POOL = 1;

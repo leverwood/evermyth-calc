@@ -13,7 +13,7 @@ const OnFailTakeDamage: React.FC<OnFailTakeDamageProps> = ({
   changeValue,
   className,
 }) => {
-  if (!selectedOptions.onFailTakeDamage || selectedOptions.noCheck) return null;
+  if (!selectedOptions.onFailTakeDamage) return null;
 
   return (
     <li className={className}>

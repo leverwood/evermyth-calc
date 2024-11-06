@@ -5,6 +5,8 @@ import {
   OPTION_COST,
   isReward,
   RewardDataID,
+  STAGE,
+  STAGE_COST,
 } from "../types/reward-types";
 import {
   Condition,
@@ -18,11 +20,13 @@ import {
 import { getDCHard } from "../../0.3/util/enemy-calc";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { hasAdv } from "../../0.3/util/pc-calcs";
+import { REWARD_STAGE_LIMITS } from "./reward-stage-limits";
 
 const logger = Logger(LOG_LEVEL.ERROR);
 
 export function initReward({
   name = "",
+  stage = STAGE.ACTION,
   advantage = false,
   advantageMsg = "",
   aoe = false,
@@ -32,6 +36,8 @@ export function initReward({
   conditions = [],
   consumable = false,
   cost = 0,
+  curse = 0,
+  curseMsg = "",
   deals = 0,
   disadvantage = false,
   disadvantageMsg = "",
@@ -40,12 +46,12 @@ export function initReward({
   grantsAbilities = [],
   heals = 0,
   instructions,
-  isMove = false,
+  immune = [],
+  imposeVulnerable = [],
   lingeringDamage = 0,
+  meleeAndRanged = false,
   multiRewards = [],
-  noAction = false,
   noChase = false,
-  noCheck = false,
   notes = "",
   onFailTakeDamage = 0,
   price = 0,
@@ -54,6 +60,7 @@ export function initReward({
   reduceDamage = 0,
   relentless = false,
   relentlessMsg = "",
+  resistant = [],
   restrained = 0,
   requiresAmmo = false,
   specific = false,
@@ -63,25 +70,31 @@ export function initReward({
   summon = false,
   summonTierIncrease = 0,
   teleport = false,
+  tierDecrease = 0,
+  tierIncrease = 0,
   trained = false,
   trainedMsg = "",
   type = REWARD_TYPE.EQUIPMENT,
   upcast,
   upcastMax = 0,
+  vulnerable = [],
   wellspringMax = 0,
   wellspringRecover = 0,
-  whileDefending = false,
 }: RewardData): Reward {
   const reward: Reward = {
     __typename: "Reward",
     name,
+    stage,
     deals: 0,
     heals: 0,
     cost: 0,
     tier: -1,
     type,
     price,
+    meleeAndRanged,
   };
+  reward.tier += STAGE_COST[stage];
+
   if (advantage) {
     reward.tier += OPTION_COST.advantage;
     reward.advantage = true;
@@ -127,6 +140,11 @@ export function initReward({
     reward.tier += cost * OPTION_COST.cost;
     reward.cost += cost;
   }
+  if (curse) {
+    reward.tier -= curse;
+    reward.curse = curse;
+    reward.curseMsg = curseMsg;
+  }
   if (deals) {
     reward.tier += deals * OPTION_COST.deals;
     reward.deals += deals;
@@ -150,36 +168,24 @@ export function initReward({
     reward.tier += heals * OPTION_COST.heals;
     reward.heals += heals;
   }
+  if (immune.length) {
+    reward.tier += immune.length * OPTION_COST.immune;
+    reward.immune = immune;
+  }
+  if (imposeVulnerable.length) {
+    reward.tier += imposeVulnerable.length * OPTION_COST.imposeVulnerable;
+    reward.imposeVulnerable = imposeVulnerable;
+  }
   if (instructions) {
     reward.instructions = instructions;
-  }
-  if (isMove) {
-    reward.isMove = true;
   }
   if (lingeringDamage) {
     reward.lingeringDamage = lingeringDamage;
     reward.tier += OPTION_COST.lingeringDamage * lingeringDamage;
   }
-  if (multiRewards && multiRewards.length) {
-    const multiRewardsResult = multiRewards.map(initReward);
-    reward.multiRewards = multiRewardsResult;
-    let maxTier = 0;
-    for (const r of multiRewardsResult) {
-      if (r.tier > maxTier) maxTier = r.tier;
-    }
-    reward.tier = maxTier;
-  }
-  if (noAction) {
-    reward.tier += OPTION_COST.noAction;
-    reward.noAction = true;
-  }
   if (noChase) {
     reward.tier += OPTION_COST.noChase;
     reward.noChase = true;
-  }
-  if (noCheck) {
-    reward.tier += OPTION_COST.noCheck;
-    reward.noCheck = true;
   }
   if (notes) {
     reward.notes = notes;
@@ -201,6 +207,10 @@ export function initReward({
     reward.tier += OPTION_COST.relentless;
     reward.relentless = true;
     reward.relentlessMsg = relentlessMsg;
+  }
+  if (resistant.length) {
+    reward.tier += resistant.length * OPTION_COST.resistant;
+    reward.resistant = resistant;
   }
   if (restrained) {
     reward.tier += OPTION_COST.restrained * restrained;
@@ -235,6 +245,14 @@ export function initReward({
     reward.tier += OPTION_COST.teleport;
     reward.teleport = true;
   }
+  if (tierDecrease) {
+    reward.tier -= tierDecrease;
+    reward.tierDecrease = tierDecrease;
+  }
+  if (tierIncrease) {
+    reward.tier += tierIncrease;
+    reward.tierIncrease = tierIncrease;
+  }
   if (trained) {
     reward.tier += OPTION_COST.trained;
     reward.trained = true;
@@ -246,6 +264,10 @@ export function initReward({
     reward.tier += upcastMax;
     reward.upcast = upcast;
   }
+  if (vulnerable.length) {
+    reward.tier += vulnerable.length * OPTION_COST.vulnerable;
+    reward.vulnerable = vulnerable;
+  }
   if (wellspringMax) {
     reward.tier += wellspringMax * OPTION_COST.wellspringMax;
     reward.wellspringMax = wellspringMax;
@@ -254,9 +276,47 @@ export function initReward({
     reward.tier += wellspringRecover * OPTION_COST.wellspringRecover;
     reward.wellspringRecover = wellspringRecover;
   }
-  if (whileDefending) {
-    reward.whileDefending = true;
-    reward.tier += OPTION_COST.whileDefending;
+
+  // must be last
+  if (multiRewards && multiRewards.length) {
+    reward.multiRewards = multiRewards;
+
+    // find the highest action tier
+    const highestActionTier = Math.max(
+      ...multiRewards
+        .filter((r) => r.stage === STAGE.ACTION || !r.stage)
+        .map(initReward)
+        .map((r) => r.tier),
+      !reward.stage || reward.stage === STAGE.ACTION ? reward.tier : 0
+    );
+    // find highest defense tier
+    const highestDefenseTier = Math.max(
+      ...multiRewards
+        .filter((r) => r.stage === STAGE.DEFENSE)
+        .map(initReward)
+        .map((r) => r.tier),
+      reward.stage === STAGE.DEFENSE ? reward.tier : 0
+    );
+    // sum passive, move, and minor tiers
+    let otherTiers = multiRewards
+      .filter(
+        (r) =>
+          r.stage === STAGE.PASSIVE ||
+          r.stage === STAGE.MINOR ||
+          r.stage === STAGE.MOVE
+      )
+      .map(initReward)
+      .map((r) => r.tier)
+      .reduce((a, b) => a + b, 0);
+    if (
+      reward.stage === STAGE.PASSIVE ||
+      reward.stage === STAGE.MINOR ||
+      reward.stage === STAGE.MOVE
+    ) {
+      otherTiers += reward.tier;
+    }
+
+    reward.tier = highestActionTier + highestDefenseTier + otherTiers;
   }
 
   return reward;
@@ -266,12 +326,54 @@ export function migrateRewardData(reward: any): RewardData {
   const newData: RewardData = {
     ...reward,
   };
+  if (!reward.stage) {
+    newData.stage = STAGE.ACTION;
+  }
+  if (reward.stage === "action") newData.stage = STAGE.ACTION;
   if (typeof reward.stunned === "boolean") {
     newData.stunned = reward.stunned ? 1 : 0;
   }
   if (typeof reward.restrained === "boolean") {
     newData.restrained = reward.restrained ? 1 : 0;
   }
+
+  // remove junk data
+  if (reward.reduceDamage === 0) {
+    delete newData.reduceDamage;
+  }
+  if (reward.trained === false) {
+    delete newData.trained;
+  }
+  if (reward.cost === 0) {
+    delete newData.cost;
+  }
+  if (reward.advantage === false) delete newData.advantage;
+  if (reward.disadvantage === false) delete newData.disadvantage;
+  if (reward.aoe === false) {
+    delete newData.aoe;
+  }
+  if (reward.avoidAllies === false) {
+    delete newData.avoidAllies;
+  }
+  if (!reward.trainedMsg) {
+    delete newData.trainedMsg;
+  }
+  if (reward.resistant && !reward.resistant.length) {
+    delete newData.resistant;
+  }
+  if (reward.immune && !reward.immune.length) {
+    delete newData.immune;
+  }
+  if (reward.vulnerable && !reward.vulnerable.length) {
+    delete newData.vulnerable;
+  }
+  if (reward.imposeVulnerable && !reward.imposeVulnerable.length) {
+    delete newData.imposeVulnerable;
+  }
+  if (!reward.rangeIncrease || reward.rangeIncrease < 1) {
+    delete newData.rangeIncrease;
+  }
+
   return newData;
 }
 
@@ -373,9 +475,7 @@ export function validateRewardData(options: RewardData): {
 
   const reward = initReward(options);
   if (reward.tier < 0) {
-    errors.push(
-      `Tier is negative (${reward.tier}), so it will be considered tier 0`
-    );
+    errors.push(`Tier is negative (${reward.tier})`);
   }
 
   if (options.advantage && !options.advantageMsg) {
@@ -394,9 +494,6 @@ export function validateRewardData(options: RewardData): {
       "Disadvantage must specify under which conditions you may roll with disadvantage"
     );
   }
-  // if(options.deals && (options.noCheck || options.noAction)){
-  //    errors.push("If it deals damage, it must require a check and an action")
-  // }
   if (options.duration && !options.durationMsg) {
     errors.push("If it has a duration, you must specify the duration");
   }
@@ -410,19 +507,14 @@ export function validateRewardData(options: RewardData): {
       errors.push("Abilities need a description");
     }
   }
-  if (options.isMove && (options.deals || options.heals)) {
-    errors.push("If it is a movement, it cannot deal or heal points");
-  }
-  if (options.noCheck && options.noAction) {
-    errors.push(
-      "If it doesn't take an action, it already doesn't take a check"
-    );
-  }
   if (options.rangeIncrease && !options.ranged) {
     errors.push("Cannot increase range if it is not a ranged reward");
   }
-  if (options.reduceDamage && !options.cost && !options.consumable) {
-    errors.push("If it reduces damage, it must have a cost or be consumable");
+  if (options.ranged && options.meleeAndRanged) {
+    errors.push("Cannot be both ranged and melee and ranged");
+  }
+  if (options.meleeAndRanged && options.rangeIncrease) {
+    errors.push("Cannot increase range if both melee and ranged");
   }
   if (options.relentless && !options.relentlessMsg) {
     errors.push("Relentless must specify which pool(s) it affects");
@@ -447,6 +539,21 @@ export function validateRewardData(options: RewardData): {
   if (options.heals && !options.cost && !options.consumable) {
     errors.push("If it heals, it must have a wellspring cost or be consumable");
   }
+
+  // check for limits on stage
+  for (const attribute in options) {
+    if (
+      options.stage &&
+      !!options[attribute as keyof RewardData] &&
+      REWARD_STAGE_LIMITS[attribute] &&
+      REWARD_STAGE_LIMITS[attribute][options.stage] === false
+    ) {
+      errors.push(
+        `Attribute "${attribute}" is not allowed in stage "${options.stage}"`
+      );
+    }
+  }
+
   const valid = errors.length === 0;
   return { errors, valid };
 }

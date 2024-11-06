@@ -2,28 +2,28 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
-interface RemoveIsMoveProps {
+interface RemoveMeleeAndRangedProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
   className?: string;
 }
 
-const RemoveIsMove: React.FC<RemoveIsMoveProps> = ({
+const RemoveMeleeAndRanged: React.FC<RemoveMeleeAndRangedProps> = ({
   selectedOptions,
   changeValue,
   className,
 }) => {
-  if (!selectedOptions.isMove) return null;
+  if (!selectedOptions.meleeAndRanged) return null;
 
   return (
     <li className={className}>
       <AddRemoveButton
         adding={false}
-        onClick={() => changeValue("isMove", false)}
+        onClick={() => changeValue("meleeAndRanged", false)}
       />
-      <AttributeDescription keyName="isMove" />
+      <AttributeDescription keyName="meleeAndRanged" />
     </li>
   );
 };
 
-export default RemoveIsMove;
+export default RemoveMeleeAndRanged;

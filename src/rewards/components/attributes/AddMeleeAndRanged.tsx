@@ -3,23 +3,23 @@ import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 
-interface AddNoCheckAttributeProps {
+interface AddMeleeAndRangedAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddNoCheckAttribute: React.FC<AddNoCheckAttributeProps> = ({
+const AddMeleeAndRangedAttribute: React.FC<AddMeleeAndRangedAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (selectedOptions.noCheck || selectedOptions.noAction) return null;
+  if (selectedOptions.meleeAndRanged) return null;
 
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("noCheck", true)} />
-      <AttributeDescription keyName="noCheck" />
+      <AddRemoveButton onClick={() => changeValue("meleeAndRanged", true)} />
+      <AttributeDescription keyName="meleeAndRanged" />
     </li>
   );
 };
 
-export default AddNoCheckAttribute;
+export default AddMeleeAndRangedAttribute;

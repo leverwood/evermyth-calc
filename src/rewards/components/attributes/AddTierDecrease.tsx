@@ -3,23 +3,21 @@ import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 
-interface AddIsMoveAttributeProps {
+interface AddTierDecreaseAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddIsMoveAttribute: React.FC<AddIsMoveAttributeProps> = ({
+const AddTierDecreaseAttribute: React.FC<AddTierDecreaseAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (selectedOptions.isMove) return null;
-
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("isMove", true)} />
-      <AttributeDescription keyName="isMove" />
+      <AddRemoveButton onClick={() => changeValue("tierDecrease", 1)} />
+      <AttributeDescription keyName="tierDecrease" />
     </li>
   );
 };
 
-export default AddIsMoveAttribute;
+export default AddTierDecreaseAttribute;
