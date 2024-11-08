@@ -16,6 +16,7 @@ import { randomPCs } from "./simulate-pc";
 import { pcTurn } from "./simulate-pc";
 import { enemyTurn } from "./simulate-enemy";
 import {
+  getWellspringCost,
   initReward,
   maxDamageReduction,
 } from "../../rewards/util/reward-calcs";
@@ -36,7 +37,7 @@ export const runSimulations = (
   for (let i = 0; i < numSimulations; i++) {
     const pcs = randomPCs(minLevel, maxLevel);
     const enemies = makeRandomEnemiesFromPCs(pcs);
-    
+
     const creatures: Creatures = {
       GM: {
         enemies,
@@ -316,14 +317,12 @@ export function tryReduceDamage(damage: number, victim: PC | Enemy) {
 
   const needReduction = damage - victim.pool + 1;
   const reward = victim.rewards.find(
-    (opt) =>
-      opt.reduceDamage && maxDamageReduction(opt) >= needReduction
+    (opt) => opt.reduceDamage && maxDamageReduction(opt) >= needReduction
   );
 
   if (reward) {
     let timesUpcast = 0;
-    let usedWellspring =
-      (reward.cost && reward.cost * initReward(reward).tier) || 0;
+    let usedWellspring = getWellspringCost(initReward(reward));
     // the amount you are going to reduce so far
     let damageReduction = reward.reduceDamage || 0;
 

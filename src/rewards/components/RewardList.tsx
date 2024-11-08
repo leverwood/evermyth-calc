@@ -16,16 +16,34 @@ import RollRandomReward from "./RollRandomReward";
 export const logger = Logger(LOG_LEVEL.INFO);
 
 export default function RewardCreator() {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+
   const { rewards, addReward, deleteReward, getRewardById } =
     useRewardContext();
   const navigate = useNavigate();
 
   const globalMax = findMaxTier(rewards);
   const [shownTierRange, setShownTierRange] = useState<[number, number]>([
-    -1,
-    globalMax,
+    parseInt(params.get("minTier") || "-1"),
+    parseInt(params.get("maxTier") || globalMax.toString()),
   ]);
-  const [searchText, setSearchText] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>(
+    params.get("search") || ""
+  );
+
+  const rewardTypesParam = params.get("rewardTypes");
+  const rewardTypesFromUrl = rewardTypesParam
+    ? (rewardTypesParam.split(",") as REWARD_TYPE[])
+    : [
+        REWARD_TYPE.EQUIPMENT,
+        REWARD_TYPE.FEATURE,
+        REWARD_TYPE.TRINKET,
+        REWARD_TYPE.ALLY,
+      ];
+
+  const [rewardTypes, setRewardTypes] =
+    useState<REWARD_TYPE[]>(rewardTypesFromUrl);
 
   const handleClickCopy = useCallback(
     (id: string | undefined) => {
@@ -42,6 +60,52 @@ export default function RewardCreator() {
     [addReward, getRewardById]
   );
 
+  const handleChangeRewardType = useCallback(
+    (type: REWARD_TYPE, checked: boolean) => {
+      setRewardTypes((prevRewardTypes) => {
+        let newRewardTypes = [...prevRewardTypes];
+        if (checked) {
+          newRewardTypes.push(type);
+        } else {
+          newRewardTypes = prevRewardTypes.filter((t) => t !== type);
+        }
+
+        // put reward types in url param
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        params.set("rewardTypes", newRewardTypes.join(","));
+        url.search = params.toString();
+        window.history.replaceState({}, "", url.toString());
+
+        return newRewardTypes;
+      });
+    },
+    []
+  );
+
+  const handleSetSearchText = useCallback((text: string) => {
+    setSearchText(text);
+
+    // store in url
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set("search", text);
+    url.search = params.toString();
+    window.history.replaceState({}, "", url.toString());
+  }, []);
+
+  const handleSetShownTierRange = useCallback((range: [number, number]) => {
+    setShownTierRange(range);
+
+    // store in url
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set("minTier", range[0].toString());
+    params.set("maxTier", range[1].toString());
+    url.search = params.toString();
+    window.history.replaceState({}, "", url.toString());
+  }, []);
+
   // grab all the rewards but the last one
   const showRewards = rewards
     .filter(
@@ -49,12 +113,13 @@ export default function RewardCreator() {
         !searchText ||
         options.name?.toLowerCase().includes(searchText.toLowerCase())
     )
-    // filter rewards not in tier range
+    // filter rewards in tier range
     .filter((options) => {
-      if (shownTierRange[0] === -1) return true;
       const r = initReward(options);
       return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
     })
+    // filter rewards by type
+    .filter((options) => rewardTypes.includes(initReward(options).type))
     // sort them by tier
     .sort((opt1, opt2) => {
       const r1 = initReward(opt1);
@@ -85,17 +150,52 @@ export default function RewardCreator() {
       <h1>Reward Creator</h1>
       <TierRangeSlider
         value={shownTierRange}
-        setShownTierRange={setShownTierRange}
+        setShownTierRange={handleSetShownTierRange}
         max={globalMax}
       />
       <InputGroup className="mb-4">
         <Form.Control
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => handleSetSearchText(e.target.value)}
           placeholder="Search"
         ></Form.Control>
         <InputGroup.Text>🔎</InputGroup.Text>
       </InputGroup>
+      <InputGroup className="mb-4">
+        <Form.Check
+          className={`me-3`}
+          checked={rewardTypes.includes(REWARD_TYPE.EQUIPMENT)}
+          onChange={(e) =>
+            handleChangeRewardType(REWARD_TYPE.EQUIPMENT, e.target.checked)
+          }
+          label="Equipment"
+        />
+        <Form.Check
+          className={`me-3`}
+          checked={rewardTypes.includes(REWARD_TYPE.FEATURE)}
+          onChange={(e) =>
+            handleChangeRewardType(REWARD_TYPE.FEATURE, e.target.checked)
+          }
+          label="Feature"
+        />
+        <Form.Check
+          className={`me-3`}
+          checked={rewardTypes.includes(REWARD_TYPE.TRINKET)}
+          onChange={(e) =>
+            handleChangeRewardType(REWARD_TYPE.TRINKET, e.target.checked)
+          }
+          label="Trinket"
+        />
+        <Form.Check
+          className={`me-3`}
+          checked={rewardTypes.includes(REWARD_TYPE.ALLY)}
+          onChange={(e) =>
+            handleChangeRewardType(REWARD_TYPE.ALLY, e.target.checked)
+          }
+          label="Ally/Vehicle"
+        />
+      </InputGroup>
+      <span className={`me-2`}>Count: {showRewards.length}</span>
       <Button onClick={handleCreateNew} className="mb-4">
         Create New
       </Button>

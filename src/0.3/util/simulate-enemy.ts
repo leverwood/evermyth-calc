@@ -9,7 +9,10 @@ import {
   PCRollOptions,
 } from "../types/system-types";
 import { getMaxMod, getTargetablePCs, hasAdv } from "./pc-calcs";
-import { decrementConditionDurations } from "../../rewards/util/reward-calcs";
+import {
+  decrementConditionDurations,
+  getWellspringCost,
+} from "../../rewards/util/reward-calcs";
 import {
   makeStandardAoE,
   makeStandardArmor,
@@ -106,7 +109,7 @@ export const enemyTurn = (
   turn.usedReward = reward;
 
   // always spend wellspring even if it fails
-  enemy.wellspring -= reward.cost * Math.max(reward.tier, 0);
+  enemy.wellspring -= getWellspringCost(reward);
   if (!reward.aoe) {
     pcsToAttack = [pcsToAttack[0]];
   }

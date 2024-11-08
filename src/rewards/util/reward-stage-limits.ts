@@ -27,9 +27,9 @@ export const REWARD_STAGE_LIMITS: {
   aoe: {
     [STAGE.ACTION]: true,
     [STAGE.MOVE]: false,
-    [STAGE.MINOR]: false,
+    [STAGE.MINOR]: true,
     [STAGE.DEFENSE]: true,
-    [STAGE.PASSIVE]: false,
+    [STAGE.PASSIVE]: true,
   },
   avoidAllies: {
     [STAGE.ACTION]: true,
@@ -41,7 +41,7 @@ export const REWARD_STAGE_LIMITS: {
   castTime: {
     [STAGE.ACTION]: true,
     [STAGE.MOVE]: false,
-    [STAGE.MINOR]: false,
+    [STAGE.MINOR]: true,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: true,
   },
@@ -91,7 +91,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.MOVE]: false,
     [STAGE.MINOR]: true,
-    [STAGE.DEFENSE]: false,
+    [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
   },
   grantsAbilities: {
@@ -135,6 +135,20 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.MINOR]: false,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: false,
+  },
+  onAutoSuccess: {
+    [STAGE.ACTION]: false,
+    [STAGE.MOVE]: true,
+    [STAGE.MINOR]: true,
+    [STAGE.DEFENSE]: false,
+    [STAGE.PASSIVE]: true,
+  },
+  onSuccess: {
+    [STAGE.ACTION]: false,
+    [STAGE.MOVE]: true,
+    [STAGE.MINOR]: true,
+    [STAGE.DEFENSE]: false,
+    [STAGE.PASSIVE]: true,
   },
   ranged: {
     [STAGE.ACTION]: true,

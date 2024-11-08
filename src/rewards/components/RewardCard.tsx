@@ -102,8 +102,7 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
           }`}
         >
           <div>
-            {reward.type !== REWARD_TYPE.TRAINING &&
-            reward.type !== REWARD_TYPE.TRINKET ? (
+            {reward.type !== REWARD_TYPE.TRINKET ? (
               <span className={styles.cardTier}>
                 tier {Math.max(reward.tier, 0)}{" "}
               </span>

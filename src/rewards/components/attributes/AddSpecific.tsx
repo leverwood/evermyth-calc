@@ -20,6 +20,7 @@ const AddSpecificAttribute: React.FC<AddSpecificAttributeProps> = ({
       <AddRemoveButton onClick={() => changeValue("specific", true)} />
       <AttributeDescription keyName="specific" />
       <Form.Control
+        as="textarea"
         value={selectedOptions.specificMsg || ""}
         onChange={(e) => changeValue("specificMsg", e.target.value)}
       />

@@ -80,6 +80,9 @@ export function EditReward({ id }: { id: string }) {
         case "price":
           newValue = parseInt(value as string);
           break;
+        case "overrideTier":
+          newValue = value ? parseInt(value as string) : 0;
+          break;
         case "immune":
         case "resistant":
         case "vulnerable":
@@ -197,22 +200,23 @@ export function EditReward({ id }: { id: string }) {
             />
             <Form.Check
               inline
-              id="trainingType"
-              type="radio"
-              label="Training"
-              value={REWARD_TYPE.TRAINING}
-              checked={selectedOptions.type === REWARD_TYPE.TRAINING}
-              onChange={() => changeValue("type", REWARD_TYPE.TRAINING)}
-            />
-            <Form.Check
-              inline
-              id="trinketType"
+              id="type-trinket"
               type="radio"
               name="type"
               label="Trinket"
               value={REWARD_TYPE.TRINKET}
               checked={selectedOptions.type === REWARD_TYPE.TRINKET}
               onChange={() => changeValue("type", REWARD_TYPE.TRINKET)}
+            />
+            <Form.Check
+              inline
+              id="type-ally"
+              type="radio"
+              name="type"
+              label="Ally/Vehicle"
+              value={REWARD_TYPE.ALLY}
+              checked={selectedOptions.type === REWARD_TYPE.ALLY}
+              onChange={() => changeValue("type", REWARD_TYPE.ALLY)}
             />
           </Form.Group>
           <Form.Group className="mt-3">
@@ -243,7 +247,6 @@ export function EditReward({ id }: { id: string }) {
               checked={selectedOptions.stage === STAGE.MOVE}
               onChange={() => changeValue("stage", STAGE.MOVE)}
             />
-
             <Form.Check
               inline
               id="stage-passive"
@@ -257,7 +260,7 @@ export function EditReward({ id }: { id: string }) {
               inline
               id="stage-minor"
               type="radio"
-              label="Minor Task (+3)"
+              label="Minor Task (+2)"
               value={STAGE.MINOR}
               checked={selectedOptions.stage === STAGE.MINOR}
               onChange={() => changeValue("stage", STAGE.MINOR)}
@@ -281,16 +284,24 @@ export function EditReward({ id }: { id: string }) {
               onChange={(e) => changeValue("version", e.target.value)}
             />
           </InputGroup>
-          {selectedOptions.type !== REWARD_TYPE.TRAINING ? (
-            <AddAttributes
-              selectedOptions={selectedOptions}
-              changeValue={changeValue}
-              rewards={savedRewards}
-              searchString={searchString}
-              setSearchString={setSearchString}
-            />
-          ) : null}
-          {selectedOptions.type !== REWARD_TYPE.TRAINING && (
+          <InputGroup className="mb-4 mt-4">
+            <Form.Control
+              value={searchString}
+              onChange={(e) => setSearchString(e.target.value)}
+              placeholder="Search"
+            ></Form.Control>
+            <InputGroup.Text>🔎</InputGroup.Text>
+          </InputGroup>
+          {selectedOptions.type !== REWARD_TYPE.TRINKET &&
+            selectedOptions.type !== REWARD_TYPE.ALLY && (
+              <AddAttributes
+                selectedOptions={selectedOptions}
+                changeValue={changeValue}
+                rewards={savedRewards}
+                searchString={searchString}
+              />
+            )}
+          {selectedOptions.type !== REWARD_TYPE.TRINKET && (
             <CombinedReward
               searchString={searchString}
               selectedOptions={selectedOptions}
@@ -332,41 +343,48 @@ export function EditReward({ id }: { id: string }) {
               />
             </Col>
             <Col>
-              {(selectedOptions.type === REWARD_TYPE.EQUIPMENT ||
-                selectedOptions.type === REWARD_TYPE.TRINKET ||
-                selectedOptions.price) && (
-                <>
-                  <InputGroup size="lg" className="mt-3 mb-3">
-                    <InputGroup.Text>Price (cp)</InputGroup.Text>
-                    <Form.Control
-                      id="rewardPrice"
-                      type="number"
-                      min="0"
-                      value={priceStr || ""}
-                      onChange={handleChangePrice}
-                    />
-                  </InputGroup>
-                  <ul>
-                    <li>Tier 0 is 1c - 25c </li>
-                    <li>Tier 1 is 26c - 250c</li>
-                    <li>Tier 2 is 251c - 2,500c</li>
-                    <li>Tier 3 is 2,501c - 25,000c</li>
-                    <li>Tier 4 is 25,001c - 250,000c</li>
-                  </ul>
-                  <ShopCategoryCheckboxes
-                    checkedCategories={selectedOptions.shopCategories || []}
-                    setChecked={handleSetCheckedCategories}
-                  />
-                </>
-              )}
+              <InputGroup size="lg" className="mt-3 mb-3">
+                <InputGroup.Text>Price (cp)</InputGroup.Text>
+                <Form.Control
+                  id="rewardPrice"
+                  type="number"
+                  min="0"
+                  value={priceStr || ""}
+                  onChange={handleChangePrice}
+                />
+              </InputGroup>
+              <ul>
+                <li>Tier 0 is 1c - 25c </li>
+                <li>Tier 1 is 26c - 250c</li>
+                <li>Tier 2 is 251c - 2,500c</li>
+                <li>Tier 3 is 2,501c - 25,000c</li>
+                <li>Tier 4 is 25,001c - 250,000c</li>
+              </ul>
+              <ShopCategoryCheckboxes
+                checkedCategories={selectedOptions.shopCategories || []}
+                setChecked={handleSetCheckedCategories}
+              />
             </Col>
           </Row>
+
+          {selectedOptions.type === REWARD_TYPE.ALLY && (
+            <InputGroup className={`mt-3`}>
+              <InputGroup.Text>Tier</InputGroup.Text>
+              <Form.Control
+                id="override-tier"
+                type="number"
+                value={selectedOptions.overrideTier || 0}
+                onChange={(e) => changeValue("overrideTier", e.target.value)}
+              />
+            </InputGroup>
+          )}
 
           <RemoveAttributes
             selectedOptions={selectedOptions}
             changeValue={changeValue}
             savedRewards={savedRewards}
           />
+
           <div>
             Override description
             <br />

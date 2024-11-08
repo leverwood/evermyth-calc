@@ -26,7 +26,8 @@ const DynamicText = ({
     const currentTextRef = textRef.current;
     const resizeText = () => {
       if (!currentTextRef) return;
-      const { clientHeight, scrollHeight } = textRef.current;
+      const { clientHeight, scrollHeight } = textRef.current
+        .parentElement as HTMLElement;
 
       if (scrollHeight > clientHeight) {
         setFontSize((prevFontSize) => {

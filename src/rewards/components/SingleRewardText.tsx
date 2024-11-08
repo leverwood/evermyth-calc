@@ -38,15 +38,19 @@ export function SingleRewardText({
       {!noTitle ? (
         <strong className={"me-2"}>
           {reward.name}
-          {!noTier &&
-            reward.type !== REWARD_TYPE.TRINKET &&
-            ` (T${reward.tier < 0 ? 0 : reward.tier})`}
+          {!noTier && reward.type !== REWARD_TYPE.TRINKET && reward.tier > 0
+            ? ` (T${reward.tier})`
+            : ""}
           .
         </strong>
       ) : null}
       {showPrice && reward.price ? <Price cp={reward.price} /> : null}
       {!noType ? (
-        <Badge className={`${styles[reward.type.toLocaleLowerCase()]} me-2`}>
+        <Badge
+          className={`${styles[reward.type.toLocaleLowerCase()]} ${
+            styles.badge
+          } me-2`}
+        >
           &nbsp;{reward.type}&nbsp;
         </Badge>
       ) : null}

@@ -2,6 +2,7 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { Form } from "react-bootstrap";
 interface RemoveSummonProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
@@ -22,6 +23,11 @@ const RemoveSummon: React.FC<RemoveSummonProps> = ({
         onClick={() => changeValue("summon", false)}
       />
       <AttributeDescription keyName="summon" />
+      <Form.Control
+        type="text"
+        value={selectedOptions.summonName}
+        onChange={(e) => changeValue("summonName", e.target.value)}
+      />
     </li>
   );
 };

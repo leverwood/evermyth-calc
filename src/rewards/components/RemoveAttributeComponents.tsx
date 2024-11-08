@@ -32,6 +32,10 @@ import RemoveMeleeAndRangedAttribute from "./attributes/RemoveMeleeAndRanged";
 import RemoveCurse from "./attributes/RemoveCurse";
 import RemoveTierDecrease from "./attributes/RemoveTierDecrease";
 import RemoveTierIncrease from "./attributes/RemoveTierIncrease";
+import RemoveOnSuccess from "./attributes/RemoveOnSuccess";
+import RemoveOnAutoSuccess from "./attributes/RemoveOnAutoSuccess";
+import RemoveSuffix from "./attributes/RemoveSuffix";
+import RemovePrefix from "./attributes/RemovePrefix";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -70,4 +74,8 @@ export const attributeComponents: readonly {
   { key: "tierDecrease", component: RemoveTierDecrease },
   { key: "tierIncrease", component: RemoveTierIncrease },
   { key: "meleeAndRanged", component: RemoveMeleeAndRangedAttribute },
+  { key: "onSuccess", component: RemoveOnSuccess },
+  { key: "onAutoSuccess", component: RemoveOnAutoSuccess },
+  { key: "prefix", component: RemovePrefix },
+  { key: "suffix", component: RemoveSuffix },
 ];

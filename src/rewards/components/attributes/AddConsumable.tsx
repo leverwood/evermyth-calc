@@ -1,7 +1,11 @@
 import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
-import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import {
+  ChangeValueFunc,
+  REWARD_TYPE,
+  RewardData,
+} from "../../types/reward-types";
 
 interface AddConsumableAttributeProps {
   selectedOptions: RewardData;
@@ -12,7 +16,11 @@ const AddConsumableAttribute: React.FC<AddConsumableAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (selectedOptions.consumable) return null;
+  if (
+    selectedOptions.consumable ||
+    selectedOptions.type === REWARD_TYPE.FEATURE
+  )
+    return null;
 
   return (
     <li>

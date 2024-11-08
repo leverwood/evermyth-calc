@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 
 import { RewardData } from "../types/reward-types";
 import { getRandomNum } from "../../util/math";
+import { SingleRewardText } from "./SingleRewardText";
+import { initReward } from "../util/reward-calcs";
 
 interface RollRandomRewardProps {
   showRewards: RewardData[];
@@ -22,9 +24,19 @@ const RollRandomReward = ({ showRewards }: RollRandomRewardProps) => {
         Roll
       </Button>
       {randomReward ? (
-        <a className={"ms-3"} href={`/rewards/${randomReward.id}/edit`}>
-          {randomReward.name}
-        </a>
+        <p>
+          <a
+            className={"ms-3"}
+            style={{ color: "inherit", textDecoration: "none" }}
+            href={`/rewards/${randomReward.id}/edit`}
+          >
+            <SingleRewardText
+              reward={initReward(randomReward)}
+              oneLine={true}
+              showPrice={true}
+            />
+          </a>
+        </p>
       ) : null}
     </span>
   );

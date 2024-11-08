@@ -6,7 +6,6 @@ import { ChangeValueFunc } from "../types/reward-types";
 import { attributeComponents } from "./AddAttributeComponents";
 import { jsxToString } from "../util/jsx-to-string";
 import { DESCRIPTIONS } from "./AttributeDescription";
-import { Form, InputGroup } from "react-bootstrap";
 import Slider from "rc-slider";
 
 const findMinMaxTier = () => {
@@ -24,13 +23,11 @@ export function AddAttributes({
   changeValue,
   rewards,
   searchString,
-  setSearchString,
 }: {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
   rewards: RewardData[];
   searchString: string;
-  setSearchString: (value: string) => void;
 }) {
   const [newAbility, setNewAbility] = useState("");
   const [upcastRewardIndex, setUpcastReward] = useState<number>(-1);
@@ -84,14 +81,6 @@ export function AddAttributes({
   return (
     <>
       <h3 className="mb-3 mt-3">Add attributes</h3>
-      <InputGroup className="mb-4">
-        <Form.Control
-          value={searchString}
-          onChange={(e) => setSearchString(e.target.value)}
-          placeholder="Search"
-        ></Form.Control>
-        <InputGroup.Text>🔎</InputGroup.Text>
-      </InputGroup>
       <Slider
         range
         className={`mb-5`}

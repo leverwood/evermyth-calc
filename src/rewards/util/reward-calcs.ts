@@ -54,6 +54,10 @@ export function initReward({
   noChase = false,
   notes = "",
   onFailTakeDamage = 0,
+  onAutoSuccess = false,
+  onSuccess = false,
+  overrideTier = undefined,
+  prefix = undefined,
   price = 0,
   ranged = false,
   rangeIncrease = 0,
@@ -67,8 +71,10 @@ export function initReward({
   specificMsg = "",
   speed = 0,
   stunned = 0,
+  suffix = undefined,
   summon = false,
   summonTierIncrease = 0,
+  summonName = "creature",
   teleport = false,
   tierDecrease = 0,
   tierIncrease = 0,
@@ -92,6 +98,8 @@ export function initReward({
     type,
     price,
     meleeAndRanged,
+    prefix,
+    suffix,
   };
   reward.tier += STAGE_COST[stage];
 
@@ -194,6 +202,14 @@ export function initReward({
     reward.tier += onFailTakeDamage * OPTION_COST.onFailTakeDamage;
     reward.onFailTakeDamage = onFailTakeDamage;
   }
+  if (onAutoSuccess) {
+    reward.onAutoSuccess = true;
+    reward.tier += OPTION_COST.onAutoSuccess;
+  }
+  if (onSuccess) {
+    reward.onSuccess = true;
+    reward.tier += OPTION_COST.onSuccess;
+  }
   if (ranged) {
     reward.ranged = true;
     reward.rangeIncrease = rangeIncrease;
@@ -236,6 +252,7 @@ export function initReward({
   if (summon) {
     reward.tier += OPTION_COST.summon;
     reward.summon = true;
+    reward.summonName = summonName;
   }
   if (summonTierIncrease) {
     reward.tier += summonTierIncrease * OPTION_COST.summonTierIncrease;
@@ -317,6 +334,10 @@ export function initReward({
     }
 
     reward.tier = highestActionTier + highestDefenseTier + otherTiers;
+  }
+
+  if (overrideTier !== undefined && overrideTier !== null) {
+    reward.tier = reward.overrideTier = overrideTier;
   }
 
   return reward;
@@ -466,19 +487,17 @@ export function validateRewardData(options: RewardData): {
 } {
   const errors: string[] = [];
 
-  if (options.type === REWARD_TYPE.TRAINING) {
-    return {
-      errors: [],
-      valid: true,
-    };
-  }
-
   const reward = initReward(options);
   if (reward.tier < 0) {
     errors.push(`Tier is negative (${reward.tier})`);
   }
 
-  if (options.advantage && !options.advantageMsg) {
+  if (
+    options.advantage &&
+    !options.advantageMsg &&
+    options.stage !== STAGE.ACTION &&
+    options.stage !== STAGE.DEFENSE
+  ) {
     errors.push(
       "Advantage must specify under which conditions you may roll with advantage"
     );
@@ -506,6 +525,9 @@ export function validateRewardData(options: RewardData): {
     if (emptyAbilities.length) {
       errors.push("Abilities need a description");
     }
+  }
+  if (options.onAutoSuccess && options.onSuccess) {
+    errors.push("Cannot have both On Auto Success and On Success");
   }
   if (options.rangeIncrease && !options.ranged) {
     errors.push("Cannot increase range if it is not a ranged reward");
@@ -578,4 +600,11 @@ export const isSameReward = (a: RewardData, b: RewardData) => {
     JSON.stringify({ ...a, name: "" }) === JSON.stringify({ ...b, name: "" });
   logger.debug(`isSameReward: ${isSame}`, a, b);
   return isSame;
+};
+
+export const getWellspringCost = (reward: Reward): number => {
+  if (!reward.cost) return 0;
+
+  const originalTier = reward.tier + reward.cost - 1;
+  return Math.max(originalTier * reward.cost, 1);
 };

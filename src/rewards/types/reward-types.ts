@@ -4,8 +4,8 @@ import { ShopCategory } from "../../shops/types/shop-types";
 export enum REWARD_TYPE {
   EQUIPMENT = "equipment",
   FEATURE = "feature",
-  TRAINING = "training",
   TRINKET = "trinket",
+  ALLY = "ally",
 }
 
 // generate with crypto.randomUUID()
@@ -40,6 +40,9 @@ interface RewardBase {
   noChase?: boolean;
   notes?: string;
   onFailTakeDamage?: number;
+  onAutoSuccess?: boolean;
+  onSuccess?: boolean;
+  prefix?: string;
   price?: number;
   ranged?: boolean;
   rangeIncrease?: number;
@@ -52,7 +55,9 @@ interface RewardBase {
   specificMsg?: string;
   speed?: number;
   stunned?: number;
+  suffix?: string;
   summon?: boolean;
+  summonName?: string;
   summonTierIncrease?: number;
   teleport?: boolean;
   tierDecrease?: number;
@@ -67,6 +72,7 @@ interface RewardBase {
   vulnerable?: [];
   immune?: [];
   imposeVulnerable?: [];
+  overrideTier?: number;
 }
 
 export interface RewardData extends RewardBase {
@@ -122,7 +128,7 @@ export const STAGE_COST: {
   [STAGE.DEFENSE]: 0,
   [STAGE.MOVE]: 1,
   [STAGE.PASSIVE]: 1,
-  [STAGE.MINOR]: 3,
+  [STAGE.MINOR]: 2,
 } as const;
 
 export const OPTION_COST: {
@@ -146,6 +152,9 @@ export const OPTION_COST: {
   meleeAndRanged: 0,
   noChase: 1,
   onFailTakeDamage: -1,
+  onAutoSuccess: -2,
+  onSuccess: -1,
+  prefix: 0,
   ranged: 0,
   rangeIncrease: 1,
   reduceDamage: 1,
@@ -156,6 +165,7 @@ export const OPTION_COST: {
   specific: -1,
   speed: 1,
   stunned: 3,
+  suffix: 0,
   summon: 3,
   summonTierIncrease: 1,
   teleport: 2,

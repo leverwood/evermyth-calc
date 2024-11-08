@@ -3,21 +3,23 @@ import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 
-interface AddTierIncreaseAttributeProps {
+interface AddOnSuccessAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddTierIncreaseAttribute: React.FC<AddTierIncreaseAttributeProps> = ({
+const AddOnSuccessAttribute: React.FC<AddOnSuccessAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
+  if (selectedOptions.onSuccess || selectedOptions.onAutoSuccess) return null;
+
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("tierIncrease", 1)} />
-      <AttributeDescription keyName="tierIncrease" />
+      <AddRemoveButton onClick={() => changeValue("onSuccess", true)} />
+      <AttributeDescription keyName="onSuccess" />
     </li>
   );
 };
 
-export default AddTierIncreaseAttribute;
+export default AddOnSuccessAttribute;

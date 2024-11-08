@@ -2,27 +2,25 @@
 
 :global(.badge).equipment {
   background-color: $equipmentColor !important;
-  color: white;
 }
 
-:global(.badge).training {
-  background-color: $trainingColor !important;
-  color: white;
+:global(.badge).ally {
+  background-color: $allyColor !important;
+
 }
 
 :global(.badge).feature {
   background-color: $featureColor !important;
-  color: white;
+
 }
 
 :global(.badge).trinket {
   background-color: $trinketColor !important;
-  color: white;
+
 }
 
 :global(.badge).price {
   background-color: $priceColor !important;
-  color: white;
 }
 
 .singleRewardText {
@@ -31,4 +29,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.badge {
+  color:rgb(128, 128, 128) !important;
 }

@@ -2,6 +2,7 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 import styles from "./TierRangeSlider.module.scss";
+import { useState } from "react";
 
 export default function TierRangeSlider({
   value = [0, 5],
@@ -12,6 +13,7 @@ export default function TierRangeSlider({
   max: number;
   setShownTierRange: (value: [number, number]) => void;
 }) {
+  const [defaultValue] = useState(value);
   const marks: {
     [key: number]: string;
   } = {};
@@ -28,7 +30,7 @@ export default function TierRangeSlider({
         max={max}
         marks={marks}
         step={null}
-        defaultValue={[-1, max]}
+        defaultValue={defaultValue}
         onChangeComplete={(value) =>
           setShownTierRange(
             typeof value === "number" ? [value, value] : [value[0], value[1]]

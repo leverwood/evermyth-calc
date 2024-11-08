@@ -18,6 +18,7 @@ import {
 import {
   decrementConditionDurations,
   getRewardDC,
+  getWellspringCost,
 } from "../../rewards/util/reward-calcs";
 import {
   makeAdvGranter,
@@ -137,7 +138,7 @@ function pcHealAction(pc: PC, downPC: PC, options: PCRollOptions): PCAction {
 
   const hits = getHits();
   const healTotal = reward.heals * hits; // TODO: upcast
-  let usedWellspring = hits ? Math.max(reward.tier, 0) * reward.cost || 0 : 0;
+  let usedWellspring = hits ? getWellspringCost(reward) || 0 : 0;
 
   if (healTotal) {
     downPC.pool += healTotal;

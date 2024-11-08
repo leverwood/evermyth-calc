@@ -2,6 +2,7 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { Form } from "react-bootstrap";
 interface RemoveAdvantageProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
@@ -22,7 +23,8 @@ const RemoveAdvantage: React.FC<RemoveAdvantageProps> = ({
         onClick={() => changeValue("advantage", false)}
       />
       <AttributeDescription keyName="advantage" />
-      <input
+      <Form.Control
+        as="textarea"
         value={selectedOptions.advantageMsg || ""}
         onChange={(e) => changeValue("advantageMsg", e.target.value)}
       />

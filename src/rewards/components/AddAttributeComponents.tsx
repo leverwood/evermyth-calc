@@ -37,6 +37,10 @@ import AddCurse from "./attributes/AddCurse";
 import AddTierDecrease from "./attributes/AddTierDecrease";
 import AddTierIncrease from "./attributes/AddTierIncrease";
 import AddMeleeAndRangedAttribute from "./attributes/AddMeleeAndRanged";
+import AddOnSuccessAttribute from "./attributes/AddOnSuccess";
+import AddOnAutoSuccessAttribute from "./attributes/AddOnAutoSuccess";
+import AddPrefix from "./attributes/AddPrefix";
+import AddSuffix from "./attributes/AddSuffix";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -80,4 +84,8 @@ export const attributeComponents: readonly {
   { key: "tierDecrease", component: AddTierDecrease },
   { key: "tierIncrease", component: AddTierIncrease },
   { key: "meleeAndRanged", component: AddMeleeAndRangedAttribute },
+  { key: "onSuccess", component: AddOnSuccessAttribute },
+  { key: "onAutoSuccess", component: AddOnAutoSuccessAttribute },
+  { key: "prefix", component: AddPrefix },
+  { key: "suffix", component: AddSuffix },
 ] as const;

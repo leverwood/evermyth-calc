@@ -2,22 +2,23 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
-
-interface AddTierIncreaseAttributeProps {
+interface AddSuffixAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddTierIncreaseAttribute: React.FC<AddTierIncreaseAttributeProps> = ({
+const AddSuffixAttribute: React.FC<AddSuffixAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
+  if (selectedOptions.suffix !== undefined) return null;
+
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("tierIncrease", 1)} />
-      <AttributeDescription keyName="tierIncrease" />
+      <AddRemoveButton onClick={() => changeValue("suffix", "")} />
+      <AttributeDescription keyName="suffix" />
     </li>
   );
 };
 
-export default AddTierIncreaseAttribute;
+export default AddSuffixAttribute;

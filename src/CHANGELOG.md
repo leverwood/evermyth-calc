@@ -12,6 +12,9 @@
 - Make the item cost an amount of wellspring equal to the tier
 - Add stages
 - Training from +2 to +1
+- Reward wellspring takes original tier into account
+- Add on success and on auto success
+- Features cannot be single use
 
 ## 0.3.2
 

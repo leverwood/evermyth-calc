@@ -27,6 +27,7 @@ const AddAdvantageAttribute: React.FC<AddAdvantageAttributeProps> = ({
       <AddRemoveButton onClick={() => changeValue("advantage", true)} />
       <AttributeDescription keyName="advantage" />
       <Form.Control
+        as="textarea"
         value={selectedOptions.advantageMsg || ""}
         type="text"
         onChange={(e) => changeValue("advantageMsg", e.target.value)}

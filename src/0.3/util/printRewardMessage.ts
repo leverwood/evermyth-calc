@@ -1,8 +1,7 @@
-import { Reward } from "../../rewards/types/reward-types";
+import { Reward, STAGE } from "../../rewards/types/reward-types";
 import { printModifier } from "../../0.2/util/dice-calcs-0.2";
 // import { LOG_LEVEL, Logger } from "../../util/log";
-import { initReward } from "../../rewards/util/reward-calcs";
-import { getDCMedium } from "./enemy-calc";
+import { getWellspringCost, initReward } from "../../rewards/util/reward-calcs";
 
 // const logger = Logger(LOG_LEVEL.INFO);
 
@@ -25,19 +24,27 @@ export const printRewardMessage = (
     const aoeCreatures = reward.avoidAllies
       ? "creatures of your choice"
       : "all creatures";
-    const zoneSize = reward.rangeIncrease
+    const rangedZoneSize = reward.rangeIncrease
       ? reward.rangeIncrease * 2 + 2
       : reward.meleeAndRanged
       ? 1
       : 2;
-    const zoneMsg = `${zoneSize} zone${zoneSize > 1 ? "s" : ""}`;
+    const aoeZoneSize = reward.aoe
+      ? reward.rangeIncrease
+        ? reward.rangeIncrease + 1
+        : 1
+      : 0;
+    const rangedZoneMsg = `${rangedZoneSize} zone${
+      rangedZoneSize > 1 ? "s" : ""
+    }`;
+    const aoeZoneMsg = `${aoeZoneSize} zone${aoeZoneSize > 1 ? "s" : ""}`;
 
     if (reward.specificMsg) messages.push(reward.specificMsg);
 
     // Decide to cast it
     if (reward.castTimeMsg) messages.push(reward.castTimeMsg);
 
-    if (reward.ranged) messages.push(`range: ${zoneSize} zones away`);
+    if (reward.ranged) messages.push(`range: ${rangedZoneMsg} away`);
     if (reward.meleeAndRanged) messages.push("melee, range: 1 zone away");
     if (reward.relentless)
       messages.push(
@@ -45,9 +52,21 @@ export const printRewardMessage = (
       );
 
     // ROLL
-    if (reward.trained) messages.push(`training ` + reward.trainedMsg || "");
-    if (reward.advantage)
-      messages.push(`advantage ` + reward.advantageMsg || "");
+    if (reward.onSuccess) messages.push(`on success`);
+    if (reward.onAutoSuccess) messages.push(`on auto success`);
+    if (reward.trained)
+      messages.push(
+        `${!reward.trainedMsg ? "roll with " : ""}training${
+          reward.trainedMsg ? ": " : ""
+        }` + reward.trainedMsg || ""
+      );
+    if (reward.advantage) {
+      messages.push(
+        reward.advantageMsg
+          ? `advantage ` + reward.advantageMsg
+          : "roll with advantage"
+      );
+    }
     if (reward.disadvantage)
       messages.push(`target +5 ` + reward.disadvantageMsg || "");
 
@@ -63,7 +82,11 @@ export const printRewardMessage = (
       if (reward.noChase) messages.push(`can't be chased`);
     }
     if (reward.summon)
-      messages.push(`summon a tier ${reward.summonTierIncrease || 0} creature`);
+      messages.push(
+        `summon a tier ${reward.summonTierIncrease || 0} ${
+          reward.summonName
+        }, you may only have 1 summon at a time`
+      );
     if (!reward.summon && reward.summonTierIncrease) {
       messages.push(`+${reward.summonTierIncrease} summon tier`);
     }
@@ -78,15 +101,17 @@ export const printRewardMessage = (
     // DEAL OR HEAL
     if (reward.deals) {
       messages.push(
-        `deal ${isUpcast ? printModifier(reward.deals) : reward.deals} point${
-          reward.deals > 1 ? "s" : ""
-        }${reward.aoe ? " to " + aoeCreatures + ` in ${zoneMsg}` : ""}`
+        `deal ${
+          isUpcast || reward.stage === STAGE.MINOR
+            ? printModifier(reward.deals)
+            : reward.deals
+        } point${reward.deals > 1 ? "s" : ""}${
+          reward.aoe ? " to " + aoeCreatures + ` in ${aoeZoneMsg}` : ""
+        }`
       );
-      if (reward.aoe) messages.push(`DC ${getDCMedium(reward.tier)}`);
     }
     if (!reward.deals && reward.aoe) {
-      messages.push(`affects ${aoeCreatures} in ${zoneMsg}`);
-      messages.push(`DC ${getDCMedium(reward.tier)}`);
+      messages.push(`affects ${aoeCreatures} in ${aoeZoneMsg}`);
     }
     if (reward.heals) {
       messages.push(
@@ -103,7 +128,7 @@ export const printRewardMessage = (
     }
     if (reward.lingeringDamage) {
       messages.push(
-        `deals ${reward.lingeringDamage} damage at the end of their turn unless an action is taken to end the effect`
+        `deals ${reward.lingeringDamage} damage at the end of their turns unless an action is taken to end the effect`
       );
     }
 
@@ -177,14 +202,16 @@ export const printRewardMessage = (
     // cost should be last
     if (reward.consumable) messages.push("single use");
     if (reward.cost)
-      messages.push(
-        `costs ${Math.max(reward.tier, 1) * reward.cost} wellspring`
-      );
+      messages.push(`costs ${getWellspringCost(reward)} wellspring`);
 
     // add stage label
     if (messages.length) {
       messages[0] = `(${reward.stage?.toLowerCase()}) ` + messages[0];
     }
+
+    if (reward.suffix) messages.push(reward.suffix);
+
+    if (reward.prefix) messages.unshift(reward.prefix);
   }
 
   if (reward.multiRewards) {
@@ -211,4 +238,4 @@ export const printRewardMessage = (
   for (let i = 1; i < messages.length; i++) {}
 
   return messages.filter((m) => m.length).join(", ");
-}
+};

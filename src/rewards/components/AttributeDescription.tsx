@@ -91,8 +91,8 @@ export const DESCRIPTIONS: {
   ),
   lingeringDamage: (
     <>
-      <strong>Lingering Damage.</strong> Deal +1 damage at the end of their turn
-      unless an action is taken to end the effect.
+      <strong>Lingering Damage.</strong> Deal +1 damage at the end of their
+      turns unless an action is taken to end the effect.
     </>
   ),
   meleeAndRanged: (
@@ -123,9 +123,28 @@ export const DESCRIPTIONS: {
       pool of the ability you used.
     </>
   ),
+  prefix: (
+    <>
+      <strong>Prefix.</strong> Add a text before the rest of the reward
+      description.
+    </>
+  ),
+  onAutoSuccess: (
+    <>
+      <strong>On Auto Success.</strong> The effect applies only if you roll the
+      maximum number on the skill die.
+    </>
+  ),
+  onSuccess: (
+    <>
+      <strong>On Success.</strong> The effect applies only if the roll is
+      successful.
+    </>
+  ),
   ranged: (
     <>
-      <strong>Ranged.</strong> Can target a zone up to 2 away. In the current zone, add +5 to the target.
+      <strong>Ranged.</strong> Can target a zone up to 2 away. In the current
+      zone, add +5 to the target.
     </>
   ),
   rangeIncrease: (
@@ -180,6 +199,12 @@ export const DESCRIPTIONS: {
       multiple times to increase the tier limit.
     </>
   ),
+  suffix: (
+    <>
+      <strong>Suffix.</strong> Add a text after the rest of the reward
+      description.
+    </>
+  ),
   summon: (
     <>
       <strong>Summon</strong> a tier 0 creature
@@ -198,12 +223,14 @@ export const DESCRIPTIONS: {
   ),
   tierDecrease: (
     <>
-      <strong>Tier Decrease.</strong> Decrease the tier of the reward by 1
+      <strong>Reward Tier Decrease.</strong> Decrease the tier of the reward by
+      1
     </>
   ),
   tierIncrease: (
     <>
-      <strong>Tier Increase.</strong> Increase the tier of the reward by 1
+      <strong>Reward Tier Increase.</strong> Increase the tier of the reward by
+      1
     </>
   ),
   trained: (
