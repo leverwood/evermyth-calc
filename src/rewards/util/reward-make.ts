@@ -148,7 +148,7 @@ export const makePotionOfHealing = (tier: number): Reward => {
     name: `T${tier} Potion of Healing`,
     deals: 0,
     consumable: true,
-    stage: STAGE.MINOR,
+    stage: STAGE.ACTION,
     heals: tier + 1,
   });
   if (reward.tier !== tier)

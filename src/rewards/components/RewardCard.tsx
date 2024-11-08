@@ -48,13 +48,12 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
               rewardData.padImage ? styles.padImage : ""
             }`}
           >
-            <div
+            <img
               className={`${styles.frontImage} ${
                 rewardData.stretchImgY ? styles.stretchImgY : ""
               }`}
-              style={{
-                backgroundImage: `url(${rewardData.frontImg})`,
-              }}
+              src={rewardData.frontImg}
+              alt={reward.name}
             />
           </div>
         </div>
@@ -102,11 +101,11 @@ export function RewardCard({ rewardData }: { rewardData: RewardData }) {
           }`}
         >
           <div>
-            {reward.type !== REWARD_TYPE.TRINKET ? (
+            {reward.type !== REWARD_TYPE.TRINKET && (
               <span className={styles.cardTier}>
                 tier {Math.max(reward.tier, 0)}{" "}
               </span>
-            ) : null}
+            )}
             <span className={`${styles.cardType}`}>
               {reward.type || "EQUIPMENT"}
             </span>{" "}

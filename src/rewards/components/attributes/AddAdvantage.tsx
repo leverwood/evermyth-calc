@@ -16,7 +16,7 @@ const AddAdvantageAttribute: React.FC<AddAdvantageAttributeProps> = ({
 }) => {
   if (selectedOptions.advantage) return null;
   if (
-    REWARD_STAGE_LIMITS["advantage"][selectedOptions.stage || STAGE.ACTION] ===
+    REWARD_STAGE_LIMITS["advantage"][selectedOptions.stage || STAGE.CHECK] ===
     false
   ) {
     return null;

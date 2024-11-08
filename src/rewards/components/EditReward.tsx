@@ -225,9 +225,9 @@ export function EditReward({ id }: { id: string }) {
               id="stage-action"
               type="radio"
               label={"Check"}
-              value={STAGE.ACTION}
-              checked={selectedOptions.stage === STAGE.ACTION}
-              onChange={() => changeValue("stage", STAGE.ACTION)}
+              value={STAGE.CHECK}
+              checked={selectedOptions.stage === STAGE.CHECK}
+              onChange={() => changeValue("stage", STAGE.CHECK)}
             />
             <Form.Check
               inline
@@ -260,10 +260,10 @@ export function EditReward({ id }: { id: string }) {
               inline
               id="stage-minor"
               type="radio"
-              label="Minor Task (+2)"
-              value={STAGE.MINOR}
-              checked={selectedOptions.stage === STAGE.MINOR}
-              onChange={() => changeValue("stage", STAGE.MINOR)}
+              label="Action - No Roll (+2)"
+              value={STAGE.ACTION}
+              checked={selectedOptions.stage === STAGE.ACTION}
+              onChange={() => changeValue("stage", STAGE.ACTION)}
             />
           </Form.Group>
           <InputGroup size="sm" className={`mt-3`}>

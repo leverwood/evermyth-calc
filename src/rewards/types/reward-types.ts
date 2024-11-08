@@ -54,6 +54,7 @@ interface RewardBase {
   specific?: boolean;
   specificMsg?: string;
   speed?: number;
+  speedType?: string;
   stunned?: number;
   suffix?: string;
   summon?: boolean;
@@ -114,21 +115,22 @@ export const TEMPORARY_ADV_DEFENSE: Condition = {
 };
 
 export enum STAGE {
-  ACTION = "check",
+  CHECK = "check",
   MOVE = "move",
   DEFENSE = "defense",
   PASSIVE = "passive",
-  MINOR = "minor",
+  // MINOR = "minor",
+  ACTION = "action",
 }
 
 export const STAGE_COST: {
   [key in STAGE]: number;
 } = {
-  [STAGE.ACTION]: 0,
+  [STAGE.CHECK]: 0,
   [STAGE.DEFENSE]: 0,
   [STAGE.MOVE]: 1,
   [STAGE.PASSIVE]: 1,
-  [STAGE.MINOR]: 2,
+  [STAGE.ACTION]: 2,
 } as const;
 
 export const OPTION_COST: {
@@ -152,8 +154,8 @@ export const OPTION_COST: {
   meleeAndRanged: 0,
   noChase: 1,
   onFailTakeDamage: -1,
-  onAutoSuccess: -2,
-  onSuccess: -1,
+  onAutoSuccess: -1,
+  onSuccess: 0,
   prefix: 0,
   ranged: 0,
   rangeIncrease: 1,

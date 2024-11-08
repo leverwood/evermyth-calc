@@ -78,7 +78,12 @@ export const printRewardMessage = (
         } away`
       );
     } else {
-      if (reward.speed) messages.push(`speed is ${reward.speed + 1}`);
+      if (reward.speed)
+        messages.push(
+          `+${reward.speed} ${
+            reward.speedType ? `${reward.speedType} ` : ""
+          }speed`
+        );
       if (reward.noChase) messages.push(`can't be chased`);
     }
     if (reward.summon)
@@ -102,7 +107,7 @@ export const printRewardMessage = (
     if (reward.deals) {
       messages.push(
         `deal ${
-          isUpcast || reward.stage === STAGE.MINOR
+          isUpcast || reward.stage === STAGE.ACTION
             ? printModifier(reward.deals)
             : reward.deals
         } point${reward.deals > 1 ? "s" : ""}${
@@ -179,19 +184,21 @@ export const printRewardMessage = (
     if (reward.wellspringMax)
       messages.push(`increase max wellspring by ${reward.wellspringMax}`);
 
-    if (reward.stunned)
-      messages.push(
-        "make a check to maintain the stun if an action is used to break it"
-      );
-    if (reward.restrained)
-      messages.push(
-        "make a check to maintain the effect if an action is used to break it"
-      );
+    // this must go before "roll to maintain" messages
     if (reward.onFailTakeDamage) {
       messages.push(
         `on a failure take ${reward.onFailTakeDamage} damage to the pool of the ability you used`
       );
     }
+
+    if (reward.stunned)
+      messages.push(
+        "roll to maintain the stun if an action is used to break it"
+      );
+    if (reward.restrained)
+      messages.push(
+        "roll to maintain the effect if an action is used to break it"
+      );
 
     // duration should be near last
     if (reward.durationMsg) messages.push(reward.durationMsg);

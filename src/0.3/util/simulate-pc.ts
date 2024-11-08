@@ -109,7 +109,7 @@ function pcHealAction(pc: PC, downPC: PC, options: PCRollOptions): PCAction {
 
   const getHits = () => {
     if (
-      reward.stage === STAGE.MINOR ||
+      reward.stage === STAGE.ACTION ||
       reward.stage === STAGE.MOVE ||
       reward.stage === STAGE.PASSIVE
     ) {

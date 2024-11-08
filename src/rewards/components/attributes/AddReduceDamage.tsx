@@ -15,7 +15,7 @@ const AddReduceDamageAttribute: React.FC<AddReduceDamageAttributeProps> = ({
 }) => {
   if (
     REWARD_STAGE_LIMITS["reduceDamage"][
-      selectedOptions.stage || STAGE.ACTION
+      selectedOptions.stage || STAGE.CHECK
     ] === false
   ) {
     return null;

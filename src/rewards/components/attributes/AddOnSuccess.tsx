@@ -1,7 +1,7 @@
 import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
-import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { ChangeValueFunc, RewardData, STAGE } from "../../types/reward-types";
 
 interface AddOnSuccessAttributeProps {
   selectedOptions: RewardData;
@@ -12,7 +12,13 @@ const AddOnSuccessAttribute: React.FC<AddOnSuccessAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (selectedOptions.onSuccess || selectedOptions.onAutoSuccess) return null;
+  if (
+    selectedOptions.onSuccess ||
+    selectedOptions.onAutoSuccess ||
+    selectedOptions.stage === STAGE.CHECK ||
+    selectedOptions.stage === STAGE.DEFENSE
+  )
+    return null;
 
   return (
     <li>

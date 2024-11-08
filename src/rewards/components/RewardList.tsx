@@ -116,6 +116,7 @@ export default function RewardCreator() {
     // filter rewards in tier range
     .filter((options) => {
       const r = initReward(options);
+      if (r.tier < 0 && shownTierRange[0] < 0) return true;
       return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
     })
     // filter rewards by type
@@ -139,7 +140,7 @@ export default function RewardCreator() {
     const id = addReward({
       name: "",
       type: REWARD_TYPE.EQUIPMENT,
-      stage: STAGE.ACTION,
+      stage: STAGE.CHECK,
     });
     // navigate to edit page
     navigate(`/rewards/${id}/edit`);

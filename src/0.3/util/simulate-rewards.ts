@@ -31,11 +31,11 @@ export function chooseBestReward(
   // remove ones that don't match the options
   if (options.action)
     possibleRewards = possibleRewards.filter(
-      (reward) => reward.stage === STAGE.ACTION
+      (reward) => reward.stage === STAGE.CHECK
     );
   if (options.action === false)
     possibleRewards = possibleRewards.filter(
-      (reward) => reward.stage !== STAGE.ACTION
+      (reward) => reward.stage !== STAGE.CHECK
     );
   if (options.deals)
     possibleRewards = possibleRewards.filter((reward) => reward.deals);
@@ -47,11 +47,11 @@ export function chooseBestReward(
     possibleRewards = possibleRewards.filter((reward) => !reward.heals);
   if (options.needsCheck)
     possibleRewards = possibleRewards.filter(
-      (reward) => reward.stage === STAGE.ACTION
+      (reward) => reward.stage === STAGE.CHECK
     );
   if (options.needsCheck === false)
     possibleRewards = possibleRewards.filter(
-      (reward) => reward.stage !== STAGE.ACTION
+      (reward) => reward.stage !== STAGE.CHECK
     );
 
   // remove those that place conditions which are already active

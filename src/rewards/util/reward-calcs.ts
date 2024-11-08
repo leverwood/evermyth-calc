@@ -26,7 +26,7 @@ const logger = Logger(LOG_LEVEL.ERROR);
 
 export function initReward({
   name = "",
-  stage = STAGE.ACTION,
+  stage = STAGE.CHECK,
   advantage = false,
   advantageMsg = "",
   aoe = false,
@@ -70,6 +70,7 @@ export function initReward({
   specific = false,
   specificMsg = "",
   speed = 0,
+  speedType = "",
   stunned = 0,
   suffix = undefined,
   summon = false,
@@ -244,6 +245,7 @@ export function initReward({
   if (speed) {
     reward.tier += speed * OPTION_COST.speed;
     reward.speed = speed;
+    reward.speedType = speedType;
   }
   if (stunned) {
     reward.tier += OPTION_COST.stunned * stunned;
@@ -301,10 +303,12 @@ export function initReward({
     // find the highest action tier
     const highestActionTier = Math.max(
       ...multiRewards
-        .filter((r) => r.stage === STAGE.ACTION || !r.stage)
+        .filter(
+          (r) => r.stage === STAGE.CHECK || r.stage === STAGE.ACTION || !r.stage
+        )
         .map(initReward)
         .map((r) => r.tier),
-      !reward.stage || reward.stage === STAGE.ACTION ? reward.tier : 0
+      !reward.stage || reward.stage === STAGE.CHECK ? reward.tier : 0
     );
     // find highest defense tier
     const highestDefenseTier = Math.max(
@@ -314,26 +318,28 @@ export function initReward({
         .map((r) => r.tier),
       reward.stage === STAGE.DEFENSE ? reward.tier : 0
     );
-    // sum passive, move, and minor tiers
+    // sum passive, move tiers
     let otherTiers = multiRewards
-      .filter(
-        (r) =>
-          r.stage === STAGE.PASSIVE ||
-          r.stage === STAGE.MINOR ||
-          r.stage === STAGE.MOVE
-      )
+      .filter((r) => r.stage === STAGE.PASSIVE || r.stage === STAGE.MOVE)
       .map(initReward)
       .map((r) => r.tier)
       .reduce((a, b) => a + b, 0);
-    if (
-      reward.stage === STAGE.PASSIVE ||
-      reward.stage === STAGE.MINOR ||
-      reward.stage === STAGE.MOVE
-    ) {
+    if (reward.stage === STAGE.PASSIVE || reward.stage === STAGE.MOVE) {
       otherTiers += reward.tier;
     }
 
     reward.tier = highestActionTier + highestDefenseTier + otherTiers;
+  }
+
+  // if it is a trinket, return a tier value for filtering purposes
+  if (type === REWARD_TYPE.TRINKET) {
+    let tier = 0;
+    let remaining = reward.price || 0;
+    while (remaining / 10 > 2.5) {
+      tier += 1;
+      remaining /= 10;
+    }
+    reward.tier = tier;
   }
 
   if (overrideTier !== undefined && overrideTier !== null) {
@@ -348,9 +354,8 @@ export function migrateRewardData(reward: any): RewardData {
     ...reward,
   };
   if (!reward.stage) {
-    newData.stage = STAGE.ACTION;
+    newData.stage = STAGE.CHECK;
   }
-  if (reward.stage === "action") newData.stage = STAGE.ACTION;
   if (typeof reward.stunned === "boolean") {
     newData.stunned = reward.stunned ? 1 : 0;
   }
@@ -487,6 +492,8 @@ export function validateRewardData(options: RewardData): {
 } {
   const errors: string[] = [];
 
+  if (options.type === REWARD_TYPE.TRINKET) return { errors, valid: true };
+
   const reward = initReward(options);
   if (reward.tier < 0) {
     errors.push(`Tier is negative (${reward.tier})`);
@@ -495,7 +502,7 @@ export function validateRewardData(options: RewardData): {
   if (
     options.advantage &&
     !options.advantageMsg &&
-    options.stage !== STAGE.ACTION &&
+    options.stage !== STAGE.CHECK &&
     options.stage !== STAGE.DEFENSE
   ) {
     errors.push(

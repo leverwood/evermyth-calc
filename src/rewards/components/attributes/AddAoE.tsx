@@ -15,7 +15,7 @@ const AddAoeAttribute: React.FC<AddAoeAttributeProps> = ({
 }) => {
   if (selectedOptions.aoe) return null;
   if (
-    REWARD_STAGE_LIMITS["aoe"][selectedOptions.stage || STAGE.ACTION] === false
+    REWARD_STAGE_LIMITS["aoe"][selectedOptions.stage || STAGE.CHECK] === false
   ) {
     return null;
   }

@@ -189,7 +189,8 @@ export const DESCRIPTIONS: {
   ),
   speed: (
     <>
-      <strong>Speed.</strong> Increase your speed by +1 zone
+      <strong>Speed.</strong> Increase your speed by +1 zone. Can specify a type
+      of movement.
     </>
   ),
   stunned: (

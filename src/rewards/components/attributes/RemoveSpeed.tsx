@@ -2,6 +2,7 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { Form } from "react-bootstrap";
 interface RemoveSpeedProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
@@ -23,6 +24,11 @@ const RemoveSpeed: React.FC<RemoveSpeedProps> = ({
         overrideText={`❌ (current: ${selectedOptions.speed})`}
       />
       <AttributeDescription keyName="speed" />
+      <Form.Control
+        type="text"
+        value={selectedOptions.speedType}
+        onChange={(e) => changeValue("speedType", e.target.value)}
+      />
     </li>
   );
 };
