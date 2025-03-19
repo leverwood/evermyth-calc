@@ -69,7 +69,7 @@ export const printRewardMessage = (
       );
     }
     if (reward.disadvantage)
-      messages.push(`target +5 ` + reward.disadvantageMsg || "");
+      messages.push(`disadvantage ` + reward.disadvantageMsg || "");
 
     // movement
     if (reward.teleport) {

@@ -51,7 +51,7 @@ export const DESCRIPTIONS: {
   ),
   disadvantage: (
     <>
-      <strong>Target +5.</strong> Under condition:
+      <strong>Disadvantage.</strong> Under condition:
     </>
   ),
   duration: (

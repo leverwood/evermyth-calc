@@ -336,7 +336,8 @@ export function initReward({
       ...multiRewards
         .filter((r) => r.consumable)
         .map(initReward)
-        .map((r) => r.tier)
+        .map((r) => r.tier),
+      reward.consumable ? reward.tier : 0
     );
     // sum passive, move tiers
     let otherTiers = multiRewards
@@ -357,6 +358,16 @@ export function initReward({
       otherTiers += reward.tier;
     }
 
+    if (reward.name === "Plate Armor of Etherealness") {
+      console.log({
+        highestActionTier,
+        highestDefenseTier,
+        highestSingleUseTier,
+        otherTiers,
+        singleUse: multiRewards.filter((r) => r.consumable),
+      });
+    }
+    
     reward.tier =
       highestActionTier +
       highestDefenseTier +
