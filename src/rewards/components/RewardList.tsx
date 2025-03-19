@@ -15,7 +15,7 @@ import RollRandomReward from "./RollRandomReward";
 
 export const logger = Logger(LOG_LEVEL.INFO);
 
-export default function RewardCreator() {
+export default function RewardList() {
   const url = new URL(window.location.href);
   const params = new URLSearchParams(url.search);
 
@@ -205,9 +205,8 @@ export default function RewardCreator() {
         <ListGroup>
           {showRewards.map((options) => {
             const reward = initReward(options);
-            const index = rewards.findIndex((opt) => opt === options);
             return (
-              <ListGroup.Item className={`d-flex`} key={index}>
+              <ListGroup.Item className={`d-flex`} key={options.id}>
                 {options.frontImg && (
                   <div
                     className={`${styles.lineImg} me-2 mt-1`}

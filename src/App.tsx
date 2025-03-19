@@ -2,14 +2,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import OldApp from "./0.2/components/App-0.2";
 import SystemOverview from "./0.3/components/SystemOverview";
-import RewardCreator from "./rewards/components/RewardList";
+import RewardList from "./rewards/components/RewardList";
 import PlayerTracker from "./players/components/PlayerTracker";
 import ShopListPage from "./shops/components/ShopList";
 import Layout from "./components/Layout";
 import { ShopProvider } from "./shops/contexts/ShopContext";
 import EditShop from "./shops/components/EditShop";
 import Map from "./map/components/Map";
-import RewardPage from "./rewards/components/EditRewardPage";
+import EditRewardPage from "./rewards/components/EditRewardPage";
 import { RewardProvider } from "./rewards/contexts/RewardContext";
 import ServiceList from "./services/components/ServiceList";
 import EditService from "./services/components/EditService";
@@ -17,6 +17,9 @@ import { ServiceProvider } from "./services/contexts/ServiceContext";
 import EditShopCategory from "./shops/components/EditShopCategory";
 
 import "./App.scss";
+import EditCreaturePage from "./creatures/components/EditCreaturePage";
+import { CreatureProvider } from "./creatures/contexts/CreatureContext";
+import CreatureList from "./creatures/components/CreatureList";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <RewardProvider>
-          <RewardCreator />
+          <RewardList />
         </RewardProvider>
       </Layout>
     ),
@@ -49,7 +52,27 @@ const router = createBrowserRouter([
     path: "/rewards/:id/edit",
     element: (
       <Layout>
-        <RewardPage />
+        <EditRewardPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/creatures",
+    element: (
+      <Layout>
+        <CreatureProvider>
+          <CreatureList />
+        </CreatureProvider>
+      </Layout>
+    ),
+  },
+  {
+    path: "/creatures/:id/edit",
+    element: (
+      <Layout>
+        <RewardProvider>
+          <EditCreaturePage />
+        </RewardProvider>
       </Layout>
     ),
   },

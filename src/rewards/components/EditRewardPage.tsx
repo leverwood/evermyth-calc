@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { EditReward } from "./EditReward";
 import { RewardProvider } from "../contexts/RewardContext";
 
-function RewardPage() {
+function EditRewardPage() {
   const { id } = useParams<{ id?: string }>();
 
   if (!id) return <p>404</p>;
@@ -14,4 +14,4 @@ function RewardPage() {
   );
 }
 
-export default RewardPage;
+export default EditRewardPage;

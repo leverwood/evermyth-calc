@@ -113,9 +113,7 @@ export const printRewardMessage = (
           reward.stage === STAGE.PASSIVE
             ? printModifier(reward.deals)
             : dealPoints
-        } point${reward.deals > 1 || reward.stage === STAGE.ACTION ? "s" : ""}${
-          reward.aoe ? " to " + aoeCreatures + ` in ${aoeZoneMsg}` : ""
-        }`
+        } ${reward.aoe ? " to " + aoeCreatures + ` in ${aoeZoneMsg}` : ""}`
       );
     }
     if (!reward.deals && reward.aoe) {
@@ -123,7 +121,7 @@ export const printRewardMessage = (
     }
     if (reward.heals) {
       messages.push(
-        `heals ${healPoints} point${
+        `heals ${healPoints} ${
           reward.aoe
             ? " to " +
               (reward.avoidAllies
@@ -131,7 +129,7 @@ export const printRewardMessage = (
                 : "all creatures") +
               " in a zone"
             : ""
-        }${reward.heals > 1 ? "s" : ""}`
+        }`
       );
     }
     if (reward.lingeringDamage) {

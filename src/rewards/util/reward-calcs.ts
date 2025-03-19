@@ -358,16 +358,6 @@ export function initReward({
       otherTiers += reward.tier;
     }
 
-    if (reward.name === "Plate Armor of Etherealness") {
-      console.log({
-        highestActionTier,
-        highestDefenseTier,
-        highestSingleUseTier,
-        otherTiers,
-        singleUse: multiRewards.filter((r) => r.consumable),
-      });
-    }
-    
     reward.tier =
       highestActionTier +
       highestDefenseTier +

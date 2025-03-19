@@ -389,7 +389,7 @@
       "name": "Blind Fire Mark",
       "type": "feature",
       "ranged": true,
-      "disadvantageMsg": "close your eyes and fire with disadvantage",
+      "disadvantageMsg": "because you close your eyes",
       "disadvantage": true,
       "deals": 3,
       "id": "dfa510a9-ba65-4c8e-a1bc-68b7faaa58d3",
@@ -1028,7 +1028,7 @@
       "id": "daba37e4-bd78-46b5-92f9-2096c3f2749e",
       "price": 75,
       "trained": true,
-      "disadvantageMsg": "+5 to target when stealthing",
+      "disadvantageMsg": " when stealthing",
       "disadvantage": true,
       "reduceDamage": 2,
       "trainedMsg": "armor training",
@@ -1044,7 +1044,7 @@
       "price": 50,
       "reduceDamage": 1,
       "disadvantage": true,
-      "disadvantageMsg": "+5 to target when stealthing",
+      "disadvantageMsg": " to stealth",
       "shopCategories": [
         "blacksmith"
       ],
@@ -3870,7 +3870,7 @@
       ],
       "trainedMsg": "training in armor",
       "deals": 0,
-      "curseMsg": "add +5 to the target when making checks and defense rolls against demons",
+      "curseMsg": "disadvantage against demons",
       "curse": 1,
       "multiRewards": [
         {
@@ -4114,7 +4114,7 @@
       "type": "equipment",
       "id": "3628bca4-a669-4f36-9404-4b7bc0cf800b",
       "price": 0,
-      "disadvantageMsg": "when stealthing",
+      "disadvantageMsg": "to stealth",
       "reduceDamage": 3,
       "shopCategories": [],
       "stage": "defense",
@@ -8835,6 +8835,17 @@
       "stage": "check",
       "version": "0.3.3",
       "created": "2025-03-19T05:15:23.895Z"
+    },
+    {
+      "name": "Brittle",
+      "type": "feature",
+      "stage": "passive",
+      "id": "0a537775-ce5c-4150-b3ec-d7174f681ac3",
+      "version": "0.3.3",
+      "created": "2025-03-19T16:01:25.299Z",
+      "vulnerable": [
+        "bludgeoning"
+      ]
     }
   ],
   "players": [
