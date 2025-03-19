@@ -69,7 +69,7 @@
       "name": "Chocolate",
       "consumable": true,
       "heals": 2,
-      "instructions": "single use, no check, restore 2 to mental pool",
+      "instructions": "",
       "specificMsg": "restores mental pool",
       "specific": true,
       "type": "equipment",
@@ -78,7 +78,7 @@
         "apothecary"
       ],
       "price": 25,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "id": "7bd70c18-3bec-4b7c-bf8c-266fa23117b7",
@@ -133,11 +133,6 @@
       "version": "0.3.3"
     },
     {
-      "id": "8a09f15d-571f-4e46-9f4b-1896c342ff95",
-      "name": "Finger of the Five-Fingered Viscount",
-      "stage": "check"
-    },
-    {
       "id": "c919abe2-4f51-4ab0-9821-9c1fc239a025",
       "name": "Finger of the Viscount",
       "type": "equipment",
@@ -146,7 +141,7 @@
         "duplicates one item less than 100 coins but not any of its magical properties"
       ],
       "price": 100,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "id": "cd16e1c8-55e7-401e-ba43-b094e1f93ca2",
@@ -162,7 +157,8 @@
         "temple",
         "survival-outfitters"
       ],
-      "stage": "minor"
+      "stage": "action",
+      "version": "0.3.3"
     },
     {
       "id": "fabd81e7-99b7-48cd-afd7-bfc8adf7d588",
@@ -172,7 +168,7 @@
       "grantsAbilities": [
         "negates the effects of living light spell fields"
       ],
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Hooded Lantern",
@@ -245,9 +241,9 @@
       "name": "Needle of Mending",
       "type": "equipment",
       "grantsAbilities": [
-        "repair things"
+        "repair a single break or tear as long as it is no larger than 1 foot"
       ],
-      "instructions": "With this needle, you can repair a single break or tear in an object, as long as the break or tear is no larger than 1 foot in any dimension. It leaves no trace of the former damage.",
+      "instructions": "",
       "id": "fd717b79-aab6-42fe-8f0c-a13568fa7cec",
       "shopCategories": [
         "clothier"
@@ -275,7 +271,7 @@
       "grantsAbilities": [
         "When inserted into any door’s lock, the door opens and becomes a portal to the Feywild"
       ],
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Rabbit Hop",
@@ -304,7 +300,7 @@
     },
     {
       "name": "Torch",
-      "instructions": "Lasts 1 hour. Each torch takes 1 gear slot.",
+      "instructions": "",
       "id": "305996a5-7318-4314-8d56-05a255578b5f",
       "type": "equipment",
       "shopCategories": [
@@ -312,7 +308,12 @@
         "delving-supplies"
       ],
       "price": 1,
-      "stage": "check"
+      "stage": "action",
+      "durationMsg": "lasts 1 hour",
+      "duration": 1,
+      "specificMsg": "each torch takes 1 gear slot",
+      "specific": true,
+      "tierDecrease": 1
     },
     {
       "name": "Warlock of Glomtili",
@@ -351,21 +352,28 @@
       "shopCategories": [
         "alchemist"
       ],
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Basic Poison",
       "multiRewards": [
         {
           "name": "Coat weapon",
-          "consumable": true,
-          "noCheck": true,
-          "deals": 2
+          "type": "equipment",
+          "stage": "minor",
+          "id": "923319a7-f117-43f5-9706-89513aeb0a7b",
+          "version": "0.3.3",
+          "created": "2025-03-19T04:17:43.035Z",
+          "onSuccess": true,
+          "deals": 3,
+          "consumable": true
         },
         {
-          "name": "Ingested",
+          "name": "Ingested poison",
           "consumable": true,
-          "deals": 4
+          "deals": 4,
+          "id": "26a95e46-1937-4fe3-98c6-5151fa9843c4",
+          "stage": "check"
         }
       ],
       "type": "equipment",
@@ -397,7 +405,7 @@
       "id": "713ddab0-880f-4b38-9616-b0556bf5d3b9",
       "frontImg": "https://julietfoundryvtt.s3.amazonaws.com/art/anira_cards/Cattegy_a_heavily_wounded_minotaur_hero_is_getting_up_off_the_g_c4ef0e25-8768-4e69-9552-a93b3c853d7f.png",
       "stretchImgY": true,
-      "stage": "minor"
+      "stage": "defense"
     },
     {
       "name": "Burning Hands",
@@ -432,14 +440,6 @@
       "stage": "check"
     },
     {
-      "name": "Coat with poison",
-      "consumable": true,
-      "deals": 2,
-      "id": "8bff3677-13e7-4b68-af0b-338e888755bb",
-      "stage": "minor",
-      "type": "feature"
-    },
-    {
       "name": "Crimson Chains",
       "restrained": 1,
       "type": "feature",
@@ -466,7 +466,7 @@
       "advantageMsg": "cause a creature to become  twice or half as big for one hour. They have advantage on actions when their new size is helpful",
       "cost": 1,
       "type": "feature",
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Formula: Antitoxin",
@@ -477,7 +477,7 @@
       "durationMsg": "8 hours",
       "duration": 1,
       "id": "60131c34-9055-43e9-9144-3ada70768966",
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Formula: Basic Poison",
@@ -568,7 +568,7 @@
       "name": "Inspiring Song",
       "advantage": true,
       "advantageMsg": "",
-      "instructions": "Grant a creature 3 inspiration. Each can be used whenever they choose to gain advantage on a  roll. A creature may only have 3 inspiration at a time and they expire on a full reset. Costs 1 wellspring. JULIAN: This needs a name",
+      "instructions": "Grant a creature 3 inspiration. Each can be used whenever they choose to gain advantage on a  roll. A creature may only have 3 inspiration at a time and they expire on a full reset. Costs 1 wellspring.",
       "cost": 1,
       "grantsAbilities": [
         "",
@@ -587,7 +587,7 @@
         "leatherworker"
       ],
       "stage": "defense",
-      "advantageMsg": "to defending with this armor",
+      "advantageMsg": "",
       "advantage": true
     },
     {
@@ -714,7 +714,7 @@
       "trainedMsg": "Grants training in persuading and deceiving for 1 hour. If you are already trained, you roll with advantage",
       "trained": true,
       "consumable": true,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Shadowstep mark",
@@ -789,7 +789,7 @@
         "arcane-shop"
       ],
       "price": 200,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Stone Step",
@@ -872,15 +872,17 @@
           "name": "Attack",
           "type": "feature",
           "id": "f692544c-3539-4040-99d7-513f30bae40e",
-          "deals": 3
+          "deals": 3,
+          "stage": "check"
         },
         {
           "name": "Stunning Strike",
           "type": "equipment",
           "id": "819552b0-05f2-4ee1-bd9d-9eb80337e419",
           "stunned": 1,
-          "cost": 1,
-          "deals": 1
+          "cost": 2,
+          "deals": 2,
+          "stage": "check"
         }
       ],
       "stage": "check"
@@ -889,18 +891,18 @@
       "type": "equipment",
       "name": "Spidersilk Gloves",
       "deals": 0,
-      "advantageMsg": "and have advantage",
+      "advantageMsg": "on the same",
       "advantage": true,
-      "trainedMsg": "you are trained",
+      "trainedMsg": "Sleight of Hand (picking locks, picking pockets, or performing other acts of manipulating small objects for the purpose of stealing)",
       "trained": true,
-      "instructions": "These gloves are invisible when worn. While wearing them, you roll with training and advantage when picking locks, picking pockets, or performing other acts of manipulating small objects for the purpose of stealing.",
+      "instructions": "",
       "id": "9e97a31d-085e-41ad-a1c5-29af3c9b3c19",
       "price": 150,
       "shopCategories": [
         "shady-dealer"
       ],
-      "specific": true,
-      "specificMsg": "when picking locks and picking pockets",
+      "specific": false,
+      "specificMsg": "",
       "notes": "I'm making this specific because I think the training is too punishing on this one",
       "frontImg": "https://julietfoundryvtt.s3.amazonaws.com/art/anira_cards/Gloves_of_Thievery.png",
       "padImage": true,
@@ -928,7 +930,7 @@
       "shopCategories": [
         "bowyer"
       ],
-      "instructions": "If you roll a 1 and fail, the bundle is expended.",
+      "instructions": "",
       "stage": "check"
     },
     {
@@ -1015,11 +1017,10 @@
       "id": "4a8e5f26-8f37-41cb-a75a-8d54a6f68f6e",
       "price": 30,
       "trained": true,
-      "trainedMsg": "gain training in defense",
       "shopCategories": [
         "blacksmith"
       ],
-      "stage": "check"
+      "stage": "defense"
     },
     {
       "name": "Chain Mail",
@@ -1050,7 +1051,9 @@
       "stage": "defense",
       "trained": true,
       "advantageMsg": "to defending with this armor",
-      "advantage": true
+      "advantage": true,
+      "frontImg": "https://bg3.wiki/w/images/8/8d/Scale_Mail_Icon.png?20230203223251",
+      "stretchImgY": false
     },
     {
       "name": "Studded Leather Armor",
@@ -1196,8 +1199,8 @@
         "temple"
       ],
       "consumable": true,
-      "heals": 1,
-      "stage": "minor"
+      "heals": 2,
+      "stage": "action"
     },
     {
       "name": "Recipe: Soothing Tea",
@@ -1213,14 +1216,14 @@
       "castTime": 1,
       "castTimeMsg": "takes 1 hour",
       "instructions": "heals 4 points across any mental pools, single use",
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Sling or Blowgun Ammo Pouch",
       "type": "equipment",
       "id": "a1bb0a69-25fc-4c87-aeec-b7a89802ef3b",
       "price": 1,
-      "instructions": "If you roll a 1 when using this and fail, the ammo pouch is expended.",
+      "instructions": "",
       "shopCategories": [
         "bowyer",
         "woodworker"
@@ -1380,13 +1383,43 @@
       "name": "Conqueror",
       "type": "feature",
       "id": "a8287021-42a0-4660-b684-2ec976631fd9",
-      "instructions": "Imbue any object or creature with fire. When an object is used as a weapon, it deals 1 extra point and ignites flammable items. When a creature ignites, it takes 1 damage immediately and at the end of its turn unless the fire is put out with an action.",
-      "deals": 1,
-      "lingeringDamage": 1,
-      "notes": "",
+      "instructions": "",
+      "deals": 0,
+      "lingeringDamage": 0,
+      "notes": "When an object is used as a weapon, it deals 1 extra point and ignites combustible items. When a creature ignites, it takes 1 damage immediately and at the end of its turn unless the fire is put out with an action.",
       "frontImg": "https://julietfoundryvtt.s3.amazonaws.com/art/anira_cards/Cattegy_a_flaming_blade._epic_fantasy_art_29a40d39-ff4f-4499-91b1-62bbff274a62.png",
       "stretchImgY": true,
-      "stage": "check"
+      "stage": "check",
+      "multiRewards": [
+        {
+          "name": "Combust Object",
+          "type": "equipment",
+          "stage": "check",
+          "id": "0a1f5692-6d03-4d29-ba79-a2cf103f25b0",
+          "version": "0.3.3",
+          "created": "2024-11-08T11:06:01.525Z",
+          "specificMsg": "if an object is combustible",
+          "specific": true,
+          "lingeringDamage": 1,
+          "deals": 2
+        },
+        {
+          "name": "Ignite Weapon",
+          "type": "equipment",
+          "stage": "check",
+          "id": "fc3ce20a-1a62-4b2d-ad2b-e0b44352cf8d",
+          "version": "0.3.3",
+          "created": "2024-11-08T11:01:07.142Z",
+          "deals": 1,
+          "cost": 1,
+          "durationMsg": "lasts 1 minute",
+          "duration": 1,
+          "grantsAbilities": [
+            "on subsequent turns deal +1"
+          ]
+        }
+      ],
+      "version": "0.3.3"
     },
     {
       "name": "Light Crossbow",
@@ -1404,7 +1437,7 @@
       "multiRewards": [
         {
           "name": "Loading",
-          "type": "equipment",
+          "type": "feature",
           "stage": "passive",
           "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
           "version": "0.3.3",
@@ -1478,7 +1511,7 @@
       ],
       "frontImg": "https://julietfoundryvtt.s3.amazonaws.com/art/anira_cards/leverwood_fantasy_art_of_a_tiny_pouch_with_ball_bearings_spilli_419988d4-8621-4097-82e6-9f369e71c1ae.png",
       "padImage": true,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Dazzleburst Crystal",
@@ -1507,7 +1540,7 @@
         "bowyer"
       ],
       "price": 15,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Hunting Trap",
@@ -1765,18 +1798,18 @@
       "stage": "check"
     },
     {
-      "name": "Rifle",
+      "name": "19th Century Rifle",
       "type": "equipment",
       "id": "d1cae208-d54e-4659-8f91-4904a48a0d27",
       "ranged": true,
-      "rangeIncrease": 1,
-      "deals": 1,
+      "deals": 2,
       "shopCategories": [
         "blacksmith",
         "tinker"
       ],
       "price": 200,
-      "stage": "check"
+      "stage": "check",
+      "frontImg": "https://www.nam.ac.uk/sites/default/files/styles/slice_lg/public/2017-06/165924_slice.jpg.webp?itok=60O0lMFe"
     },
     {
       "name": "Shortsword",
@@ -1835,7 +1868,7 @@
       "name": "Climbing Kit",
       "type": "equipment",
       "id": "c78b8279-39aa-4e02-8a9c-b2c6addc122f",
-      "advantageMsg": " grants advantage to climbing checks",
+      "advantageMsg": "to climb",
       "advantage": true,
       "price": 20,
       "shopCategories": [
@@ -1939,7 +1972,19 @@
       ],
       "price": 1,
       "stage": "check",
-      "multiRewards": [],
+      "multiRewards": [
+        {
+          "name": "Slow",
+          "type": "feature",
+          "stage": "check",
+          "id": "4f110ae4-e494-4531-b3df-b4d227032834",
+          "version": "0.3.3",
+          "created": "2024-11-06T00:44:39.186Z",
+          "grantsAbilities": [
+            "decrease the target's speed by half"
+          ]
+        }
+      ],
       "source": "5e SRD",
       "version": "0.3.3"
     },
@@ -2142,7 +2187,7 @@
       "multiRewards": [
         {
           "name": "Sap",
-          "type": "equipment",
+          "type": "feature",
           "stage": "check",
           "id": "534d81a2-0c59-4768-863d-3315cec134b3",
           "version": "0.3.3",
@@ -2274,7 +2319,7 @@
       "multiRewards": [
         {
           "name": "Loading",
-          "type": "equipment",
+          "type": "feature",
           "stage": "passive",
           "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
           "version": "0.3.3",
@@ -2697,7 +2742,7 @@
       "instructions": "",
       "castTimeMsg": "activates after soaking in water for 1 hour",
       "castTime": 1,
-      "stage": "minor"
+      "stage": "passive"
     },
     {
       "name": "Rite of the Blood Moon",
@@ -2706,7 +2751,7 @@
       "instructions": "This powerful ritual curse can only be cast under a full moon. Upon an altar outdoors, a creature must be sacrificed, their blood drained, and their heart eaten. No roll is required.\n\nAll allies who participate in the ritual transform into bloodthirsty monsters who solve every problem with violence, spare no mercy for any enemy, and do not rest. For the duration, they double all physical pools, and the transformation lasts until the next midnight.",
       "frontImg": "https://julietfoundryvtt.s3.amazonaws.com/art/anira_cards/Cattegy_someone_is_sacrificed_upon_an_altar_undernealth_a_red_m_11c42ba6-b6de-45dd-84b3-1616a78be924.png",
       "stretchImgY": true,
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Glyph Crafter",
@@ -3011,7 +3056,8 @@
       "shopCategories": [
         "entertainment"
       ],
-      "stage": "check"
+      "stage": "check",
+      "advantage": true
     },
     {
       "name": "Disguise Kit",
@@ -3038,7 +3084,9 @@
       "specific": false,
       "stage": "check",
       "curseMsg": "If you are reduced to zero hit points while attuned to a band of loyalty, you instantly die. These rings are favored by spies who can’t afford to fall into enemy hands.",
-      "curse": 1
+      "curse": 1,
+      "frontImg": "https://bg3.wiki/w/images/3/3e/Guild_Ring_Faded.png?20231224081004",
+      "stretchImgY": false
     },
     {
       "name": "Lock of Trickery",
@@ -3133,12 +3181,15 @@
       "name": "Cheater's Coin",
       "type": "equipment",
       "id": "3d35e639-c99a-4dd5-bda0-29324c6a5d20",
-      "instructions": "When flipped, it will give whatever result the owner wishes",
+      "instructions": "",
       "shopCategories": [
         "shady-dealer",
         "tavern"
       ],
-      "stage": "check"
+      "stage": "check",
+      "grantsAbilities": [
+        "give whatever result you wish"
+      ]
     },
     {
       "name": "Ring of the Adventurous Limb",
@@ -3161,7 +3212,7 @@
       "grantsAbilities": [
         "Effects of a wish, but only lasts 1d6 rounds. After the effects are over the wish is completely undone"
       ],
-      "stage": "minor",
+      "stage": "action",
       "consumable": true,
       "tierIncrease": 1
     },
@@ -3183,22 +3234,32 @@
       "type": "equipment",
       "id": "cf97d520-5ce6-48cb-a2e5-c33bcfd8f424",
       "grantsAbilities": [
-        "It is what you think it is"
+        "pull a rat out of the bag"
       ],
       "shopCategories": [
         "pet-store"
       ],
-      "stage": "check"
+      "stage": "check",
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304545279806013460/leverwood_a_bag_of_rats._DD_item._white_background._fantasy_art_65f6139f-cff6-4d09-bc10-17fd32dd8317.png?ex=672fc7f7&is=672e7677&hm=2e61b89b2612a2dedc913d9ab8fe8d8d1dc4b9c23b3dbd25927ce3463f664966&"
     },
     {
       "name": "Book of Epic Boredom",
       "type": "equipment",
       "id": "cb8c37e8-df8a-476a-bcd4-3d9d4a74bec0",
-      "instructions": "When read for 5 minutes, DC 15 or fall asleep",
+      "instructions": "",
       "shopCategories": [
         "bookstore"
       ],
-      "stage": "check"
+      "stage": "check",
+      "durationMsg": "5 minutes",
+      "duration": 0,
+      "castTimeMsg": "read for 5 minutes",
+      "castTime": 1,
+      "notes": "When read for 5 minutes, DC 15 or fall asleep",
+      "grantsAbilities": [
+        "DC 15 or fall asleep"
+      ],
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304546409638396044/leverwood_A_man_asleep_on_top_of_a_book._White_background._Fant_5573d2be-49ae-4e8d-9cb5-0934977d7f11.png?ex=672fc905&is=672e7785&hm=80e2af4d3e1675a583864c71a135a13b6dce967b9e52fe2b9a32e0ebea6eb7b0&"
     },
     {
       "name": "Dehydrated Beast",
@@ -3247,31 +3308,37 @@
       "name": "Black Cigarette",
       "type": "equipment",
       "id": "f3f4ec61-79ce-41d8-9f67-1638f3c58165",
-      "instructions": "When smoked, it creates a huge cloud of smoke and allows the smoker to see through smoke and fog.  Can be smoked for 5 minutes, single use.",
+      "instructions": "",
       "grantsAbilities": [
-        "",
-        ""
+        "create a cloud of smoke in your zone, you can see through smoke and fog"
       ],
       "shopCategories": [
         "shady-dealer",
         "apothecary",
         "tavern"
       ],
-      "stage": "check"
+      "stage": "action",
+      "notes": "When smoked, it creates a huge cloud of smoke and allows the smoker to see through smoke and fog.  Can be smoked for 5 minutes, single use.",
+      "durationMsg": "can smoke the cigarette for 5 minutes",
+      "duration": 1,
+      "consumable": true,
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304551187043061820/leverwood_Black_cigarette_billowing_black_smoke._DD_magic_item._4833964c-74fa-43ad-9e2f-7d1836b57aec.png?ex=672fcd78&is=672e7bf8&hm=fb79b4a3798e6533bb9fe87d54e09785e018d5cfbb1858c3eb62ca2060dfebf7&",
+      "stretchImgY": true
     },
     {
       "name": "Dust of De-Appearance",
       "type": "equipment",
       "id": "01ee4f9d-121c-4a17-8a72-deb2189469cf",
-      "instructions": "Can make things invisible, but wears off if the object moves, is moved, or even wiggles a bit.",
+      "instructions": "",
       "grantsAbilities": [
-        ""
+        "makes something invisible, but wears off if it moves or is moved"
       ],
       "shopCategories": [
         "arcane-shop",
         "shady-dealer"
       ],
-      "stage": "check"
+      "stage": "action",
+      "consumable": true
     },
     {
       "name": "Psychic Paper",
@@ -3376,7 +3443,8 @@
           "type": "feature",
           "id": "7e42922d-618e-4143-9e8d-4b44a34c55c7",
           "deals": 2,
-          "instructions": "deal 2 points"
+          "instructions": "deal 2 points",
+          "stage": "check"
         },
         {
           "name": "Change Weather",
@@ -3387,7 +3455,8 @@
             "change the weather to a natural state of your choosing"
           ],
           "duration": 2,
-          "durationMsg": "lasts for 1 hour"
+          "durationMsg": "lasts for 1 hour",
+          "stage": "check"
         }
       ],
       "frontImg": "https://julietfoundryvtt.s3.us-east-1.amazonaws.com/art/obsidian/487fd72b6253955d90a399980e89bf23.png",
@@ -3407,11 +3476,12 @@
       "type": "equipment",
       "id": "a8f2d5c7-d7d3-4259-8c7b-1cb2739172a4",
       "consumable": true,
-      "instructions": "Random effect when consumed (1d6) \n\n1. Immune 5 rounds 1. fire 2. cold 3. electricity 4. poison\n2. Heals a pool of your choice 1d4\n3. Turn into a newt for 1d4 rounds\n4. Take 1 END damage\n5. Fly speed 1 for 1d4 rounds\n6. Speak to animals for 1d4 hours",
+      "instructions": "Random effect when consumed (1d6) \n\n1. Immune 5 rounds to [1. fire 2. cold 3. electricity 4. poison]\n2. Heals a pool of your choice 1d4\n3. Turn into a newt for 1d4 rounds\n4. Take 1 END damage\n5. Fly speed 1 for 1d4 rounds\n6. Speak to animals for 1d4 hours",
       "price": 10,
       "frontImg": "https://julietfoundryvtt.s3.us-east-1.amazonaws.com/art/obsidian/db9853f2bca5d55e2f75c838b1510efd.png",
       "padImage": true,
-      "stage": "check"
+      "stage": "action",
+      "tierIncrease": 1
     },
     {
       "name": "Thunderwave",
@@ -3543,8 +3613,9 @@
       "type": "equipment",
       "id": "f3fa6ad3-90e0-4908-a91c-e207dc9386ac",
       "stunned": 3,
-      "cost": 2,
-      "stage": "check"
+      "stage": "check",
+      "onFailTakeDamage": 2,
+      "cost": 1
     },
     {
       "name": "Hold Person",
@@ -3602,7 +3673,7 @@
       "id": "2727de5c-9f74-4131-b65c-bd6e40ec6df8",
       "speed": 1,
       "instructions": "fly speed of 1, no roll required",
-      "stage": "minor"
+      "stage": "action"
     },
     {
       "name": "Upcast: Stun",
@@ -3726,7 +3797,8 @@
           "notes": "",
           "durationMsg": "10 minues",
           "duration": 3,
-          "cost": 1
+          "cost": 1,
+          "stage": "check"
         }
       ],
       "trainedMsg": "armor training",
@@ -3814,7 +3886,8 @@
           "name": "Attack",
           "type": "feature",
           "id": "132ab10c-41e7-4813-b770-6a24b36e2993",
-          "deals": 4
+          "deals": 4,
+          "stage": "check"
         }
       ]
     },
@@ -3845,17 +3918,17 @@
         {
           "name": "Find Dragon",
           "type": "feature",
-          "stage": "action",
+          "stage": "check",
           "id": "bad1e5d6-e25b-4539-aded-691a85172fe4",
           "version": "0.3.3",
           "created": "2024-11-05T22:50:01.146Z",
           "grantsAbilities": [
-            "discern the distance and direction to the closest dragon within 30 miles of a specific type"
+            "discern the distance and direction to the closest dragon within 30 miles of a type specific to this reward"
           ],
           "cost": 1,
           "ranged": true,
           "rangeIncrease": 2,
-          "instructions": "(action) discern the distance and direction to the closest dragon within 30 miles of a specific type, costs 1 wellspring"
+          "instructions": "(action) discern the distance and direction to the closest dragon within 30 miles of a type specific to this reward, costs 1 wellspring"
         }
       ]
     },
@@ -3943,7 +4016,7 @@
     {
       "name": "Glamoured Studded Leather",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "e9a7fe2a-7874-4bf1-aedf-0d3375545e47",
       "version": "0.3.3",
       "created": "2024-11-05T23:00:44.948Z",
@@ -4156,19 +4229,7 @@
       "id": "56ab7219-edf4-4e67-a1a3-e29eab56edcc",
       "version": "0.3.3",
       "created": "2024-11-06T00:44:19.313Z",
-      "multiRewards": [
-        {
-          "name": "Slow",
-          "type": "feature",
-          "stage": "check",
-          "id": "4f110ae4-e494-4531-b3df-b4d227032834",
-          "version": "0.3.3",
-          "created": "2024-11-06T00:44:39.186Z",
-          "grantsAbilities": [
-            "decrease the target's speed by half"
-          ]
-        }
-      ],
+      "multiRewards": [],
       "instructions": "",
       "price": 1,
       "shopCategories": [
@@ -4210,7 +4271,7 @@
       "multiRewards": [
         {
           "name": "Sap",
-          "type": "equipment",
+          "type": "feature",
           "stage": "check",
           "id": "534d81a2-0c59-4768-863d-3315cec134b3",
           "version": "0.3.3",
@@ -4283,7 +4344,7 @@
       "multiRewards": [
         {
           "name": "Topple",
-          "type": "equipment",
+          "type": "feature",
           "stage": "check",
           "id": "73d74605-2588-40d9-ba4f-e5a10c1e400c",
           "version": "0.3.3",
@@ -4415,7 +4476,7 @@
     },
     {
       "name": "Loading",
-      "type": "equipment",
+      "type": "feature",
       "stage": "passive",
       "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
       "version": "0.3.3",
@@ -4438,7 +4499,7 @@
       "multiRewards": [
         {
           "name": "Loading",
-          "type": "equipment",
+          "type": "feature",
           "stage": "passive",
           "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
           "version": "0.3.3",
@@ -4715,7 +4776,8 @@
           "cost": 1,
           "grantsAbilities": [
             "target is poisoned and all creatures have advantage to defend against it"
-          ]
+          ],
+          "onSuccess": true
         }
       ]
     },
@@ -4730,7 +4792,8 @@
       "cost": 1,
       "grantsAbilities": [
         "target is poisoned and all creatures have advantage to defend against it"
-      ]
+      ],
+      "onSuccess": true
     },
     {
       "name": "Dancing Sword",
@@ -4783,25 +4846,26 @@
         {
           "name": "Ignite",
           "type": "equipment",
-          "stage": "minor",
+          "stage": "passive",
           "id": "ec49dafb-c326-41ec-b66d-21cba7ea3073",
           "version": "0.3.3",
           "created": "2024-11-06T15:54:43.619Z",
-          "deals": 2,
+          "deals": 1,
           "onSuccess": true
         }
       ],
       "deals": 2,
-      "instructions": "deal 2 points. Speaking this magic sword’s command word causes flames to erupt from the blade until you dismiss the effect."
+      "instructions": "(check) deal 2 points. Speaking this magic sword’s command word causes flames to erupt from the blade until you dismiss the effect.",
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/7/219/1000/1000/636284733648450283.jpeg"
     },
     {
       "name": "Ignite",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "passive",
       "id": "ec49dafb-c326-41ec-b66d-21cba7ea3073",
       "version": "0.3.3",
       "created": "2024-11-06T15:54:43.619Z",
-      "deals": 2,
+      "deals": 1,
       "onSuccess": true
     },
     {
@@ -4896,7 +4960,7 @@
         {
           "name": "Giant's Bane",
           "type": "equipment",
-          "stage": "minor",
+          "stage": "passive",
           "id": "75f23f1b-66a9-4634-a390-5e87f8c51a21",
           "version": "0.3.3",
           "created": "2024-11-06T17:10:35.005Z",
@@ -4906,7 +4970,7 @@
           "grantsAbilities": [
             "the giant dies"
           ],
-          "tierIncrease": 1
+          "tierIncrease": 2
         },
         {
           "name": "Thunder Throw",
@@ -4924,7 +4988,8 @@
           "grantsAbilities": [
             "hammer unleashes a thunderclap audible out to 10 zones"
           ],
-          "tierDecrease": 1
+          "tierDecrease": 0,
+          "onFailTakeDamage": 1
         }
       ],
       "specificMsg": "if wearing a belt of giant strength and gauntlets of ogre power",
@@ -4950,12 +5015,13 @@
       "grantsAbilities": [
         "hammer unleashes a thunderclap audible out to 10 zones"
       ],
-      "tierDecrease": 1
+      "tierDecrease": 0,
+      "onFailTakeDamage": 1
     },
     {
       "name": "Giant's Bane",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "passive",
       "id": "75f23f1b-66a9-4634-a390-5e87f8c51a21",
       "version": "0.3.3",
       "created": "2024-11-06T17:10:35.005Z",
@@ -4965,7 +5031,7 @@
       "grantsAbilities": [
         "the giant dies"
       ],
-      "tierIncrease": 1
+      "tierIncrease": 2
     },
     {
       "name": "Holy Avenger",
@@ -4978,18 +5044,18 @@
         {
           "name": "Attack",
           "type": "feature",
-          "id": "1a1123e0-95c9-41fd-8a4d-916b4bf22845",
-          "deals": 2,
+          "id": "f692544c-3539-4040-99d7-513f30bae40e",
+          "deals": 3,
           "stage": "check"
         },
         {
           "name": "Radiance",
           "type": "feature",
-          "stage": "minor",
+          "stage": "passive",
           "id": "6557e932-eb9c-4785-a0be-eb9141292a1f",
           "version": "0.3.3",
           "created": "2024-11-06T17:20:15.154Z",
-          "specificMsg": "hit a fiend or undead",
+          "specificMsg": "if hit a fiend or undead",
           "specific": true,
           "deals": 2,
           "onSuccess": true
@@ -4998,16 +5064,19 @@
       "advantage": true,
       "aoe": true,
       "advantageMsg": "on defense against magic",
-      "source": "5e SRD"
+      "source": "5e SRD",
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/45205/630/1000/1000/638657413742057582.png",
+      "tierDecrease": 1,
+      "padImage": true
     },
     {
       "name": "Radiance",
       "type": "feature",
-      "stage": "minor",
+      "stage": "passive",
       "id": "6557e932-eb9c-4785-a0be-eb9141292a1f",
       "version": "0.3.3",
       "created": "2024-11-06T17:20:15.154Z",
-      "specificMsg": "hit a fiend or undead",
+      "specificMsg": "if hit a fiend or undead",
       "specific": true,
       "deals": 2,
       "onSuccess": true
@@ -5039,15 +5108,15 @@
     {
       "name": "Luck",
       "type": "feature",
-      "stage": "minor",
+      "stage": "passive",
       "id": "7ed23784-1cd6-42f9-aeaa-1f69da07f105",
       "version": "0.3.3",
       "created": "2024-11-06T17:44:21.806Z",
       "grantsAbilities": [
-        "reroll your skill die, you must use the second roll"
+        "you can reroll your skill die, you must use the second roll"
       ],
       "cost": 2,
-      "tierIncrease": 0
+      "tierIncrease": 1
     },
     {
       "name": "Wish",
@@ -5093,15 +5162,15 @@
         {
           "name": "Luck",
           "type": "feature",
-          "stage": "minor",
+          "stage": "passive",
           "id": "7ed23784-1cd6-42f9-aeaa-1f69da07f105",
           "version": "0.3.3",
           "created": "2024-11-06T17:44:21.806Z",
           "grantsAbilities": [
-            "reroll your skill die, you must use the second roll"
+            "you can reroll your skill die, you must use the second roll"
           ],
           "cost": 2,
-          "tierIncrease": 0
+          "tierIncrease": 1
         },
         {
           "name": "Wish",
@@ -5127,8 +5196,15 @@
       "created": "2024-11-06T18:05:50.331Z",
       "multiRewards": [
         {
+          "name": "Attack",
+          "type": "feature",
+          "id": "1a1123e0-95c9-41fd-8a4d-916b4bf22845",
+          "deals": 2,
+          "stage": "check"
+        },
+        {
           "name": "Glowing",
-          "type": "equipment",
+          "type": "feature",
           "stage": "passive",
           "id": "3360d070-344e-4b35-9814-b7ce05c2b58c",
           "version": "0.3.3",
@@ -5136,21 +5212,16 @@
           "grantsAbilities": [
             "sheds bright light in 1 zone"
           ]
-        },
-        {
-          "name": "Attack",
-          "type": "feature",
-          "id": "3ba5adbf-3a64-4823-8f8f-380721bfa343",
-          "deals": 1,
-          "stage": "check"
         }
       ],
-      "specificMsg": "hit a fiend or undead",
+      "specificMsg": "if you hit a fiend or undead",
       "specific": true,
       "deals": 1,
       "grantsAbilities": [
-        "if the target has 2 or fewer points, it is destroyed"
-      ]
+        "if the target has 2 or fewer points after taking this damage, it is destroyed"
+      ],
+      "tierDecrease": 1,
+      "onSuccess": true
     },
     {
       "name": "Glowing",
@@ -5179,7 +5250,7 @@
           "stage": "check"
         }
       ],
-      "specificMsg": "hit a construct",
+      "specificMsg": "if you hit a construct",
       "specific": true,
       "deals": 2,
       "onSuccess": true,
@@ -5229,9 +5300,9 @@
       "specificMsg": "if it is an auto success",
       "specific": true,
       "grantsAbilities": [
-        "if the creature has less than 8 points, it is slain instantly as the sword tears its life force from its body  (a construct or an undead is immune)"
+        "if the creature has less than 8 points, you may slay it instantly and tear its life force from its body  (a construct or an undead is immune)"
       ],
-      "tierIncrease": 3,
+      "tierIncrease": 2,
       "source": "5e SRD"
     },
     {
@@ -5247,7 +5318,7 @@
       "multiRewards": [
         {
           "name": "Ranged Attack",
-          "type": "equipment",
+          "type": "feature",
           "stage": "check",
           "id": "d1270c10-cfed-4024-a136-e014254bb15a",
           "version": "0.3.3",
@@ -5257,18 +5328,19 @@
         },
         {
           "name": "Swear Vengeance",
-          "type": "equipment",
+          "type": "feature",
           "stage": "minor",
-          "id": "a57d5c6d-ae58-4691-ba95-99fda97c98ec",
+          "id": "19f8f16a-4276-416f-9ceb-6b0a9bf785a5",
           "version": "0.3.3",
-          "created": "2024-11-06T18:20:39.982Z",
+          "created": "2024-11-07T23:54:31.488Z",
           "grantsAbilities": [
-            "the target of your attack becomes your sworn enemy until it dies, you may swear vengeance to one creature per day"
+            "the target becomes your sworn enemy until it dies, you may swear vengeance to one creature per day"
           ],
-          "tierDecrease": 2
+          "tierDecrease": 2,
+          "prefix": "utter or sign the following command words: “Swift death to you who have wronged me”"
         }
       ],
-      "specificMsg": "against your sworn enemy",
+      "specificMsg": "target your sworn enemy",
       "specific": true,
       "grantsAbilities": [
         "target gains no benefit from cover"
@@ -5278,7 +5350,7 @@
     },
     {
       "name": "Swear Vengeance",
-      "type": "equipment",
+      "type": "feature",
       "stage": "minor",
       "id": "a57d5c6d-ae58-4691-ba95-99fda97c98ec",
       "version": "0.3.3",
@@ -5419,7 +5491,7 @@
     {
       "name": "Sword of Life Stealing",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "passive",
       "id": "ef048ad7-1a04-4739-aab6-399cd576f96b",
       "version": "0.3.3",
       "created": "2024-11-06T19:39:45.063Z",
@@ -5443,7 +5515,7 @@
     {
       "name": "Sword of Sharpness",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "passive",
       "id": "d1d392ec-cfd3-4939-9882-7a1dee778452",
       "version": "0.3.3",
       "created": "2024-11-06T19:42:10.778Z",
@@ -5451,13 +5523,13 @@
         {
           "name": "Attack",
           "type": "feature",
-          "id": "1a1123e0-95c9-41fd-8a4d-916b4bf22845",
-          "deals": 2,
+          "id": "f692544c-3539-4040-99d7-513f30bae40e",
+          "deals": 3,
           "stage": "check"
         },
         {
           "name": "Glowing",
-          "type": "equipment",
+          "type": "feature",
           "stage": "passive",
           "id": "3360d070-344e-4b35-9814-b7ce05c2b58c",
           "version": "0.3.3",
@@ -5471,7 +5543,8 @@
       "specificMsg": "if you auto succeed",
       "specific": false,
       "deals": 2,
-      "onAutoSuccess": true
+      "onAutoSuccess": true,
+      "tierDecrease": 1
     },
     {
       "name": "Sword of Wounding",
@@ -5530,7 +5603,7 @@
     {
       "name": "Vicious",
       "type": "feature",
-      "stage": "minor",
+      "stage": "passive",
       "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
       "version": "0.3.3",
       "created": "2024-11-07T14:15:44.820Z",
@@ -5561,8 +5634,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5599,8 +5672,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5637,8 +5710,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5664,7 +5737,7 @@
       "multiRewards": [
         {
           "name": "Sap",
-          "type": "equipment",
+          "type": "feature",
           "stage": "check",
           "id": "534d81a2-0c59-4768-863d-3315cec134b3",
           "version": "0.3.3",
@@ -5675,8 +5748,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5710,8 +5783,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5743,8 +5816,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5774,7 +5847,7 @@
       "multiRewards": [
         {
           "name": "Loading",
-          "type": "equipment",
+          "type": "feature",
           "stage": "passive",
           "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
           "version": "0.3.3",
@@ -5795,8 +5868,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5835,8 +5908,8 @@
         },
         {
           "name": "Vicious",
-          "type": "equipment",
-          "stage": "minor",
+          "type": "feature",
+          "stage": "passive",
           "id": "f4f56ae0-4365-462a-9621-c9e29d88a093",
           "version": "0.3.3",
           "created": "2024-11-07T14:15:44.820Z",
@@ -5863,7 +5936,7 @@
         {
           "name": "Decapitate",
           "type": "equipment",
-          "stage": "minor",
+          "stage": "passive",
           "id": "3f83325f-dafd-4aa0-a241-6491b7f8dc50",
           "version": "0.3.3",
           "created": "2024-11-07T14:30:31.010Z",
@@ -5872,11 +5945,12 @@
           "grantsAbilities": [
             "when you attack a creature with at least 1 head, you cut off one of the heads and it dies if it can't survive without the lost head. The target is immune to this effect if it is immune to slashing damage, or the DM decides the creature is too big for its head to be cut off (instead taking 5 slashing damage)"
           ],
-          "tierIncrease": 2
+          "tierIncrease": 3
         }
       ],
-      "tierDecrease": 0,
-      "source": "5e SRD"
+      "tierDecrease": 1,
+      "source": "5e SRD",
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/7/462/1000/1000/636284780691337497.jpeg"
     },
     {
       "name": "Slashing Resistance",
@@ -5892,7 +5966,7 @@
     {
       "name": "Decapitate",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "passive",
       "id": "3f83325f-dafd-4aa0-a241-6491b7f8dc50",
       "version": "0.3.3",
       "created": "2024-11-07T14:30:31.010Z",
@@ -5901,7 +5975,7 @@
       "grantsAbilities": [
         "when you attack a creature with at least 1 head, you cut off one of the heads and it dies if it can't survive without the lost head. The target is immune to this effect if it is immune to slashing damage, or the DM decides the creature is too big for its head to be cut off (instead taking 5 slashing damage)"
       ],
-      "tierIncrease": 2
+      "tierIncrease": 3
     },
     {
       "name": "Amulet of Health",
@@ -5951,7 +6025,8 @@
       "grantsAbilities": [
         "A bag with 10 gear slots, Mouth = 2ft diameter, Item retrieval consumes your actions for 1 minute\n\nIf damaged, it is destroyed and contents scatter in Astral, If turned inside out all contents spill out\n\nO² limit: Any creatures in the bag begin to suffocate after 10 minutes\n\nIf put in an extradimensional space both items are destroyed, a 1-way gate to the Astral Plane, everything within 10 feet is sucked in and then the gate disappears"
       ],
-      "source": "5e SRD"
+      "source": "5e SRD",
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/7/120/1000/1000/636284708068284913.jpeg"
     },
     {
       "name": "Bead of Force",
@@ -6080,7 +6155,7 @@
     {
       "name": "Oil of Slipperiness",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "352bf62c-af59-4020-a0d4-58915a895fec",
       "version": "0.3.3",
       "created": "2024-11-07T15:52:41.938Z",
@@ -6130,7 +6205,7 @@
     {
       "name": "Potion of Animal Friendship",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "ff7463f1-d416-4c23-9cc7-0352cb0066b8",
       "version": "0.3.3",
       "created": "2024-11-07T16:28:14.491Z",
@@ -6180,7 +6255,7 @@
     {
       "name": "Potion of Growth ",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "fce3d04f-a2b6-4f68-ad47-b5eb2aa87987",
       "version": "0.3.3",
       "created": "2024-11-07T17:02:13.642Z",
@@ -6194,7 +6269,7 @@
     {
       "name": "Potion of Greater Healing",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "f6f8563a-5d4b-4fe1-b3dc-ce7dc9b6bc5d",
       "version": "0.3.3",
       "created": "2024-11-07T17:04:20.461Z",
@@ -6204,7 +6279,7 @@
     {
       "name": "Potion of Superior Healing",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "bee3fc96-a385-4db3-be09-8335a5f307ea",
       "version": "0.3.3",
       "created": "2024-11-07T17:05:12.210Z",
@@ -6214,7 +6289,7 @@
     {
       "name": "Potion of Supreme Healing",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "8a124ae6-0d7c-46c5-b376-08f5b0005608",
       "version": "0.3.3",
       "created": "2024-11-07T17:05:50.064Z",
@@ -6224,7 +6299,7 @@
     {
       "name": "Potion of Resistance",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "0251ea92-fa99-4d61-9d4a-85e6ded30b80",
       "version": "0.3.3",
       "created": "2024-11-07T17:39:22.792Z",
@@ -6240,7 +6315,7 @@
     {
       "name": "Potion of Speed",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "a8e4ee4c-52fb-4d3f-91dc-09415304988a",
       "version": "0.3.3",
       "created": "2024-11-07T17:43:27.417Z",
@@ -6252,7 +6327,7 @@
     {
       "name": "Potion of Water Breathing",
       "type": "equipment",
-      "stage": "minor",
+      "stage": "action",
       "id": "0b90e974-f39b-4239-a0cd-e83f817605a4",
       "version": "0.3.3",
       "created": "2024-11-07T17:44:01.362Z",
@@ -6411,6 +6486,2355 @@
       "version": "0.3.3",
       "created": "2024-11-07T22:00:08.002Z",
       "overrideTier": 2
+    },
+    {
+      "name": "Swear Vengeance",
+      "type": "feature",
+      "stage": "minor",
+      "id": "19f8f16a-4276-416f-9ceb-6b0a9bf785a5",
+      "version": "0.3.3",
+      "created": "2024-11-07T23:54:31.488Z",
+      "grantsAbilities": [
+        "the target becomes your sworn enemy until it dies, you may swear vengeance to one creature per day"
+      ],
+      "tierDecrease": 2,
+      "prefix": "utter or sign the following command words: “Swift death to you who have wronged me”"
+    },
+    {
+      "id": "26548f6e-6660-4d11-9c1e-6438f50b0fc4",
+      "name": "Med Kit",
+      "heals": 2,
+      "consumable": true,
+      "instructions": "(action) heal 2 physical, single use",
+      "specificMsg": "physical pools only",
+      "specific": true,
+      "type": "equipment",
+      "price": 25,
+      "shopCategories": [
+        "temple",
+        "survival-outfitters"
+      ],
+      "stage": "action",
+      "version": "0.3.3",
+      "created": "2024-11-08T00:17:47.700Z"
+    },
+    {
+      "name": "Thieves Tools",
+      "type": "equipment",
+      "stage": "check",
+      "id": "05e8f0c0-478c-4c02-a18b-4e03cc2a0d23",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:03:33.773Z",
+      "price": 25,
+      "shopCategories": [
+        "shady-dealer"
+      ],
+      "advantage": true,
+      "frontImg": "https://julietfoundryvtt.s3.us-east-1.amazonaws.com/art/obsidian/0671b7db238b49779a06817d09c3ae99.webp"
+    },
+    {
+      "name": "Brass Knuckles",
+      "type": "equipment",
+      "stage": "check",
+      "id": "d65db040-bad2-4a8d-a4a3-78ba25c78c68",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:07:35.697Z",
+      "deals": 1,
+      "shopCategories": [
+        "shady-dealer"
+      ],
+      "price": 10
+    },
+    {
+      "name": "Dread Helm",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "7f8cae54-c157-4b2a-930c-287f50d56901",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:19:55.794Z",
+      "grantsAbilities": [
+        "makes your eyes glow red, hides the rest of your face in shadow"
+      ],
+      "tierDecrease": 1
+    },
+    {
+      "name": "Horn of Silent Alarm",
+      "type": "equipment",
+      "stage": "check",
+      "id": "5dc8964d-6de7-4b6e-a6d7-10b463831844",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:24:47.497Z",
+      "cost": 1,
+      "grantsAbilities": [
+        "one creature of your choice can hear the horn’s blare, no one else can hear it"
+      ],
+      "tierIncrease": 1
+    },
+    {
+      "name": "Instrument of Illusions",
+      "type": "equipment",
+      "stage": "check",
+      "id": "53e0c29c-3ac2-4759-ae7a-823bed5badb9",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:29:00.704Z",
+      "grantsAbilities": [
+        "create harmless, obviously illusory visual effects within a 5-foot-radius sphere centered on the instrument"
+      ],
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/45205/647/1000/1000/638657413766315440.png"
+    },
+    {
+      "name": "Staff of Fire Bolt",
+      "type": "equipment",
+      "stage": "check",
+      "id": "cf3ccaec-4295-4cde-a191-e2433f0c5032",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:38:53.341Z",
+      "ranged": true,
+      "deals": 1
+    },
+    {
+      "name": "Tankard of Plenty",
+      "type": "equipment",
+      "stage": "check",
+      "id": "814c619e-bf0c-4748-97dc-cab6fe5224fc",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:40:40.155Z",
+      "grantsAbilities": [
+        "fill with three pints of rich dwarven ale"
+      ]
+    },
+    {
+      "name": "Staff of Birdcalls",
+      "type": "equipment",
+      "stage": "check",
+      "id": "31dba3b1-5063-4162-b2f3-5b26d332280a",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:47:25.492Z",
+      "grantsAbilities": [
+        "emits the call of a small bird"
+      ]
+    },
+    {
+      "name": "Magnifying Glass",
+      "type": "equipment",
+      "stage": "check",
+      "id": "444eb674-c0d2-461c-a1f3-9ff2a5bd9d7a",
+      "version": "0.3.3",
+      "created": "2024-11-08T01:54:32.857Z",
+      "source": "Tales of the Valiant",
+      "advantageMsg": "to appraise or inspect a small or detailed item",
+      "advantage": true
+    },
+    {
+      "name": "Flare Gun",
+      "type": "equipment",
+      "stage": "check",
+      "id": "2904689a-1ff0-4fe1-b1a7-2211e26634bf",
+      "version": "0.3.3",
+      "created": "2024-11-08T10:52:33.355Z",
+      "ranged": true,
+      "rangeIncrease": 3,
+      "suffix": "flares are single use, roll determines if who you want to see it sees it and who you do not want to see it does not",
+      "grantsAbilities": [],
+      "tierDecrease": 1,
+      "frontImg": "https://www.horsesoldier.com/images/product/22/78283.jpg"
+    },
+    {
+      "name": "Ignite Weapon",
+      "type": "equipment",
+      "stage": "check",
+      "id": "fc3ce20a-1a62-4b2d-ad2b-e0b44352cf8d",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:01:07.142Z",
+      "deals": 1,
+      "cost": 1,
+      "durationMsg": "lasts 1 minute",
+      "duration": 1,
+      "grantsAbilities": [
+        "on subsequent turns deal +1"
+      ]
+    },
+    {
+      "name": "Combust Object",
+      "type": "equipment",
+      "stage": "check",
+      "id": "0a1f5692-6d03-4d29-ba79-a2cf103f25b0",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:06:01.525Z",
+      "specificMsg": "if an object is combustible",
+      "specific": true,
+      "lingeringDamage": 1,
+      "deals": 2
+    },
+    {
+      "name": "Witch's Owl Hat",
+      "type": "equipment",
+      "stage": "check",
+      "id": "43359592-54d4-41df-bca7-e2d7509ab3d8",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:26:50.297Z",
+      "grantsAbilities": [
+        "the small owl will sometimes agree to perform certain narrowly-defined tasks"
+      ],
+      "prefix": "a witch's hat stuffed with straw which contains a small owl's nest",
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304552362870046761/leverwood_a_cute_whimsical_witchs_hat_stuffed_with_straw_which__aa9f7f39-ab8d-494f-883f-1735ef440c30.png?ex=672fce90&is=672e7d10&hm=ee399f86a8d07399f7b53d8adc25848db8777febbcd6ee730e4ca0cbcf046b8c&",
+      "stretchImgY": true
+    },
+    {
+      "name": "Boots of False Tracks",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "336b8547-d119-4082-9cf2-90e2f0ab3136",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:29:12.950Z",
+      "notes": "While wearing the boots, you can choose to have them leave tracks like those of another kind of humanoid",
+      "grantsAbilities": [
+        "leave tracks like those of a kind of medium-sized humanoid"
+      ],
+      "tierDecrease": 0,
+      "frontImg": "https://cdna.artstation.com/p/assets/images/images/020/070/532/large/ewelina-szewczyk-shoes.jpg?1566243005&dl=1"
+    },
+    {
+      "name": "Spider Suit",
+      "type": "equipment",
+      "stage": "check",
+      "id": "39fe56fb-5ea7-4bf9-9548-8197c11f5db0",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:31:33.726Z",
+      "prefix": "magnificent three-piece suit and top hat, a large spider in each pocket, the hat full of webs",
+      "grantsAbilities": [
+        "spiders are somewhat commensurate to command"
+      ],
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304551777743409205/leverwood_magnificent_three-piece_suit_and_top_hat_a_large_spid_ef922d10-3d4d-4e94-91c0-59cf2189cf9a.png?ex=672fce05&is=672e7c85&hm=b498da3e1decab9b7c2602d80693de00a2dbb0cecd3a5d5f2478ee2013cb62fb&"
+    },
+    {
+      "name": "Gloves of Glass",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "690ddc68-9c89-42c7-9454-b6f287d2a6c3",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:33:08.591Z",
+      "notes": "Fine glass gloves leave human handprints, can shatter brittle objects from a distance by rubbing fingers to make a SKREEEE sound",
+      "grantsAbilities": [
+        "leave human handprints"
+      ],
+      "multiRewards": [
+        {
+          "name": "Shatter Glass",
+          "type": "equipment",
+          "stage": "check",
+          "id": "817cf62a-7537-48af-bb2b-d7fcc175cf55",
+          "version": "0.3.3",
+          "created": "2024-11-08T11:34:07.877Z",
+          "grantsAbilities": [
+            "shatter small brittle objects from a distance by rubbing fingers to make a SKREEEE sound"
+          ]
+        }
+      ],
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304554393319899217/leverwood_Glass_gloves._DD_magic_item._White_background._Fantas_59fa588d-c2e9-4e26-82e0-e88f5c67d004.png?ex=672fd074&is=672e7ef4&hm=15ae029d1f350be3dc85b4bc20e6d064f0f396937c16f9716a75d615d2050ec0&",
+      "padImage": true
+    },
+    {
+      "name": "Shatter Glass",
+      "type": "equipment",
+      "stage": "check",
+      "id": "817cf62a-7537-48af-bb2b-d7fcc175cf55",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:34:07.877Z",
+      "grantsAbilities": [
+        "shatter small brittle objects from a distance by rubbing fingers to make a SKREEEE sound"
+      ]
+    },
+    {
+      "name": "Ring of Climb Real Good",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "198c0694-d48e-4069-80ae-025a972de6c0",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:36:46.365Z",
+      "advantageMsg": "to climb",
+      "trainedMsg": "Climbing",
+      "trained": true,
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304555555368472626/leverwood_A_ring_made_of_rope._DD_magic_item._White_background._bdc6e280-eaa9-4c87-8e6b-a668bff115f6.png?ex=672fd189&is=672e8009&hm=7e518c3a1d2b0eaf3d8b212903e205d0c453514abfc0e98a93cb73676bb0a049&"
+    },
+    {
+      "name": "Potion of Invisibility",
+      "type": "equipment",
+      "stage": "action",
+      "id": "1262e746-fcee-4335-8a2c-c40951e0fe2b",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:39:55.125Z",
+      "consumable": true,
+      "durationMsg": "lasts 1 hour",
+      "duration": 1,
+      "grantsAbilities": [
+        "become invisible, the effect ends if you perform a major action like attacking or casting a spell"
+      ],
+      "source": "5e SRD",
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/45205/722/1000/1000/638657413893589864.png",
+      "padImage": true
+    },
+    {
+      "name": "Ring of Feather Falling",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "ab8cb77c-bf57-476e-91b4-4f6aa830ec25",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:45:15.447Z",
+      "instructions": "",
+      "notes": "Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If a creature lands before the spell ends, the creature takes no damage from the fall, and the spell ends for that creature.",
+      "suffix": "can use as an interaction",
+      "grantsAbilities": [
+        "up to five falling creatures fall gently"
+      ],
+      "tierDecrease": 0
+    },
+    {
+      "name": "Feather Fall",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "4e879ed1-5271-4591-875e-3e2c5aa5b189",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:48:28.861Z",
+      "cost": 1,
+      "grantsAbilities": [
+        "up to five falling creatures fall gently"
+      ],
+      "frontImg": "https://julietfoundryvtt.s3.us-east-1.amazonaws.com/art/obsidian/83372eb099bf1f8500805778f779afe4.png",
+      "stretchImgY": true,
+      "tierIncrease": 1
+    },
+    {
+      "name": "Potion of Flying",
+      "type": "equipment",
+      "stage": "action",
+      "id": "d4cadb3b-5d33-448e-bab8-698701894022",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:50:15.361Z",
+      "consumable": true,
+      "durationMsg": "lasts 1 hour",
+      "duration": 1,
+      "speedType": "fly",
+      "speed": 1,
+      "tierIncrease": 1,
+      "frontImg": "https://bg3.wiki/w/images/0/04/POT_Potion_of_Flying_Faded.png"
+    },
+    {
+      "name": "Pipe of Smoke Monsters",
+      "type": "equipment",
+      "stage": "check",
+      "id": "eb7e06c5-1251-4ab4-9e25-1620445ac569",
+      "version": "0.3.3",
+      "created": "2024-11-08T11:56:08.286Z",
+      "notes": "common. While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth. The form must be small enough to fit in a 1-foot cube and loses its shape after a few seconds, becoming an ordinary puff of smoke.",
+      "grantsAbilities": [
+        " exhale a puff of smoke that takes the form of a single creature, the form must be small enough to fit in a 1-foot cube and loses its shape after a few seconds"
+      ],
+      "frontImg": "https://www.dndbeyond.com/avatars/thumbnails/20487/629/1000/1000/637677966956828917.jpeg",
+      "padImage": true
+    },
+    {
+      "name": "Azurite gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "78ac4186-d6d1-44fb-8759-375ecfedd466",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:38:39.883Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque mottled deep blue"
+    },
+    {
+      "name": "Banded agate gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "98d4f62a-ef2a-4a75-8348-308b132d93c3",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:40:02.484Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent striped brown, blue, white, or red"
+    },
+    {
+      "name": "Blue quartz gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "a1f7d0f5-aa23-4b8d-b3a0-5bcb570a6821",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:40:21.752Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent pale blue"
+    },
+    {
+      "name": "Eye agate gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "13d1ef43-b81b-4367-8f93-3cda125136e8",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:40:44.095Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent circles of gray, white, brown, blue, or green"
+    },
+    {
+      "name": "Hematite gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "17550832-2f1e-4287-bfa0-991dff7894ac",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:41:13.236Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque gray-black"
+    },
+    {
+      "name": "Lapis lazuli gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "4e2db820-820d-43b9-98d1-49da6b355b32",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:41:28.088Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque light and dark blue with yellow flecks"
+    },
+    {
+      "name": "Malachite gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "7040d691-e1a7-4ccb-8994-a17a8c413864",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:49:21.487Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque striated light and dark green"
+    },
+    {
+      "name": "Moss agate gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "182e3395-68e8-4061-87fa-20f14e300be8",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:49:39.309Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent pink or yellow-white with mossy gray or green markings"
+    },
+    {
+      "name": "Obsidian gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "72113652-cd89-4b38-962b-12bc18272ac0",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:49:51.961Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque black"
+    },
+    {
+      "name": "Rhodochrosite gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "a8110dca-9a18-463f-a5dd-c08d257020f6",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:50:07.056Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque light pink"
+    },
+    {
+      "name": "Tiger eye gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "1c45dae9-f578-42b4-b36a-83b6b5766678",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:50:24.211Z",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent brown with golden center"
+    },
+    {
+      "name": "Turquoise gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "cdc0e38d-c473-42f5-a23d-a7f4b34f11b5",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:51:04.453Z",
+      "instructions": "opaque light blue-green",
+      "price": 25,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Bloodstone gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "8d1e299f-c9da-4754-a956-60c5c2708a5a",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:51:50.323Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque dark gray with red flecks"
+    },
+    {
+      "name": "Carnelian gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "58e769dd-30c8-4c38-8949-a96a246216a7",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:52:23.157Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque orange to red-brown"
+    },
+    {
+      "name": "Chalcedony gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "2a732fd3-0264-4dab-ae22-53f486af64d2",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:52:35.831Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque white"
+    },
+    {
+      "name": "Chrysoprase gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "8a4878b9-66d6-474a-9db4-472db48dd33c",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:52:48.875Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent green"
+    },
+    {
+      "name": "Citrine gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "2f2ec45f-2c03-4bb1-8765-e4fa5703bd17",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:53:01.022Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent pale yellow-brow"
+    },
+    {
+      "name": "Jasper gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "be0e93b4-b818-41a9-a025-03d3781f2728",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:53:17.575Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque blue, black, or brown"
+    },
+    {
+      "name": "Moonstone gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "015b061c-f452-42f2-a03b-75563bca83f5",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:53:31.325Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent white with pale blue glow"
+    },
+    {
+      "name": "Onyx gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "576f2bda-f382-4b6d-83d7-e2f2b56e3fe4",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:53:46.614Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque bands of black and white, or pure black or white"
+    },
+    {
+      "name": "Quartz gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "9e4bb27c-fb71-4f2a-88e9-be6f119bd6b4",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:54:00.571Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent white, smoky gray, or yellow"
+    },
+    {
+      "name": "Sardonyx gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "98d446a8-0993-4d86-bce1-228689e6ca64",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:54:14.012Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque bands of red and white"
+    },
+    {
+      "name": "Star rose quartz gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "296942f6-7c1a-42c7-9198-8f2f92b6e5e5",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:54:26.854Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent rosy stone with white star-shaped center"
+    },
+    {
+      "name": "Zircon gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "2d0c40ba-314c-48e2-95a0-2e0475303aeb",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:54:47.611Z",
+      "price": 50,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent pale blue-green"
+    },
+    {
+      "name": "Amber gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "23304fa7-be24-48e7-9b9b-2541b0e4afda",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:55:05.251Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent watery gold to rich gold"
+    },
+    {
+      "name": "Amethyst gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "272d2375-3f44-45da-af4e-ad7157deb47f",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:55:32.997Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent deep purple"
+    },
+    {
+      "name": "Chrysoberyl gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "bafba8d4-93f4-49c1-98c4-3528af0eed92",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:55:44.119Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent yellow-green to pale green"
+    },
+    {
+      "name": "Coral gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "41af43c5-5f48-4892-bbf8-49e14396534c",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:55:56.839Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque crimson"
+    },
+    {
+      "name": "Garnet gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "adb17190-85d5-491a-bf5b-b1e881514e3c",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:56:08.074Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent red, brown-green, or violet"
+    },
+    {
+      "name": "Jade gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "a6f00121-da41-44e5-ac1b-8a385eb717e9",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:56:23.187Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent light green, deep green, or white"
+    },
+    {
+      "name": "Jet gem",
+      "type": "trinket",
+      "stage": "check",
+      "id": "10ff1f05-7daf-49ff-be9c-f6277eda2011",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:56:38.392Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque deep black"
+    },
+    {
+      "name": "Pearl (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "f0087563-391b-4844-9714-6e5e95ac01b4",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:56:57.008Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque lustrous white, yellow, or pink"
+    },
+    {
+      "name": "Spinel (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "afa2820a-694a-4ebb-a342-b060d42b855c",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:57:34.105Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent red, red-brown, or deep green"
+    },
+    {
+      "name": "Tourmaline (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "92995335-f582-4af9-a680-88aff29d3965",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:57:48.888Z",
+      "price": 500,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent pale green, blue, brown, or red"
+    },
+    {
+      "name": "Alexandrite (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "c9e4ef53-a8bf-438a-abb3-d85d8587a0ac",
+      "version": "0.3.3",
+      "created": "2024-11-08T17:58:12.504Z",
+      "price": 5000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent dark green"
+    },
+    {
+      "name": "Aquamarine (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "16a9a54e-5bb8-41f6-b57e-3158be375f0b",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:01:19.350Z",
+      "price": 5000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent pale blue-green"
+    },
+    {
+      "name": "Black pearl (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "382a9e51-279d-4692-b96f-991a59cc1bd0",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:01:34.153Z",
+      "price": 5000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "opaque pure black"
+    },
+    {
+      "name": "Blue spinel (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "e0b0c653-5bac-43ed-a5c1-25ccff2ba43a",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:01:48.275Z",
+      "price": 5000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent deep blue"
+    },
+    {
+      "name": "Peridot (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "52cba91e-954f-4ddc-80f3-adc6b61edd56",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:02:02.527Z",
+      "price": 5000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent rich olive green"
+    },
+    {
+      "name": "Topaz (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "8f7f2412-a543-437b-8115-a3fb16c00b7d",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:02:17.246Z",
+      "price": 5000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent golden yellow"
+    },
+    {
+      "name": "Black opal (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "9ff0041b-08d1-46b9-9127-cd026c4e9874",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:02:44.311Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent dark green with black mottling and golden flecks"
+    },
+    {
+      "name": "Blue sapphire (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "1dc81dad-0b0c-41fd-8f98-215679a81bf8",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:03:18.071Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent blue-white to medium blue"
+    },
+    {
+      "name": "Emerald (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "4aaeda67-6340-42f5-94c4-9ee84cf54f06",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:03:30.436Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent deep bright green"
+    },
+    {
+      "name": "Fire opal (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "d18b2502-6792-45e8-8ef1-48d7111df772",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:03:48.356Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent fiery red"
+    },
+    {
+      "name": "Opal (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "a85a0081-990f-433c-9d38-fd0b801fedbb",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:04:09.364Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent pale blue with green and golden mottling"
+    },
+    {
+      "name": "Star ruby (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "112e9f58-c2b8-4ed9-b924-0e211d3ea7c0",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:04:23.796Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent ruby with white star-shaped center"
+    },
+    {
+      "name": "Star sapphire (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "dad677c9-4072-4801-a16d-ca3bf7e7d18f",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:04:45.298Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent blue sapphire with white star-shaped center"
+    },
+    {
+      "name": "Yellow sapphire (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "e4a06aee-e3aa-40c5-8fb9-c4030f832c74",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:05:02.865Z",
+      "price": 10000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent fiery yellow or yellow-green"
+    },
+    {
+      "name": "Black sapphire (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "60a9f822-71c7-4c0e-82b9-56eabd4bda2e",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:05:31.517Z",
+      "price": 50000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "translucent lustrous black with glowing highlights"
+    },
+    {
+      "name": "Diamond (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "6477f47f-a78f-4156-bba5-f06f8eafe6eb",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:06:27.919Z",
+      "price": 50000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent blue-white, canary, pink, brown, or blue"
+    },
+    {
+      "name": "Jacinth (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "aae74145-6a91-43f8-a72e-024071d0181d",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:06:45.080Z",
+      "price": 50000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent fiery orange"
+    },
+    {
+      "name": "Ruby (gem)",
+      "type": "trinket",
+      "stage": "check",
+      "id": "8bb1b440-a394-4e17-a56e-be62f892e0ed",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:06:59.379Z",
+      "price": 50000,
+      "shopCategories": [
+        "jeweller"
+      ],
+      "instructions": "transparent clear red to deep crimson"
+    },
+    {
+      "name": "Silver ewer",
+      "type": "trinket",
+      "stage": "check",
+      "id": "0734804a-f135-487a-b492-8ee9ff576af1",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:09:48.608Z",
+      "price": 20,
+      "shopCategories": [
+        "blacksmith",
+        "jeweller",
+        "temple"
+      ]
+    },
+    {
+      "name": "Carved bone statuette",
+      "type": "trinket",
+      "stage": "check",
+      "id": "0318d54a-d93c-4f04-b8ab-3f568de2e63c",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:10:26.328Z",
+      "price": 20,
+      "shopCategories": []
+    },
+    {
+      "name": "Small gold bracelet",
+      "type": "trinket",
+      "stage": "check",
+      "id": "b9b7a808-eacc-4dee-8c2b-3187f69d2515",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:10:47.625Z",
+      "price": 20,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Cloth-of-gold vestments",
+      "type": "trinket",
+      "stage": "check",
+      "id": "d12a4e17-6b71-4fa8-914a-6b0906ceda19",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:11:00.002Z",
+      "price": 20,
+      "shopCategories": [
+        "temple",
+        "clothier"
+      ]
+    },
+    {
+      "name": "Black velvet mask stitched with silver thread",
+      "type": "trinket",
+      "stage": "check",
+      "id": "c8bd8744-2c69-4a5f-831c-d5faf1da7838",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:11:14.183Z",
+      "price": 20,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Copper chalice with silver filigree",
+      "type": "trinket",
+      "stage": "check",
+      "id": "5af24fbe-63bd-4036-9184-9aeda4197bb1",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:11:40.851Z",
+      "price": 20,
+      "shopCategories": [
+        "jeweller",
+        "temple"
+      ]
+    },
+    {
+      "name": "Pair of engraved bone dice",
+      "type": "trinket",
+      "stage": "check",
+      "id": "6c4b502e-8965-489b-9fe6-2673368420bb",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:11:52.918Z",
+      "price": 20,
+      "shopCategories": [
+        "shady-dealer"
+      ]
+    },
+    {
+      "name": "Small mirror set in a painted wooden frame",
+      "type": "trinket",
+      "stage": "check",
+      "id": "300c299d-169e-4d46-92c0-ed7545b2f8fc",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:12:03.843Z",
+      "price": 20,
+      "shopCategories": [
+        "general-store",
+        "tinker"
+      ]
+    },
+    {
+      "name": "Embroidered silk handkerchief",
+      "type": "trinket",
+      "stage": "check",
+      "id": "b2d9db3e-2301-4b35-88c9-3d10abcc3a5f",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:12:31.201Z",
+      "price": 20,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Gold locket with a painted portrait inside",
+      "type": "trinket",
+      "stage": "check",
+      "id": "15a9890e-6ace-4f2a-bb99-131b61e2754d",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:12:47.792Z",
+      "price": 20,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Gold ring set with bloodstones",
+      "type": "trinket",
+      "stage": "check",
+      "id": "e44821d5-aa78-4ef6-92bf-98e452ffc2db",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:13:33.542Z",
+      "price": 200,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Carved ivory statuette",
+      "type": "trinket",
+      "stage": "check",
+      "id": "483c0713-4ced-452d-8514-ff05019eefc5",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:14:01.267Z",
+      "price": 200,
+      "shopCategories": [
+        "temple"
+      ]
+    },
+    {
+      "name": "Large gold bracelet",
+      "type": "trinket",
+      "stage": "check",
+      "id": "8caf6abb-6d03-423f-ade1-91232364ed18",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:14:45.563Z",
+      "price": 200,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Silver necklace with a gemstone pendant",
+      "type": "trinket",
+      "stage": "check",
+      "id": "f96dc4f5-16a1-478e-b3d7-9e0242ce3801",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:14:55.496Z",
+      "price": 200,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Bronze crown",
+      "type": "trinket",
+      "stage": "check",
+      "id": "0104fd69-e8c5-452a-a35d-9d21e8de2c93",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:15:02.915Z",
+      "price": 200,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Silk robe with gold embroidery",
+      "type": "trinket",
+      "stage": "check",
+      "id": "fd2669e4-91b7-43eb-82b6-249e6d320f39",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:15:07.179Z",
+      "price": 200,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Large well-made tapestry",
+      "type": "trinket",
+      "stage": "check",
+      "id": "4557bb2a-8574-43ec-8e20-0079f36183f4",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:15:20.623Z",
+      "price": 200,
+      "shopCategories": [
+        "art-and tattoos"
+      ]
+    },
+    {
+      "name": "Brass mug with jade inlay",
+      "type": "trinket",
+      "stage": "check",
+      "id": "62969a17-af8c-4ebe-b464-ae1025abace7",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:17:37.920Z",
+      "price": 200,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Box of turquoise animal figurines",
+      "type": "trinket",
+      "stage": "check",
+      "id": "bc38aa0d-ea87-47e3-a1e3-4847165660b9",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:18:01.190Z",
+      "price": 200,
+      "shopCategories": [
+        "entertainment",
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Gold bird cage with electrum filigree",
+      "type": "trinket",
+      "stage": "check",
+      "id": "ab8484a4-be6a-4c3f-a008-6f1c5c93a3d3",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:18:26.467Z",
+      "price": 200,
+      "shopCategories": [
+        "pet-store"
+      ]
+    },
+    {
+      "name": "Silver chalice set with moonstones",
+      "type": "trinket",
+      "stage": "check",
+      "id": "27e706b6-268c-4f96-a045-c7e5f75c3d65",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:19:04.655Z",
+      "price": 2000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Silver-plated steel longsword with jet set in hilt",
+      "type": "trinket",
+      "stage": "check",
+      "id": "91d39909-d0fb-45ee-91f7-1dae99db38e0",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:19:22.284Z",
+      "price": 2000,
+      "shopCategories": [
+        "blacksmith"
+      ]
+    },
+    {
+      "name": "Carved harp of exotic wood with ivory inlay and zircon gems",
+      "type": "trinket",
+      "stage": "check",
+      "id": "c7e00c0c-3869-4154-b8f3-caf5f8a20bbf",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:19:45.434Z",
+      "price": 2000,
+      "shopCategories": [
+        "entertainment"
+      ]
+    },
+    {
+      "name": "Small gold idol",
+      "type": "trinket",
+      "stage": "check",
+      "id": "505805d0-1ca2-4c8a-ba4b-d457db9de5ff",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:19:57.955Z",
+      "price": 2000,
+      "shopCategories": [
+        "temple"
+      ]
+    },
+    {
+      "name": "Gold dragon comb set with red garnets as eyes",
+      "type": "trinket",
+      "stage": "check",
+      "id": "3d4be0bc-ac48-49bc-868e-a3538677f393",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:20:07.401Z",
+      "price": 2000,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Bottle stopper cork embossed with gold leaf and set with amethysts",
+      "type": "trinket",
+      "stage": "check",
+      "id": "3e26185d-ac4c-4fa2-81fd-1efc82a21602",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:20:31.783Z",
+      "price": 2000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Ceremonial electrum dagger with a black pearl in the pommel",
+      "type": "trinket",
+      "stage": "check",
+      "id": "10dee6f6-ab0a-44f9-bb1c-eaa5ddfd1f82",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:20:38.015Z",
+      "price": 2000,
+      "shopCategories": [
+        "blacksmith"
+      ]
+    },
+    {
+      "name": "Silver and gold brooch",
+      "type": "trinket",
+      "stage": "check",
+      "id": "2e8662d0-9512-451e-af48-8f378997cb3f",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:21:07.279Z",
+      "price": 2000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Obsidian statuette with gold fittings and inlay",
+      "type": "trinket",
+      "stage": "check",
+      "id": "1fcb8b5d-d66b-4d39-ae69-88c5f442d037",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:21:16.923Z",
+      "price": 2000,
+      "shopCategories": [
+        "temple"
+      ]
+    },
+    {
+      "name": "Painted gold war mask",
+      "type": "trinket",
+      "stage": "check",
+      "id": "f4451b7d-cadc-45e6-ba26-47c09bfae094",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:21:25.758Z",
+      "price": 2000,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Fine gold chain set with a fire opal",
+      "type": "trinket",
+      "stage": "check",
+      "id": "1834b194-5597-4ed4-af0d-0982c02cebe4",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:40:18.147Z",
+      "price": 20000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Old masterpiece painting",
+      "type": "trinket",
+      "stage": "check",
+      "id": "134a1fa0-2868-4ac5-9d40-80267ad891a8",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:40:37.863Z",
+      "price": 20000,
+      "shopCategories": [
+        "art-and tattoos"
+      ]
+    },
+    {
+      "name": "Embroidered silk and velvet mantle set with numerous moonstones",
+      "type": "trinket",
+      "stage": "check",
+      "id": "c9a62a1f-2b33-4d1f-b02f-0715028e286c",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:40:51.028Z",
+      "price": 20000,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Platinum bracelet set with a sapphire",
+      "type": "trinket",
+      "stage": "check",
+      "id": "fc352a06-1a61-4330-a85b-be1cf92a8686",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:41:00.405Z",
+      "price": 20000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Embroidered glove set with jewel chips",
+      "type": "trinket",
+      "stage": "check",
+      "id": "c2eda5e7-ae6e-41c8-9ff1-a08f6c57a786",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:41:07.092Z",
+      "price": 20000,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "Jeweled anklet",
+      "type": "trinket",
+      "stage": "check",
+      "id": "f6fb4800-fe6f-4a54-9f0f-3b0aa376054a",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:41:15.608Z",
+      "price": 20000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Gold music box",
+      "type": "trinket",
+      "stage": "check",
+      "id": "a8e529bc-0198-4554-ab95-7c42c12a8e58",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:41:24.892Z",
+      "price": 20000,
+      "shopCategories": [
+        "tinker"
+      ]
+    },
+    {
+      "name": "Gold circlet set with four aquamarines",
+      "type": "trinket",
+      "stage": "check",
+      "id": "bbb968a2-d561-4ab7-885a-f96b48973555",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:41:36.220Z",
+      "price": 20000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Eye patch with a mock eye set in blue sapphire and moonstone",
+      "type": "trinket",
+      "stage": "check",
+      "id": "2c572ae4-6af8-4adc-b08b-75757fe6bf61",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:42:28.392Z",
+      "price": 20000,
+      "shopCategories": [
+        "clothier"
+      ]
+    },
+    {
+      "name": "A necklace string of small pink pearls",
+      "type": "trinket",
+      "stage": "check",
+      "id": "d45a4ad9-9d2c-45b3-889a-4628361e09fd",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:42:49.611Z",
+      "price": 20000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Jeweled gold crown",
+      "type": "trinket",
+      "stage": "check",
+      "id": "5af1734c-d0cb-4300-9d25-1d2b244a0bf0",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:42:59.572Z",
+      "price": 200000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Jeweled platinum ring",
+      "type": "trinket",
+      "stage": "check",
+      "id": "1579685e-e531-4ea1-8a4b-7b1094cdf93e",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:43:12.031Z",
+      "price": 200000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Small gold statuette set with rubies",
+      "type": "trinket",
+      "stage": "check",
+      "id": "fbd1a1ed-aa73-4519-80ef-19309ee625c1",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:43:27.811Z",
+      "price": 200000,
+      "shopCategories": [
+        "temple"
+      ]
+    },
+    {
+      "name": "Gold cup set with emeralds",
+      "type": "trinket",
+      "stage": "check",
+      "id": "60bb0fef-b33e-4f3b-8420-3b94bbd8d8da",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:43:38.309Z",
+      "price": 200000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Gold jewelry box with platinum filigree",
+      "type": "trinket",
+      "stage": "check",
+      "id": "dbf7bed2-27bc-44b3-b1ef-d44aa164c145",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:43:47.750Z",
+      "price": 200000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "name": "Painted gold child’s sarcophagus",
+      "type": "trinket",
+      "stage": "check",
+      "id": "7bcebce3-eb3b-42aa-9ca9-fef342a40164",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:43:58.051Z",
+      "price": 200000,
+      "shopCategories": [
+        "woodworker"
+      ]
+    },
+    {
+      "name": "Jade game board with solid gold playing pieces",
+      "type": "trinket",
+      "stage": "check",
+      "id": "c7adff22-0784-4661-ace1-5cf862a0130f",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:44:09.403Z",
+      "price": 200000,
+      "shopCategories": [
+        "entertainment"
+      ]
+    },
+    {
+      "name": "Bejeweled ivory drinking horn with gold filigree",
+      "type": "trinket",
+      "stage": "check",
+      "id": "6db13983-9615-4187-927a-a7608f744264",
+      "version": "0.3.3",
+      "created": "2024-11-08T18:44:23.327Z",
+      "price": 200000,
+      "shopCategories": [
+        "jeweller"
+      ]
+    },
+    {
+      "id": "219686dc-392a-4fa0-bd08-05206b9ffd07",
+      "name": "First Aid Kit",
+      "heals": 2,
+      "consumable": true,
+      "instructions": "",
+      "specificMsg": "physical pools only",
+      "specific": true,
+      "type": "equipment",
+      "price": 25,
+      "shopCategories": [
+        "temple",
+        "survival-outfitters"
+      ],
+      "stage": "action",
+      "version": "0.3.3",
+      "created": "2024-11-08T20:30:08.110Z",
+      "frontImg": "https://cdn.discordapp.com/attachments/998978618061488158/1304544214851522620/leverwood_a_WWI_med_kit._DD_item._white_background_b54f6dc2-0dd9-49fa-85a0-50f8eb434651.png?ex=672fc6fa&is=672e757a&hm=643c48eb982fb56b1b529534d5abb9232264145c5bc13212536286e645e0abff&",
+      "stretchImgY": true
+    },
+    {
+      "name": "Kerosene",
+      "type": "equipment",
+      "stage": "check",
+      "id": "d86cd249-5505-4319-98ef-4db4f27d8822",
+      "version": "0.3.3",
+      "created": "2024-11-08T20:44:40.246Z",
+      "frontImg": "https://www.ima-usa.com/cdn/shop/products/ON7457__01.jpg",
+      "aoe": true,
+      "deals": 1,
+      "consumable": true,
+      "castTimeMsg": "",
+      "castTime": 0,
+      "lingeringDamage": 0,
+      "instructions": "",
+      "prefix": "must be ignited"
+    },
+    {
+      "name": "Ammo",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "3aa6bb2d-2df8-40fc-9aed-d371d9fc3355",
+      "version": "0.3.3",
+      "created": "2024-11-09T00:37:09.965Z",
+      "consumable": true,
+      "deals": 2
+    },
+    {
+      "name": "Streetmaster",
+      "type": "equipment",
+      "stage": "check",
+      "id": "609c5b4b-d5cd-44c6-88a8-4083dcd916bc",
+      "version": "0.3.3",
+      "created": "2025-03-19T00:27:04.093Z",
+      "advantageMsg": "",
+      "deals": 1,
+      "ranged": true,
+      "requiresAmmo": true,
+      "flavor": "A pistol manufactured by Dai Lung"
+    },
+    {
+      "name": "Combat Knife",
+      "type": "equipment",
+      "stage": "check",
+      "id": "cdca9134-cea3-4111-9932-afef1ee0ddf2",
+      "version": "0.3.3",
+      "created": "2025-03-19T00:36:46.583Z",
+      "deals": 1
+    },
+    {
+      "name": "Cyberdeck",
+      "type": "equipment",
+      "stage": "check",
+      "id": "f2c0f0b8-d80a-4982-b325-d6130af5839f",
+      "version": "0.3.3",
+      "created": "2025-03-19T00:38:13.882Z",
+      "instructions": "enables Netrunning, includes Virtuality Goggles"
+    },
+    {
+      "name": "Pistol Magazine",
+      "type": "equipment",
+      "stage": "check",
+      "id": "e1f35ce6-a969-418e-8f33-7dc8af97e31b",
+      "version": "0.3.3",
+      "created": "2025-03-19T00:40:21.750Z",
+      "instructions": "ammo"
+    },
+    {
+      "name": "Rifle Magazine",
+      "type": "equipment",
+      "stage": "check",
+      "id": "37338ec1-7441-4132-9bdb-9d1cc014a3bf",
+      "version": "0.3.3",
+      "created": "2025-03-19T00:42:53.020Z",
+      "instructions": "ammo"
+    },
+    {
+      "name": "Jungle Reaper",
+      "type": "equipment",
+      "stage": "check",
+      "id": "77ae6a99-c7ff-4e0c-bf07-cfbf15b50403",
+      "version": "0.3.3",
+      "created": "2025-03-19T00:46:20.642Z",
+      "requiresAmmo": true,
+      "ranged": true,
+      "deals": 2,
+      "flavor": "An assault rifle manufactured by Chadran Arms"
+    },
+    {
+      "name": "Rattle Can",
+      "type": "equipment",
+      "stage": "check",
+      "id": "1277d4ad-8d37-4a8a-b692-5466e26f2b70",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:00:11.674Z",
+      "ranged": true,
+      "requiresAmmo": true,
+      "aoe": true,
+      "multiRewards": [
+        {
+          "name": "Loading",
+          "type": "feature",
+          "stage": "passive",
+          "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
+          "version": "0.3.3",
+          "created": "2024-11-06T13:18:18.335Z",
+          "castTimeMsg": "requires 1 action to reload",
+          "castTime": 1
+        }
+      ],
+      "deals": 1,
+      "onFailTakeDamage": 0,
+      "flavor": "A cheap, mass-produced grenade launcher by GunMart that makes a lot of noise but doesn't pack much punch"
+    },
+    {
+      "name": "Box of Launcher Grenades",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "14df9c61-862e-42fc-aa8f-150c4560ea82",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:07:28.585Z"
+    },
+    {
+      "name": "Kerenzikov",
+      "type": "feature",
+      "stage": "minor",
+      "id": "3f718e04-03fa-48b5-b0dd-1731560886e7",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:13:37.366Z",
+      "grantsAbilities": [
+        "permanently change your position in the initiative order"
+      ],
+      "cost": 1,
+      "instructions": "",
+      "flavor": "Chipware, requires Neural Implant"
+    },
+    {
+      "name": "Neural Implant",
+      "type": "feature",
+      "stage": "passive",
+      "id": "5bb6b7e8-14f6-4415-9721-d72aed4d949d",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:16:16.121Z",
+      "grantsAbilities": [
+        "consists of Neural Link (allows you to install chipware) and Interface Plugs (allows you to mentally control machinery)"
+      ]
+    },
+    {
+      "name": "Chemical Analyzer",
+      "type": "feature",
+      "stage": "check",
+      "id": "31681107-5997-40df-9f0e-9eb7a3d6f04f",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:18:25.412Z",
+      "grantsAbilities": [
+        "test substance for chemical composition and compare it to a database"
+      ],
+      "flavor": "Chipware, requires Neural Implant"
+    },
+    {
+      "name": "Olfactory Boost",
+      "type": "feature",
+      "stage": "check",
+      "id": "aa26c9e9-30ea-4058-96b1-d0109ce538c7",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:20:29.481Z",
+      "grantsAbilities": [
+        "track via scent"
+      ],
+      "flavor": "Chipware, requires Neural Implant"
+    },
+    {
+      "name": "Skill Chip",
+      "type": "feature",
+      "stage": "passive",
+      "id": "e5be6bcd-50d0-4bf9-ba0c-42e9d2828a36",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:23:17.154Z",
+      "flavor": "Chipware, requires Neural Implant",
+      "trainedMsg": "Martial Arts, Handguns, Perception, Deduction, Electronics, Paramedics, or Science",
+      "trained": true
+    },
+    {
+      "name": "Tactile Boost",
+      "type": "feature",
+      "stage": "action",
+      "id": "51306ed1-500d-45ae-a829-0483a6b04c22",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:25:20.592Z",
+      "grantsAbilities": [
+        "detect motion within 2 zones by placing hand on surface"
+      ],
+      "castTimeMsg": "takes 30 seconds",
+      "castTime": 1,
+      "flavor": "Chipware, requires Neural Link"
+    },
+    {
+      "name": "Machete",
+      "type": "equipment",
+      "stage": "check",
+      "id": "d29f6aeb-a0aa-4cdd-a7c0-d26d294dc85e",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:34:18.579Z",
+      "deals": 2
+    },
+    {
+      "name": "Junkblaster",
+      "type": "equipment",
+      "stage": "check",
+      "id": "1c93f5ef-951f-43d6-8b6e-705e281c9ee7",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:38:36.183Z",
+      "onFailTakeDamage": 1,
+      "ranged": true,
+      "requiresAmmo": true,
+      "deals": 3,
+      "flavor": "A street trash shotgun made by Scavvers which is prone to violently backfiring",
+      "onFailDmgType": "END"
+    },
+    {
+      "name": "Box of Shotgun Shells",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "2f89cbbc-f63e-4e30-98bc-0797a5d08846",
+      "version": "0.3.3",
+      "created": "2025-03-19T01:44:12.665Z"
+    },
+    {
+      "name": "Warlock",
+      "type": "feature",
+      "instructions": "",
+      "id": "91ff46bc-b2ad-48d6-8840-aa091331c7a1",
+      "frontImg": "",
+      "stretchImgY": true,
+      "stage": "passive",
+      "trainedMsg": "Pact Magic. Your spellcasting ability is SOC",
+      "trained": true,
+      "version": "0.3.3",
+      "created": "2025-03-19T02:12:18.517Z",
+      "flavor": "You draw magic from a patron with whom you have made a pact",
+      "multiRewards": [
+        {
+          "name": "Pactbound",
+          "type": "equipment",
+          "stage": "check",
+          "id": "cd0c32ec-a7eb-4a8c-84c9-a988e820c7cb",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:17:14.036Z",
+          "instructions": "Displeasing your warlock patron blocks your ability to cast spells until they are appeased."
+        },
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        }
+      ]
+    },
+    {
+      "name": "Pushing the Limit",
+      "type": "equipment",
+      "stage": "check",
+      "id": "f310177b-af52-488b-86bd-8da18d293a09",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:14:41.328Z",
+      "grantsAbilities": [],
+      "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+    },
+    {
+      "name": "Pactbound",
+      "type": "equipment",
+      "stage": "check",
+      "id": "cd0c32ec-a7eb-4a8c-84c9-a988e820c7cb",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:17:14.036Z",
+      "instructions": "Displeasing your warlock patron blocks your ability to cast spells until they are appeased."
+    },
+    {
+      "name": "Cleric",
+      "type": "feature",
+      "stage": "check",
+      "id": "ab2e229b-4e3a-433e-a858-aa5bba2b30eb",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:23:18.985Z",
+      "multiRewards": [
+        {
+          "name": "Heresy",
+          "type": "equipment",
+          "stage": "check",
+          "id": "c90c5d0e-5f6b-4f3a-ba0f-4dcd84daf09a",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:23:57.635Z",
+          "instructions": "If you offend your god or betray your ideals, you can't cast spells until you atone"
+        },
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        }
+      ],
+      "trainedMsg": "Divine Magic. Your spellcasting ability is Instinct",
+      "trained": true,
+      "flavor": "You draw power from a god you worship or a philosophy you believe in"
+    },
+    {
+      "name": "Heresy",
+      "type": "equipment",
+      "stage": "check",
+      "id": "c90c5d0e-5f6b-4f3a-ba0f-4dcd84daf09a",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:23:57.635Z",
+      "instructions": "If you offend your god or betray your ideals, you can't cast spells until you atone"
+    },
+    {
+      "name": "Druid",
+      "type": "feature",
+      "stage": "passive",
+      "id": "a368ea6e-1602-4a6b-b2e6-0284c61283ad",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:31:23.237Z",
+      "trainedMsg": "Spellcasting. Your spellcasting ability is Instinct",
+      "trained": true,
+      "multiRewards": [
+        {
+          "name": "Interconnected",
+          "type": "equipment",
+          "stage": "check",
+          "id": "30f6ac54-0a83-43e8-9101-ac6a653093ab",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:42:38.312Z",
+          "instructions": "Disrupting an ecosystem’s delicate balance sacrifices your magic until it is restored."
+        },
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        }
+      ],
+      "flavor": "The spirit of the natural world flows through you and grants you mystic power"
+    },
+    {
+      "name": "Interconnected",
+      "type": "equipment",
+      "stage": "check",
+      "id": "30f6ac54-0a83-43e8-9101-ac6a653093ab",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:42:38.312Z",
+      "instructions": "Disrupting an ecosystem’s delicate balance sacrifices your magic until it is restored."
+    },
+    {
+      "name": "Wizard",
+      "type": "feature",
+      "stage": "passive",
+      "id": "904631a6-8edb-4c3f-a49d-205da8f27587",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:45:24.431Z",
+      "trainedMsg": "Spellcasting. Your spellcasting ability is Education",
+      "trained": true,
+      "multiRewards": [
+        {
+          "name": "Mystic Misfire",
+          "type": "equipment",
+          "stage": "check",
+          "id": "39ab09a8-766c-485a-84b6-251d440837de",
+          "version": "0.3.3",
+          "created": "2025-03-19T03:00:21.325Z",
+          "instructions": "If you roll a 1 on your ability die when spellcasting, you must study the spell for 1 hour to cast it again"
+        },
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        }
+      ],
+      "flavor": "You master the arcane arts through dedicated study"
+    },
+    {
+      "name": "It's About Confidence",
+      "type": "equipment",
+      "stage": "check",
+      "id": "dc0aeb69-ac39-4daa-940a-cf7b8e5e9801",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:54:05.830Z",
+      "instructions": "If you roll a 1 on your ability die when you cast a spell, you cannot cast it again until after a full reset"
+    },
+    {
+      "name": "Sorcerer",
+      "type": "feature",
+      "stage": "passive",
+      "id": "22084105-d06b-4c31-aee3-31a8d306ffc0",
+      "version": "0.3.3",
+      "created": "2025-03-19T02:54:54.300Z",
+      "multiRewards": [
+        {
+          "name": "It's About Confidence",
+          "type": "equipment",
+          "stage": "check",
+          "id": "dc0aeb69-ac39-4daa-940a-cf7b8e5e9801",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:54:05.830Z",
+          "instructions": "If you roll a 1 on your ability die when you cast a spell, you cannot cast it again until after a full reset"
+        },
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        }
+      ],
+      "flavor": "You were born with innate magical power",
+      "trainedMsg": "Spellcasting. Your spellcasting ability is INS or SOC (choose 1)",
+      "trained": true
+    },
+    {
+      "name": "Mystic Misfire",
+      "type": "equipment",
+      "stage": "check",
+      "id": "39ab09a8-766c-485a-84b6-251d440837de",
+      "version": "0.3.3",
+      "created": "2025-03-19T03:00:21.325Z",
+      "instructions": "If you roll a 1 on your ability die when spellcasting, you must study the spell for 1 hour to cast it again"
+    },
+    {
+      "name": "Paladin",
+      "type": "feature",
+      "stage": "passive",
+      "id": "341e1562-cc76-4a60-a24e-e883c57b3d7d",
+      "version": "0.3.3",
+      "created": "2025-03-19T03:08:02.677Z",
+      "flavor": "You have sworn a sacred oath, and its power grants you mystical ability.",
+      "multiRewards": [
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        },
+        {
+          "name": "Oathbound",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f587c4ff-c2cb-4a55-921c-646534040bf3",
+          "version": "0.3.3",
+          "created": "2025-03-19T03:09:00.267Z",
+          "instructions": "Breaking your oath strips you of spellcasting until you ceremonially renew it. After three breaks, you must take a new oath."
+        }
+      ],
+      "trainedMsg": "Spellcasting. Your spellcasting ability is INS or SOC (choose 1)",
+      "trained": true
+    },
+    {
+      "name": "Oathbound",
+      "type": "equipment",
+      "stage": "check",
+      "id": "f587c4ff-c2cb-4a55-921c-646534040bf3",
+      "version": "0.3.3",
+      "created": "2025-03-19T03:09:00.267Z",
+      "instructions": "Breaking your oath strips you of spellcasting until you ceremonially renew it. After three breaks, you must take a new oath."
+    },
+    {
+      "name": "Bard",
+      "type": "feature",
+      "stage": "passive",
+      "id": "5694da62-7a4f-429e-b9f4-df4a4d17b2b8",
+      "version": "0.3.3",
+      "created": "2025-03-19T03:15:39.571Z",
+      "trainedMsg": "Spellcasting. Your spellcasting ability is SOC",
+      "trained": true,
+      "flavor": "You channel the magic of music, dance, or verse",
+      "multiRewards": [
+        {
+          "name": "Dissonance",
+          "type": "feature",
+          "stage": "check",
+          "id": "a59d0b9b-3e2e-4432-bd7a-9590ae9b233e",
+          "version": "0.3.3",
+          "created": "2025-03-19T03:17:33.884Z",
+          "instructions": "If you roll a 1 on your ability die when spellcasting, all creatures who can hear you become deaf for 1 minute"
+        },
+        {
+          "name": "Pushing the Limit",
+          "type": "equipment",
+          "stage": "check",
+          "id": "f310177b-af52-488b-86bd-8da18d293a09",
+          "version": "0.3.3",
+          "created": "2025-03-19T02:14:41.328Z",
+          "grantsAbilities": [],
+          "instructions": "If you are out of wellspring, you can still attempt to cast. On a fail, you drop to 0 spellcasting pool."
+        }
+      ]
+    },
+    {
+      "name": "Dissonance",
+      "type": "feature",
+      "stage": "check",
+      "id": "a59d0b9b-3e2e-4432-bd7a-9590ae9b233e",
+      "version": "0.3.3",
+      "created": "2025-03-19T03:17:33.884Z",
+      "instructions": "If you roll a 1 on your ability die when spellcasting, all creatures who can hear you become deaf for 1 minute"
+    },
+    {
+      "name": "Bounce Back",
+      "type": "equipment",
+      "stage": "action",
+      "id": "a9828fb3-79fe-4855-bf83-77df31e96e0c",
+      "version": "0.3.3",
+      "created": "2025-03-19T03:38:51.863Z",
+      "flavor": "Auto-injector",
+      "consumable": true,
+      "heals": 3,
+      "specificMsg": "physical pool",
+      "specific": false,
+      "rollPoints": true,
+      "castTime": 1,
+      "castTimeMsg": "takes 3 rounds",
+      "deals": 0,
+      "instructions": "(action) heals 1 point each round for 3 rounds, single use"
+    },
+    {
+      "name": "Coat weapon",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "923319a7-f117-43f5-9706-89513aeb0a7b",
+      "version": "0.3.3",
+      "created": "2025-03-19T04:17:43.035Z",
+      "onSuccess": true,
+      "deals": 3,
+      "consumable": true
+    },
+    {
+      "name": "MaxDoc",
+      "type": "equipment",
+      "stage": "action",
+      "id": "387f0b3b-826c-438c-8c84-d1d283408fdd",
+      "version": "0.3.3",
+      "created": "2025-03-19T04:32:34.672Z",
+      "heals": 2,
+      "consumable": true,
+      "flavor": "An inhaler manufactured by Trauma Team"
+    },
+    {
+      "name": "Black Lace",
+      "type": "equipment",
+      "stage": "action",
+      "id": "130c7190-416c-46ea-997f-71817631f9e1",
+      "version": "0.3.3",
+      "created": "2025-03-19T04:36:37.502Z",
+      "curseMsg": "Take 1d4 INS damage",
+      "curse": 1,
+      "consumable": true,
+      "advantageMsg": "when defending",
+      "durationMsg": "lasts 10 minutes",
+      "duration": 1,
+      "grantsAbilities": [
+        "sets your Endurance die to a d20",
+        "adds +4 to the pool's current and max"
+      ],
+      "flavor": "27% dextromethamphetamine, 15% cannabinoid, 40% water, and 8% chemical ingredients of unknown origin. Potential reactions include altered states of consciousness, panic attacks, elevated heart rates, dehydration, and heart attacks."
+    },
+    {
+      "name": "Ballistic Vest",
+      "type": "equipment",
+      "stage": "defense",
+      "id": "994c4e72-a397-482c-8915-0e352b8a8b44",
+      "version": "0.3.3",
+      "created": "2025-03-19T04:51:53.660Z",
+      "advantageMsg": "when defending against physical attack",
+      "advantage": true,
+      "reduceDamage": 1
+    },
+    {
+      "name": "Agent",
+      "type": "equipment",
+      "stage": "check",
+      "id": "7415ad97-6245-4086-b451-48bec2d203c1",
+      "version": "0.3.3",
+      "created": "2025-03-19T04:54:52.993Z",
+      "instructions": "Self-adaptive-AI powered smartphone. Can surf the Data Pool and recommend a future course of action based on your personal goals. AI may suggest unwise actions.",
+      "summonTierIncrease": 0,
+      "tierIncrease": 2
+    },
+    {
+      "name": "Duct Tape",
+      "type": "equipment",
+      "stage": "check",
+      "id": "59e6700e-411e-44c5-bcd8-b5b8393d90c8",
+      "version": "0.3.3",
+      "created": "2025-03-19T04:58:59.559Z"
+    },
+    {
+      "name": "Flashlight",
+      "type": "equipment",
+      "stage": "check",
+      "id": "78192aa4-ca03-4f61-a8cc-5a15094f2adc",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:00:06.408Z",
+      "instructions": "Rechargeable. Lasts up to 10 hours on a charge.",
+      "tierIncrease": 1
+    },
+    {
+      "name": "Handcuffs",
+      "type": "equipment",
+      "id": "1371d59b-beb7-468f-82df-e53354a5e50d",
+      "shopCategories": [
+        "shady-dealer",
+        "tinker"
+      ],
+      "instructions": "",
+      "price": 10,
+      "stage": "check",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:03:21.799Z"
+    },
+    {
+      "name": "Lock Picking Set",
+      "type": "equipment",
+      "stage": "check",
+      "id": "9015c185-c072-4069-8caa-63561642778d",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:04:21.394Z",
+      "price": 25,
+      "shopCategories": [
+        "shady-dealer"
+      ],
+      "advantage": true,
+      "frontImg": ""
+    },
+    {
+      "name": "Medscanner",
+      "type": "equipment",
+      "stage": "check",
+      "id": "a153a0ec-066b-413c-9fe0-aaa427b085bc",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:05:32.406Z",
+      "instructions": "",
+      "flavor": "Scanner with external probes and contacts that diagnoses injury and illnes",
+      "advantage": true,
+      "advantageMsg": "on medical checks when assisting someone ill or injured",
+      "trained": true
+    },
+    {
+      "name": "Nylon Rope",
+      "type": "equipment",
+      "id": "031ba94c-16b1-475a-aeba-1c2a0c08c39a",
+      "price": 5,
+      "shopCategories": [
+        "delving-supplies",
+        "general-store",
+        "survival-outfitters"
+      ],
+      "instructions": "50 ft.",
+      "stage": "check",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:11:38.715Z"
+    },
+    {
+      "name": "Techscanner",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "76127a4a-4986-4aba-8b58-a47267d4f589",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:12:59.260Z",
+      "flavor": "Scanner diagnoses a wide variety of electronics, assisting the user in repairs, or\nother technical work.",
+      "notes": "cyberpunk RED",
+      "trainedMsg": "Electronics",
+      "trained": true
+    },
+    {
+      "name": "Vial of Biotoxin",
+      "multiRewards": [
+        {
+          "name": "Coat weapon",
+          "type": "equipment",
+          "stage": "minor",
+          "id": "923319a7-f117-43f5-9706-89513aeb0a7b",
+          "version": "0.3.3",
+          "created": "2025-03-19T04:17:43.035Z",
+          "onSuccess": true,
+          "deals": 3,
+          "consumable": true
+        },
+        {
+          "name": "Ingested poison",
+          "consumable": true,
+          "deals": 4,
+          "id": "26a95e46-1937-4fe3-98c6-5151fa9843c4",
+          "stage": "check"
+        }
+      ],
+      "type": "equipment",
+      "instructions": "",
+      "id": "6d57900e-7e11-4404-bb0e-0d671c9c768d",
+      "price": 100,
+      "shopCategories": [
+        "alchemist"
+      ],
+      "stage": "check",
+      "version": "0.3.3",
+      "created": "2025-03-19T05:15:23.895Z"
     }
   ],
   "players": [
@@ -6528,6 +8952,42 @@
       "dead": false,
       "eduMod": 0,
       "id": "dcc0b74d-2ed6-4995-a34c-d2708161787c"
+    },
+    {
+      "id": "b4a6e563-4379-4a70-bac1-8acc4bba7e19",
+      "name": "Partition 1",
+      "level": 1,
+      "rewards": [
+        "cdca9134-cea3-4111-9932-afef1ee0ddf2",
+        "609c5b4b-d5cd-44c6-88a8-4083dcd916bc",
+        "f2c0f0b8-d80a-4982-b325-d6130af5839f",
+        "e1f35ce6-a969-418e-8f33-7dc8af97e31b",
+        "37338ec1-7441-4132-9bdb-9d1cc014a3bf",
+        "77ae6a99-c7ff-4e0c-bf07-cfbf15b50403",
+        "14df9c61-862e-42fc-aa8f-150c4560ea82",
+        "1277d4ad-8d37-4a8a-b692-5466e26f2b70",
+        "3f718e04-03fa-48b5-b0dd-1731560886e7",
+        "5bb6b7e8-14f6-4415-9721-d72aed4d949d",
+        "31681107-5997-40df-9f0e-9eb7a3d6f04f",
+        "aa26c9e9-30ea-4058-96b1-d0109ce538c7",
+        "e5be6bcd-50d0-4bf9-ba0c-42e9d2828a36",
+        "51306ed1-500d-45ae-a829-0483a6b04c22",
+        "d29f6aeb-a0aa-4cdd-a7c0-d26d294dc85e",
+        "1c93f5ef-951f-43d6-8b6e-705e281c9ee7",
+        "2f89cbbc-f63e-4e30-98bc-0797a5d08846",
+        "a9828fb3-79fe-4855-bf83-77df31e96e0c",
+        "387f0b3b-826c-438c-8c84-d1d283408fdd",
+        "130c7190-416c-46ea-997f-71817631f9e1",
+        "994c4e72-a397-482c-8915-0e352b8a8b44",
+        "7415ad97-6245-4086-b451-48bec2d203c1",
+        "59e6700e-411e-44c5-bcd8-b5b8393d90c8",
+        "78192aa4-ca03-4f61-a8cc-5a15094f2adc",
+        "1371d59b-beb7-468f-82df-e53354a5e50d",
+        "9015c185-c072-4069-8caa-63561642778d",
+        "a153a0ec-066b-413c-9fe0-aaa427b085bc",
+        "031ba94c-16b1-475a-aeba-1c2a0c08c39a",
+        "6d57900e-7e11-4404-bb0e-0d671c9c768d"
+      ]
     },
     {
       "type": "pc",
@@ -7350,6 +9810,10 @@
     {
       "slug": "jeweller",
       "name": "Jeweller"
+    },
+    {
+      "slug": "art-and tattoos",
+      "name": "Art and Tattoos"
     }
   ],
   "services": [
