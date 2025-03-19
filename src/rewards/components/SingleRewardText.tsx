@@ -14,6 +14,7 @@ export function SingleRewardText({
   noTier = false,
   upcast = false,
   showPrice = false,
+  link = false,
 }: {
   reward: Reward;
   className?: string;
@@ -23,12 +24,12 @@ export function SingleRewardText({
   noTier?: boolean;
   upcast?: boolean;
   showPrice?: boolean;
+  link?: boolean;
 }) {
-
   let message = printRewardMessage(reward, upcast);
 
   if (oneLine) {
-    message = message.replaceAll("\n", " ");
+    message = message.trim().replaceAll("\n\n", " | ").replaceAll("\n", " ");
   }
 
   const Component = oneLine ? "span" : "div";
@@ -36,13 +37,13 @@ export function SingleRewardText({
   return (
     <Component className={`${styles.singleRewardText} ${className}`}>
       {!noTitle ? (
-        <strong className={"me-2"}>
-          {reward.name}
-          {!noTier && reward.type !== REWARD_TYPE.TRINKET && reward.tier > 0
-            ? ` (T${reward.tier})`
-            : ""}
-          .
-        </strong>
+        link ? (
+          <a href={`/rewards/${reward.optionsId}/edit`}>
+            <Title reward={reward} noTier={noTier} />
+          </a>
+        ) : (
+          <Title reward={reward} noTier={noTier} />
+        )
       ) : null}
       {showPrice && reward.price ? <Price cp={reward.price} /> : null}
       {!noType ? (
@@ -58,3 +59,13 @@ export function SingleRewardText({
     </Component>
   );
 }
+
+const Title = ({ reward, noTier }: { reward: Reward; noTier?: boolean }) => (
+  <strong className={"me-2"}>
+    {reward.name}
+    {!noTier && reward.type !== REWARD_TYPE.TRINKET && reward.tier > 0
+      ? ` (T${reward.tier})`
+      : ""}
+    .
+  </strong>
+);

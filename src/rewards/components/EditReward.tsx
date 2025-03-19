@@ -269,7 +269,7 @@ export function EditReward({ id }: { id: string }) {
               inline
               id="stage-minor"
               type="radio"
-              label="Minor (+2)"
+              label="Minor (+1 with check/+2)"
               value={STAGE.MINOR}
               checked={selectedOptions.stage === STAGE.MINOR}
               onChange={() => changeValue("stage", STAGE.MINOR)}

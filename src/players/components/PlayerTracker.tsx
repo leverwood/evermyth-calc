@@ -258,7 +258,7 @@ function RewardListEdit({
           >
             &nbsp;x&nbsp;
           </Button>
-          <SingleRewardText reward={data} oneLine={true} />
+          <SingleRewardText reward={data} oneLine={true} link={true} />
         </ListGroup.Item>
       ))}
     </ListGroup>

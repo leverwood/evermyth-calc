@@ -34,13 +34,11 @@ export const printRewardMessage = (
         ? reward.rangeIncrease + 1
         : 1
       : 0;
-    console.log({
-      aoeCreatures,
-      rangedZoneSize,
-      aoeZoneSize,
-      rangeIncrease: reward.rangeIncrease,
-    });
     const aoeZoneMsg = `${aoeZoneSize} zone${aoeZoneSize > 1 ? "s" : ""}`;
+    const healPoints =
+      reward.stage === STAGE.ACTION ? `1d${reward.heals * 2}` : reward.heals;
+    const dealPoints =
+      reward.stage === STAGE.ACTION ? `1d${reward.deals * 2}` : reward.deals;
 
     if (reward.specificMsg) messages.push(reward.specificMsg);
 
@@ -114,8 +112,8 @@ export const printRewardMessage = (
           reward.stage === STAGE.MINOR ||
           reward.stage === STAGE.PASSIVE
             ? printModifier(reward.deals)
-            : reward.deals
-        } point${reward.deals > 1 ? "s" : ""}${
+            : dealPoints
+        } point${reward.deals > 1 || reward.stage === STAGE.ACTION ? "s" : ""}${
           reward.aoe ? " to " + aoeCreatures + ` in ${aoeZoneMsg}` : ""
         }`
       );
@@ -125,7 +123,7 @@ export const printRewardMessage = (
     }
     if (reward.heals) {
       messages.push(
-        `heals ${reward.heals} point${
+        `heals ${healPoints} point${
           reward.aoe
             ? " to " +
               (reward.avoidAllies

@@ -26,6 +26,7 @@ import { REWARD_STAGE_LIMITS } from "./reward-stage-limits";
 const logger = Logger(LOG_LEVEL.ERROR);
 
 export function initReward({
+  id = "",
   name = "",
   stage = STAGE.CHECK,
   advantage = false,
@@ -105,8 +106,14 @@ export function initReward({
     prefix,
     suffix,
     flavor,
+    optionsId: id,
   };
   reward.tier += STAGE_COST[stage];
+
+  // when a minor action requires a successful roll, it only costs 1 tier
+  if (stage === STAGE.MINOR && (onSuccess || onAutoSuccess)) {
+    reward.tier -= 1;
+  }
 
   if (advantage) {
     reward.tier += OPTION_COST.advantage;
@@ -309,6 +316,7 @@ export function initReward({
     // find the highest action tier
     const highestActionTier = Math.max(
       ...multiRewards
+        .filter((r) => !r.consumable)
         .filter(
           (r) => r.stage === STAGE.CHECK || r.stage === STAGE.ACTION || !r.stage
         )
@@ -319,10 +327,16 @@ export function initReward({
     // find highest defense tier
     const highestDefenseTier = Math.max(
       ...multiRewards
-        .filter((r) => r.stage === STAGE.DEFENSE)
+        .filter((r) => r.stage === STAGE.DEFENSE && !r.consumable)
         .map(initReward)
         .map((r) => r.tier),
       reward.stage === STAGE.DEFENSE ? reward.tier : 0
+    );
+    const highestSingleUseTier = Math.max(
+      ...multiRewards
+        .filter((r) => r.consumable)
+        .map(initReward)
+        .map((r) => r.tier)
     );
     // sum passive, move tiers
     let otherTiers = multiRewards
@@ -343,7 +357,11 @@ export function initReward({
       otherTiers += reward.tier;
     }
 
-    reward.tier = highestActionTier + highestDefenseTier + otherTiers;
+    reward.tier =
+      highestActionTier +
+      highestDefenseTier +
+      highestSingleUseTier +
+      otherTiers;
   }
 
   // if it is a trinket, return a tier value for filtering purposes
