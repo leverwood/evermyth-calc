@@ -7,6 +7,7 @@ import {
   RewardDataID,
   STAGE,
   STAGE_COST,
+  DMG_TYPE,
 } from "../types/reward-types";
 import {
   Condition,
@@ -43,6 +44,7 @@ export function initReward({
   disadvantageMsg = "",
   duration = 0,
   durationMsg = "",
+  flavor = "",
   grantsAbilities = [],
   heals = 0,
   instructions,
@@ -54,6 +56,7 @@ export function initReward({
   noChase = false,
   notes = "",
   onFailTakeDamage = 0,
+  onFailDmgType = DMG_TYPE.USED,
   onAutoSuccess = false,
   onSuccess = false,
   overrideTier = undefined,
@@ -101,6 +104,7 @@ export function initReward({
     meleeAndRanged,
     prefix,
     suffix,
+    flavor,
   };
   reward.tier += STAGE_COST[stage];
 
@@ -112,6 +116,7 @@ export function initReward({
   if (aoe) {
     reward.tier += OPTION_COST.aoe;
     reward.aoe = true;
+    reward.rangeIncrease = rangeIncrease;
   }
   if (avoidAllies) {
     reward.tier += OPTION_COST.avoidAllies;
@@ -202,6 +207,7 @@ export function initReward({
   if (onFailTakeDamage) {
     reward.tier += onFailTakeDamage * OPTION_COST.onFailTakeDamage;
     reward.onFailTakeDamage = onFailTakeDamage;
+    reward.onFailDmgType = onFailDmgType;
   }
   if (onAutoSuccess) {
     reward.onAutoSuccess = true;
@@ -320,11 +326,20 @@ export function initReward({
     );
     // sum passive, move tiers
     let otherTiers = multiRewards
-      .filter((r) => r.stage === STAGE.PASSIVE || r.stage === STAGE.MOVE)
+      .filter(
+        (r) =>
+          r.stage === STAGE.PASSIVE ||
+          r.stage === STAGE.MOVE ||
+          r.stage === STAGE.MINOR
+      )
       .map(initReward)
       .map((r) => r.tier)
       .reduce((a, b) => a + b, 0);
-    if (reward.stage === STAGE.PASSIVE || reward.stage === STAGE.MOVE) {
+    if (
+      reward.stage === STAGE.PASSIVE ||
+      reward.stage === STAGE.MOVE ||
+      reward.stage === STAGE.MINOR
+    ) {
       otherTiers += reward.tier;
     }
 
@@ -536,7 +551,7 @@ export function validateRewardData(options: RewardData): {
   if (options.onAutoSuccess && options.onSuccess) {
     errors.push("Cannot have both On Auto Success and On Success");
   }
-  if (options.rangeIncrease && !options.ranged) {
+  if (options.rangeIncrease && !options.ranged && !options.aoe) {
     errors.push("Cannot increase range if it is not a ranged reward");
   }
   if (options.ranged && options.meleeAndRanged) {

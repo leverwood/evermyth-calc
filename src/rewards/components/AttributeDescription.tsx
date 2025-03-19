@@ -60,6 +60,11 @@ export const DESCRIPTIONS: {
       apply this multiple times if the duration is exceptionally long. Duration:
     </>
   ),
+  flavor: (
+    <>
+      <strong>Flavor.</strong> Add a flavor text to the reward.
+    </>
+  ),
   grantsAbilities: (
     <>
       <strong>Grants ability or applies a condition.</strong> Ability or
@@ -149,7 +154,8 @@ export const DESCRIPTIONS: {
   ),
   rangeIncrease: (
     <>
-      <strong>Range Increase.</strong> Can target a zone +2 further away.
+      <strong>Range Increase.</strong> Can target more zones. Ranged: +2 further
+      away, AOE: +1 zone
     </>
   ),
   reduceDamage: (

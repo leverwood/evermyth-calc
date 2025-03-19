@@ -8,6 +8,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: boolean;
     [STAGE.DEFENSE]: boolean;
     [STAGE.PASSIVE]: boolean;
+    [STAGE.MINOR]: boolean;
   };
 } = {
   advantage: {
@@ -16,6 +17,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   disadvantage: {
     [STAGE.CHECK]: true,
@@ -23,6 +25,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   aoe: {
     [STAGE.CHECK]: true,
@@ -30,6 +33,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   avoidAllies: {
     [STAGE.CHECK]: true,
@@ -37,6 +41,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   castTime: {
     [STAGE.CHECK]: true,
@@ -44,6 +49,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   consumable: {
     [STAGE.CHECK]: true,
@@ -51,13 +57,15 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   cost: {
     [STAGE.CHECK]: true,
     [STAGE.MOVE]: false,
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
-    [STAGE.PASSIVE]: false,
+    [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   upcast: {
     [STAGE.CHECK]: true,
@@ -65,6 +73,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   deals: {
     [STAGE.CHECK]: true,
@@ -72,13 +81,15 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   heals: {
     [STAGE.CHECK]: true,
     [STAGE.MOVE]: false,
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
-    [STAGE.PASSIVE]: false,
+    [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   lingeringDamage: {
     [STAGE.CHECK]: true,
@@ -86,13 +97,15 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   duration: {
     [STAGE.CHECK]: true,
     [STAGE.MOVE]: false,
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
-    [STAGE.PASSIVE]: false,
+    [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   grantsAbilities: {
     [STAGE.CHECK]: true,
@@ -100,6 +113,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   immune: {
     [STAGE.CHECK]: true,
@@ -107,6 +121,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   imposeVulnerable: {
     [STAGE.CHECK]: true,
@@ -114,6 +129,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   resistant: {
     [STAGE.CHECK]: true,
@@ -121,6 +137,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   vulnerable: {
     [STAGE.CHECK]: true,
@@ -128,6 +145,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   onFailTakeDamage: {
     [STAGE.CHECK]: true,
@@ -135,6 +153,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   onAutoSuccess: {
     [STAGE.CHECK]: false,
@@ -142,6 +161,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   onSuccess: {
     [STAGE.CHECK]: false,
@@ -149,6 +169,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   ranged: {
     [STAGE.CHECK]: true,
@@ -156,6 +177,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   reduceDamage: {
     [STAGE.CHECK]: false,
@@ -163,6 +185,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   relentless: {
     [STAGE.CHECK]: false,
@@ -170,6 +193,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   requiresAmmo: {
     [STAGE.CHECK]: true,
@@ -177,6 +201,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   restrained: {
     [STAGE.CHECK]: true,
@@ -184,6 +209,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   specific: {
     [STAGE.CHECK]: true,
@@ -191,6 +217,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   speed: {
     [STAGE.CHECK]: true,
@@ -198,6 +225,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   stunned: {
     [STAGE.CHECK]: true,
@@ -205,6 +233,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   summon: {
     [STAGE.CHECK]: true,
@@ -212,6 +241,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   teleport: {
     [STAGE.CHECK]: true,
@@ -219,6 +249,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   wellspringMax: {
     [STAGE.CHECK]: true,
@@ -226,6 +257,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: false,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
   wellspringRecover: {
     [STAGE.CHECK]: true,
@@ -233,6 +265,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: false,
+    [STAGE.MINOR]: true,
   },
   curse: {
     [STAGE.CHECK]: true,
@@ -240,5 +273,6 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.ACTION]: true,
     [STAGE.DEFENSE]: true,
     [STAGE.PASSIVE]: true,
+    [STAGE.MINOR]: true,
   },
 } as const;

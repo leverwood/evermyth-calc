@@ -41,6 +41,7 @@ import AddOnSuccessAttribute from "./attributes/AddOnSuccess";
 import AddOnAutoSuccessAttribute from "./attributes/AddOnAutoSuccess";
 import AddPrefix from "./attributes/AddPrefix";
 import AddSuffix from "./attributes/AddSuffix";
+import AddFlavor from "./attributes/AddFlavor";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -88,4 +89,5 @@ export const attributeComponents: readonly {
   { key: "onAutoSuccess", component: AddOnAutoSuccessAttribute },
   { key: "prefix", component: AddPrefix },
   { key: "suffix", component: AddSuffix },
+  { key: "flavor", component: AddFlavor }
 ] as const;

@@ -36,6 +36,7 @@ import RemoveOnSuccess from "./attributes/RemoveOnSuccess";
 import RemoveOnAutoSuccess from "./attributes/RemoveOnAutoSuccess";
 import RemoveSuffix from "./attributes/RemoveSuffix";
 import RemovePrefix from "./attributes/RemovePrefix";
+import RemoveFlavor from "./attributes/RemoveFlavor";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -78,4 +79,5 @@ export const attributeComponents: readonly {
   { key: "onAutoSuccess", component: RemoveOnAutoSuccess },
   { key: "prefix", component: RemovePrefix },
   { key: "suffix", component: RemoveSuffix },
+  { key: "flavor", component: RemoveFlavor },
 ];

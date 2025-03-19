@@ -8,6 +8,28 @@ export enum REWARD_TYPE {
   ALLY = "ally",
 }
 
+export enum DMG_TYPE {
+  STR = "STR",
+  AGI = "AGI",
+  END = "END",
+  EDU = "EDU",
+  INS = "INS",
+  SOC = "SOC",
+  USED = "the pool of the ability you used",
+}
+
+export const DMG_TYPE_OPTIONS: {
+  [key in DMG_TYPE]: string;
+} = {
+  [DMG_TYPE.USED]: "the pool of the ability you used",
+  [DMG_TYPE.STR]: "STR",
+  [DMG_TYPE.AGI]: "AGI",
+  [DMG_TYPE.END]: "END",
+  [DMG_TYPE.EDU]: "EDU",
+  [DMG_TYPE.INS]: "INS",
+  [DMG_TYPE.SOC]: "SOC",
+} as const;
+
 // generate with crypto.randomUUID()
 export type RewardDataID = string;
 
@@ -31,6 +53,7 @@ interface RewardBase {
   disadvantageMsg?: string;
   duration?: number;
   durationMsg?: string;
+  flavor?: string;
   grantsAbilities?: string[];
   heals?: number;
   instructions?: string;
@@ -40,6 +63,7 @@ interface RewardBase {
   noChase?: boolean;
   notes?: string;
   onFailTakeDamage?: number;
+  onFailDmgType?: DMG_TYPE;
   onAutoSuccess?: boolean;
   onSuccess?: boolean;
   prefix?: string;
@@ -119,7 +143,7 @@ export enum STAGE {
   MOVE = "move",
   DEFENSE = "defense",
   PASSIVE = "passive",
-  // MINOR = "minor",
+  MINOR = "minor",
   ACTION = "action",
 }
 
@@ -131,6 +155,7 @@ export const STAGE_COST: {
   [STAGE.MOVE]: 1,
   [STAGE.PASSIVE]: 1,
   [STAGE.ACTION]: 2,
+  [STAGE.MINOR]: 2,
 } as const;
 
 export const OPTION_COST: {
@@ -146,6 +171,7 @@ export const OPTION_COST: {
   deals: 1,
   disadvantage: -1,
   duration: 1,
+  flavor: 0,
   grantsAbilities: 1,
   heals: 1,
   immune: 3,
@@ -160,7 +186,7 @@ export const OPTION_COST: {
   ranged: 0,
   rangeIncrease: 1,
   reduceDamage: 1,
-  relentless: 2,
+  relentless: 4,
   requiresAmmo: 0,
   restrained: 1,
   resistant: 1,

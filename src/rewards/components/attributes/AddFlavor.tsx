@@ -2,24 +2,23 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
-
-interface AddRangeIncreaseAttributeProps {
+interface AddFlavorAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddRangeIncreaseAttribute: React.FC<AddRangeIncreaseAttributeProps> = ({
+const AddFlavorAttribute: React.FC<AddFlavorAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (!selectedOptions.ranged && !selectedOptions.aoe) return null;
+  if (selectedOptions.flavor !== undefined) return null;
 
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("rangeIncrease", 1)} />
-      <AttributeDescription keyName="rangeIncrease" />
+      <AddRemoveButton onClick={() => changeValue("flavor", "")} />
+      <AttributeDescription keyName="flavor" />
     </li>
   );
 };
 
-export default AddRangeIncreaseAttribute;
+export default AddFlavorAttribute;

@@ -27,7 +27,22 @@ export const RewardProvider = ({ children }: { children: React.ReactNode }) => {
   const [rewards, setRewards] = useState<RewardData[]>(() => {
     const storedRewards = localStorage.getItem(REWARDS_STORAGE_KEY);
     const rewards = storedRewards ? JSON.parse(storedRewards) : [];
-    const newRewards = rewards.map(migrateRewardData);
+    const newRewards = rewards.map(migrateRewardData) as RewardData[];
+
+    // get the multirewards from the data
+    newRewards.forEach((reward) => {
+      if (reward.multiRewards) {
+        reward.multiRewards = reward.multiRewards.map((multiReward) => {
+          if (multiReward.id) {
+            return (
+              newRewards.find((r) => r.id === multiReward.id) || multiReward
+            );
+          }
+          return multiReward;
+        });
+      }
+    });
+
     localStorage.setItem(REWARDS_STORAGE_KEY, JSON.stringify(newRewards));
     return newRewards;
   });

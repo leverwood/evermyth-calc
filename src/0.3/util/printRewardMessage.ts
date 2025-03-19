@@ -23,7 +23,7 @@ export const printRewardMessage = (
   } else {
     const aoeCreatures = reward.avoidAllies
       ? "creatures of your choice"
-      : "all creatures";
+      : "creatures";
     const rangedZoneSize = reward.rangeIncrease
       ? reward.rangeIncrease * 2 + 2
       : reward.meleeAndRanged
@@ -34,9 +34,12 @@ export const printRewardMessage = (
         ? reward.rangeIncrease + 1
         : 1
       : 0;
-    const rangedZoneMsg = `${rangedZoneSize} zone${
-      rangedZoneSize > 1 ? "s" : ""
-    }`;
+    console.log({
+      aoeCreatures,
+      rangedZoneSize,
+      aoeZoneSize,
+      rangeIncrease: reward.rangeIncrease,
+    });
     const aoeZoneMsg = `${aoeZoneSize} zone${aoeZoneSize > 1 ? "s" : ""}`;
 
     if (reward.specificMsg) messages.push(reward.specificMsg);
@@ -44,8 +47,8 @@ export const printRewardMessage = (
     // Decide to cast it
     if (reward.castTimeMsg) messages.push(reward.castTimeMsg);
 
-    if (reward.ranged) messages.push(`range: ${rangedZoneMsg} away`);
-    if (reward.meleeAndRanged) messages.push("melee, range: 1 zone away");
+    if (reward.ranged) messages.push(`range ${rangedZoneSize}`);
+    if (reward.meleeAndRanged) messages.push("melee, range: 1");
     if (reward.relentless)
       messages.push(
         `when ${reward.relentlessMsg} is depleted, drop to 1 instead`
@@ -75,7 +78,7 @@ export const printRewardMessage = (
       messages.push(
         `teleport up to ${reward.speed ? reward.speed + 1 : 1} zone${
           reward.speed ? "s" : ""
-        } away`
+        }`
       );
     } else {
       if (reward.speed)
@@ -107,7 +110,9 @@ export const printRewardMessage = (
     if (reward.deals) {
       messages.push(
         `deal ${
-          isUpcast || reward.stage === STAGE.ACTION
+          isUpcast ||
+          reward.stage === STAGE.MINOR ||
+          reward.stage === STAGE.PASSIVE
             ? printModifier(reward.deals)
             : reward.deals
         } point${reward.deals > 1 ? "s" : ""}${
@@ -187,7 +192,7 @@ export const printRewardMessage = (
     // this must go before "roll to maintain" messages
     if (reward.onFailTakeDamage) {
       messages.push(
-        `on a failure take ${reward.onFailTakeDamage} damage to the pool of the ability you used`
+        `on fail take ${reward.onFailTakeDamage} damage to ${reward.onFailDmgType}`
       );
     }
 
@@ -204,7 +209,7 @@ export const printRewardMessage = (
     if (reward.durationMsg) messages.push(reward.durationMsg);
 
     // ammo cost should be near last
-    if (reward.requiresAmmo) messages.push("requires ammunition");
+    if (reward.requiresAmmo) messages.push("requires ammo");
 
     // cost should be last
     if (reward.consumable) messages.push("single use");
@@ -231,6 +236,10 @@ export const printRewardMessage = (
 
   if (reward.curse) {
     messages.push(`\n\n**Curse.** ${reward.curseMsg}`);
+  }
+
+  if (reward.flavor) {
+    messages.push(`\n\n*${reward.flavor}*`);
   }
 
   // merge lines where one line starts with \n
