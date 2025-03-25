@@ -10350,5 +10350,353 @@
       "owned": false,
       "text": ""
     }
+  ],
+  "creatures": [
+    {
+      "name": "Air Swarm Drone Cloud",
+      "tier": 0,
+      "rewards": [
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343"
+      ],
+      "legendary": false,
+      "id": "53700d61-ebff-45c7-a1aa-1e401977b69c",
+      "version": "0.3.3",
+      "created": "2025-03-19T21:39:38.793Z",
+      "notes": "Cyberpunk RED",
+      "description": "Tiny flying drones about the size of gnats, with nanowire cutting surfaces.",
+      "statblocks": []
+    },
+    {
+      "name": "Mini Air Drone",
+      "tier": 0.5,
+      "rewards": [
+        "0c757d5f-84c2-4515-b6b2-9cb1e7a097e7",
+        "1b3ad4aa-45ef-4e35-b633-23882061f3e3",
+        "00c99c5b-9895-4882-ab6f-3a9eb3670e84",
+        "b4cdea43-e574-4e7d-8c2e-0f77d05a2f15"
+      ],
+      "legendary": false,
+      "id": "90e1422d-0ef1-4042-9217-4fb1cd5c66b4",
+      "version": "0.3.3",
+      "created": "2025-03-19T21:47:38.903Z",
+      "description": "Has 1 of the following: Dartgun with 8 poison dartgun arrows (lootable), Pistol with 8 Pistol Magazines, Observation Camera"
+    },
+    {
+      "name": "Large Air Drone",
+      "tier": 1,
+      "rewards": [
+        "00c99c5b-9895-4882-ab6f-3a9eb3670e84",
+        "1b3ad4aa-45ef-4e35-b633-23882061f3e3",
+        "0c757d5f-84c2-4515-b6b2-9cb1e7a097e7",
+        "b4cdea43-e574-4e7d-8c2e-0f77d05a2f15"
+      ],
+      "legendary": false,
+      "id": "4e2f2c1a-6852-40f5-8d23-a59f24e691d0",
+      "version": "0.3.3",
+      "created": "2025-03-19T22:08:25.847Z",
+      "notes": "Cyberpunk RED",
+      "description": "Has 1 of the following: Heavy Pistol with 8 pistol magazines, Dartgun with 8 poisoned arrows, Observation camera"
+    },
+    {
+      "name": "Ground Drone",
+      "tier": 1.5,
+      "rewards": [
+        "00c99c5b-9895-4882-ab6f-3a9eb3670e84",
+        "d1270c10-cfed-4024-a136-e014254bb15a",
+        "1a1123e0-95c9-41fd-8a4d-916b4bf22845",
+        "7bc9c32c-9d43-4730-8890-0b8cc0539f42"
+      ],
+      "legendary": false,
+      "id": "b647920b-02c5-4a29-9db5-dea50a75fb49",
+      "version": "0.3.3",
+      "created": "2025-03-19T22:13:54.725Z",
+      "notes": "Cyberpunk RED",
+      "description": "Comes in various forms, including Rolling Ball, Tracked, Wheeled, or Snake Form."
+    },
+    {
+      "name": "Netrunner",
+      "tier": 1.5,
+      "rewards": [
+        "5bb6b7e8-14f6-4415-9721-d72aed4d949d",
+        "f2c0f0b8-d80a-4982-b325-d6130af5839f",
+        "0795590e-0b88-4315-9454-f9a471859623",
+        "abdcc70f-ab72-480e-9bbb-75a260f19f04"
+      ],
+      "legendary": false,
+      "id": "90bc56f1-5542-4037-87ab-3baa11428a31",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:08:03.666Z"
+    },
+    {
+      "name": "Bodyguard",
+      "tier": 0.5,
+      "rewards": [
+        "c46c5d18-6505-43d7-ad48-5516a9af4f31",
+        "56ab7219-edf4-4e67-a1a3-e29eab56edcc",
+        "5b61f125-6344-42c9-b995-7bd5b0037142"
+      ],
+      "legendary": false,
+      "id": "c0c59505-84a4-487d-8999-dd69ee2f97c4",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:10:51.903Z",
+      "notes": "Cyberpunk RED"
+    },
+    {
+      "name": "Security Operative",
+      "tier": 1,
+      "rewards": [
+        "182f674d-038b-4359-a066-1eec67b8c1f4",
+        "cdca9134-cea3-4111-9932-afef1ee0ddf2",
+        "c46c5d18-6505-43d7-ad48-5516a9af4f31",
+        "5b61f125-6344-42c9-b995-7bd5b0037142"
+      ],
+      "legendary": false,
+      "id": "ebef0df0-1e28-4434-a689-f841c2bc0a7c",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:31:25.421Z"
+    },
+    {
+      "name": "Security Officer",
+      "tier": 1.5,
+      "rewards": [
+        "77ae6a99-c7ff-4e0c-bf07-cfbf15b50403",
+        "d29f6aeb-a0aa-4cdd-a7c0-d26d294dc85e",
+        "87c4ca26-272d-4a7e-970b-fe636cbda297",
+        "1371d59b-beb7-468f-82df-e53354a5e50d",
+        "182f674d-038b-4359-a066-1eec67b8c1f4",
+        "5bb6b7e8-14f6-4415-9721-d72aed4d949d",
+        "3f718e04-03fa-48b5-b0dd-1731560886e7",
+        "0ee539d0-8161-4c01-a6e9-6b10813bf61b",
+        "ff93f437-a1e1-4f39-9ecd-fcb761c47086"
+      ],
+      "legendary": false,
+      "id": "f63b84cd-fa75-4f47-9e7d-9beed9ecd33a",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:50:29.277Z",
+      "notes": ""
+    },
+    {
+      "name": "Advanced Mechs",
+      "tier": 1.5,
+      "rewards": [
+        "7bc9c32c-9d43-4730-8890-0b8cc0539f42",
+        "1a1123e0-95c9-41fd-8a4d-916b4bf22845",
+        "060fcdd0-2635-4648-9a60-ae04fa6fb443",
+        "1277d4ad-8d37-4a8a-b692-5466e26f2b70"
+      ],
+      "legendary": false,
+      "id": "f3fc07f0-0b2d-40eb-9918-c4ee6b3e227f",
+      "version": "0.3.3",
+      "created": "2025-03-20T00:03:57.253Z",
+      "notes": "homemade"
+    },
+    {
+      "name": "The Amalgam",
+      "legendary": true,
+      "id": "d614b267-7bb8-46b7-aa3f-9b68143ccd35",
+      "version": "0.3.3",
+      "created": "2025-03-23T22:12:35.529Z",
+      "tier": 1,
+      "rewards": [],
+      "statblocks": [
+        {
+          "type": 0,
+          "statblock": {
+            "name": "Air Swarm Drone Cloud",
+            "tier": 0,
+            "rewards": [
+              "3ba5adbf-3a64-4823-8f8f-380721bfa343"
+            ],
+            "legendary": false,
+            "id": "53700d61-ebff-45c7-a1aa-1e401977b69c",
+            "version": "0.3.3",
+            "created": "2025-03-19T21:39:38.793Z",
+            "notes": "Cyberpunk RED",
+            "description": "Tiny flying drones about the size of gnats, with nanowire cutting surfaces.",
+            "statblocks": []
+          }
+        },
+        {
+          "type": 0,
+          "statblock": {
+            "name": "Mini Air Drone",
+            "tier": 0.5,
+            "rewards": [
+              "0c757d5f-84c2-4515-b6b2-9cb1e7a097e7",
+              "1b3ad4aa-45ef-4e35-b633-23882061f3e3",
+              "66760404-d586-45e2-bd5c-ef3fb8e08978",
+              "00c99c5b-9895-4882-ab6f-3a9eb3670e84"
+            ],
+            "legendary": false,
+            "id": "90e1422d-0ef1-4042-9217-4fb1cd5c66b4",
+            "version": "0.3.3",
+            "created": "2025-03-19T21:47:38.903Z",
+            "description": "Has 1 of the following: Dartgun with 8 poison dartgun arrows (lootable), Pistol with 8 Pistol Magazines, Observation Camera"
+          }
+        },
+        {
+          "type": 0,
+          "statblock": {
+            "name": "Mini Air Drone",
+            "tier": 0.5,
+            "rewards": [
+              "0c757d5f-84c2-4515-b6b2-9cb1e7a097e7",
+              "1b3ad4aa-45ef-4e35-b633-23882061f3e3",
+              "66760404-d586-45e2-bd5c-ef3fb8e08978",
+              "00c99c5b-9895-4882-ab6f-3a9eb3670e84"
+            ],
+            "legendary": false,
+            "id": "90e1422d-0ef1-4042-9217-4fb1cd5c66b4",
+            "version": "0.3.3",
+            "created": "2025-03-19T21:47:38.903Z",
+            "description": "Has 1 of the following: Dartgun with 8 poison dartgun arrows (lootable), Pistol with 8 Pistol Magazines, Observation Camera"
+          }
+        },
+        {
+          "type": "1",
+          "statblock": {
+            "name": "Air Swarm Drone Cloud",
+            "tier": 0,
+            "rewards": [
+              "3ba5adbf-3a64-4823-8f8f-380721bfa343"
+            ],
+            "legendary": false,
+            "id": "53700d61-ebff-45c7-a1aa-1e401977b69c",
+            "version": "0.3.3",
+            "created": "2025-03-19T21:39:38.793Z",
+            "notes": "Cyberpunk RED",
+            "description": "Tiny flying drones about the size of gnats, with nanowire cutting surfaces.",
+            "statblocks": []
+          }
+        },
+        {
+          "type": "2",
+          "statblock": {
+            "name": "Large Air Drone",
+            "tier": 1,
+            "rewards": [
+              "00c99c5b-9895-4882-ab6f-3a9eb3670e84",
+              "1b3ad4aa-45ef-4e35-b633-23882061f3e3",
+              "0c757d5f-84c2-4515-b6b2-9cb1e7a097e7",
+              "66760404-d586-45e2-bd5c-ef3fb8e08978"
+            ],
+            "legendary": false,
+            "id": "4e2f2c1a-6852-40f5-8d23-a59f24e691d0",
+            "version": "0.3.3",
+            "created": "2025-03-19T22:08:25.847Z",
+            "notes": "Cyberpunk RED",
+            "description": "Has 1 of the following: Heavy Pistol with 8 pistol magazines, Dartgun with 8 poisoned arrows, Observation camera"
+          }
+        },
+        {
+          "type": "Body Part",
+          "id": "ed2d6870-76a2-4e87-a9e4-97a39c6b2424"
+        },
+        {
+          "type": "Body Part",
+          "id": "ed2d6870-76a2-4e87-a9e4-97a39c6b2424"
+        },
+        {
+          "type": "Phase",
+          "id": "a5260064-c331-4230-881a-87bdf7d1c436"
+        },
+        {
+          "type": "Phase",
+          "id": "3f1f4c89-1077-4270-b105-5f4b6a65118d"
+        },
+        {
+          "type": "Phase",
+          "id": "ee769d69-17c5-44c8-ab37-f7a717299ae4"
+        }
+      ]
+    },
+    {
+      "name": "Tier 0 Creature",
+      "legendary": false,
+      "id": "06e3d9c8-22eb-47e5-adfb-c22bd5c4f588",
+      "version": "0.3.3",
+      "created": "2025-03-23T22:58:03.763Z",
+      "tier": 0,
+      "rewards": [
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343"
+      ]
+    },
+    {
+      "name": "Tier 1 Creature",
+      "legendary": false,
+      "id": "ee769d69-17c5-44c8-ab37-f7a717299ae4",
+      "version": "0.3.3",
+      "created": "2025-03-23T22:58:17.168Z",
+      "tier": 1,
+      "rewards": [
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343",
+        "0529479a-0507-4063-a710-7c3d05e459e8",
+        "310805fd-2178-482f-979a-a45aa9d174d9"
+      ]
+    },
+    {
+      "name": "Tier .5 Creature",
+      "legendary": false,
+      "id": "c6ea7367-901c-4219-9449-6dc533efbbf3",
+      "version": "0.3.3",
+      "created": "2025-03-23T22:58:31.205Z",
+      "tier": 0.5,
+      "rewards": [
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343",
+        "0529479a-0507-4063-a710-7c3d05e459e8",
+        "310805fd-2178-482f-979a-a45aa9d174d9"
+      ]
+    },
+    {
+      "name": "Tier 1.5 Creature",
+      "legendary": false,
+      "id": "ca69bdc8-52a3-48df-a79d-74bd18c5e21b",
+      "version": "0.3.3",
+      "created": "2025-03-23T22:58:43.818Z",
+      "tier": 1.5,
+      "rewards": [
+        "1a1123e0-95c9-41fd-8a4d-916b4bf22845",
+        "2dafeda9-c56f-40aa-a751-1cafe72b8ba6",
+        "7bc9c32c-9d43-4730-8890-0b8cc0539f42"
+      ]
+    },
+    {
+      "name": "Amalgamated Researcher",
+      "legendary": false,
+      "id": "ed2d6870-76a2-4e87-a9e4-97a39c6b2424",
+      "version": "0.3.3",
+      "created": "2025-03-23T23:00:59.802Z",
+      "tier": 1,
+      "rewards": [
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343",
+        "9d1ea9b0-f2c2-458e-a016-9ea6d238b984"
+      ]
+    },
+    {
+      "name": "The Amalgam Gloop",
+      "legendary": false,
+      "id": "a5260064-c331-4230-881a-87bdf7d1c436",
+      "version": "0.3.3",
+      "created": "2025-03-24T19:45:53.249Z",
+      "tier": 1,
+      "rewards": [
+        "1761b692-b621-4cad-9bde-6f7e8dafa104",
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343",
+        "310805fd-2178-482f-979a-a45aa9d174d9"
+      ]
+    },
+    {
+      "name": "The Amalgam Summoner",
+      "legendary": false,
+      "id": "3f1f4c89-1077-4270-b105-5f4b6a65118d",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:55:23.376Z",
+      "tier": 1,
+      "rewards": [
+        "b3a198d5-cdd5-4f49-b95f-a6f57d059483",
+        "3ba5adbf-3a64-4823-8f8f-380721bfa343",
+        "310805fd-2178-482f-979a-a45aa9d174d9"
+      ]
+    }
   ]
 }

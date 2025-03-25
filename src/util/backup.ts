@@ -6,6 +6,7 @@ export const downloadLocalStorage = () => {
     "shop_categories",
     "services",
     "hex_coordinates",
+    "creatures",
   ];
 
   // Retrieve the data for the specified keys from localStorage
