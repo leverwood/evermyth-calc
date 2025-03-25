@@ -14,6 +14,11 @@ export const DESCRIPTIONS: {
       <strong>Area of Effect.</strong> Affect all creatures in a zone
     </>
   ),
+  aoeSizeIncrease: (
+    <>
+      <strong>AoE Size Increase.</strong> Can target 1 more zone
+    </>
+  ),
   avoidAllies: (
     <>
       <strong>Avoid Allies.</strong> Area of Effect avoids allies
@@ -149,13 +154,17 @@ export const DESCRIPTIONS: {
   ranged: (
     <>
       <strong>Ranged.</strong> Can target a zone up to 2 away. In the current
-      zone, add +5 to the target.
+      zone, roll at disadvantage.
     </>
   ),
   rangeIncrease: (
     <>
-      <strong>Range Increase.</strong> Can target more zones. Ranged: +2 further
-      away, AOE: +1 zone
+      <strong>Range Increase.</strong> Can target 1 zone farther away.
+    </>
+  ),
+  rangeDecrease: (
+    <>
+      <strong>Range Decrease.</strong> Reduce the range by 1.
     </>
   ),
   reduceDamage: (

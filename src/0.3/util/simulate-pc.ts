@@ -375,9 +375,10 @@ function pcAction(
     trained: options.trainedToHit,
   });
   const needed =
-    enemiesToAttack.length === 0
+    enemiesToAttack.length !== 0
       ? getDCToHitEnemy(enemiesToAttack[0].tier)
       : getRewardDC(reward);
+
   let usedFortune = tryFortuneToHit(pc, roll, needed, advantage);
   usedFortune += tryFortuneToHit(pc, roll, needed * 2, true);
 

@@ -22,14 +22,16 @@ const DynamicText = ({
   }, [children, maxFontSize]);
 
   useEffect(() => {
-    console.log(`Resizing font size, currently ${fontSize}`);
     const currentTextRef = textRef.current;
     const resizeText = () => {
       if (!currentTextRef) return;
-      const { clientHeight, scrollHeight } = textRef.current
-        .parentElement as HTMLElement;
+      const { clientHeight, scrollHeight } = textRef.current as HTMLElement;
 
       if (scrollHeight > clientHeight) {
+        console.log(
+          `Decreasing font size to ${fontSize - 1}, currently ${fontSize}`,
+          currentTextRef
+        );
         setFontSize((prevFontSize) => {
           return prevFontSize - 1;
         });
@@ -53,7 +55,7 @@ const DynamicText = ({
       style={{
         fontSize: `${fontSize}px`,
         lineHeight: `${1.4 * fontSize}px`,
-        overflow: "scroll",
+        overflow: "auto",
         height: height ? `${height}px` : "auto",
       }}
     >

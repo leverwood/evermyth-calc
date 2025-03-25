@@ -322,7 +322,6 @@ export function tryReduceDamage(damage: number, victim: PC | Enemy) {
 
   if (reward) {
     let timesUpcast = 0;
-    let usedWellspring = getWellspringCost(initReward(reward));
     // the amount you are going to reduce so far
     let damageReduction = reward.reduceDamage || 0;
 
@@ -331,18 +330,17 @@ export function tryReduceDamage(damage: number, victim: PC | Enemy) {
       damageReduction < needReduction &&
       timesUpcast <= (reward.upcastMax || 0)
     ) {
-      usedWellspring += 1;
       timesUpcast += 1;
       damageReduction += reward.upcast?.reduceDamage || 0;
     }
 
-    if (victim.wellspring >= usedWellspring) {
-      victim.wellspring -= usedWellspring;
+    if (victim.wellspring >= needReduction) {
+      victim.wellspring -= needReduction;
       newDamage = damage - needReduction;
 
       drMessage = `${printCreatureName(victim)} used "${
         reward.name
-      }" to reduce damage by ${needReduction}, using ⭐${usedWellspring}.`;
+        }" to reduce damage by ${needReduction}, using ⭐${needReduction}.`;
     } else {
       drMessage = `${printCreatureName(victim)} only has ⭐${
         victim.wellspring

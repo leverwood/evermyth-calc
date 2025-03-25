@@ -33,8 +33,7 @@ function ShopList() {
                 <Card style={{ height: "100%" }}>
                   <SquareImage url={shop.image || shop.proprietorImage} />
                   <Card.Body>
-                    <Card.Title>
-                      {" "}
+                    <Card.Title className={styles.title}>
                       <DynamicText height={25}>{shop.name}</DynamicText>
                     </Card.Title>
                     <Card.Subtitle className={styles.subtitle}>

@@ -40,6 +40,7 @@ interface RewardBase {
   advantage?: boolean;
   advantageMsg?: string;
   aoe?: boolean;
+  aoeSizeIncrease?: number;
   avoidAllies?: boolean;
   castTime?: number;
   castTimeMsg?: string;
@@ -70,6 +71,7 @@ interface RewardBase {
   price?: number;
   ranged?: boolean;
   rangeIncrease?: number;
+  rangeDecrease?: boolean;
   reduceDamage?: number;
   relentless?: boolean;
   relentlessMsg?: string;
@@ -163,6 +165,7 @@ export const OPTION_COST: {
 } = {
   advantage: 1,
   aoe: 2,
+    aoeSizeIncrease: 1,
   avoidAllies: 1,
   castTime: -1,
   consumable: -2,
@@ -184,6 +187,7 @@ export const OPTION_COST: {
   onSuccess: 0,
   prefix: 0,
   ranged: 0,
+    rangeDecrease: 0,
   rangeIncrease: 1,
   reduceDamage: 1,
   relentless: 4,

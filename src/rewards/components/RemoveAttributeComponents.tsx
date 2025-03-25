@@ -37,6 +37,8 @@ import RemoveOnAutoSuccess from "./attributes/RemoveOnAutoSuccess";
 import RemoveSuffix from "./attributes/RemoveSuffix";
 import RemovePrefix from "./attributes/RemovePrefix";
 import RemoveFlavor from "./attributes/RemoveFlavor";
+import RemoveAoESizeIncrease from "./attributes/RemoveAoESizeIncrease";
+import RemoveRangeDecrease from "./attributes/RemoveRangeDecrease";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -46,6 +48,7 @@ export const attributeComponents: readonly {
   { key: "summon", component: RemoveSummon },
   { key: "relentless", component: RemoveRelentless },
   { key: "aoe", component: RemoveAoe },
+  { key: "aoeSizeIncrease", component: RemoveAoESizeIncrease },
   { key: "avoidAllies", component: RemoveAvoidAllies },
   { key: "lingeringDamage", component: RemoveLingeringDamage },
   { key: "teleport", component: RemoveTeleport },
@@ -62,6 +65,7 @@ export const attributeComponents: readonly {
   { key: "speed", component: RemoveSpeed },
   { key: "duration", component: RemoveDuration },
   { key: "rangeIncrease", component: RemoveRangeIncrease },
+  { key: "rangeDecrease", component: RemoveRangeDecrease },
   { key: "requiresAmmo", component: RemoveRequiresAmmo },
   { key: "ranged", component: RemoveRanged },
   { key: "upcast", component: RemoveUpcast },

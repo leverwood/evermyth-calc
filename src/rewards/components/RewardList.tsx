@@ -107,7 +107,7 @@ export default function RewardList() {
   }, []);
 
   // grab all the rewards but the last one
-  const showRewards = rewards
+  let showRewards = rewards
     .filter(
       (options) =>
         !searchText ||
@@ -120,17 +120,28 @@ export default function RewardList() {
       return r.tier >= shownTierRange[0] && r.tier <= shownTierRange[1];
     })
     // filter rewards by type
-    .filter((options) => rewardTypes.includes(initReward(options).type))
-    // sort them by tier
-    .sort((opt1, opt2) => {
+    .filter((options) => rewardTypes.includes(initReward(options).type));
+
+  if (searchText) {
+    showRewards = showRewards.sort((opt1, opt2) => {
+      // sort them by tier
       const r1 = initReward(opt1);
       const r2 = initReward(opt2);
       if (r1.tier < 0) r1.tier = -1;
       if (r2.tier < 0) r2.tier = -1;
-      return r1.tier === r2.tier
-        ? r1.name.localeCompare(r2.name)
-        : r1.tier - r2.tier;
+      return r1.name === r2.name
+        ? r1.tier - r2.tier
+        : r1.name.localeCompare(r2.name);
     });
+  } else {
+    showRewards = showRewards.sort((opt1, opt2) => {
+      const date1 = opt1.created || "0";
+      const date2 = opt2.created || "0";
+
+      return date2.localeCompare(date1);
+    });
+  }
+    
 
   const handleClickDelete = (id: string | undefined) => {
     if (id) deleteReward(id);

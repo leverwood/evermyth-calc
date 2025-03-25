@@ -1170,7 +1170,7 @@
     },
     {
       "name": "Perfume",
-      "type": "equipment",
+      "type": "trinket",
       "id": "ed15d148-eb52-4f27-a6bc-376eae2627cd",
       "price": 5,
       "stage": "check"
@@ -1333,14 +1333,14 @@
     },
     {
       "name": "Tankard",
-      "type": "equipment",
+      "type": "trinket",
       "id": "f4272c83-498b-41af-b908-d3f9a81ddf9c",
       "price": 1,
       "stage": "check"
     },
     {
       "name": "Waterskin",
-      "type": "equipment",
+      "type": "trinket",
       "id": "9e2e09d4-4924-4d41-9dab-e1d044155f0d",
       "price": 1,
       "shopCategories": [
@@ -1663,7 +1663,7 @@
       "name": "Shell Blessing",
       "type": "feature",
       "id": "3f15f8b3-67c8-4545-bd82-8d3bfda37a47",
-      "advantageMsg": "grants advantage to defense to all creatures in your current zone for 10 minutes",
+      "advantageMsg": "to defense for 10 minutes",
       "cost": 1,
       "advantage": true,
       "durationMsg": "10 minutes",
@@ -1708,7 +1708,7 @@
       "type": "equipment",
       "id": "a837206b-2cac-4066-9b29-f8d24483da60",
       "price": 20,
-      "instructions": "worth 20c",
+      "instructions": "",
       "stage": "check"
     },
     {
@@ -2028,7 +2028,7 @@
     },
     {
       "name": "Little bag of sand",
-      "type": "equipment",
+      "type": "trinket",
       "id": "ef2dae59-e1fe-4613-9bcd-f1cd275eefb8",
       "shopCategories": [
         "arcane-shop"
@@ -2049,7 +2049,7 @@
     },
     {
       "name": "Bell",
-      "type": "equipment",
+      "type": "trinket",
       "id": "c0753619-5d8e-4061-91f4-53844ac39121",
       "price": 1,
       "shopCategories": [
@@ -2060,7 +2060,7 @@
     },
     {
       "name": "Steel Mirror",
-      "type": "equipment",
+      "type": "trinket",
       "id": "bad86155-a988-4e1f-bc0f-5f92a54fad5a",
       "price": 5,
       "shopCategories": [
@@ -2103,7 +2103,7 @@
     },
     {
       "name": "Manacles",
-      "type": "equipment",
+      "type": "trinket",
       "id": "8064c37d-7f77-4d08-9b9c-c38f80218eb5",
       "shopCategories": [
         "shady-dealer",
@@ -2797,7 +2797,7 @@
     },
     {
       "name": "Tinderbox",
-      "type": "equipment",
+      "type": "trinket",
       "id": "5daaeb3f-8b9f-489f-981c-f928668068cf",
       "shopCategories": [
         "survival-outfitters",
@@ -2822,7 +2822,7 @@
     },
     {
       "name": "Signal Whistle",
-      "type": "equipment",
+      "type": "trinket",
       "id": "b151b147-6812-47c1-9104-22dedd3f5100",
       "price": 1,
       "shopCategories": [
@@ -3408,9 +3408,10 @@
       "aoe": true,
       "cost": 1,
       "grantsAbilities": [
-        "snuffs out all light sources, blinded, area is difficult terrain"
+        "blinded, difficult terrain, snuffs out all light sources"
       ],
-      "stage": "check"
+      "stage": "check",
+      "ranged": true
     },
     {
       "name": "Witness Lantern",
@@ -3874,7 +3875,7 @@
       "curse": 1,
       "multiRewards": [
         {
-          "name": "Armor +1",
+          "name": "Armor",
           "type": "equipment",
           "stage": "defense",
           "id": "0529479a-0507-4063-a710-7c3d05e459e8",
@@ -3907,7 +3908,7 @@
       "trainedMsg": "trained in armor",
       "multiRewards": [
         {
-          "name": "Armor +1",
+          "name": "Armor",
           "type": "equipment",
           "stage": "defense",
           "id": "0529479a-0507-4063-a710-7c3d05e459e8",
@@ -3933,7 +3934,7 @@
       ]
     },
     {
-      "name": "Armor +1",
+      "name": "Armor",
       "type": "equipment",
       "stage": "defense",
       "id": "0529479a-0507-4063-a710-7c3d05e459e8",
@@ -3942,7 +3943,7 @@
       "reduceDamage": 1
     },
     {
-      "name": "Armor +2",
+      "name": "Armor",
       "type": "equipment",
       "stage": "defense",
       "id": "7bc9c32c-9d43-4730-8890-0b8cc0539f42",
@@ -3951,7 +3952,7 @@
       "reduceDamage": 2
     },
     {
-      "name": "Armor +3",
+      "name": "Armor",
       "type": "equipment",
       "stage": "defense",
       "id": "77a9eff2-b7b7-44ca-9fc1-70122dcddd4a",
@@ -3960,7 +3961,7 @@
       "reduceDamage": 3
     },
     {
-      "name": "Armor +4",
+      "name": "Armor",
       "type": "equipment",
       "stage": "defense",
       "id": "54a950be-2cb5-4991-ae1b-4f967b2af0ea",
@@ -3969,7 +3970,7 @@
       "reduceDamage": 4
     },
     {
-      "name": "Armor +5",
+      "name": "Armor",
       "type": "equipment",
       "stage": "defense",
       "id": "c037fcb0-0da7-4b5f-95ac-d964261217f1",
@@ -4001,7 +4002,7 @@
       "created": "2024-11-05T23:00:01.124Z",
       "multiRewards": [
         {
-          "name": "Armor +1",
+          "name": "Armor",
           "type": "equipment",
           "stage": "defense",
           "id": "0529479a-0507-4063-a710-7c3d05e459e8",
@@ -4022,7 +4023,7 @@
       "created": "2024-11-05T23:00:44.948Z",
       "multiRewards": [
         {
-          "name": "Armor +2",
+          "name": "Armor",
           "type": "equipment",
           "stage": "defense",
           "id": "7bc9c32c-9d43-4730-8890-0b8cc0539f42",
@@ -4552,34 +4553,6 @@
       "advantage": true,
       "price": 100,
       "shopCategories": [
-        "blacksmith"
-      ],
-      "source": "5e SRD"
-    },
-    {
-      "name": "Pistol",
-      "type": "equipment",
-      "stage": "check",
-      "id": "ccab5b7e-661f-45e9-84f2-fc142824e501",
-      "version": "0.3.3",
-      "created": "2024-11-06T13:26:08.214Z",
-      "deals": 2,
-      "multiRewards": [
-        {
-          "name": "Vex",
-          "type": "feature",
-          "stage": "check",
-          "id": "9f00e4d7-61c8-4100-b51d-958ab76bf56e",
-          "version": "0.3.3",
-          "created": "2024-11-06T01:42:02.546Z",
-          "advantageMsg": "on all checks against this target by you",
-          "advantage": true,
-          "deals": 0
-        }
-      ],
-      "price": 250,
-      "shopCategories": [
-        "tinker",
         "blacksmith"
       ],
       "source": "5e SRD"
@@ -5362,7 +5335,7 @@
     },
     {
       "name": "Ranged Attack",
-      "type": "equipment",
+      "type": "feature",
       "stage": "check",
       "id": "b4cdea43-e574-4e7d-8c2e-0f77d05a2f15",
       "version": "0.3.3",
@@ -5382,7 +5355,7 @@
     },
     {
       "name": "Ranged Attack",
-      "type": "equipment",
+      "type": "feature",
       "stage": "check",
       "id": "5d2bbe24-9f48-4ac8-acbd-ed2e154b3b60",
       "version": "0.3.3",
@@ -5392,7 +5365,7 @@
     },
     {
       "name": "Ranged Attack",
-      "type": "equipment",
+      "type": "feature",
       "stage": "check",
       "id": "c9a2b50a-0653-4189-9d81-0fd9fc52cb64",
       "version": "0.3.3",
@@ -8143,11 +8116,12 @@
       "id": "609c5b4b-d5cd-44c6-88a8-4083dcd916bc",
       "version": "0.3.3",
       "created": "2025-03-19T00:27:04.093Z",
-      "advantageMsg": "",
+      "advantageMsg": "to hit",
       "deals": 1,
       "ranged": true,
       "requiresAmmo": true,
-      "flavor": "A pistol manufactured by Dai Lung"
+      "flavor": "A pistol manufactured by Dai Lung",
+      "advantage": true
     },
     {
       "name": "Combat Knife",
@@ -8174,7 +8148,8 @@
       "id": "e1f35ce6-a969-418e-8f33-7dc8af97e31b",
       "version": "0.3.3",
       "created": "2025-03-19T00:40:21.750Z",
-      "instructions": "ammo"
+      "instructions": "ammo",
+      "price": 5
     },
     {
       "name": "Rifle Magazine",
@@ -8183,7 +8158,8 @@
       "id": "37338ec1-7441-4132-9bdb-9d1cc014a3bf",
       "version": "0.3.3",
       "created": "2025-03-19T00:42:53.020Z",
-      "instructions": "ammo"
+      "instructions": "ammo",
+      "price": 5
     },
     {
       "name": "Jungle Reaper",
@@ -8195,7 +8171,20 @@
       "requiresAmmo": true,
       "ranged": true,
       "deals": 2,
-      "flavor": "An assault rifle manufactured by Chadran Arms"
+      "flavor": "An assault rifle manufactured by Chadran Arms",
+      "multiRewards": [
+        {
+          "name": "Vex",
+          "type": "feature",
+          "stage": "check",
+          "id": "9f00e4d7-61c8-4100-b51d-958ab76bf56e",
+          "version": "0.3.3",
+          "created": "2024-11-06T01:42:02.546Z",
+          "advantageMsg": "on all checks against this target by you",
+          "advantage": true,
+          "deals": 0
+        }
+      ]
     },
     {
       "name": "Rattle Can",
@@ -8207,21 +8196,12 @@
       "ranged": true,
       "requiresAmmo": true,
       "aoe": true,
-      "multiRewards": [
-        {
-          "name": "Loading",
-          "type": "feature",
-          "stage": "passive",
-          "id": "4db50970-5a04-43bc-ac5b-017debf08f0d",
-          "version": "0.3.3",
-          "created": "2024-11-06T13:18:18.335Z",
-          "castTimeMsg": "requires 1 action to reload",
-          "castTime": 1
-        }
-      ],
+      "multiRewards": [],
       "deals": 1,
       "onFailTakeDamage": 0,
-      "flavor": "A cheap, mass-produced grenade launcher by GunMart that makes a lot of noise but doesn't pack much punch"
+      "flavor": "A cheap, mass-produced grenade launcher by GunMart that makes a lot of noise but doesn't pack much punch",
+      "castTimeMsg": "takes 1 action to load",
+      "castTime": 1
     },
     {
       "name": "Box of Launcher Grenades",
@@ -8229,7 +8209,8 @@
       "stage": "minor",
       "id": "14df9c61-862e-42fc-aa8f-150c4560ea82",
       "version": "0.3.3",
-      "created": "2025-03-19T01:07:28.585Z"
+      "created": "2025-03-19T01:07:28.585Z",
+      "price": 10
     },
     {
       "name": "Kerenzikov",
@@ -8334,7 +8315,8 @@
       "stage": "minor",
       "id": "2f89cbbc-f63e-4e30-98bc-0797a5d08846",
       "version": "0.3.3",
-      "created": "2025-03-19T01:44:12.665Z"
+      "created": "2025-03-19T01:44:12.665Z",
+      "price": 5
     },
     {
       "name": "Warlock",
@@ -8696,7 +8678,7 @@
       "flavor": "27% dextromethamphetamine, 15% cannabinoid, 40% water, and 8% chemical ingredients of unknown origin. Potential reactions include altered states of consciousness, panic attacks, elevated heart rates, dehydration, and heart attacks."
     },
     {
-      "name": "Ballistic Vest",
+      "name": "Medium Armorjack",
       "type": "equipment",
       "stage": "defense",
       "id": "994c4e72-a397-482c-8915-0e352b8a8b44",
@@ -8723,7 +8705,8 @@
       "stage": "check",
       "id": "59e6700e-411e-44c5-bcd8-b5b8393d90c8",
       "version": "0.3.3",
-      "created": "2025-03-19T04:58:59.559Z"
+      "created": "2025-03-19T04:58:59.559Z",
+      "instructions": "180 feet"
     },
     {
       "name": "Flashlight",
@@ -8732,12 +8715,12 @@
       "id": "78192aa4-ca03-4f61-a8cc-5a15094f2adc",
       "version": "0.3.3",
       "created": "2025-03-19T05:00:06.408Z",
-      "instructions": "Rechargeable. Lasts up to 10 hours on a charge.",
+      "instructions": "Batteries last up to 10 hours",
       "tierIncrease": 1
     },
     {
       "name": "Handcuffs",
-      "type": "equipment",
+      "type": "trinket",
       "id": "1371d59b-beb7-468f-82df-e53354a5e50d",
       "shopCategories": [
         "shady-dealer",
@@ -8846,6 +8829,395 @@
       "vulnerable": [
         "bludgeoning"
       ]
+    },
+    {
+      "name": "Observation Camera",
+      "type": "equipment",
+      "stage": "check",
+      "id": "00c99c5b-9895-4882-ab6f-3a9eb3670e84",
+      "version": "0.3.3",
+      "created": "2025-03-19T21:49:26.461Z"
+    },
+    {
+      "name": "Dartgun",
+      "type": "equipment",
+      "stage": "check",
+      "id": "1b3ad4aa-45ef-4e35-b633-23882061f3e3",
+      "version": "0.3.3",
+      "created": "2025-03-19T21:50:02.229Z",
+      "deals": 1,
+      "ranged": true,
+      "requiresAmmo": true
+    },
+    {
+      "name": "Dartgun Arrow, Poisoned",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "0c757d5f-84c2-4515-b6b2-9cb1e7a097e7",
+      "version": "0.3.3",
+      "created": "2025-03-19T21:51:12.069Z",
+      "onSuccess": true,
+      "deals": 2,
+      "consumable": true
+    },
+    {
+      "name": "Kevlar Armor",
+      "type": "equipment",
+      "stage": "defense",
+      "id": "634aa53a-6152-4636-8cb4-008628d3ec99",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:12:09.559Z",
+      "reduceDamage": 2
+    },
+    {
+      "name": "Radio Communicator",
+      "type": "equipment",
+      "stage": "check",
+      "id": "182f674d-038b-4359-a066-1eec67b8c1f4",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:29:13.143Z",
+      "instructions": "Earpiece, half mile range",
+      "notes": "Cyberpunk RED"
+    },
+    {
+      "name": "Ballistic Vest",
+      "type": "equipment",
+      "stage": "defense",
+      "id": "c46c5d18-6505-43d7-ad48-5516a9af4f31",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:35:19.045Z",
+      "advantageMsg": "when defending against physical attack",
+      "reduceDamage": 1
+    },
+    {
+      "name": "Bodyweight Suit",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "0795590e-0b88-4315-9454-f9a471859623",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:43:33.227Z",
+      "flavor": "Skinsuit with impact absorbing, sintered armorgel layered in key body areas. Also has a place to store your Cyberdeck and supports your Interface Plugs.",
+      "trained": true,
+      "trainedMsg": "Physical Defense",
+      "multiRewards": [
+        {
+          "name": "Armor",
+          "type": "equipment",
+          "stage": "defense",
+          "id": "0529479a-0507-4063-a710-7c3d05e459e8",
+          "version": "0.3.3",
+          "created": "2024-11-05T22:37:37.613Z",
+          "reduceDamage": 1
+        }
+      ]
+    },
+    {
+      "name": "Binoculars",
+      "type": "trinket",
+      "stage": "check",
+      "id": "87c4ca26-272d-4a7e-970b-fe636cbda297",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:56:04.419Z"
+    },
+    {
+      "name": "Disposable Cellphone",
+      "type": "equipment",
+      "stage": "check",
+      "id": "0ee539d0-8161-4c01-a6e9-6b10813bf61b",
+      "version": "0.3.3",
+      "created": "2025-03-19T23:58:12.797Z",
+      "tierIncrease": 2,
+      "flavor": "Makes calls. Easy to dump if needed.",
+      "notes": "Cyberpunk RED"
+    },
+    {
+      "name": "Bulletproof Vest",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "ff93f437-a1e1-4f39-9ecd-fcb761c47086",
+      "version": "0.3.3",
+      "created": "2025-03-20T00:06:32.548Z",
+      "resistant": [
+        " bullets"
+      ],
+      "multiRewards": [
+        {
+          "name": "Armor",
+          "type": "equipment",
+          "stage": "defense",
+          "id": "0529479a-0507-4063-a710-7c3d05e459e8",
+          "version": "0.3.3",
+          "created": "2024-11-05T22:37:37.613Z",
+          "reduceDamage": 1
+        }
+      ]
+    },
+    {
+      "name": "Flashbang",
+      "type": "equipment",
+      "stage": "check",
+      "id": "060fcdd0-2635-4648-9a60-ae04fa6fb443",
+      "version": "0.3.3",
+      "created": "2025-03-20T00:16:04.345Z",
+      "grantsAbilities": [
+        "creatures are blinded",
+        "creatures are deafened"
+      ],
+      "consumable": true,
+      "aoe": true,
+      "ranged": true
+    },
+    {
+      "name": "Join us",
+      "type": "feature",
+      "stage": "check",
+      "id": "9d1ea9b0-f2c2-458e-a016-9ea6d238b984",
+      "version": "0.3.3",
+      "created": "2025-03-23T23:01:22.660Z",
+      "stunned": 1,
+      "cost": 2,
+      "deals": 1,
+      "instructions": "",
+      "suffix": "dealt to INS, if this causes you to lose your character you will join the hive mind",
+      "tierDecrease": 1
+    },
+    {
+      "name": "Plinker",
+      "type": "equipment",
+      "stage": "check",
+      "id": "5b61f125-6344-42c9-b995-7bd5b0037142",
+      "version": "0.3.3",
+      "created": "2025-03-24T01:10:40.315Z",
+      "deals": 1,
+      "ranged": true,
+      "requiresAmmo": true,
+      "flavor": "A cheap pistol mass-produced by GunMart during the 4th corporate war",
+      "price": 20
+    },
+    {
+      "name": "Mark II",
+      "type": "equipment",
+      "stage": "check",
+      "id": "abdcc70f-ab72-480e-9bbb-75a260f19f04",
+      "version": "0.3.3",
+      "created": "2025-03-24T01:18:04.445Z",
+      "deals": 2,
+      "multiRewards": [],
+      "price": 250,
+      "shopCategories": [
+        "tinker",
+        "blacksmith"
+      ],
+      "source": "5e SRD",
+      "ranged": true,
+      "requiresAmmo": true,
+      "flavor": "A heavy pistol manufactured by Mustang Arms",
+      "notes": "Cyberpunk RED"
+    },
+    {
+      "name": "Charged Attack",
+      "type": "feature",
+      "stage": "check",
+      "id": "1761b692-b621-4cad-9bde-6f7e8dafa104",
+      "version": "0.3.3",
+      "created": "2025-03-24T19:36:46.127Z",
+      "castTime": 1,
+      "castTimeMsg": "Begin charging as an action. If a creature attacks you they become your new target. At the beginning of your next turn, the check is rolled as the attack is released",
+      "deals": 2
+    },
+    {
+      "name": "Charged Attack",
+      "type": "feature",
+      "stage": "check",
+      "id": "cd6a1ad7-a73b-4213-aed4-19c907404f36",
+      "version": "0.3.3",
+      "created": "2025-03-24T19:47:08.963Z",
+      "castTime": 1,
+      "castTimeMsg": "Begin charging as an action. If a creature attacks you they become your new target. At the beginning of your next turn, the check is rolled as the attack is released",
+      "deals": 3
+    },
+    {
+      "name": "Charged Eye Blast",
+      "type": "equipment",
+      "stage": "check",
+      "id": "2ceab1c6-eb26-4371-968a-a3d4bc612a86",
+      "version": "0.3.3",
+      "created": "2025-03-24T19:50:57.430Z",
+      "castTime": 1,
+      "castTimeMsg": "begin charging as an action maintaining eye contact with your target. If the target is no longer visible, you may switch to another target. At the beginning of your next turn, roll to release the blast if there is still a visible target",
+      "specific": false,
+      "deals": 3
+    },
+    {
+      "name": "Charged Summon",
+      "type": "feature",
+      "stage": "check",
+      "id": "b3a198d5-cdd5-4f49-b95f-a6f57d059483",
+      "version": "0.3.3",
+      "created": "2025-03-24T19:54:37.825Z",
+      "summon": true,
+      "castTimeMsg": "begin charging as an action, roll to summon at the beginning of your next turn",
+      "castTime": 1,
+      "cost": 1,
+      "summonTierIncrease": 1
+    },
+    {
+      "name": "Ranged Attack",
+      "type": "feature",
+      "stage": "check",
+      "id": "8680cfca-6cc5-4ce9-abc6-e1d85bd9dfdd",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:39:17.723Z",
+      "deals": 5,
+      "ranged": true
+    },
+    {
+      "name": "Ranged Attack",
+      "type": "feature",
+      "stage": "check",
+      "id": "5c721f93-243d-4598-801a-8adf211ea6a8",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:42:41.166Z",
+      "deals": 6,
+      "ranged": true
+    },
+    {
+      "name": "Heavy Attack",
+      "type": "equipment",
+      "stage": "check",
+      "id": "310805fd-2178-482f-979a-a45aa9d174d9",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:45:23.436Z",
+      "cost": 1,
+      "deals": 2
+    },
+    {
+      "name": "Heavy Attack",
+      "type": "equipment",
+      "stage": "check",
+      "id": "2dafeda9-c56f-40aa-a751-1cafe72b8ba6",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:46:23.415Z",
+      "cost": 1,
+      "deals": 3
+    },
+    {
+      "name": "Heavy Attack",
+      "type": "equipment",
+      "stage": "check",
+      "id": "9794a5fe-41fd-4b14-b2d2-9ec9aec3570d",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:46:31.213Z",
+      "cost": 1,
+      "deals": 4
+    },
+    {
+      "name": "Heavy Attack",
+      "type": "equipment",
+      "stage": "check",
+      "id": "f303adec-cb28-4528-99c6-2b554b2d8b8f",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:46:40.849Z",
+      "cost": 1,
+      "deals": 5
+    },
+    {
+      "name": "Heavy Attack",
+      "type": "equipment",
+      "stage": "check",
+      "id": "25b8c331-cbcd-45c5-a177-5969d406e675",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:47:01.396Z",
+      "cost": 1,
+      "deals": 6
+    },
+    {
+      "name": "Heavy Attack",
+      "type": "equipment",
+      "stage": "check",
+      "id": "f4bea4f0-ccd5-49d3-82bc-efa059276597",
+      "version": "0.3.3",
+      "created": "2025-03-24T20:47:10.854Z",
+      "cost": 1,
+      "deals": 7
+    },
+    {
+      "name": "Charged Cleave",
+      "type": "feature",
+      "stage": "check",
+      "id": "d569b159-608e-4ad1-870d-9100981c53c4",
+      "version": "0.3.3",
+      "created": "2025-03-24T21:06:24.471Z",
+      "castTime": 1,
+      "castTimeMsg": "begin charging as an action. If an enemy leaves the zone you are targeting, you may move to target another zone. On the beginning of your next turn, roll to attack",
+      "ranged": true,
+      "aoe": true,
+      "deals": 2,
+      "rangeDecrease": true,
+      "cost": 1
+    },
+    {
+      "name": "EMP Threading",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "cec2fc70-0d9e-417c-8fb6-12e6e790163f",
+      "version": "0.3.3",
+      "created": "2025-03-25T14:30:56.779Z",
+      "flavor": "Cyberware popularized by the media sensation UR, these thin silver lines run in circuit-like patterns\nacross the body. Many people believe they act as a \"Faraday cage\" to protect you from\nradiation and EMP effects but so far there’s no scientific backing to these claims. But they\nsure do look cool. Most people wear EMP Threading as a fashion statement.",
+      "notes": "Cyberpunk RED",
+      "trainedMsg": "Persuasion",
+      "trained": true
+    },
+    {
+      "name": "Image Enhance",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "74313145-0867-4902-96cc-35cf137d9ddc",
+      "version": "0.3.3",
+      "created": "2025-03-25T14:33:07.740Z",
+      "trainedMsg": "Visual Perception",
+      "trained": true,
+      "flavor": "Two cybereyes",
+      "notes": "Cyberpunk RED"
+    },
+    {
+      "name": "MicroVideo",
+      "type": "equipment",
+      "stage": "minor",
+      "id": "ff0e356a-cbe0-469a-af87-ae400b8fee02",
+      "version": "0.3.3",
+      "created": "2025-03-25T14:35:23.760Z",
+      "grantsAbilities": [
+        "Camera in eye records video and audio to a standard Memory Chip or a\nlinked Agent."
+      ],
+      "tierDecrease": 1,
+      "notes": "Cyberpunk RED",
+      "flavor": "Cybereye"
+    },
+    {
+      "name": "Amplified Hearing",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "4f91d85b-f440-4aef-9c5a-e254480da9cb",
+      "version": "0.3.3",
+      "created": "2025-03-25T14:40:36.119Z",
+      "trainedMsg": "Listening",
+      "trained": true,
+      "advantageMsg": "when Listening",
+      "notes": "Cyberpunk RED",
+      "instructions": "",
+      "flavor": "Cyberaudio"
+    },
+    {
+      "name": "Voice Stress Analyzer",
+      "type": "equipment",
+      "stage": "passive",
+      "id": "74a9e861-88d7-4870-8f20-ae746a437414",
+      "version": "0.3.3",
+      "created": "2025-03-25T14:46:39.955Z",
+      "trainedMsg": "Insight",
+      "trained": true,
+      "flavor": "Cyberaudio"
     }
   ],
   "players": [
@@ -8997,7 +9369,23 @@
         "9015c185-c072-4069-8caa-63561642778d",
         "a153a0ec-066b-413c-9fe0-aaa427b085bc",
         "031ba94c-16b1-475a-aeba-1c2a0c08c39a",
-        "6d57900e-7e11-4404-bb0e-0d671c9c768d"
+        "6d57900e-7e11-4404-bb0e-0d671c9c768d",
+        "5b61f125-6344-42c9-b995-7bd5b0037142",
+        "abdcc70f-ab72-480e-9bbb-75a260f19f04",
+        "060fcdd0-2635-4648-9a60-ae04fa6fb443",
+        "ff93f437-a1e1-4f39-9ecd-fcb761c47086",
+        "0ee539d0-8161-4c01-a6e9-6b10813bf61b",
+        "87c4ca26-272d-4a7e-970b-fe636cbda297",
+        "0795590e-0b88-4315-9454-f9a471859623",
+        "c46c5d18-6505-43d7-ad48-5516a9af4f31",
+        "182f674d-038b-4359-a066-1eec67b8c1f4",
+        "634aa53a-6152-4636-8cb4-008628d3ec99",
+        "76127a4a-4986-4aba-8b58-a47267d4f589",
+        "cec2fc70-0d9e-417c-8fb6-12e6e790163f",
+        "74313145-0867-4902-96cc-35cf137d9ddc",
+        "ff0e356a-cbe0-469a-af87-ae400b8fee02",
+        "4f91d85b-f440-4aef-9c5a-e254480da9cb",
+        "74a9e861-88d7-4870-8f20-ae746a437414"
       ]
     },
     {

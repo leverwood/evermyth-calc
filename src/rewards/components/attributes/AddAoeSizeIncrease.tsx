@@ -3,23 +3,23 @@ import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
 
-interface AddRangeIncreaseAttributeProps {
+interface AddAoeSizeIncreaseAttributeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
 }
 
-const AddRangeIncreaseAttribute: React.FC<AddRangeIncreaseAttributeProps> = ({
+const AddAoeSizeIncreaseAttribute: React.FC<AddAoeSizeIncreaseAttributeProps> = ({
   selectedOptions,
   changeValue,
 }) => {
-  if (!selectedOptions.ranged || selectedOptions.rangeDecrease) return null;
+  if (!selectedOptions.aoe) return null;
 
   return (
     <li>
-      <AddRemoveButton onClick={() => changeValue("rangeIncrease", 1)} />
-      <AttributeDescription keyName="rangeIncrease" />
+      <AddRemoveButton onClick={() => changeValue("aoeSizeIncrease", 1)} />
+      <AttributeDescription keyName="aoeSizeIncrease" />
     </li>
   );
 };
 
-export default AddRangeIncreaseAttribute;
+export default AddAoeSizeIncreaseAttribute;

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4
+
+- Creatures have rewards of a tier less than their tier
+
 ## O.3.3
 
 - Change restrained to have a tier limit and can be applied multiple times

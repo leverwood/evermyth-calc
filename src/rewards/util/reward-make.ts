@@ -29,14 +29,7 @@ export const makeStandardArmor = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} Armor`,
     stage: STAGE.DEFENSE,
-    deals: 0,
-    reduceDamage: 1,
-    cost: 1,
-    upcast: initReward({
-      name: `T${tier} Armor Upcast`,
-      reduceDamage: 1,
-    }),
-    upcastMax: tier - 1,
+    reduceDamage: tier + 1,
   });
   if (reward.tier !== tier)
     logger.error(
@@ -49,7 +42,7 @@ export const makeStandardArmor = (tier: number): Reward => {
 export const makeStandardSpell = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} Spell`,
-    deals: 1 + tier + tier,
+    deals: 2 + tier,
     cost: 1,
   });
   if (reward.tier !== tier)
@@ -65,7 +58,7 @@ export const makeStandardAoE = (tier: number): Reward => {
   }
   const reward = initReward({
     name: `T${tier} AoE Spell`,
-    deals: tier + tier - 1,
+    deals: tier,
     cost: 1,
     aoe: true,
   });
@@ -81,13 +74,13 @@ export const makeAdvGranter = (tier: number): Reward => {
     {
       name: "Advantage on action rolls",
       status: PC_STATUS.ADV_ACT,
-      duration: tier,
+      duration: 1,
       ends: "bottom",
     },
     {
       name: "Advantage on defense rolls",
       status: PC_STATUS.ADV_DEFEND,
-      duration: tier,
+      duration: 1,
       ends: "top",
     },
   ];
@@ -146,7 +139,6 @@ export const makeDisadvImposer = (tier: number): Reward => {
 export const makePotionOfHealing = (tier: number): Reward => {
   const reward = initReward({
     name: `T${tier} Potion of Healing`,
-    deals: 0,
     consumable: true,
     stage: STAGE.ACTION,
     heals: tier + 1,
@@ -164,8 +156,7 @@ export const makeHealingSpell = (tier: number): Reward => {
   }
   const reward = initReward({
     name: `T${tier} Healing Spell`,
-    deals: 0,
-    heals: 1 + tier + tier,
+    heals: 2 + tier,
     cost: 1,
   });
   if (reward.tier !== tier)

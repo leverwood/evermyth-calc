@@ -10,7 +10,8 @@ import { getWellspringCost, initReward } from "../../rewards/util/reward-calcs";
 export const printRewardMessage = (
   reward: Reward,
   isUpcast = false,
-  ignoreInstructions = false
+  ignoreInstructions = false,
+  isCreature = false
 ): string => {
   const messages: string[] = [];
 
@@ -22,16 +23,16 @@ export const printRewardMessage = (
     messages.push(reward.instructions);
   } else {
     const aoeCreatures = reward.avoidAllies
-      ? "creatures of your choice"
-      : "creatures";
+      ? "creatures you choose"
+      : "all creatures";
     const rangedZoneSize = reward.rangeIncrease
       ? reward.rangeIncrease * 2 + 2
-      : reward.meleeAndRanged
+      : (reward.meleeAndRanged || reward.rangeDecrease)
       ? 1
       : 2;
     const aoeZoneSize = reward.aoe
-      ? reward.rangeIncrease
-        ? reward.rangeIncrease + 1
+      ? reward.aoeSizeIncrease
+        ? reward.aoeSizeIncrease + 1
         : 1
       : 0;
     const aoeZoneMsg = `${aoeZoneSize} zone${aoeZoneSize > 1 ? "s" : ""}`;
@@ -113,7 +114,7 @@ export const printRewardMessage = (
           reward.stage === STAGE.PASSIVE
             ? printModifier(reward.deals)
             : dealPoints
-        } ${reward.aoe ? " to " + aoeCreatures + ` in ${aoeZoneMsg}` : ""}`
+        }${reward.aoe ? " to " + aoeCreatures + ` in ${aoeZoneMsg}` : ""}`
       );
     }
     if (!reward.deals && reward.aoe) {
@@ -121,7 +122,7 @@ export const printRewardMessage = (
     }
     if (reward.heals) {
       messages.push(
-        `heals ${healPoints} ${
+        `heals ${healPoints}${
           reward.aoe
             ? " to " +
               (reward.avoidAllies
@@ -134,7 +135,7 @@ export const printRewardMessage = (
     }
     if (reward.lingeringDamage) {
       messages.push(
-        `deals ${reward.lingeringDamage} damage at the end of their turns unless an action is taken to end the effect`
+        `deals ${reward.lingeringDamage} dmg at the end of their turns unless an action is taken to end the effect`
       );
     }
 
@@ -171,9 +172,9 @@ export const printRewardMessage = (
     }
     if (reward.reduceDamage) {
       messages.push(
-        `reduce damage ${reward.reduceDamage > 1 ? "up to " : ""}${
+        `reduce dmg ${reward.reduceDamage > 1 ? "up to " : "by "}${
           reward.reduceDamage
-        } point${reward.reduceDamage > 1 ? "s" : ""} for 1 wellspring${
+        } for 1 WS${
           reward.reduceDamage > 1 ? " each" : ""
         }`
       );
@@ -181,14 +182,14 @@ export const printRewardMessage = (
 
     // WELLSPRING EFFECTS
     if (reward.wellspringRecover)
-      messages.push(`recovers ${reward.wellspringRecover}d4 wellspring`);
+      messages.push(`recovers ${reward.wellspringRecover}d4 WS`);
     if (reward.wellspringMax)
-      messages.push(`increase max wellspring by ${reward.wellspringMax}`);
+      messages.push(`increase max WS by ${reward.wellspringMax}`);
 
     // this must go before "roll to maintain" messages
     if (reward.onFailTakeDamage) {
       messages.push(
-        `on fail take ${reward.onFailTakeDamage} damage to ${reward.onFailDmgType}`
+        `on fail take ${reward.onFailTakeDamage} dmg to ${reward.onFailDmgType}`
       );
     }
 
@@ -208,9 +209,9 @@ export const printRewardMessage = (
     if (reward.requiresAmmo) messages.push("requires ammo");
 
     // cost should be last
-    if (reward.consumable) messages.push("single use");
+    if (reward.consumable) messages.push(isCreature ? "costs 1 WS" : "single use");
     if (reward.cost)
-      messages.push(`costs ${getWellspringCost(reward)} wellspring`);
+      messages.push(`costs ${getWellspringCost(reward)} WS`);
 
     // add stage label
     if (messages.length) {

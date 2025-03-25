@@ -2,6 +2,7 @@ import React from "react";
 import AddRemoveButton from "../../../components/AddRemoveButton";
 import AttributeDescription from "../AttributeDescription";
 import { ChangeValueFunc, RewardData } from "../../types/reward-types";
+import { Form } from "react-bootstrap";
 interface RemoveCastTimeProps {
   selectedOptions: RewardData;
   changeValue: ChangeValueFunc;
@@ -23,7 +24,8 @@ const RemoveCastTime: React.FC<RemoveCastTimeProps> = ({
         overrideText={`❌ (current: ${selectedOptions.castTime})`}
       />
       <AttributeDescription keyName="castTime" />
-      <input
+      <Form.Control
+        type="text"
         value={selectedOptions.castTimeMsg || ""}
         onChange={(e) => changeValue("castTimeMsg", e.target.value)}
       />

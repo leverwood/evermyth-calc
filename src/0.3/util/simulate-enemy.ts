@@ -287,8 +287,8 @@ function possibleRewards(tier: number) {
 }
 
 export function makeEnemyRewards(enemyTier: number) {
-  const rewardTier = Math.max(0, Math.floor(enemyTier));
-  const randomRewardTier = getRandomNum(0, rewardTier);
+  const rewardTier = Math.max(0, Number.isInteger(enemyTier) ? enemyTier - 1 : Math.floor(enemyTier));
+  const randomRewardTier = getRandomNum(0, Math.max(0, rewardTier - 1));
   const rewards = [
     makeStandardWeapon(rewardTier),
     makeRandomReward(rewardTier, possibleRewards(rewardTier)),

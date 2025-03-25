@@ -18,7 +18,6 @@ import {
   isBeneficialStatus,
   isEnemyStatus,
 } from "../../0.3/types/system-types";
-import { getDCHard } from "../../0.3/util/enemy-calc";
 import { LOG_LEVEL, Logger } from "../../util/log";
 import { hasAdv } from "../../0.3/util/pc-calcs";
 import { REWARD_STAGE_LIMITS } from "./reward-stage-limits";
@@ -32,6 +31,7 @@ export function initReward({
   advantage = false,
   advantageMsg = "",
   aoe = false,
+  aoeSizeIncrease = 0,
   avoidAllies = false,
   castTime = 0,
   castTimeMsg = "",
@@ -65,6 +65,7 @@ export function initReward({
   price = 0,
   ranged = false,
   rangeIncrease = 0,
+  rangeDecrease = false,
   reduceDamage = 0,
   relentless = false,
   relentlessMsg = "",
@@ -123,7 +124,9 @@ export function initReward({
   if (aoe) {
     reward.tier += OPTION_COST.aoe;
     reward.aoe = true;
-    reward.rangeIncrease = rangeIncrease;
+
+    reward.aoeSizeIncrease = aoeSizeIncrease;
+    reward.tier += OPTION_COST.rangeIncrease * rangeIncrease;
   }
   if (avoidAllies) {
     reward.tier += OPTION_COST.avoidAllies;
@@ -227,6 +230,7 @@ export function initReward({
   if (ranged) {
     reward.ranged = true;
     reward.rangeIncrease = rangeIncrease;
+    reward.rangeDecrease = rangeDecrease;
     reward.tier += OPTION_COST.rangeIncrease * rangeIncrease;
   }
   if (reduceDamage) {
@@ -433,6 +437,9 @@ export function migrateRewardData(reward: any): RewardData {
   if (!reward.rangeIncrease || reward.rangeIncrease < 1) {
     delete newData.rangeIncrease;
   }
+  if (!reward.aoeSizeIncrease || reward.aoeSizeIncrease < 1) {
+    delete newData.aoeSizeIncrease;
+  }
 
   return newData;
 }
@@ -517,7 +524,7 @@ export const decrementConditionDurations = (
 };
 
 export function getRewardDC(reward: Reward): number {
-  return getDCHard(reward.tier);
+  return 10 + reward.tier;
 }
 
 export function validateRewardData(options: RewardData): {
@@ -570,8 +577,11 @@ export function validateRewardData(options: RewardData): {
   if (options.onAutoSuccess && options.onSuccess) {
     errors.push("Cannot have both On Auto Success and On Success");
   }
-  if (options.rangeIncrease && !options.ranged && !options.aoe) {
+  if (options.rangeIncrease && !options.ranged) {
     errors.push("Cannot increase range if it is not a ranged reward");
+  }
+  if (options.aoeSizeIncrease && !options.aoe) {
+    errors.push("Cannot increase AoE size if it is not an AoE reward");
   }
   if (options.ranged && options.meleeAndRanged) {
     errors.push("Cannot be both ranged and melee and ranged");

@@ -15,6 +15,7 @@ export function SingleRewardText({
   upcast = false,
   showPrice = false,
   link = false,
+  isCreature = false,
 }: {
   reward: Reward;
   className?: string;
@@ -25,8 +26,9 @@ export function SingleRewardText({
   upcast?: boolean;
   showPrice?: boolean;
   link?: boolean;
+  isCreature?: boolean;
 }) {
-  let message = printRewardMessage(reward, upcast);
+  let message = printRewardMessage(reward, upcast, false, isCreature);
 
   if (oneLine) {
     message = message.trim().replaceAll("\n\n", " | ").replaceAll("\n", " ");

@@ -23,13 +23,7 @@ export function AddCreatureReward({
 
   useEffect(() => {
     let list = adding
-      ? rewards.filter(
-          (reward) =>
-            !creature.rewards.includes(reward.id || "") &&
-            !reward.advantage &&
-            !reward.disadvantage &&
-            !reward.trained
-        )
+      ? rewards.filter((reward) => !creature.rewards.includes(reward.id || ""))
       : (creature.rewards
           .map((id) => getRewardById(id))
           .filter((reward) => reward) as RewardData[]);
@@ -69,6 +63,7 @@ export function AddCreatureReward({
                 <SingleRewardText
                   reward={initReward(rewardData)}
                   oneLine={true}
+                  isCreature={true}
                 />
               </li>
             );

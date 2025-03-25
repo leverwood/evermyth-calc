@@ -4,9 +4,9 @@ import { RewardDataID } from "../../rewards/types/reward-types";
 export type CreatureDataID = string;
 
 export enum STATBLOCK_TYPE {
-  BODY_PART,
-  PHASE,
-  LAIR,
+  BODY_PART = "Body Part",
+  PHASE = "Phase",
+  LAIR = "Lair",
 }
 
 export interface Creature {
@@ -32,9 +32,20 @@ export interface LegendaryCreature {
   legendary: true;
   statblocks: {
     type: STATBLOCK_TYPE;
-    statblock: Creature;
+    id: CreatureDataID;
   }[];
+  version?: string;
+  created?: string;
 }
+
+// key guard for Creature
+export const isLegendary = (creature: any): creature is LegendaryCreature => {
+  return creature.legendary;
+};
+
+export const isCreature = (creature: any): creature is Creature => {
+  return !creature.legendary;
+};
 
 // value should be any possible value of the key
 export type ChangeValueFunc = (

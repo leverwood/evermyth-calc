@@ -15,7 +15,11 @@ import {
   PC,
 } from "../types/system-types";
 import { getTier } from "../../util/calcs";
-import { getEnemyPool, getEnemyWellspring } from "../util/enemy-calc";
+import {
+  getDCMedium,
+  getEnemyPool,
+  getEnemyWellspring,
+} from "../util/enemy-calc";
 import { makeEnemyInitiative, makeRandomEnemy } from "../util/simulate-enemy";
 import { makeRandomEnemyTiers } from "../util/simulate-enemy";
 import { getPCMaxPool, getPCWellspring } from "../util/pc-calcs";
@@ -405,7 +409,7 @@ export function CreaturesDisplay({ creatures }: { creatures: Creatures }) {
           <p key={i}>
             {printCreatureName(enemy)}: Tier {enemy.tier} | Pool{" "}
             {getEnemyPool(enemy.tier)} | Wellspring{" "}
-            {getEnemyWellspring(enemy.tier)}
+            {getEnemyWellspring(enemy.tier)} | Target {getDCMedium(enemy.tier)}
           </p>
           <ul>
             {enemy.rewards.map((r, i) => (
