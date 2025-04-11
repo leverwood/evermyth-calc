@@ -5,6 +5,21 @@ import { REWARD_TYPE, Reward } from "../types/reward-types";
 import { Badge } from "react-bootstrap";
 import Price from "../../shops/components/Price";
 
+const typeEmoji = (type: REWARD_TYPE) => {
+  switch (type) {
+    case REWARD_TYPE.EQUIPMENT:
+      return "🎒";
+    case REWARD_TYPE.FEATURE:
+      return "✨";
+    case REWARD_TYPE.TRINKET:
+      return "💍";
+    case REWARD_TYPE.ALLY:
+      return "🧝";
+    default:
+      return "";
+  }
+};
+
 export function SingleRewardText({
   reward,
   className = "",
@@ -16,6 +31,8 @@ export function SingleRewardText({
   showPrice = false,
   link = false,
   isCreature = false,
+  typeBefore = false,
+  rawMarkdown = false,
 }: {
   reward: Reward;
   className?: string;
@@ -27,6 +44,8 @@ export function SingleRewardText({
   showPrice?: boolean;
   link?: boolean;
   isCreature?: boolean;
+  typeBefore?: boolean;
+  rawMarkdown?: boolean;
 }) {
   let message = printRewardMessage(reward, upcast, false, isCreature);
 
@@ -38,13 +57,20 @@ export function SingleRewardText({
 
   return (
     <Component className={`${styles.singleRewardText} ${className}`}>
+      {typeBefore && `${typeEmoji(reward.type)} `}
       {!noTitle ? (
         link ? (
           <a href={`/rewards/${reward.optionsId}/edit`}>
+            {rawMarkdown && "**"}
             <Title reward={reward} noTier={noTier} />
+            {rawMarkdown && "** "}
           </a>
         ) : (
-          <Title reward={reward} noTier={noTier} />
+          <>
+            {rawMarkdown && "**"}
+            <Title reward={reward} noTier={noTier} />
+            {rawMarkdown && "** "}
+          </>
         )
       ) : null}
       {showPrice && reward.price ? <Price cp={reward.price} /> : null}
@@ -57,7 +83,20 @@ export function SingleRewardText({
           &nbsp;{reward.type}&nbsp;
         </Badge>
       ) : null}
-      {<Markdown>{message}</Markdown>}{" "}
+      {rawMarkdown ? (
+        <>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: message.replaceAll("\n\n", "<br />"),
+            }}
+          />
+          <br />
+          -----------------------
+        </>
+      ) : (
+        <Markdown options={{}}>{message}</Markdown>
+      )}
+      <br />
     </Component>
   );
 }

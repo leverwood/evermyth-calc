@@ -176,7 +176,7 @@ export const REWARD_STAGE_LIMITS: {
     [STAGE.MOVE]: false,
     [STAGE.ACTION]: false,
     [STAGE.DEFENSE]: false,
-    [STAGE.PASSIVE]: false,
+    [STAGE.PASSIVE]: true,
     [STAGE.MINOR]: true,
   },
   reduceDamage: {

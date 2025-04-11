@@ -37,9 +37,13 @@ export const printRewardMessage = (
       : 0;
     const aoeZoneMsg = `${aoeZoneSize} zone${aoeZoneSize > 1 ? "s" : ""}`;
     const healPoints =
-      reward.stage === STAGE.ACTION ? `1d${reward.heals * 2}` : reward.heals;
+      reward.stage === STAGE.ACTION && reward.heals > 1 && reward.heals <= 6
+        ? `1d${reward.heals * 2}`
+        : reward.heals;
     const dealPoints =
-      reward.stage === STAGE.ACTION ? `1d${reward.deals * 2}` : reward.deals;
+      reward.stage === STAGE.ACTION && reward.deals > 1 && reward.deals <= 6
+        ? `1d${reward.deals * 2}`
+        : reward.deals;
 
     if (reward.specificMsg) messages.push(reward.specificMsg);
 
@@ -139,6 +143,12 @@ export const printRewardMessage = (
       );
     }
 
+    if (reward.reduceMaxPool) {
+      messages.push(
+        `reduce max pool by ${reward.reduceMaxPool} until a full reset`
+      );
+    }
+
     // STUNNED OR RESTRAINED
     if (reward.restrained)
       messages.push(
@@ -174,9 +184,7 @@ export const printRewardMessage = (
       messages.push(
         `reduce dmg ${reward.reduceDamage > 1 ? "up to " : "by "}${
           reward.reduceDamage
-        } for 1 WS${
-          reward.reduceDamage > 1 ? " each" : ""
-        }`
+        } for 1 WS${reward.reduceDamage > 1 ? " each" : ""}`
       );
     }
 
@@ -209,7 +217,8 @@ export const printRewardMessage = (
     if (reward.requiresAmmo) messages.push("requires ammo");
 
     // cost should be last
-    if (reward.consumable) messages.push(isCreature ? "costs 1 WS" : "single use");
+    if (reward.consumable)
+      messages.push(isCreature ? `costs ${reward.tier + 1} WS` : "single use");
     if (reward.cost)
       messages.push(`costs ${getWellspringCost(reward)} WS`);
 

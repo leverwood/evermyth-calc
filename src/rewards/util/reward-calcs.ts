@@ -67,6 +67,7 @@ export function initReward({
   rangeIncrease = 0,
   rangeDecrease = false,
   reduceDamage = 0,
+  reduceMaxPool = 0,
   relentless = false,
   relentlessMsg = "",
   resistant = [],
@@ -126,7 +127,7 @@ export function initReward({
     reward.aoe = true;
 
     reward.aoeSizeIncrease = aoeSizeIncrease;
-    reward.tier += OPTION_COST.rangeIncrease * rangeIncrease;
+    reward.tier += OPTION_COST.aoeSizeIncrease * aoeSizeIncrease;
   }
   if (avoidAllies) {
     reward.tier += OPTION_COST.avoidAllies;
@@ -236,6 +237,10 @@ export function initReward({
   if (reduceDamage) {
     reward.tier += reduceDamage * OPTION_COST.reduceDamage;
     reward.reduceDamage = reduceDamage;
+  }
+  if (reduceMaxPool) {
+    reward.tier += reduceMaxPool * OPTION_COST.reduceMaxPool;
+    reward.reduceMaxPool = reduceMaxPool;
   }
   if (relentless) {
     reward.tier += OPTION_COST.relentless;

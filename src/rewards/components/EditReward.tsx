@@ -5,7 +5,7 @@ import { ChangeValueFunc } from "../types/reward-types";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { logger } from "./RewardList";
 import { CombinedReward } from "./CombinedReward";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   initReward,
   isSameReward,
@@ -18,6 +18,7 @@ import ShopCategoryCheckboxes from "../../shops/components/ShopCategoryCheckboxe
 import { ShopCategory } from "../../shops/types/shop-types";
 import { ShopProvider } from "../../shops/contexts/ShopContext";
 import { printRewardMessage } from "../../0.3/util/printRewardMessage";
+import { SingleRewardText } from "./SingleRewardText";
 
 export function EditReward({ id }: { id: string }) {
   const {
@@ -30,6 +31,10 @@ export function EditReward({ id }: { id: string }) {
   const errors = validateRewardData(selectedOptions || {}).errors;
   const [searchString, setSearchString] = useState("");
   logger.debug("errors", errors);
+
+  useEffect(() => {
+    document.title = selectedOptions?.name || "Edit Reward";
+  }, [selectedOptions?.name]);
 
   const changeValue = useCallback<ChangeValueFunc>(
     (key, value, index = -1) => {
@@ -349,6 +354,14 @@ export function EditReward({ id }: { id: string }) {
                 label="Add padding to image"
                 checked={selectedOptions.padImage || false}
                 onChange={(e) => changeValue("padImage", e.target.checked)}
+              />
+              <hr />
+              <SingleRewardText
+                reward={initReward(selectedOptions)}
+                oneLine={false}
+                noType={true}
+                typeBefore={true}
+                rawMarkdown={true}
               />
             </Col>
             <Col>

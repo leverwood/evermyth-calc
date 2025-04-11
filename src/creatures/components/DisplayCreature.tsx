@@ -4,6 +4,7 @@ import { useRewardContext } from "../../rewards/contexts/RewardContext";
 import { RewardData } from "../../rewards/types/reward-types";
 import { initReward } from "../../rewards/util/reward-calcs";
 import { Creature, STATBLOCK_TYPE } from "../types/creature-types";
+import Markdown from "markdown-to-jsx";
 
 interface CreatureProps {
   creature: Creature;
@@ -11,13 +12,17 @@ interface CreatureProps {
   headingLevel?: number;
 }
 
-const DisplayCreature = ({ creature, statblockType, headingLevel }: CreatureProps) => {
+const DisplayCreature = ({
+  creature,
+  statblockType,
+  headingLevel,
+}: CreatureProps) => {
   const { getRewardById } = useRewardContext();
 
   const [creatureRewards, setCreatureRewards] = useState<RewardData[]>([]);
 
   let HeadingComponent: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" = "h4";
-  switch(headingLevel) {
+  switch (headingLevel) {
     case 1:
       HeadingComponent = "h1";
       break;
@@ -54,8 +59,7 @@ const DisplayCreature = ({ creature, statblockType, headingLevel }: CreatureProp
     <div>
       <HeadingComponent className={`mb-0`}>{creature.name}</HeadingComponent>
       <p className={`mt-0`}>
-        {statblockType && ` (${statblockType})`}
-        T{creature.tier} |{" "}
+        {statblockType && ` (${statblockType})`}T{creature.tier} |{" "}
         {creature.overridePool || Math.max(1, creature.tier * 4)} Pool | Target{" "}
         {creature.overrideTarget || Math.ceil(10 + creature.tier)} | WS{" "}
         {creature.overrideWellspring || creature.tier * 2}
@@ -75,7 +79,8 @@ const DisplayCreature = ({ creature, statblockType, headingLevel }: CreatureProp
           );
         })}
       </ul>
-      <p>{creature.description}</p>
+      <hr />
+      <Markdown>{creature.description || ""}</Markdown>
     </div>
   );
 };

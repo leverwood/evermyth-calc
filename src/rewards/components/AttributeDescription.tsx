@@ -173,6 +173,12 @@ export const DESCRIPTIONS: {
       wellspring each point.
     </>
   ),
+  reduceMaxPool: (
+    <>
+      <strong>Reduce Max Pool.</strong> Reduce the max pool of a creature by -1.
+      Apply multiple times to increase the reduction.
+    </>
+  ),
   relentless: (
     <>
       <strong>Relentless.</strong> When the following pool(s) hit zero, return

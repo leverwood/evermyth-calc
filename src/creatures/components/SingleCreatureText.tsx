@@ -18,7 +18,6 @@ const SingleCreatureText = ({
         <CreatureTier creature={creature} />
         ).{" "}
       </strong>
-      {creature.description}{" "}
       {!creature.legendary &&
         creature.rewards
           .map((rewardId) => {

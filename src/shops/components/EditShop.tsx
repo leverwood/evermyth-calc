@@ -10,7 +10,7 @@ import { initReward } from "../../rewards/util/reward-calcs";
 import ViewService from "../../services/components/ViewService";
 import { Service } from "../../services/types/service-types";
 import BrowseAllItems from "./BrowseAllItems";
-import { RewardData } from "../../rewards/types/reward-types";
+import { isRewardData, RewardData } from "../../rewards/types/reward-types";
 
 const EditShop: React.FC = () => {
   const { addShop, updateShop, getShopById, rewards, services } =
@@ -31,6 +31,8 @@ const EditShop: React.FC = () => {
     shopType: "",
   });
   const alreadyAddedIds = shopData.forSale?.map((item) => item.id) || [];
+  const [sortedForSale, setSortedForSale] =
+    useState<(RewardData | Service)[]>();
 
   // set shop data if id changes
   useEffect(() => {
@@ -44,11 +46,30 @@ const EditShop: React.FC = () => {
   }, [id, getShopById, shopData.id]);
 
   useEffect(() => {
+    const data: (RewardData | Service)[] = shopData.forSale
+      ?.map((item) => {
+        const dataItem =
+          item.type === "reward"
+            ? rewards.find((r) => r.id === item.id)
+            : services.find((s) => s.id === item.id);
+        if (!dataItem) return null;
+        return dataItem;
+      })
+      .filter((item) => item !== null) as (RewardData | Service)[];
+    const sortedItems: (RewardData | Service)[] = data.sort((a, b) => {
+      if (!a || !b) return 0;
+      return a?.name?.localeCompare(b?.name || "") || 0;
+    });
+    setSortedForSale(sortedItems);
+  }, [shopData.forSale, rewards, services]);
+
+  useEffect(() => {
     console.log(`updateShop(${shopData.id})`);
     if (id) {
       updateShop({ ...shopData, id });
     }
-  }, [shopData, id, updateShop]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shopData, id]);
 
   // update shop data when form changes
   const handleChange = (
@@ -220,30 +241,27 @@ const EditShop: React.FC = () => {
 
       <h2>For Sale</h2>
       <ListGroup className="mb-3">
-        {shopData.forSale &&
-          shopData.forSale.map((item, index) => {
-            const data =
-              item.type === "reward"
-                ? rewards.find((r) => r.id === item.id)
-                : services.find((s) => s.id === item.id);
-            if (!data) return null;
+        {sortedForSale &&
+          sortedForSale.map((item, index) => {
             return (
               <ListGroup.Item key={index}>
                 <Row>
                   <Col>
                     <Link
                       className={`${styles.forSaleLink}`}
-                      to={`/${item.type}s/${item.id}/edit`}
+                      to={`/${isRewardData(item) ? "reward" : "service"}s/${
+                        item.id
+                      }/edit`}
                     >
-                      {item.type === "reward" ? (
+                      {isRewardData(item) ? (
                         <SingleRewardText
-                          reward={initReward(data)}
+                          reward={initReward(item)}
                           oneLine={true}
                           showPrice={true}
-                          noType={true}
+                          link={true}
                         />
                       ) : (
-                        <ViewService service={data as Service} />
+                        <ViewService service={item as Service} />
                       )}
                     </Link>
                   </Col>
@@ -267,6 +285,7 @@ const EditShop: React.FC = () => {
       <hr className="mb-3" />
       <h2>Add Items</h2>
       <BrowseAllItems
+        tier={shopData.tier}
         handleAddForSale={handleAddForSale}
         alreadyAddedIds={alreadyAddedIds}
       />

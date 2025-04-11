@@ -17,6 +17,10 @@ export function EditCreature({ id }: { id: string }) {
     setCreature(creature || false);
   }, [getCreatureById, id]);
 
+  useEffect(() => {
+    document.title = creature ? `${creature.name} - Edit` : "Edit Creature";
+  }, [creature]);
+
   if (creature === false) {
     return <div>Creature not found</div>;
   }
@@ -67,7 +71,7 @@ export function EditCreature({ id }: { id: string }) {
             <InputGroup.Text>Notes</InputGroup.Text>
             <Form.Control
               as="textarea"
-              value={creature.notes || ""}
+              defaultValue={creature.notes || ""}
               onChange={(e) =>
                 updateCreature({ ...creature, notes: e.target.value })
               }

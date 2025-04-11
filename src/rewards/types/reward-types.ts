@@ -73,6 +73,7 @@ interface RewardBase {
   rangeIncrease?: number;
   rangeDecrease?: boolean;
   reduceDamage?: number;
+  reduceMaxPool?: number;
   relentless?: boolean;
   relentlessMsg?: string;
   requiresAmmo?: boolean;
@@ -165,7 +166,7 @@ export const OPTION_COST: {
 } = {
   advantage: 1,
   aoe: 2,
-    aoeSizeIncrease: 1,
+  aoeSizeIncrease: 1,
   avoidAllies: 1,
   castTime: -1,
   consumable: -2,
@@ -187,9 +188,10 @@ export const OPTION_COST: {
   onSuccess: 0,
   prefix: 0,
   ranged: 0,
-    rangeDecrease: 0,
+  rangeDecrease: 0,
   rangeIncrease: 1,
   reduceDamage: 1,
+  reduceMaxPool: 2,
   relentless: 4,
   requiresAmmo: 0,
   restrained: 1,
@@ -214,6 +216,14 @@ export const OPTION_COST: {
 export function isReward(reward: any): reward is Reward {
   return reward.__typename === "Reward";
 }
+export function isRewardData(reward: any): reward is RewardData {
+  return (
+    reward.id !== undefined &&
+    reward.name !== undefined &&
+    reward.__typename === undefined
+  );
+}
+
 export type ChangeValueFunc = (
   key:
     | keyof RewardData

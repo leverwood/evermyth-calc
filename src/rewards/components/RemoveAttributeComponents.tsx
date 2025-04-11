@@ -39,6 +39,7 @@ import RemovePrefix from "./attributes/RemovePrefix";
 import RemoveFlavor from "./attributes/RemoveFlavor";
 import RemoveAoESizeIncrease from "./attributes/RemoveAoESizeIncrease";
 import RemoveRangeDecrease from "./attributes/RemoveRangeDecrease";
+import RemoveReduceMaxPool from "./attributes/RemoveReduceMaxPool";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -81,6 +82,7 @@ export const attributeComponents: readonly {
   { key: "meleeAndRanged", component: RemoveMeleeAndRangedAttribute },
   { key: "onSuccess", component: RemoveOnSuccess },
   { key: "onAutoSuccess", component: RemoveOnAutoSuccess },
+  { key: "reduceMaxPool", component: RemoveReduceMaxPool },
   { key: "prefix", component: RemovePrefix },
   { key: "suffix", component: RemoveSuffix },
   { key: "flavor", component: RemoveFlavor },

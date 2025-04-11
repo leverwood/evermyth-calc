@@ -44,6 +44,7 @@ import AddSuffix from "./attributes/AddSuffix";
 import AddFlavor from "./attributes/AddFlavor";
 import AddAoeSizeIncrease from "./attributes/AddAoeSizeIncrease";
 import AddRangeDecrease from "./attributes/AddRangeDecrease";
+import AddReduceMaxPool from "./attributes/AddReduceMaxPool";
 
 export const attributeComponents: readonly {
   key: keyof RewardData;
@@ -91,6 +92,7 @@ export const attributeComponents: readonly {
   { key: "meleeAndRanged", component: AddMeleeAndRangedAttribute },
   { key: "onSuccess", component: AddOnSuccessAttribute },
   { key: "onAutoSuccess", component: AddOnAutoSuccessAttribute },
+  { key: "reduceMaxPool", component: AddReduceMaxPool },
   { key: "prefix", component: AddPrefix },
   { key: "suffix", component: AddSuffix },
   { key: "flavor", component: AddFlavor },

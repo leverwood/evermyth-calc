@@ -20,6 +20,7 @@ import "./App.scss";
 import EditCreaturePage from "./creatures/components/EditCreaturePage";
 import { CreatureProvider } from "./creatures/contexts/CreatureContext";
 import CreatureList from "./creatures/components/CreatureList";
+import ViewShop from "./shops/components/ViewShop";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,16 @@ const router = createBrowserRouter([
       <Layout>
         <ShopProvider>
           <EditShop />
+        </ShopProvider>
+      </Layout>
+    ),
+  },
+  {
+    path: "/shop/:id",
+    element: (
+      <Layout>
+        <ShopProvider>
+          <ViewShop />
         </ShopProvider>
       </Layout>
     ),

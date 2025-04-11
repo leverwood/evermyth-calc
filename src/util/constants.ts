@@ -1,4 +1,4 @@
-export const CURRENT_VERSION = "0.3.3";
+export const CURRENT_VERSION = "0.3.4";
 
 export const ABILITY_MIN_LVL = -3;
 

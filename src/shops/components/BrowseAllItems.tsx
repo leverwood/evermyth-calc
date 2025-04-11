@@ -1,12 +1,11 @@
 import { Button, Col, InputGroup, ListGroup, Row, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { useShopContext } from "../contexts/ShopContext";
 import ShopCategoryCheckboxes from "./ShopCategoryCheckboxes";
 import { ShopCategory } from "../types/shop-types";
 import Price from "./Price";
-import { RewardData } from "../../rewards/types/reward-types";
+import { isReward, RewardData } from "../../rewards/types/reward-types";
 import { Service } from "../../services/types/service-types";
 import TooltipSlider from "../../components/TooltipSlider";
 import { SingleRewardText } from "../../rewards/components/SingleRewardText";
@@ -28,7 +27,7 @@ const findMaxPrice = (items: (RewardData | Service)[]) => {
 };
 
 function BrowseAllItems({
-  tier = 1,
+  tier = 99999,
   handleAddForSale,
   alreadyAddedIds,
 }: {
@@ -86,6 +85,10 @@ function BrowseAllItems({
           item.data.shopCategories?.includes(slug)
         );
       })
+      .filter((item) => {
+        const reward = initReward(item.data);
+        return !isReward(reward) || reward.tier < tier;
+      })
       .sort((a, b) => {
         return (a.data.price || 0) - (b.data.price || 0);
       })
@@ -100,6 +103,7 @@ function BrowseAllItems({
     rewards,
     searchText,
     services,
+    tier,
   ]);
 
   // update the max price when the items are filtered
